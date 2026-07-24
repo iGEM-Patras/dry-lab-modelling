@@ -1,0 +1,18 @@
+#include "/data/users/kzanaj/lipoplex/ff/martini_v2.1-dna.itp"
+#include "/data/users/kzanaj/lipoplex/ff/DOTAP.itp"
+#include "/data/users/kzanaj/lipoplex/ff/MC3.itp"
+#include "/data/users/kzanaj/lipoplex/ff/martini_v2.0_lipids.itp"
+#include "/data/users/kzanaj/lipoplex/ff/martini_v2.0_CHOL_bonded.itp"
+#include "/data/users/kzanaj/lipoplex/ff/water_ions.itp"
+#include "/data/users/kzanaj/lipoplex/dna/dna_duplex_bonded.itp"
+[ system ]
+PENK lipoplex MC3
+[ molecules ]
+DNA 1
+MC3N 120
+DOPE 80
+CHOL 40
+W           23814
+NA               120
+NA               370
+CL               432

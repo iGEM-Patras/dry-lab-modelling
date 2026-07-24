@@ -1,0 +1,17 @@
+# Large MD trajectories & checkpoints — kept on cluster, not versioned
+*.xtc
+*.trr
+*.cpt
+*.tpr
+*.edr
+# GROMACS backups & logs
+\#*\#
+*.log
+mdout.mdp
+step*.pdb
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+# OS
+.DS_Store

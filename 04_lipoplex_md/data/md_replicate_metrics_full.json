@@ -1,0 +1,74 @@
+[
+  {
+    "replicate": "DOTAP_r1",
+    "formulation": "DOTAP",
+    "contacts": 11.92156862745098,
+    "mindist_nm": 0.47180841568627446,
+    "dna_rg_nm": 4.210823176470588,
+    "rdf_peak": 1.860783
+  },
+  {
+    "replicate": "DOTAP_r2",
+    "formulation": "DOTAP",
+    "contacts": 32.666666666666664,
+    "mindist_nm": 0.45596013333333335,
+    "dna_rg_nm": 4.095503725490196,
+    "rdf_peak": 1.649691
+  },
+  {
+    "replicate": "DOTAP_r3",
+    "formulation": "DOTAP",
+    "contacts": 19.058823529411764,
+    "mindist_nm": 0.45942547254901955,
+    "dna_rg_nm": 3.7063284117647064,
+    "rdf_peak": 1.332689
+  },
+  {
+    "replicate": "MC3N_r1",
+    "formulation": "MC3N",
+    "contacts": 0.0,
+    "mindist_nm": 3.0882199215686277,
+    "dna_rg_nm": 4.201574666666667,
+    "rdf_peak": 0.934301
+  },
+  {
+    "replicate": "MC3N_r2",
+    "formulation": "MC3N",
+    "contacts": 18.019607843137255,
+    "mindist_nm": 0.45791441568627445,
+    "dna_rg_nm": 4.20299868627451,
+    "rdf_peak": 1.140933
+  },
+  {
+    "replicate": "MC3N_r3",
+    "formulation": "MC3N",
+    "contacts": 10.843137254901961,
+    "mindist_nm": 0.47367417450980387,
+    "dna_rg_nm": 4.310443294117647,
+    "rdf_peak": 1.403074
+  },
+  {
+    "replicate": "MC3P_r1",
+    "formulation": "MC3P",
+    "contacts": 48.19607843137255,
+    "mindist_nm": 0.450246537254902,
+    "dna_rg_nm": 4.3664492745098045,
+    "rdf_peak": 1.669288
+  },
+  {
+    "replicate": "MC3P_r2",
+    "formulation": "MC3P",
+    "contacts": 47.0,
+    "mindist_nm": 0.4550549294117647,
+    "dna_rg_nm": 4.281943470588235,
+    "rdf_peak": 1.679333
+  },
+  {
+    "replicate": "MC3P_r3",
+    "formulation": "MC3P",
+    "contacts": 2.215686274509804,
+    "mindist_nm": 0.8305217647058822,
+    "dna_rg_nm": 4.373843450980392,
+    "rdf_peak": 1.102818
+  }
+]
