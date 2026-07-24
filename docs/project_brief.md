@@ -14,7 +14,7 @@ This project supports an enkephalin-based analgesic strategy built on **proenkep
 3. **Human anti-NEP (MME) siRNA design** — four validated-in-silico siRNA duplexes targeting the CDS shared by all MME transcript variants, with off-target and thermodynamic scoring.
 4. **Lipoplex CG-MD** — coarse-grained MARTINI simulations comparing three lipid formulations (permanent-cation DOTAP, protonated ionizable MC3-H⁺, neutral MC3⁰) across triplicate replicates, resolving the pH-dependent DNA-binding behaviour that motivates the ionizable-lipid choice.
 
-**Scope note on the payload.** The four cassette plasmids carry the **native** human PENK sequence — they are the expression-system test-bed. The engineered anionic-address PENK (the therapy payload) is a separate construct: it currently exists as a **cloning-ready insert** (`engineered_PENK_GC-optimized.fasta` / `engPENK_insert_annotated.gb`), not yet assembled into an expression plasmid. It is audited here as the payload (§1) but is deliberately kept out of the four-plasmid restriction QC (§2) — see the note there.
+**Scope note on the payload.** The four cassette plasmids carry the **native** human PENK sequence — they are the expression-system test-bed. The engineered anionic-address PENK (the therapy payload) is a separate construct: it currently exists as a **cloning-ready insert** (`engineered_PENK_GC-optimized.fasta` / `engPENK_insert_annotated.gb`), not yet assembled into an expression plasmid. It is audited here as the payload (§1) and kept out of the four-plasmid restriction QC (§2); §2b then assembles it into a therapy plasmid on the test-bed backbone with its own purpose-built QC.
 
 ---
 
@@ -55,6 +55,28 @@ A two-tier scheme confirms both **linker type** and **gene order**, and is desig
 The virtual gel (`restriction_qc_gel.png`) shows both digests side-by-side against a 1 kb-plus ladder; the full bench recipe and interpretation logic are in `restriction_qc_protocol.md`.
 
 **Applies to the four native plasmids only.** This scheme is native-PENK-specific: the engineered payload insert has **no AflII and no XbaI site** (it is cloned via NheI/XhoI), so it cannot be screened by Digest A and does not share a lane with the four plasmids. Once the engineered PENK is cloned into an expression backbone, that construct will need its **own restriction map** computed fresh.
+
+---
+
+## 2b. Engineered PENK therapy plasmid — in silico build + QC
+
+The four native plasmids are the **test-bed**; the **engineered PENK is the intended therapeutic construct**. To make it a plasmid rather than a linear fragment, the engineered insert (NheI–Kozak–CDS–XhoI, 885 bp) was cloned in silico into the **pcDNA3.1(+)** backbone shared by the test-bed vectors.
+
+**Assembly.** Backbone donor = plasmid 4 (PENK-P2A-mEGFP), chosen for its **single** NheI and **single** XhoI sites (a clean directional swap). The native P2A–mEGFP cassette (1,639 bp, NheI→XhoI) was excised and replaced by the engineered insert, giving a **6,217 bp circular plasmid**. Verified: single NheI + single XhoI, engineered CDS present exactly once (288 aa, **all 7 YGGFEVVG cores**), native cassette removed. Promoter (CMV), polyA (bGH), and selection (NeoR/AmpR) are held identical to the test-bed, so the therapy construct stays parallel to the validated expression system.
+
+**Purpose-built QC.** The native Digest A/B scheme does not transfer — the engineered plasmid has **no AflII site**, and its only XbaI site is in the backbone. Five diagnostic digests replace it:
+
+| Digest | Enzyme(s) | Expected bands (bp) | Purpose |
+|---|---|---|---|
+| A — insert release | NheI + XhoI | **5,338 + 879** | insert present & correct size |
+| B — linearize | NheI | 6,217 | total size |
+| C — identity | BglII | 5,144 + 1,073 | empty vector loses the 1,073 band |
+| D — fingerprint | NcoI | 3,342 + 1,845 + 735 + 295 | rearrangement check |
+| E — fingerprint | PstI | 4,117 + 1,544 + 447 + 109 | independent fingerprint |
+
+The virtual gel (`engPENK_therapy_qc_gel.png`) shows all five digests vs a 1 kb-plus ladder; the protocol and bench recipe are in `engPENK_therapy_qc_protocol.md`, and the annotated plasmid is `engPENK_therapy_plasmid.gb`.
+
+**Status.** In silico design. After bench cloning, Sanger sequencing across the CDS is mandatory — the seven cores are synonymously distinct by design and a gel cannot verify them (the engineered analogue of the gel-invisible plasmid-1 truncation).
 
 ---
 
