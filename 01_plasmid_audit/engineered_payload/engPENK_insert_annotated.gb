@@ -1,0 +1,61 @@
+LOCUS       engPENK_insert           885 bp    DNA     linear   UNK 01-JAN-1980
+DEFINITION  Engineered PENK insert (YGGFEVVG x7), GC 60.1%, NheI/XhoI
+            cloning-ready.
+ACCESSION   engPENK_insert
+VERSION     engPENK_insert
+KEYWORDS    .
+SOURCE      .
+  ORGANISM  .
+            .
+FEATURES             Location/Qualifiers
+     protein_bind    1..6
+                     /label="NheI"
+     regulatory      7..12
+                     /label="Kozak (GCCACC)"
+     misc_feature    13..15
+                     /label="start ATG"
+     CDS             13..879
+                     /label="engineered PENK (288 aa)"
+                     /translation="MARFLTLCTWLLLLGPGLLATVRAECSQDCATCSYRLVRPADINF
+                     LACVMECEGKLPSLKIWETCKELLQLSKPELPQDGTSTLRENSKPEESHLLAKRYGGFE
+                     VVGKRYGGFEVVGKKMDELYPMEPEEEANGSEILAKRYGGFEVVGKKDAEEDDSLANSS
+                     DLLKELLETGDNRERSHHQDGSDNEEEVSKRYGGFEVVGRGLKRSPQLEDEAKELQKRY
+                     GGFEVVGRRVGRPEWWMDYQKRYGGFEVVGKRFAEALPSDEEGESYSKEVPEMEKRYGG
+                     FEVVGRF"
+     sig_peptide     13..84
+                     /label="signal peptide (pred.)"
+     misc_feature    310..333
+                     /label="YGGFEVVG core 1"
+     misc_feature    340..363
+                     /label="YGGFEVVG core 2"
+     misc_feature    436..459
+                     /label="YGGFEVVG core 3"
+     misc_feature    595..618
+                     /label="YGGFEVVG core 4"
+     misc_feature    676..699
+                     /label="YGGFEVVG core 5"
+     misc_feature    745..768
+                     /label="YGGFEVVG core 6"
+     misc_feature    847..870
+                     /label="YGGFEVVG core 7"
+     misc_feature    877..879
+                     /label="stop (TGA)"
+     protein_bind    880..885
+                     /label="XhoI"
+ORIGIN
+        1 gctagcgcca ccatggctcg tttcctgacc ctgtgcacct ggctgctgct gctgggtcct
+       61 ggtctgctgg ctaccgtgcg tgctgagtgc agccaggact gcgctacctg cagctaccgt
+      121 ctggtgcgtc ctgctgacat caacttcctg gcttgcgtga tggagtgcga gggtaagctg
+      181 cctagcctga agatctggga gacctgcaag gagctgctgc agctgagcaa gcctgagctg
+      241 cctcaggacg gtaccagcac cctgcgtgag aacagcaagc ctgaggagag ccacctgctg
+      301 gctaagcgtt acggtggttt cgaggtcgtc ggtaagcgtt acggtggatt cgaggtcgtg
+      361 ggtaagaaga tggacgagct gtaccctatg gagcctgagg aggaggctaa cggtagcgag
+      421 atcctggcta agcgttacgg aggtttcgag gtcgtgggta agaaggacgc tgaggaggac
+      481 gacagcctgg ctaacagcag cgacctgctg aaggagctgc tggagaccgg tgacaaccgt
+      541 gagcgtagcc accaccagga cggtagcgac aacgaggagg aggtgagcaa gcgttacggt
+      601 ggtttcgagg tcgtcggacg tggtctgaag cgtagccctc agctggagga cgaggctaag
+      661 gagctgcaga agcgttacgg aggtttcgag gtcgtgggac gtcgtgtggg tcgtcctgag
+      721 tggtggatgg actaccagaa gcgttacgga ggattcgagg tcgtcggtaa gcgtttcgct
+      781 gaggctctgc ctagcgacga ggagggtgag agctacagca aggaggtgcc tgagatggag
+      841 aagcgttacg gtggattcga ggtcgtcggt cgtttctgac tcgag
+//

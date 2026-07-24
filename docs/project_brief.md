@@ -14,7 +14,7 @@ This project supports an enkephalin-based analgesic strategy built on **proenkep
 3. **Human anti-NEP (MME) siRNA design** — four validated-in-silico siRNA duplexes targeting the CDS shared by all MME transcript variants, with off-target and thermodynamic scoring.
 4. **Lipoplex CG-MD** — coarse-grained MARTINI simulations comparing three lipid formulations (permanent-cation DOTAP, protonated ionizable MC3-H⁺, neutral MC3⁰) across triplicate replicates, resolving the pH-dependent DNA-binding behaviour that motivates the ionizable-lipid choice.
 
-**Scope note on the payload.** The four cassette plasmids carry the **native** human PENK sequence — they are the expression-system test-bed. The engineered anionic-address PENK (the therapy payload) is a separate construct and is not the subject of the plasmid QC here.
+**Scope note on the payload.** The four cassette plasmids carry the **native** human PENK sequence — they are the expression-system test-bed. The engineered anionic-address PENK (the therapy payload) is a separate construct: it currently exists as a **cloning-ready insert** (`engineered_PENK_GC-optimized.fasta` / `engPENK_insert_annotated.gb`), not yet assembled into an expression plasmid. It is audited here as the payload (§1) but is deliberately kept out of the four-plasmid restriction QC (§2) — see the note there.
 
 ---
 
@@ -28,12 +28,15 @@ All four plasmids are pcDNA3.1(+)-type backbones carrying native human PENK and 
 | 2 | mEGFP-P2A-PENK | 6,971 | CMV → mEGFP–P2A–PENK (single ORF) | full length (266 aa) | 7 | OK, caveat |
 | 3 | PENK-IRES-mEGFP | 7,512 | CMV → PENK (cap) → IRES → mEGFP | full length (267 aa) | 7 | **OK — cleanest** |
 | 4 | PENK-P2A-mEGFP | 6,971 | CMV → PENK–P2A–mEGFP (single ORF) | full length (267 aa) | 7 | OK |
+| — | **engineered PENK (payload)** | 885 (insert) | NheI–Kozak–ATG–CDS–XhoI (cloning-ready insert) | **engineered** (288 aa) | **7 of 7** | OK — payload |
 
 **Key findings**
 
 - **Plasmid 3 (PENK-IRES-mEGFP) is the cleanest construct**: PENK is cap-dependent with an intact signal peptide (MARFLTLC…), byte-identical to the UniProt P01210 reference.
 - **Plasmid 1 has a genuine defect**: a premature stop truncates the C-terminal **YGGFMRF** (the 7th enkephalin core), leaving 6 of 7 cores. This is a point-level lesion — **it will not change any restriction-gel band** and can only be caught by Sanger sequencing of the PENK 3′ end.
 - **Plasmid 2 caveat**: PENK is downstream of P2A, so its N-terminus becomes P-ARFLTLC (loses initiator Met, gains a P2A-derived proline) — this may impair signal-peptide function and secretion. For a secreted peptide product, the secreted gene should be placed **first** (as in plasmids 3 and 4).
+
+- **Engineered payload (therapy construct)**: the anionic-address PENK, in which all seven enkephalin cores are recoded YGGF[M/L] → **YGGFEVVG**. Verified from `engineered_PENK_GC-optimized.fasta`: 867 nt CDS → 288 aa, Met start, single clean stop, **7 of 7 engineered cores, 0 native cores**, GC 59.9%, no homopolymers, cores made synonymously distinct, and single flanking NheI/XhoI sites with **no internal cut sites** (cloning-clean for pcDNA3.1(+)). This is the construct that gives the therapy its function; it is **not yet in a backbone**, so it appears in the audit but not in the four-plasmid gel QC.
 
 Full per-feature detail is in `plasmid_feature_audit.csv`.
 
@@ -50,6 +53,8 @@ A two-tier scheme confirms both **linker type** and **gene order**, and is desig
 **Critical limitation flagged in the protocol:** passing the gel QC does **not** clear plasmid 1 — the PENK truncation is invisible on a gel and must be confirmed by **Sanger sequencing**.
 
 The virtual gel (`restriction_qc_gel.png`) shows both digests side-by-side against a 1 kb-plus ladder; the full bench recipe and interpretation logic are in `restriction_qc_protocol.md`.
+
+**Applies to the four native plasmids only.** This scheme is native-PENK-specific: the engineered payload insert has **no AflII and no XbaI site** (it is cloned via NheI/XhoI), so it cannot be screened by Digest A and does not share a lane with the four plasmids. Once the engineered PENK is cloned into an expression backbone, that construct will need its **own restriction map** computed fresh.
 
 ---
 
