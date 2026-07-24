@@ -142,6 +142,22 @@ Figure: `lipoplex_md_50ns.png` (RDF with replicate spread · contacts with indiv
 
 ---
 
+## 4b. Therapeutic delivery rationale — putting the two arms together
+
+The four workstreams are not independent analyses; they are components of one system whose therapeutic logic is **endogenous opioid enhancement**: *make more enkephalin, degrade less of it, at the pain relay.*
+
+**Mechanism.** The PENK construct produces proenkephalin, which is processed to enkephalins — endogenous opioid peptides acting on δ- (and μ-) opioid receptors to produce opioid-like analgesia without an exogenous opioid. Neprilysin (NEP / MME / CD10) is the principal enkephalin-degrading ectopeptidase, inactivating enkephalins in the synaptic space within seconds. Silencing NEP prolongs enkephalin action — the knockdown arm. The two arms are synergistic.
+
+**Where the siRNA goes — co-formulation, not just co-expression.** NEP acts as a cell-surface ectoenzyme and enkephalin is degraded *extracellularly*, but siRNA silencing is **cell-autonomous** — it only affects the cells actually transfected. Secreted enkephalin then diffuses past the surfaces of many neighboring cells, and NEP on any of them will degrade it. Silencing NEP only in the enkephalin-producing cell is therefore insufficient. The design consequence: **co-formulate the NEP siRNA and the PENK plasmid in the same lipoplex, delivered to the same locus**, so the population of enkephalin-producing cells overlaps maximally with the population of NEP-silenced cells. This is precisely why the lipoplex CG-MD (§4) is load-bearing — the lipoplex is the vehicle that carries both nucleic acids into the same region, and the siRNA off-target screen (§3) is part of that same package.
+
+**Where in the CNS.** Lipoplexes do not cross the blood–brain barrier, so delivery is local/regional to the analgesic circuit — principally the **spinal dorsal horn (intrathecal)**, the first nociceptive synapse and rich in δ/μ opioid receptors; supraspinal targets (PAG, RVM) are alternatives. There is clinical precedent for the enkephalin-gene-therapy-for-pain concept (an HSV proenkephalin vector reached trials for cancer pain); the additions here are the NEP-knockdown arm and a non-viral lipoplex vehicle.
+
+The two-arm concept and its dorsal-horn mechanism are shown in `therapy_delivery_schematic.png`.
+
+**Honest caveats.** (i) The cell-autonomy mismatch is the central design risk — co-formulation plus local delivery mitigates but does not erase it. (ii) NEP has other substrates (substance P, bradykinin, natriuretic peptides, amyloid-β); broad chronic knockdown could impair Aβ clearance, so the knockdown is kept **local and transient** by using siRNA/lipoplex rather than a permanent vector. (iii) Sustained opioid tone raises tolerance/dependence considerations. (iv) siRNA and non-integrating plasmid expression are transient — adequate for proof-of-concept, but a chronic indication would want a durable vector.
+
+---
+
 ## 5. What each deliverable establishes
 
 | Workstream | Establishes | Actionable output |
