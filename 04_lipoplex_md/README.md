@@ -11,7 +11,19 @@ A 60-bp CG B-DNA duplex + lipid membrane, cationic-lipid 120 : DOPE 80 : cholest
 
 **3 independent velocity-seed replicates per formulation** (9 runs), engine **GROMACS 2024.5**.
 
-## Stage-1 results (50 ns × 3 seeds, mean ± SEM)
+## Final results (200 ns × 3 seeds, mean ± SEM)
+
+All 9 replicates extended from 50 ns to **200 ns** (each continued from its checkpoint). Metrics computed on the equilibrated second half (100–200 ns), identical pipeline to the 50 ns analysis.
+
+| Formulation | DNA–lipid contacts | Min dist (nm) | RDF peak g(r) | DNA Rg (nm) |
+|-------------|-------------------:|--------------:|--------------:|------------:|
+| DOTAP | 24.7 ± 5.5 | 0.460 ± 0.003 | 1.54 ± 0.12 | 4.10 ± 0.13 |
+| MC3-H⁺ | 34.4 ± 8.6 | 0.469 ± 0.013 | 1.57 ± 0.31 | 4.24 ± 0.07 |
+| MC3⁰ | 8.1 ± 4.9 | 1.270 ± 0.563 | 1.04 ± 0.09 | 4.18 ± 0.002 |
+
+**The pH switch is reproduced, and the extension confirms it robustly.** At endosomal pH the protonated ionizable lipid (MC3-H⁺) binds DNA as tightly as the permanent-cation DOTAP (~0.47 nm closest approach); at physiological pH the neutral form (MC3⁰) holds DNA ~1.3 nm away with an RDF peak at the bulk value (~1.0). The extension's key win is convergence: the large 50 ns between-seed spread for MC3-H⁺ (contacts SEM 15.1, min-dist SEM 0.126) **collapsed** at 200 ns (SEM 8.6 and 0.013) — the short run had caught the stochastic nucleation event mid-transient. See `RESULTS_200ns.md` for the full 50→200 ns convergence tables.
+
+### Stage-1 results (50 ns × 3 seeds, mean ± SEM) — superseded
 
 | Formulation | DNA–lipid contacts | Min dist (nm) | DNA Rg (nm) |
 |-------------|-------------------:|--------------:|------------:|
@@ -19,7 +31,7 @@ A 60-bp CG B-DNA duplex + lipid membrane, cationic-lipid 120 : DOPE 80 : cholest
 | MC3-H⁺ | 32.5 ± 15.1 | 0.579 ± 0.126 | 4.34 ± 0.03 |
 | MC3⁰ | 9.6 ± 5.2 | 1.340 ± 0.874 | 4.24 ± 0.04 |
 
-The **pH switch is reproduced qualitatively**. The large between-seed spread is not noise: within-replicate block errors are small (0.7–4.2), while cumulative-mean contacts are **still rising at 50 ns** — binding is a stochastic nucleation event that has not converged. This is the quantitative justification for the **200 ns extension** (running).
+At 50 ns cumulative-mean contacts were still rising and the between-seed spread was large — the stochastic nucleation event had not converged, which motivated the 200 ns extension above.
 
 ## Layout
 ```
@@ -34,11 +46,15 @@ topology/
 scripts/
   analyze_replicate.sh  per-replicate analysis (RDF, contacts, mindist, gyration)
 data/
-  md_replicate_metrics_full.json   per-replicate metrics (all 9)
-  md_formulation_summary.json      mean±SEM per formulation
-  xvg/<FORM>_r<n>/                 raw GROMACS outputs (4 metrics × 9 replicates)
+  md_replicate_metrics_full.json      per-replicate metrics, 50 ns (all 9)
+  md_formulation_summary.json         mean±SEM per formulation, 50 ns
+  md_formulation_summary_200ns.json   mean±SEM + per-replicate, 200 ns (final)
+  xvg/<FORM>_r<n>/                     raw GROMACS outputs, 50 ns (4 metrics × 9)
+  xvg_200ns/<FORM>_r<n>/               raw GROMACS outputs, 200 ns (4 metrics × 9)
 figures/
-  lipoplex_md_50ns.png             4-panel: RDF, contacts, min-dist, convergence
+  lipoplex_md_200ns.png            4-panel, final: RDF, contacts, min-dist, convergence
+  lipoplex_md_50ns.png             4-panel, Stage-1 (superseded)
+RESULTS_200ns.md                   200 ns results + 50→200 ns convergence tables
 ```
 
 ## Analysis method

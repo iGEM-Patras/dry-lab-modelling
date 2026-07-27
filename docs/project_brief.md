@@ -115,30 +115,33 @@ Passenger strands, mRNA positions, and full scoring are in `sirna_design_table.c
 
 **3 independent velocity-seed replicates per formulation** (9 runs), analyzed with mean ± SEM.
 
-### Stage 1 results (50 ns × 3 seeds)
+### Final results (200 ns × 3 seeds)
 
-| Formulation | DNA–lipid contacts | Min DNA–lipid dist (nm) | DNA Rg (nm) |
-|-------------|-------------------:|------------------------:|------------:|
-| DOTAP (permanent +) | 21.2 ± 6.1 | 0.462 ± 0.005 | 4.00 ± 0.15 |
-| MC3-H⁺ (endosomal pH) | 32.5 ± 15.1 | 0.579 ± 0.126 | 4.34 ± 0.03 |
-| MC3⁰ (physiological pH) | 9.6 ± 5.2 | 1.340 ± 0.874 | 4.24 ± 0.04 |
+All 9 replicates were extended from 50 ns to **200 ns** (each continued from its checkpoint); metrics use the equilibrated second half (100–200 ns).
 
-**The pH switch is reproduced qualitatively:** the protonated ionizable lipid binds DNA strongly; the neutral form does not reliably bind (one seed stayed 3.09 nm away with zero contacts); the permanent-cation control binds most reproducibly.
+| Formulation | DNA–lipid contacts | Min DNA–lipid dist (nm) | RDF peak g(r) | DNA Rg (nm) |
+|-------------|-------------------:|------------------------:|--------------:|------------:|
+| DOTAP (permanent +) | 24.7 ± 5.5 | 0.460 ± 0.003 | 1.54 ± 0.12 | 4.10 ± 0.13 |
+| MC3-H⁺ (endosomal pH) | 34.4 ± 8.6 | 0.469 ± 0.013 | 1.57 ± 0.31 | 4.24 ± 0.07 |
+| MC3⁰ (physiological pH) | 8.1 ± 4.9 | 1.270 ± 0.563 | 1.04 ± 0.09 | 4.18 ± 0.002 |
 
-### Convergence — why the error bars are large, and why that matters
+**The pH switch is reproduced, and the extension confirms it robustly.** At endosomal pH the protonated ionizable lipid (MC3-H⁺) binds DNA as tightly as the permanent-cation control DOTAP — both reach ~0.47 nm closest approach — condensing and protecting the cargo. At physiological pH the neutral form (MC3⁰) holds DNA ~1.3 nm away, with an RDF peak at the bulk value (~1.0) and one seed that never binds (0.08 contacts, 2.36 nm) — the release/circulation state.
 
-The between-seed spread is large **because binding is a stochastic nucleation event that has not finished in 50 ns**. The diagnostics make this explicit and honest:
+### Convergence — the extension did its job
 
-- Cumulative-mean contact number is **still rising** at the end of most runs (first-half → second-half drift up to +200%).
-- Within-replicate block-averaged standard error is **small** (0.7–4.2 contacts) — so the variability is *between-seed sampling*, not thermal noise.
+At 50 ns the between-seed spread was large **because binding is a stochastic nucleation event that had not finished** (cumulative-mean contacts still rising, first-half → second-half drift up to +200%, while within-replicate block error stayed small at 0.7–4.2 contacts — i.e. between-seed sampling, not thermal noise). The 200 ns extension resolved this:
 
-This is the quantitative justification for the **200 ns production extension** now running (each replicate continued from its checkpoint). It is a genuine convergence requirement, not padding.
+- **MC3-H⁺ error bars collapsed** — contacts SEM 15.1 → 8.6, min-distance SEM 0.126 → 0.013 nm (≈10× tighter). The short run had caught nucleation mid-transient; the long run confirms genuine strong binding.
+- **DOTAP** stayed strong and tightened further (contacts SEM 6.1 → 5.5) — constitutive binding, as expected for a non-titratable lipid.
+- **MC3⁰** stayed weak throughout — the intended physiological-pH control.
+
+Cumulative-mean contacts plateau by ~100 ns for all formulations, so the 100–200 ns analysis window is equilibrated. This was a genuine convergence requirement, not padding.
 
 ### Honest limitation (stated by design)
 
 The DOTAP, MC3-H⁺ and MC3⁰ topologies are **MARTINI-2 analogy models** (built from DOPC/DUPC), **not** independently validated published parameters. Consequently all conclusions are **qualitative / comparative** — the relative ranking of DNA-condensing tendency across formulations and protonation states — **not** quantitative binding free energies. More sampling improves convergence but cannot fix a parameter-provenance limitation; this is disclosed rather than hidden.
 
-Figure: `lipoplex_md_50ns.png` (RDF with replicate spread · contacts with individual seeds · closest approach · convergence). Per-replicate and summary metrics in `md_replicate_metrics_full.json` / `md_formulation_summary.json`.
+Figure: `lipoplex_md_200ns.png` (RDF with replicate spread · contacts with individual seeds · closest approach · convergence). Per-replicate and summary metrics in `md_formulation_summary_200ns.json`; full 50→200 ns convergence tables in `04_lipoplex_md/RESULTS_200ns.md`. The Stage-1 50 ns figure/metrics are retained (`lipoplex_md_50ns.png`, `md_formulation_summary.json`) for provenance.
 
 ---
 
@@ -173,4 +176,4 @@ The two-arm concept and its dorsal-horn mechanism are shown in `therapy_delivery
 
 Every tool version, force field, database accession, and published design rule is recorded in `methods_references.md`. The full analysis code, input topologies, protocols, and figures are versioned in the accompanying Git repository. The MD parameter-provenance caveat is stated in both the methods log and the results above.
 
-*This brief covers the initial (50 ns) MD stage; the MD section will be refreshed with the 200 ns extended-run results when those runs complete.*
+*This brief reports the final 200 ns MD results (all 9 replicates converged). The optional Boltz peptide–receptor co-fold (μ/δ opioid receptor × native/engineered enkephalin) was attempted opportunistically but did not complete — it hit a cluster home-directory disk-quota limit during MSA generation, so no co-fold structures were produced. It is not one of the core deliverables and can be re-run once quota is freed.*
