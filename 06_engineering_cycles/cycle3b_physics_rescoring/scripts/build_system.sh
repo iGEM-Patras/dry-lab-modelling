@@ -51,6 +51,11 @@ echo "TER" >> complex_raw.pdb
 cat pep_chir.pdb >> complex_raw.pdb
 echo "END" >> complex_raw.pdb
 
+# NOTE ON FILENAMES: packmol-memgen builds its MEMEMBED output name as
+#   pdb[:-4] + n_ter + "_EMBED.pdb"   (main.py:774)  with n_ter defaulting to "in".
+# An input whose name ENDS IN "_in" (e.g. complex_in.pdb) becomes "complex_inin_EMBED.pdb", which
+# collides with the path its shutil.move writes, and memgen dies with
+# FileNotFoundError. The build input is named complex_start.pdb to avoid this.
 ORIENT=""
 if command -v memembed >/dev/null 2>&1; then
   if memembed -o complex_oriented.pdb complex_raw.pdb >memembed.log 2>&1; then
@@ -58,33 +63,47 @@ if command -v memembed >/dev/null 2>&1; then
     # in contact with the receptor. A silent chain drop is the failure mode here.
     if $PY - <<PYEOF
 import sys, numpy as np
-def rd(f):
+# MEMEMBED appends DUM pseudo-atoms marking the two bilayer planes (~4400 of them).
+# Strip those, then verify the real solute was moved as ONE RIGID BODY.
+def rd(f, drop_dum=False):
     A=[l for l in open(f) if l.startswith(("ATOM","HETATM"))]
+    if drop_dum: A=[l for l in A if l[17:20].strip()!="DUM"]
     xyz=lambda l: np.array([float(l[30:38]),float(l[38:46]),float(l[46:54])])
     return A, {c: np.array([xyz(l) for l in A if l[21]==c]) for c in {l[21] for l in A}}
-Ai,ci = rd("complex_raw.pdb"); Ao,co = rd("complex_oriented.pdb")
-if len(Ai)!=len(Ao): print(f"  memembed changed atom count {len(Ai)}->{len(Ao)}"); sys.exit(1)
-if set(ci)!=set(co):  print(f"  memembed changed chains {set(ci)}->{set(co)}"); sys.exit(1)
+Ai,ci = rd("complex_raw.pdb")
+Ao,co = rd("complex_oriented.pdb", drop_dum=True)
+ndum = sum(1 for l in open("complex_oriented.pdb")
+           if l.startswith(("ATOM","HETATM")) and l[17:20].strip()=="DUM")
+print(f"  memembed: {ndum} DUM bilayer-marker atoms stripped")
+if len(Ai)!=len(Ao):
+    print(f"  REJECT: solute atom count changed {len(Ai)}->{len(Ao)}"); sys.exit(1)
+if set(ci)!=set(co):
+    print(f"  REJECT: chain set changed {sorted(ci)}->{sorted(co)}"); sys.exit(1)
 def mind(d):
     a,b=d["A"],d["B"]
     return float(np.sqrt(((a[:,None,:]-b[None,:,:])**2).sum(-1)).min())
 d0,d1 = mind(ci), mind(co)
-print(f"  min receptor-peptide distance: {d0:.2f} A -> {d1:.2f} A (rigid-body check)")
-sys.exit(0 if abs(d0-d1) < 0.05 else 1)
+# a rigid-body move preserves ALL internal distances, so also check the radius of gyration
+rg=lambda d: float(np.sqrt(((np.vstack(list(d.values()))-np.vstack(list(d.values())).mean(0))**2).sum(1).mean()))
+g0,g1 = rg(ci), rg(co)
+print(f"  min receptor-peptide dist: {d0:.2f} -> {d1:.2f} A | Rg: {g0:.2f} -> {g1:.2f} A")
+ok = abs(d0-d1) < 0.05 and abs(g0-g1) < 0.05
+if not ok: print("  REJECT: pose was NOT moved as a rigid body")
+sys.exit(0 if ok else 1)
 PYEOF
-    then cp complex_oriented.pdb complex_in.pdb; ORIENT="--preoriented"
-    else echo "  memembed output rejected; letting memgen orient"; cp complex_raw.pdb complex_in.pdb
+    then grep -vE "^(ATOM|HETATM).{9}DUM" complex_oriented.pdb > complex_start.pdb; ORIENT="--preoriented"
+    else echo "  memembed output rejected; letting memgen orient"; cp complex_raw.pdb complex_start.pdb
     fi
   else
-    echo "  memembed failed; letting memgen orient"; cp complex_raw.pdb complex_in.pdb
+    echo "  memembed failed; letting memgen orient"; cp complex_raw.pdb complex_start.pdb
   fi
 else
-  cp complex_raw.pdb complex_in.pdb
+  cp complex_raw.pdb complex_start.pdb
 fi
 echo "orientation: ${ORIENT:-memgen internal}"
 
 # ---- 4. pack bilayer ------------------------------------------------------
-packmol-memgen --pdb complex_in.pdb --lipids POPC --ratio 1 \
+packmol-memgen --pdb complex_start.pdb --lipids POPC --ratio 1 \
   --dist 15 --dist_wat 20 --salt --salt_c Na+ --saltcon 0.15 \
   --ffprot ff14SB --ffwat tip3p --parametrize --notprotonate \
   $ORIENT --overwrite --log memgen.log > memgen.out 2>&1 || {

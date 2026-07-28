@@ -1,0 +1,29 @@
+; Cycle 3b - membrane-embedded GPCR/peptide complex, Amber ff14SB + Lipid21
+integrator              = md
+nstlist                 = 20
+cutoff-scheme           = Verlet
+rlist                   = 1.0
+coulombtype             = PME
+rcoulomb                = 1.0
+vdwtype                 = cutoff
+vdw-modifier            = potential-shift-verlet
+rvdw                    = 1.0
+DispCorr                = EnerPres
+constraints             = h-bonds
+constraint-algorithm    = LINCS
+lincs-iter              = 1
+lincs-order             = 4
+tcoupl                  = V-rescale
+tc-grps                 = Protein Other Water_and_ions
+ref-t                   = 310 310 310
+tau-t                   = 0.5 0.5 0.5
+; 1 fs timestep: a freshly packed bilayer has close contacts that 2 fs can blow up
+dt                      = 0.001
+nsteps                  = 200000          ; 200 ps
+pcoupl                  = no
+gen-vel                 = yes
+gen-temp                = 310
+gen-seed                = -1
+nstxout-compressed      = 10000
+nstlog                  = 10000
+nstenergy               = 10000
