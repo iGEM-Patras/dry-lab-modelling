@@ -1,0 +1,5 @@
+peptide,label,receptor,iptm,complex_plddt,confidence_score
+YGGFM,native Met-enkephalin,MOR,0.9587,0.8089,0.8389
+YGGFEVVG,engineered chimera (C1),MOR,0.9328,0.8127,0.8367
+YGGFM,native Met-enkephalin,DOR,0.9786,0.8613,0.8848
+YGGFEVVG,engineered chimera (C1),DOR,0.9718,0.8304,0.8587
