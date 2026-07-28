@@ -1,9 +1,35 @@
 # Cycle 1 — Enkephalin–deltorphin chimera (`YGGFEVVG`)
 
-**Status:** complete · **Outcome:** δ-preference raised to **1.96×** native · **Decision:** carry forward as Cycle 2 baseline
+**Status:** complete · **Outcome:** ~~δ-preference raised to 1.96× native~~ **see correction below** · **Decision:** carry forward as Cycle 2 baseline
 
 This is a retrospective writeup: the design was built and tested before being formalised
 as a DBTL cycle. Numbers below are the final matched-MSA production runs.
+
+> ## ⚠ CORRECTION (issued during Cycle 2)
+>
+> **The headline "1.96× native" figure in this document is withdrawn.** It was computed
+> from the single top-ranked diffusion sample (`model_0`) of each complex. Recomputing
+> across all 5 samples that were generated:
+>
+> | Estimator | native `YGGFM` | C1 `YGGFEVVG` |
+> |---|---|---|
+> | `model_0` only (as originally reported) | +0.0199 | +0.0390 |
+> | **all 5 samples (correct)** | **+0.0050 ± 0.0051** | **+0.0114 ± 0.0131** |
+>
+> C1's Δ_sel is smaller than its own uncertainty — indistinguishable from zero
+> (Welch p = 0.43) and from native (p = 0.60).
+>
+> **Root cause:** the `MOR_eng` complex has an ipTM spread of 0.0280 across samples,
+> 3× larger than any other complex in the study (range 0.9201–0.9850). `model_0` for
+> that complex landed at 0.9328, near the floor of its own distribution. The apparent
+> selectivity was substantially one unlucky μ sample, not a property of the peptide.
+>
+> **What survives:** the directional conclusion (the deltorphin address graft moves the
+> peptide δ-ward relative to native) and the pose-convergence anomaly. **What does not:**
+> any quantitative selectivity claim. Do not quote "1.96×".
+>
+> **Process change adopted from here on:** every reported metric is a mean ± SD over all
+> diffusion samples, never a single model. Single-model numbers are not reported.
 
 ---
 

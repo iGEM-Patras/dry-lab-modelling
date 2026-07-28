@@ -22,11 +22,41 @@ reducing the μ-mediated adverse-effect profile that makes conventional opioids 
 
 | Cycle | Design concept | Payload | Status | Result |
 |---|---|---|---|---|
-| **1** | Graft the **deltorphin II address** onto the enkephalin message | `YGGFEVVG` | ✅ complete | δ-preference **1.96×** native |
-| **2** | Enhance address hydrophobicity / anionic residue (literature-guided) | 5 variants | 🔄 in progress | — |
+| **1** | Graft the **deltorphin II address** onto the enkephalin message | `YGGFEVVG` | ✅ complete | Directionally δ-ward; **quantitative claim withdrawn** (see correction) |
+| **2** | Enhance address hydrophobicity / anionic residue (literature-guided) | 5 variants | ✅ complete | **Primary hypothesis falsified** — 4 of 5 predictions wrong; V4/V5 retained |
+| **3a** | Validate pose convergence as a selectivity metric | *no new sequences* | 📋 pre-registered | — |
+| **3b** | Combine Cycle 2's two independent wins | `YAFDIIG` | ⏸ blocked on 3a | — |
 
-- [`cycle1_deltorphin_chimera/CYCLE1.md`](cycle1_deltorphin_chimera/CYCLE1.md) — retrospective DBTL writeup
-- [`cycle2_delta_selectivity/CYCLE2_DESIGN.md`](cycle2_delta_selectivity/CYCLE2_DESIGN.md) — pre-registered design + predictions
+- [`cycle1_deltorphin_chimera/CYCLE1.md`](cycle1_deltorphin_chimera/CYCLE1.md) — retrospective writeup **+ correction notice**
+- [`cycle2_delta_selectivity/CYCLE2_DESIGN.md`](cycle2_delta_selectivity/CYCLE2_DESIGN.md) — pre-registration (committed before the runs)
+- [`cycle2_delta_selectivity/CYCLE2_RESULTS.md`](cycle2_delta_selectivity/CYCLE2_RESULTS.md) — results, prediction scoring, Cycle 1 correction
+- [`cycle3a_convergence_metric/CYCLE3A_DESIGN.md`](cycle3a_convergence_metric/CYCLE3A_DESIGN.md) — pre-registration
+
+## What counts as a cycle here
+
+A cycle is defined by its **Learn → Design edge**, not by the number of constructs it
+contains. Variants that were all designed from the *same* Learn output, tested in
+parallel, and interpreted against each other are **one cycle with a multi-arm panel** —
+Cycle 2's five variants are controls for one another (V3 is the Asp-without-Ile control
+for V4; V2 isolates β-branching from bulk in V1) and are meaningless in isolation.
+
+Splitting a parallel panel into one "cycle" per variant would produce loops with
+identical Design inputs and no Learn edges between them. That inflates cycle count while
+reducing cycle depth. Conversely, Cycle 3 **is** split into 3a and 3b because 3a's
+result determines what metric 3b is judged on — a genuine sequential dependency.
+
+## Track record
+
+Predictions are committed and pushed **before** the corresponding runs are launched, so
+the falsification record is auditable in the git history.
+
+| Cycle | Predictions made | Confirmed | Falsified | Pre-registration commit |
+|---|---|---|---|---|
+| 2 | 5 | 1 | **4** | `f2d6ade` (before job `ac2c837e`) |
+| 3a | 5 | — | — | *this commit* |
+
+A high falsification rate is the intended outcome of honest pre-registration, not a
+failure of the project.
 
 ## Shared method
 
