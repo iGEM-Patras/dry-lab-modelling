@@ -22,19 +22,51 @@ cd "$S"
 [ -f system.gro ] && [ -f system.top ] || { echo "FAIL: no system.gro/system.top in $S"; exit 1; }
 nvidia-smi --query-gpu=name --format=csv,noheader
 
-# ---- index groups -----------------------------------------------------------
-printf 'q\n' | $GMX make_ndx -f system.gro -o index.ndx >mk.log 2>&1
-echo "=== index groups ==="; grep -oE "^ *[0-9]+ [A-Za-z_+-]+" mk.log | head -20
-for g in Protein Other Water_and_ions; do
-  grep -qE "[0-9]+ $g " mk.log || { echo "FAIL: group '$g' missing -> fix tc-grps"; exit 1; }
-done
+# ---- index groups + peptide location ---------------------------------------
+# Written directly by make_index.py: make_ndx's default group NUMBERS are not
+# predictable on this system (group 20 is already "non-Water"), so selecting by
+# number scrambled the thermostat groups. See make_index.py for the full note.
+$PY $W/scripts/make_index.py system.top system.gro index.ndx pepmeta.txt \
+  || { echo "FAIL: index/thermostat-group construction"; exit 1; }
+. ./pepmeta.txt
+echo "peptide residues ${PEP_FIRST_RES}-${PEP_LAST_RES} (${PEP_NRES} aa): ${PEP_SEQ}"
 
-gate () {  # gate <stage> <structure>
+# The D-residue index the caller gave is relative to the PEPTIDE; convert it to the
+# absolute residue index. Passing the peptide-relative index made the gate inspect
+# the RECEPTOR's residue 2, which has no CB, so it aborted a healthy run.
+if [ "$DRES" != "none" ]; then
+  DRES_ABS=$(( PEP_FIRST_RES + DRES - 1 ))
+  echo "D-residue: peptide position $DRES -> absolute residue $DRES_ABS"
+else
+  DRES_ABS=none
+fi
+
+gate () {  # gate <stage> <structure.pdb>
   local stage="$1" struct="$2"
-  [ "$DRES" = "none" ] && { echo "  [gate:$stage] no D-residue, skipped"; return 0; }
-  $GMX editconf -f "$struct" -o "gate_${stage}.pdb" -n index.ndx >/dev/null 2>&1 <<< "1"
-  $PY $W/scripts/chirality.py assert "gate_${stage}.pdb" "$DRES" B || {
-      echo "FAIL: chirality inverted at stage '$stage' - DISCARD this run"; exit 3; }
+  if [ "$DRES_ABS" = "none" ]; then echo "  [gate:$stage] no D-residue, skipped"; return 0; fi
+  # Extract the PEPTIDE ONLY, by residue-index range from the topology, then test
+  # position $DRES within that fragment.
+  #
+  # Why not address the whole structure by position: editconf/trjconv do not preserve
+  # the topology's residue ORDER for solvent, so absolute position 374 landed on an
+  # Na+ ion rather than the peptide's Ala2. Selecting via the topology (parmed, which
+  # reads system.top) and writing just the 7-residue peptide makes the index
+  # unambiguous and independent of how GROMACS ordered the solvent.
+  $PY - "$struct" "$PEP_FIRST_RES" "$PEP_LAST_RES" "pep_${stage}.pdb" <<'PYEOF'
+import sys, parmed as pmd
+src, lo, hi, out = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), sys.argv[4]
+st = pmd.load_file("system.top")
+st.coordinates = pmd.load_file(src).coordinates
+pep = st[f":{lo}-{hi}"]
+seq = "-".join(r.name for r in pep.residues)
+assert len(pep.residues) == hi - lo + 1, f"selected {len(pep.residues)} residues, want {hi-lo+1}"
+pep.save(out, overwrite=True)
+print(f"  [gate] peptide extracted: {seq}")
+PYEOF
+  [ -s "pep_${stage}.pdb" ] || { echo "FAIL: could not extract peptide at stage '$stage'"; exit 1; }
+  $PY $W/scripts/chirality.py assert "pep_${stage}.pdb" "$DRES" --by-position \
+    || { echo "FAIL: chirality inverted or unreadable at stage '$stage' - DISCARD this run"; exit 3; }
+  echo "  [gate:$stage] chirality OK"
 }
 
 # ---- 1. minimise ------------------------------------------------------------
@@ -42,7 +74,7 @@ $GMX grompp -f $W/scripts/min.mdp -c system.gro -p system.top -o min.tpr -n inde
   || { echo "FAIL grompp min"; tail -25 grompp_min.log; exit 1; }
 $GMX mdrun -deffnm min -nb gpu >md_min.log 2>&1 || { echo "FAIL mdrun min"; tail -20 md_min.log; exit 1; }
 echo "min: $(grep -E 'Potential Energy|Maximum force' md_min.log | tail -2 | tr '\n' ' ')"
-$GMX editconf -f min.gro -o min.pdb >/dev/null 2>&1
+$GMX editconf -f min.gro -o min.pdb >/dev/null 2>&1   # whole system: positions must match make_index
 gate min min.pdb
 
 # ---- 2. NVT ----------------------------------------------------------------

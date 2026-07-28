@@ -109,9 +109,20 @@ packmol-memgen --pdb complex_start.pdb --lipids POPC --ratio 1 \
   $ORIENT --overwrite --log memgen.log > memgen.out 2>&1 || {
     echo "FAIL: packmol-memgen"; tail -25 memgen.out; exit 1; }
 
-PRM=$(ls *.prmtop 2>/dev/null | head -1); CRD=$(ls *.rst7 *.inpcrd 2>/dev/null | head -1)
+# packmol-memgen --parametrize names its Amber output <input>_lipid.top/.crd, NOT
+# .prmtop/.rst7. Globbing only for .prmtop made a SUCCESSFUL build report EXIT=2.
+PRM=$(ls *_lipid.top *.prmtop *.parm7 2>/dev/null | head -1)
+CRD=$(ls *_lipid.crd *.rst7 *.inpcrd 2>/dev/null | head -1)
 [ -n "$PRM" ] && [ -n "$CRD" ] || { echo "FAIL: no topology produced"; tail -25 memgen.out; exit 1; }
 echo "topology: $PRM | coords: $CRD"
+# tleap emits ~2 warnings per lipid because Lipid21 SPLITS each POPC into PC/OL/PA
+# residues by design. Warnings are therefore not a failure signal here; Errors are.
+if [ -f leap_.log ]; then
+  LE=$(grep -oE "Errors = [0-9]+" leap_.log | tail -1 | grep -oE "[0-9]+")
+  LW=$(grep -oE "Warnings = [0-9]+" leap_.log | tail -1 | grep -oE "[0-9]+")
+  echo "tleap: Errors=${LE:-?} Warnings=${LW:-?} (lipid-splitting warnings are expected)"
+  [ "${LE:-1}" = "0" ] || { echo "FAIL: tleap reported errors"; grep -iE "error|fatal" leap_.log | head -10; exit 1; }
+fi
 $PY -c "
 import parmed as pmd
 p = pmd.load_file('$PRM', xyz='$CRD')

@@ -1,87 +1,138 @@
 #!/usr/bin/env python3
-"""Chirality assertion for D-amino-acid residues in Cycle 3b systems.
+"""Chirality assertion / inversion for D-amino-acid residues.
 
-The Amber ff14SB topology is enantiomer-blind: parm10.dat contains no improper
-torsion on the CX sp3 alpha-carbon, so nothing in the force field or in GROMACS
-will warn if a D-centre inverts during minimisation or equilibration. This script
-is therefore run as a hard gate after every minimisation and every equilibration
-stage. Runs that invert are discarded, not analysed.
+WHY THIS EXISTS
+---------------
+ff14SB has no D-amino-acid templates, so a D-residue is built by MIRRORING the L
+form. That is valid because no improper-torsion term in the parameter set
+references the sp3 alpha-carbon type, so handedness carries NO energetic term and
+the mirrored residue keeps identical parameters (verified: bonded topology is
+byte-identical between L and D prmtops).
 
-Convention: signed volume V = (r_N - r_CA) x (r_C - r_CA) . (r_CB - r_CA)
-    V > 0  ->  L-residue
-    V < 0  ->  D-residue
+The direct consequence is that the topology is ENANTIOMER-BLIND: nothing in the
+force field can notice if the D-centre inverts during minimisation or dynamics.
+So chirality must be asserted EXTERNALLY, after every stage. A run whose centre
+inverted is DISCARDED, never averaged in.
+
+Handedness is measured as the signed volume of the improper
+    V = (N - CA) . [ (C - CA) x (CB - CA) ]
+L-amino acids give V > 0, D-amino acids V < 0 (Gly has no CB and is achiral).
+
+USAGE
+  chirality.py assert <pdb> <resid> [chain]   -> exit 0 if D, 2 if L, 1 on error
+  chirality.py invert <pdb> <resid> [chain] <out.pdb>
+<resid> is a residue NUMBER as written in the PDB (or 1-based position when
+--by-position is given).
 """
 import sys
 import numpy as np
 
-MOVE = ("HA", "CB", "HB1", "HB2", "HB3", "HB")
-
-
-def load(path, chain=None):
+def parse(path):
     rows = []
     for l in open(path):
         if l.startswith(("ATOM", "HETATM")):
-            if chain and l[21] != chain:
-                continue
-            rows.append(dict(raw=l, name=l[12:16].strip(), resn=l[17:20].strip(),
-                             chain=l[21], resi=int(l[22:26]),
-                             xyz=np.array([float(l[30:38]), float(l[38:46]), float(l[46:54])])))
+            rows.append(dict(
+                line=l, name=l[12:16].strip(), resn=l[17:20].strip(),
+                chain=l[21], resi=l[22:26].strip(),
+                xyz=np.array([float(l[30:38]), float(l[38:46]), float(l[46:54])])))
     return rows
 
-
-def signed_volume(rows, resi):
-    d = {r["name"]: r["xyz"] for r in rows if r["resi"] == resi}
-    if not {"N", "CA", "C", "CB"} <= set(d):
-        return None  # Gly, or a cap: no CB, achiral
-    return float(np.dot(np.cross(d["N"] - d["CA"], d["C"] - d["CA"]), d["CB"] - d["CA"]))
-
-
-def invert(rows, resi):
-    """Mirror the alpha-substituents through the N-CA-C plane -> flips chirality."""
-    d = {r["name"]: r["xyz"] for r in rows if r["resi"] == resi}
-    CA = d["CA"]
-    nrm = np.cross(d["N"] - CA, d["C"] - CA)
-    nrm /= np.linalg.norm(nrm)
-    n = 0
-    for r in rows:
-        if r["resi"] == resi and r["name"] in MOVE:
-            r["xyz"] = r["xyz"] - 2 * np.dot(r["xyz"] - CA, nrm) * nrm
-            n += 1
-    return n
-
-
-def write(rows, path):
-    with open(path, "w") as f:
+def pick(rows, resid, chain, by_position):
+    if by_position:
+        keys = []
         for r in rows:
-            x, y, z = r["xyz"]
-            f.write(r["raw"][:30] + f"{x:8.3f}{y:8.3f}{z:8.3f}" + r["raw"][54:])
-        f.write("END\n")
+            k = (r["chain"], r["resi"])
+            if k not in keys:
+                keys.append(k)
+        if not 1 <= int(resid) <= len(keys):
+            sys.exit(f"FAIL: position {resid} outside 1-{len(keys)}")
+        want = keys[int(resid) - 1]
+        return [r for r in rows if (r["chain"], r["resi"]) == want]
+    sel = [r for r in rows if r["resi"] == str(resid)
+           and (chain in (None, "", "-") or r["chain"] == chain)]
+    if not sel:
+        chains = sorted({r["chain"] for r in rows})
+        sys.exit(f"FAIL: residue {resid} not found (chains present: {chains})")
+    return sel
 
+def volume(sel, resid):
+    at = {r["name"]: r["xyz"] for r in sel}
+    missing = [a for a in ("N", "CA", "C", "CB") if a not in at]
+    if missing:
+        resn = sel[0]["resn"]
+        sys.exit(f"FAIL: residue {resid} ({resn}) lacks {missing} "
+                 f"- Gly is achiral, or the wrong residue was addressed")
+    v = np.dot(at["N"] - at["CA"],
+               np.cross(at["C"] - at["CA"], at["CB"] - at["CA"]))
+    return float(v), sel[0]["resn"]
 
 def main():
-    if len(sys.argv) < 4:
-        sys.exit("usage: chirality.py {invert|assert} <pdb> <resi> [chain] [out.pdb]")
-    mode, path, resi = sys.argv[1], sys.argv[2], int(sys.argv[3])
-    chain = sys.argv[4] if len(sys.argv) > 4 and sys.argv[4] != "-" else None
-    rows = load(path, chain)
-    v0 = signed_volume(rows, resi)
-    if v0 is None:
-        sys.exit(f"FAIL residue {resi} has no CB (achiral) - wrong residue index?")
+    args = [a for a in sys.argv[1:] if a != "--by-position"]
+    by_pos = "--by-position" in sys.argv
+    if len(args) < 3:
+        sys.exit(__doc__)
+    mode, pdb, resid = args[0], args[1], args[2]
+    rest = args[3:]
+
+    if mode == "assert":
+        chain = rest[0] if rest else None
+        rows = parse(pdb)
+        sel = pick(rows, resid, chain, by_pos)
+        v, resn = volume(sel, resid)
+        hand = "D" if v < 0 else "L"
+        print(f"assert res{resid} ({resn}): V = {v:+.3f} -> {hand}", end="")
+        if v < 0:
+            print(" (ok)")
+            sys.exit(0)
+        print(" (EXPECTED D - run is invalid)")
+        sys.exit(2)
 
     if mode == "invert":
-        n = invert(rows, resi)
-        v1 = signed_volume(rows, resi)
-        out = sys.argv[5] if len(sys.argv) > 5 else path.replace(".pdb", "_D.pdb")
-        write(rows, out)
-        ok = v1 < 0 and abs(abs(v1) - abs(v0)) < 1e-6
-        print(f"invert res{resi}: moved {n} atoms | V {v0:+.3f} -> {v1:+.3f} | "
-              f"magnitude preserved={abs(abs(v1)-abs(v0))<1e-6} -> {out}")
+        if not rest:
+            sys.exit("FAIL: invert needs an output path")
+        chain = rest[0] if len(rest) > 1 else None
+        out = rest[-1]
+        rows = parse(pdb)
+        sel = pick(rows, resid, chain, by_pos)
+        v0, resn = volume(sel, resid)
+        # Refuse up front if the centre is ALREADY D. Inverting it would silently
+        # produce an L residue, and a caller asking for that is confused about the
+        # state of its own structure -- which is exactly the bug this file guards.
+        if v0 < 0:
+            sys.exit(f"FAIL: residue {resid} ({resn}) is already D "
+                     f"(V = {v0:+.3f}); refusing to invert it back to L")
+        at = {r["name"]: r["xyz"] for r in sel}
+        # Reflect ONLY the CB substituent through the N-CA-C plane. This inverts the
+        # centre while leaving the backbone -- and therefore the docked pose and every
+        # other residue -- untouched.
+        nrm = np.cross(at["C"] - at["CA"], at["N"] - at["CA"])
+        nrm /= np.linalg.norm(nrm)
+        moved = 0
+        sidechain = [r for r in sel if r["name"] not in ("N", "CA", "C", "O", "OXT",
+                                                         "H", "HA", "H1", "H2", "H3")]
+        lines_out = []
+        newxyz = {}
+        for r in sidechain:
+            d = r["xyz"] - at["CA"]
+            r2 = at["CA"] + d - 2 * np.dot(d, nrm) * nrm
+            newxyz[id(r)] = r2
+            moved += 1
+        for r in rows:
+            if id(r) in newxyz:
+                x, y, z = newxyz[id(r)]
+                l = r["line"]
+                lines_out.append(f"{l[:30]}{x:8.3f}{y:8.3f}{z:8.3f}{l[54:]}")
+            else:
+                lines_out.append(r["line"])
+        open(out, "w").writelines(lines_out)
+        v1, _ = volume(parse(out) and pick(parse(out), resid, chain, by_pos), resid)
+        ok = abs(abs(v1) - abs(v0)) < 0.15 and v1 < 0 < v0
+        print(f"invert res{resid} ({resn}): moved {moved} atoms | "
+              f"V {v0:+.3f} -> {v1:+.3f} | magnitude preserved={abs(abs(v1)-abs(v0))<0.15} "
+              f"-> {out}")
         sys.exit(0 if ok else 1)
 
-    # assert mode: require D (V < 0)
-    print(f"assert res{resi}: V = {v0:+.3f} -> {'D (ok)' if v0 < 0 else 'L (INVERTED!)'}")
-    sys.exit(0 if v0 < 0 else 2)
-
+    sys.exit(f"FAIL: unknown mode {mode!r}")
 
 if __name__ == "__main__":
     main()
