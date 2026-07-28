@@ -24,13 +24,14 @@ reducing the μ-mediated adverse-effect profile that makes conventional opioids 
 |---|---|---|---|---|
 | **1** | Graft the **deltorphin II address** onto the enkephalin message | `YGGFEVVG` | ✅ complete | Directionally δ-ward; **quantitative claim withdrawn** (see correction) |
 | **2** | Enhance address hydrophobicity / anionic residue (literature-guided) | 5 variants | ✅ complete | **Primary hypothesis falsified** — 4 of 5 predictions wrong; V4/V5 retained |
-| **3a** | Validate pose convergence as a selectivity metric | *no new sequences* | 📋 pre-registered | — |
-| **3b** | Combine Cycle 2's two independent wins | `YAFDIIG` | ⏸ blocked on 3a | — |
+| **3a** | Validate pose convergence as a selectivity metric | *no new sequences* | ✅ complete | **H3a rejected** — does not replicate; metric retired |
+| **3b** | Combine Cycle 2's two independent wins | `YAFDIIG` | ⛔ premise withdrawn | V5's "win" is within noise at n=20 — see 3a recommendation |
 
 - [`cycle1_deltorphin_chimera/CYCLE1.md`](cycle1_deltorphin_chimera/CYCLE1.md) — retrospective writeup **+ correction notice**
 - [`cycle2_delta_selectivity/CYCLE2_DESIGN.md`](cycle2_delta_selectivity/CYCLE2_DESIGN.md) — pre-registration (committed before the runs)
 - [`cycle2_delta_selectivity/CYCLE2_RESULTS.md`](cycle2_delta_selectivity/CYCLE2_RESULTS.md) — results, prediction scoring, Cycle 1 correction
 - [`cycle3a_convergence_metric/CYCLE3A_DESIGN.md`](cycle3a_convergence_metric/CYCLE3A_DESIGN.md) — pre-registration
+- [`cycle3a_convergence_metric/CYCLE3A_RESULTS.md`](cycle3a_convergence_metric/CYCLE3A_RESULTS.md) — held-out replication, scorecard, recommendation
 
 ## What counts as a cycle here
 
@@ -53,7 +54,11 @@ the falsification record is auditable in the git history.
 | Cycle | Predictions made | Confirmed | Falsified | Pre-registration commit |
 |---|---|---|---|---|
 | 2 | 5 | 1 | **4** | `f2d6ade` (before job `ac2c837e`) |
-| 3a | 5 | — | — | *this commit* |
+| 3a | 5 | 3 | **2** (both decisive) | `ec7123d` (before job `1391bb2a`) |
+
+**Cumulative: 10 predictions, 4 confirmed, 6 falsified.** The two Cycle 3a falsifications
+rejected the cycle's own hypothesis; the three confirmations include P5, which predicted
+that our *previous* cycle's ranking was unreliable — and it was.
 
 A high falsification rate is the intended outcome of honest pre-registration, not a
 failure of the project.
