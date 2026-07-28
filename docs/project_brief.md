@@ -14,6 +14,8 @@ This project supports an enkephalin-based analgesic strategy built on **proenkep
 3. **Human anti-NEP (MME) siRNA design** — four validated-in-silico siRNA duplexes targeting the CDS shared by all MME transcript variants, with off-target and thermodynamic scoring.
 4. **Lipoplex CG-MD** — coarse-grained MARTINI simulations comparing three lipid formulations (permanent-cation DOTAP, protonated ionizable MC3-H⁺, neutral MC3⁰) across triplicate replicates, resolving the pH-dependent DNA-binding behaviour that motivates the ionizable-lipid choice.
 
+A fifth workstream was added after the first four: **payload engineering cycles** (§5b) — three pre-registered DBTL iterations attempting to bias the expressed peptide toward the δ opioid receptor. It returned a **negative result**, and is reported here in full because the negative result is load-bearing: it defines where the computational screen stops and the wet-lab assay must begin, and it forced the retraction of an earlier selectivity number.
+
 **Scope note on the payload.** The four cassette plasmids carry the **native** human PENK sequence — they are the expression-system test-bed. The engineered anionic-address PENK (the therapy payload) is a separate construct: it currently exists as a **cloning-ready insert** (`engineered_PENK_GC-optimized.fasta` / `engPENK_insert_annotated.gb`), not yet assembled into an expression plasmid. It is audited here as the payload (§1) and kept out of the four-plasmid restriction QC (§2); §2b then assembles it into a therapy plasmid on the test-bed backbone with its own purpose-built QC.
 
 ---
@@ -169,6 +171,67 @@ The two-arm concept and its dorsal-horn mechanism are shown in `therapy_delivery
 | Restriction QC | Identity/gene-order check before transfection | 2-digest protocol + virtual gel |
 | siRNA design | Knockdown reagents for the NEP arm | 4 orderable duplexes + validation plan |
 | Lipoplex CG-MD | pH-dependent DNA binding of the delivery vehicle | Formulation ranking + convergence-backed screen |
+| Peptide engineering cycles | That δ-selectivity **cannot** be resolved by co-fold confidence at the effect sizes our designs produce | Shortlist of 2 payloads for radioligand binding |
+
+---
+
+## 5b. Payload engineering cycles — δ-selectivity (three DBTL iterations)
+
+Native Met-enkephalin (`YGGFM`) is only weakly δ-preferring, and δ (DOR/`OPRD1`) agonism
+carries **much lower respiratory-depression and dependence liability** than μ
+(MOR/`OPRM1`). Biasing the payload δ-ward is therefore a safety-driven design goal, and it
+was pursued over three pre-registered Design→Build→Test→Learn cycles. Predictions were
+committed and pushed to git **before** each run, so the falsification record is auditable.
+
+| Cycle | Question | Outcome |
+|---|---|---|
+| **1** | Does grafting the deltorphin II address onto the enkephalin message bias δ? | Directionally δ-ward; **quantitative claim withdrawn** (see correction below) |
+| **2** | Can address hydrophobicity / an anionic residue improve it? | **Primary hypothesis falsified** — 4 of 5 predictions wrong |
+| **3a** | Is pose convergence a better-powered selectivity proxy than ipTM? | **Hypothesis rejected** — does not replicate on held-out samples |
+
+**Cumulative track record: 10 predictions, 4 confirmed, 6 falsified.**
+
+### A retracted number, and why it is reported here
+
+Cycle 1 originally reported the engineered payload as **1.96× more δ-preferring** than
+native. **That figure is withdrawn.** It was computed from the single top-ranked diffusion
+sample. Recomputed across all samples, the engineered payload's δ-preference is
++0.0114 ± 0.0131 — indistinguishable from zero (p = 0.43) and from native (p = 0.60). Root
+cause: the engineered μ complex has ~3× the sample spread of any other complex, and the
+top-ranked model happened to land near that distribution's floor, so the apparent
+selectivity was largely one unlucky sample. A process change followed: **every metric in
+this project is now a mean ± SD over all samples, never a single model.**
+
+### Final state of the screen
+
+Across 7 peptides × 2 receptors at 20 diffusion samples each (280 structures), **no design
+achieves meaningful δ-selectivity**: every Δ_sel ≤ 0.007 with SEM ≈ 0.004, and the two
+leading payloads — `YGGFEVVG` (the built construct) and `YGGFDIIG` — are statistically
+tied. The only result reaching significance points the *wrong* way (`YGGFELLG` prefers μ,
+p = 0.008), reproducing a consistent finding that added aliphatic bulk in the address
+biases μ-ward on our Gly-Gly backbone — opposite to the published deltorphin literature,
+which measured those substitutions on a D-Ala² backbone we cannot encode in DNA.
+
+**The honest conclusion is that the in-silico screen has reached its resolution limit.**
+Boltz-2 ipTM is a structural-confidence score, not binding affinity, and it cannot resolve
+δ/μ preference at the magnitude these designs produce. The screen's real deliverable is a
+**shortlist of two payloads for radioligand competition binding at OPRD1/OPRM1**, which
+remains the only real test.
+
+### Constraint that shaped every design
+
+The payload is **expressed from a plasmid**, so it must be DNA-encodable: 20 standard
+L-amino acids only. This excludes the classic high-selectivity opioid-peptide chemistry
+(D-amino acids, penicillamine cyclisation, N-methylation), which is why the design space
+was the address-domain *sequence*. One exception is exploited deliberately — a C-terminal
+Gly is the recognition signal for **peptidylglycine α-amidating monooxygenase (PAM)**, so a
+`...VVG` payload can be amidated to `...VV-NH₂` *in vivo*; the terminal Gly in every design
+is load-bearing.
+
+![δ vs μ co-folds](figures/dor_mor_fullMSA_comparison.png)
+
+Full per-cycle pre-registrations, results, and prediction scorecards are in
+`06_engineering_cycles/`.
 
 ---
 
@@ -176,4 +239,12 @@ The two-arm concept and its dorsal-horn mechanism are shown in `therapy_delivery
 
 Every tool version, force field, database accession, and published design rule is recorded in `methods_references.md`. The full analysis code, input topologies, protocols, and figures are versioned in the accompanying Git repository. The MD parameter-provenance caveat is stated in both the methods log and the results above.
 
-*This brief reports the final 200 ns MD results (all 9 replicates converged). The optional Boltz peptide–receptor co-fold (μ/δ opioid receptor × native/engineered enkephalin) was attempted opportunistically but did not complete — it hit a cluster home-directory disk-quota limit during MSA generation, so no co-fold structures were produced. It is not one of the core deliverables and can be re-run once quota is freed.*
+*This brief reports the final 200 ns MD results (all 9 replicates converged).*
+
+*Update on the peptide–receptor co-folds: these **did** complete. An earlier version of this
+brief recorded them as blocked by a cluster disk-quota limit during MSA generation; that
+was resolved, and the root cause of the subsequent GPU memory failures turned out to be the
+prediction tool auto-loading an uncapped MSA rather than a hard hardware limit. All four
+μ/δ × native/engineered complexes were produced at matched full MSA depth (1024 sequences),
+then extended to a 7-peptide panel at 20 diffusion samples each (§5b). Structures and
+confidence files are in `06_engineering_cycles/*/data/`.*
