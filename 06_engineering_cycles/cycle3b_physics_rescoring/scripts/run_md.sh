@@ -41,18 +41,17 @@ else
   DRES_ABS=none
 fi
 
-gate () {  # gate <stage> <structure.pdb>
-  local stage="$1" struct="$2"
+gate () {  # gate <stage> <coords.gro>
+  local stage="$1" coords="$2"
   if [ "$DRES_ABS" = "none" ]; then echo "  [gate:$stage] no D-residue, skipped"; return 0; fi
-  # Extract the PEPTIDE ONLY, by residue-index range from the topology, then test
-  # position $DRES within that fragment.
+  # Read coordinates from the .gro, NOT a PDB. At 270,287 atoms the PDB atom-serial
+  # field overflows (99,999 max) and parmed rejects the file outright
+  # ("Coordinate mismatch in model 1"). .gro has no such limit.
   #
-  # Why not address the whole structure by position: editconf/trjconv do not preserve
-  # the topology's residue ORDER for solvent, so absolute position 374 landed on an
-  # Na+ ion rather than the peptide's Ala2. Selecting via the topology (parmed, which
-  # reads system.top) and writing just the 7-residue peptide makes the index
-  # unambiguous and independent of how GROMACS ordered the solvent.
-  $PY - "$struct" "$PEP_FIRST_RES" "$PEP_LAST_RES" "pep_${stage}.pdb" <<'PYEOF'
+  # The peptide is selected by residue-index range from system.top, because
+  # editconf/trjconv do not preserve the topology's solvent ORDER -- addressing the
+  # whole structure by absolute position landed on an Na+ ion instead of Ala2.
+  $PY - "$coords" "$PEP_FIRST_RES" "$PEP_LAST_RES" "pep_${stage}.pdb" <<'PYEOF'
 import sys, parmed as pmd
 src, lo, hi, out = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), sys.argv[4]
 st = pmd.load_file("system.top")
@@ -61,7 +60,7 @@ pep = st[f":{lo}-{hi}"]
 seq = "-".join(r.name for r in pep.residues)
 assert len(pep.residues) == hi - lo + 1, f"selected {len(pep.residues)} residues, want {hi-lo+1}"
 pep.save(out, overwrite=True)
-print(f"  [gate] peptide extracted: {seq}")
+print(f"  [gate] peptide extracted ({len(pep.atoms)} atoms): {seq}")
 PYEOF
   [ -s "pep_${stage}.pdb" ] || { echo "FAIL: could not extract peptide at stage '$stage'"; exit 1; }
   $PY $W/scripts/chirality.py assert "pep_${stage}.pdb" "$DRES" --by-position \
@@ -74,8 +73,7 @@ $GMX grompp -f $W/scripts/min.mdp -c system.gro -p system.top -o min.tpr -n inde
   || { echo "FAIL grompp min"; tail -25 grompp_min.log; exit 1; }
 $GMX mdrun -deffnm min -nb gpu >md_min.log 2>&1 || { echo "FAIL mdrun min"; tail -20 md_min.log; exit 1; }
 echo "min: $(grep -E 'Potential Energy|Maximum force' md_min.log | tail -2 | tr '\n' ' ')"
-$GMX editconf -f min.gro -o min.pdb >/dev/null 2>&1   # whole system: positions must match make_index
-gate min min.pdb
+gate min min.gro
 
 # ---- 2. NVT ----------------------------------------------------------------
 $GMX grompp -f $W/scripts/nvt.mdp -c min.gro -p system.top -o nvt.tpr -n index.ndx -maxwarn 5 >grompp_nvt.log 2>&1 \
@@ -90,8 +88,7 @@ $GMX grompp -f $W/scripts/npt.mdp -c nvt.gro -t nvt.cpt -p system.top -o npt.tpr
 $GMX mdrun -deffnm npt -nb gpu -pme gpu -update gpu >md_npt.log 2>&1 \
   || { echo "FAIL mdrun npt"; tail -20 md_npt.log; exit 1; }
 echo "NPT perf: $(grep -A1 'Performance' md_npt.log | tail -1)"
-$GMX editconf -f npt.gro -o npt.pdb >/dev/null 2>&1
-gate npt npt.pdb
+gate npt npt.gro
 
 # ---- 4. production BENCHMARK ----------------------------------------------
 # -resethway discards the first half's timings so setup/load-balancing is excluded.
