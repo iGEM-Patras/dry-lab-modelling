@@ -28,6 +28,17 @@ PY=$E/bin/python
 SYS=$W/systems/$TAG
 mkdir -p "$SYS"; cd "$SYS"
 
+# --resume: skip straight to the post-packing steps if a parametrized topology
+# already exists. Packing costs ~30 min of CPU per system and the topology on disk
+# is already the correct (amidated) species, so there is nothing to gain by redoing
+# it after a downstream scripting failure.
+RESUME=no
+for a in "$@"; do [ "$a" = "--resume" ] && RESUME=yes; done
+if [ "$RESUME" = "yes" ] && [ -n "$(echo *_lipid.top)" ] && [ -e "$(echo *_lipid.top | cut -d" " -f1)" ]; then
+  echo "resuming from existing packed topology in $SYS"
+  SKIP_PACK=yes
+fi
+
 POSE=$(find $W/out_${TAG} -name "*model_0.pdb" | head -1)
 [ -n "$POSE" ] || { echo "FAIL: no pose for $TAG"; exit 1; }
 echo "pose: $POSE"
@@ -126,16 +137,28 @@ fi
 echo "orientation: ${ORIENT:-memgen internal}"
 
 # ---- 4. pack bilayer ------------------------------------------------------
+if [ "${SKIP_PACK:-no}" != "yes" ]; then
 packmol-memgen --pdb complex_start.pdb --lipids POPC --ratio 1 \
   --dist 15 --dist_wat 20 --salt --salt_c Na+ --saltcon 0.15 \
   --ffprot ff14SB --ffwat tip3p --parametrize --notprotonate \
   $ORIENT --overwrite --log memgen.log > memgen.out 2>&1 || {
     echo "FAIL: packmol-memgen"; tail -25 memgen.out; exit 1; }
+fi
 
 # packmol-memgen --parametrize names its Amber output <input>_lipid.top/.crd, NOT
 # .prmtop/.rst7. Globbing only for .prmtop made a SUCCESSFUL build report EXIT=2.
-PRM=$(ls *_lipid.top *.prmtop *.parm7 2>/dev/null | head -1)
-CRD=$(ls *_lipid.crd *.rst7 *.inpcrd 2>/dev/null | head -1)
+# NOTE: do NOT write this as $(ls A B C | head -1). `ls` exits 2 when ANY operand
+# does not exist, and with `set -o pipefail` that 2 propagates out of the command
+# substitution, so `set -e` kills the script with EXIT=2 and NO error message --
+# even though the topology is sitting right there. That is the real cause of the
+# exit-2 I previously misdiagnosed as a wrong glob pattern: adding *_lipid.top to
+# the list did not help, because *.prmtop still failed to match. Use bash globbing,
+# which simply yields nothing.
+pick () { local f; for f in "$@"; do [ -e "$f" ] && { printf '%s' "$f"; return 0; }; done; return 0; }
+shopt -s nullglob
+PRM=$(pick *_lipid.top *.prmtop *.parm7)
+CRD=$(pick *_lipid.crd *.rst7 *.inpcrd)
+shopt -u nullglob
 [ -n "$PRM" ] && [ -n "$CRD" ] || { echo "FAIL: no topology produced"; tail -25 memgen.out; exit 1; }
 echo "topology: $PRM | coords: $CRD"
 # Assert the amide survived into the FINAL topology. This is the last point at
