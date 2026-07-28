@@ -1,0 +1,9 @@
+tag,stem,receptor,seq,dres,amidate,note
+c3b_dtII_DOR,dtII,DOR,YAFEVVG,2,yes,Deltorphin II  YaFEVVG-NH2
+c3b_dtII_MOR,dtII,MOR,YAFEVVG,2,yes,Deltorphin II  YaFEVVG-NH2
+c3b_dtI_DOR,dtI,DOR,YAFDVVG,2,yes,Deltorphin I   YaFDVVG-NH2
+c3b_dtI_MOR,dtI,MOR,YAFDVVG,2,yes,Deltorphin I   YaFDVVG-NH2
+c3b_em1_DOR,em1,DOR,YPWF,none,yes,Endomorphin-1  YPWF-NH2 (all-L)
+c3b_em1_MOR,em1,MOR,YPWF,none,yes,Endomorphin-1  YPWF-NH2 (all-L)
+c3b_menk_DOR,menk,DOR,YGGFM,none,no,Met-enkephalin YGGFM-OH (natively FREE ACID)
+c3b_menk_MOR,menk,MOR,YGGFM,none,no,Met-enkephalin YGGFM-OH (natively FREE ACID)

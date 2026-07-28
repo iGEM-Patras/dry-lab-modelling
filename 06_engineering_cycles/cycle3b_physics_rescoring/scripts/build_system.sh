@@ -13,6 +13,10 @@ set -euo pipefail
 
 TAG="${1:?usage: build_system.sh <tag> <dres|none>}"
 DRES="${2:-none}"
+# Amidation is ON by default: the free acid is the wrong species for every
+# peptide in this panel. Pass --no-amidate only for a deliberate control.
+AMIDATE=yes
+for a in "$@"; do [ "$a" = "--no-amidate" ] && AMIDATE=no; done
 
 W=/data/users/kzanaj/boltz_dock/cycle3b
 E=/data/users/kzanaj/envs/gmxmmpbsa
@@ -40,6 +44,25 @@ if [ "$DRES" != "none" ]; then
   mv pep_D.pdb pep_chir.pdb
 else
   cp pep_raw.pdb pep_chir.pdb
+fi
+
+# ---- 2b. install the C-terminal primary amide ------------------------------
+# MANDATORY, and the reason Cycle 3b exists. The bioactive species of every control
+# and of our payload is C-terminally AMIDATED (PAM recognises the terminal Gly).
+# Boltz-2 cannot represent an amide, and packmol-memgen --parametrize just runs
+# tleap, which defaults a bare C-terminus to the CHARGED FREE ACID. Skipping this
+# step silently simulates the wrong chemical species -- an extra -1 charge sitting
+# exactly on the pharmacophore that sets delta-selectivity -- and the run still
+# completes looking healthy. Verified: NHE gives net charge 0.000 vs -1 free acid,
+# tleap Errors=0 Warnings=0, and the D-centre survives (V = -2.504).
+if [ "$AMIDATE" = "yes" ]; then
+  $PY $W/scripts/amidate.py pep_chir.pdb pep_amide.pdb || { echo "FAIL: amidation"; exit 1; }
+  $PY $W/scripts/amidate.py pep_amide.pdb /dev/null --check \
+    || { echo "FAIL: amide cap not present after amidation"; exit 1; }
+  mv pep_amide.pdb pep_chir.pdb
+  echo "  C-terminus: primary amide (NHE)"
+else
+  echo "  C-terminus: FREE ACID (--no-amidate given)"
 fi
 
 # ---- 3. orient the COMPLEX along the membrane normal -----------------------
@@ -115,6 +138,20 @@ PRM=$(ls *_lipid.top *.prmtop *.parm7 2>/dev/null | head -1)
 CRD=$(ls *_lipid.crd *.rst7 *.inpcrd 2>/dev/null | head -1)
 [ -n "$PRM" ] && [ -n "$CRD" ] || { echo "FAIL: no topology produced"; tail -25 memgen.out; exit 1; }
 echo "topology: $PRM | coords: $CRD"
+# Assert the amide survived into the FINAL topology. This is the last point at
+# which the wrong-species error is catchable; after this the trajectory looks fine.
+if [ "$AMIDATE" = "yes" ]; then
+  $PY - "$PRM" <<'PYEOF'
+import sys, parmed as pmd
+p = pmd.load_file(sys.argv[1])
+names = [r.name for r in p.residues]
+if "NHE" not in names:
+    sys.exit("FAIL: no NHE in the final topology - the system is a FREE ACID, "
+             "which is the wrong chemical species for this panel")
+print(f"  amide verified in final topology: {names.count('NHE')} NHE residue(s)")
+PYEOF
+  [ $? -eq 0 ] || exit 1
+fi
 # tleap emits ~2 warnings per lipid because Lipid21 SPLITS each POPC into PC/OL/PA
 # residues by design. Warnings are therefore not a failure signal here; Errors are.
 if [ -f leap_.log ]; then

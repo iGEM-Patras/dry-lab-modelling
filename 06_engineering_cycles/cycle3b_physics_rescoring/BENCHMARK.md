@@ -1,8 +1,28 @@
 # Cycle 3b — Stage 1 benchmark: measured, not estimated
 
-Benchmark system: **c3b_dtII_DOR** — deltorphin II (Tyr-**D-Ala**-Phe-Glu-Val-Val-Gly-**NH2**)
-co-folded into DOR, embedded in a POPC bilayer. Chosen deliberately as the hardest
-system in the panel: it carries both the non-standard D-centre and the C-terminal amide.
+Benchmark system: **c3b_dtII_DOR** — deltorphin II co-folded into DOR, embedded in a
+POPC bilayer.
+
+> **CORRECTION.** This benchmark ran the **free acid** (`YaFEVVG-OH`), not the amide.
+> An earlier version of this file claimed the system "carries both the non-standard
+> D-centre and the C-terminal amide" — the D-centre was installed and verified, but
+> the amide was **not**: `packmol-memgen --parametrize` runs `tleap`, which defaults a
+> bare C-terminus to the charged free acid, and nothing in the pipeline installed an
+> NHE cap. The gate's own output shows it — the peptide was read as 7 residues ending
+> in GLY, with no NHE.
+>
+> This is the same wrong-species error that Cycle 3b was created to correct,
+> reproduced in the MD stage. It matters quantitatively: the free acid carries an
+> extra **−1 charge on the pharmacophore that sets δ-selectivity** (verified NHE net
+> charge 0.000 vs −1 for the acid), so a calibration built on it would be measuring
+> the wrong molecule.
+>
+> **The timings and throughput below remain valid** — the amide adds 4 atoms to a
+> 270,287-atom system, which does not change ns/day. The *chemistry* of this
+> particular run does not, and it is not used for calibration. `amidate.py` now
+> installs the cap, `build_system.sh` calls it by default, and the final topology is
+> asserted to contain NHE. All Stage 1 systems are being rebuilt as the correct
+> species.
 
 ## System (verified, not assumed)
 
