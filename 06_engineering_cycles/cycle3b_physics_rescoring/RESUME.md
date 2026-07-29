@@ -83,3 +83,76 @@ before any pose could exist (`FAIL: no pose`) — use
    reports a negative methodological result.
 
 Budget unchanged: 71.5 ns/day measured → Stage 1 = 6.7 GPU-days (~3.4 d on 2 GPUs).
+
+---
+
+# UPDATE — checkpoint check, two blocking findings
+
+## Builds all SUCCEEDED; the species fix holds
+
+All 6 systems built with `RESUME_EXIT=0`, `tleap Errors=0`, and every log carries
+`amide verified in final topology: 1 NHE residue(s)`. The `--resume` path worked:
+builds took 45 s – 2:48 instead of ~30 min. The nullglob fix for the silent EXIT=2
+is confirmed correct against real builds.
+
+## BLOCKER 1 — build → production skipped a stage
+
+`build_system.sh` writes only `system.top` + `system.gro`. The files `run_prod.sh`
+needs (`index.ndx`, `pepmeta.txt`, `min.gro`) are produced by **`run_md.sh`**, which
+the chain skipped. All 18 production tasks died in 3–5 s on
+`FAIL: <tag> missing index.ndx -- build incomplete`. No GPU time lost.
+
+Two fixes needed:
+1. Add a `--prep-only` mode to `run_md.sh` that stops after minimisation (index +
+   pepmeta + min.gro), and run it between build and production. Do NOT run full
+   `run_md.sh` — it also does NVT/NPT/benchmark, which `run_prod.sh` redoes per
+   replicate with its own seed, so that would waste ~37 min/system.
+2. `run_prod_job.sh` ends with `echo "JOB_EXIT=$?"`, so the job ALWAYS exits 0.
+   SLURM therefore marked all 18 `COMPLETED` and `--dependency=afterok` released the
+   next wave anyway. The canary gate was inert. Signature to watch for:
+   **`JOB_EXIT=1` in the log with sacct State=COMPLETED.** End the script with an
+   explicit `exit $rc`.
+
+## BLOCKER 2 — the panel is not size-comparable (fix before spending GPU)
+
+| system | atoms | POPC | box x,y (nm) |
+|---|---|---|---|
+| c3b_dtII_MOR | 96,673 | 624 | 9.7 × 9.6 |
+| c3b_em1_DOR | 119,841 | 909 | 11.2 × 11.2 |
+| c3b_em1_MOR | 120,941 | 828 | 10.8 × 10.8 |
+| c3b_dtI_MOR | 121,167 | 744 | 10.3 × 10.3 |
+| c3b_dtI_DOR | 230,381 | 1,449 | 13.9 × 13.7 |
+| **c3b_dtII_DOR** | **441,296** | **3,234** | **20.0 × 20.0** |
+
+Same ~3,136-atom receptor, same 4–7 residue peptide class, all `--preoriented`, yet
+a **4.6× spread in atoms and 5.2× in bilayer area**. `--dist 15 --dist_wat 20` pads
+differently-oriented proteins to very different footprints.
+
+Why this is disqualifying: the measurement is DOR vs MOR for the SAME peptide. With
+dtII_DOR at 3,234 lipids and dtII_MOR at 624, a difference in contact metrics is
+partly a difference in bilayer area, water-layer thickness and finite-size effects
+rather than in binding. Also note this rebuild gave 441,296 atoms where the original
+benchmark of the same system gave 270,287 from identical inputs — the geometry is not
+reproducible run-to-run, so it cannot be treated as a fixed property of the system.
+
+Budget consequence: 71.5 ns/day was measured at 270k atoms. The panel mean is now
+well above that and dtII_DOR is 1.63× it, so Stage 1 costs materially more than
+6.7 GPU-days as currently built.
+
+**Fix:** pin identical box dimensions and per-leaflet lipid counts for all 8 systems
+(explicit box + lipid numbers rather than letting `--dist` padding decide) and
+rebuild. An identical bilayer across the panel makes the peptide/receptor pair the
+only variable, which is what the comparison requires. Verify by asserting the atom
+count and box vectors agree across systems to within a small tolerance before any
+production run.
+
+## Revised resume sequence
+
+1. Pin box/lipid counts in `build_system.sh`; rebuild all 6 (+ menk when unblocked).
+   Assert cross-system size agreement.
+2. Add `--prep-only` to `run_md.sh`; generate index/pepmeta/min.gro per system.
+3. Fix `exit $rc` in `run_prod_job.sh` so `afterok` actually gates.
+4. Re-measure ns/day at the pinned size; update the budget.
+5. Canary, then the remaining replicates, then G1/G2/G3.
+
+Met-enkephalin remains blocked (co-fold wrote no `predictions/`), so Stage 1 is 18/24.
