@@ -156,3 +156,61 @@ production run.
 5. Canary, then the remaining replicates, then G1/G2/G3.
 
 Met-enkephalin remains blocked (co-fold wrote no `predictions/`), so Stage 1 is 18/24.
+
+---
+
+# UPDATE 2 — root cause found; two of my own claims were wrong
+
+## CORRECTION 1: the budget claim was wrong
+
+I wrote "the panel mean is well above 270k atoms, so Stage 1 costs materially more
+than 6.7 GPU-days". That is false. Panel mean is **188,383 atoms = 0.70x** the
+benchmark; median 121,054 = 0.45x. **Only dtII_DOR (441,296) exceeds the benchmark.**
+Scaling throughput as 1/N, the 18 as-built runs cost **3.5 GPU-days**, and a panel
+pinned at ~120k atoms costs **3.0 GPU-days for all 24 runs** — *cheaper* than the
+pre-registered 6.7, not more expensive. Compute was never the problem.
+
+## CORRECTION 2: the met-enkephalin hypothesis was wrong
+
+I wrote "YGGFM is the shortest chain in the panel; check for a minimum-length
+condition". Endomorphin-1 is `YPWF` — **4 residues, shorter than YGGFM's 5** — and
+folded fine. Minimum length is ruled out. The log shows Boltz's own
+`Number of failed examples: 1`, alongside `Found explicit empty MSA for some
+proteins, will run these in single sequence mode` (expected for any short peptide,
+including the ones that worked). No structural cause identified; treat as a
+transient and simply resubmit before investigating further.
+
+## ROOT CAUSE of the size spread: the receptor is MIS-ORIENTED in 4 of 6 systems
+
+Principal axis of the CA atoms in `complex_start.pdb` vs the membrane normal (z),
+same method for every system, same receptor:
+
+| system | tilt to normal | verdict |
+|---|---|---|
+| c3b_em1_DOR | 3.0° | OK |
+| c3b_dtII_MOR | 3.1° | OK |
+| c3b_em1_MOR | 23.6° | mis-oriented |
+| c3b_dtII_DOR | 29.6° | mis-oriented |
+| c3b_dtI_DOR | 29.8° | mis-oriented |
+| c3b_dtI_MOR | 34.8° | mis-oriented |
+
+The result is **bimodal** — 2 systems at ~3°, 4 at 24–35°. Identical inputs and
+identical method, so this is `memembed` succeeding on two and failing on four, not a
+property of the receptor. Every build logged `orientation: --preoriented`, so the
+build *believed* it was oriented and packed the bilayer around a tilted bundle.
+
+This subsumes the box-size finding: a tilted bundle presents a wider xy footprint, so
+`--dist 15` pads a larger bilayer. Size was the symptom; tilt is the cause.
+
+**Why it invalidates the runs rather than just costing more:** with a 24–35° tilt the
+TM hydrophobic belt does not align with the bilayer hydrophobic core, so TM residues
+sit against headgroups and water. The protein will rotate during equilibration to
+relieve that mismatch, which takes many ns — so a 20 ns production window would be
+dominated by protein reorientation rather than by sampling the bound pose, and the
+contact metrics would be measuring the relaxation, not the binding.
+
+**Fix:** verify tilt as an assertion in `build_system.sh` (reject > ~10° and re-run or
+fall back to memgen's internal orientation), then pin an explicit common box and
+per-leaflet lipid count so all 8 systems are geometrically identical. Add the tilt
+number to the build log. Rebuilds are CPU-only, ~30 min each, and 5 `pshort_el8` nodes
+are idle, so all 8 fit in one wave.
