@@ -136,6 +136,16 @@ else
 fi
 echo "orientation: ${ORIENT:-memgen internal}"
 
+# ---- 3b. assert tilt is acceptable (< 10 deg from membrane normal) -----------
+# MANDATORY after memembed/memgen: a tilted bundle will rotate during equilibration,
+# so production would measure reorientation, not binding. memembed occasionally fails
+# silently with tilts up to 35 deg while logging success. Tilt is orientation-only
+# (sign-agnostic); this gate accepts upright or inverted.
+if [ -n "$ORIENT" ]; then
+  $PY $W/scripts/tilt.py assert complex_oriented.pdb --max-deg 10 --rec-chain A \
+    || { echo "FAIL: post-orient tilt gate"; exit 1; }
+fi
+
 # ---- 4. pack bilayer ------------------------------------------------------
 if [ "${SKIP_PACK:-no}" != "yes" ]; then
 packmol-memgen --pdb complex_start.pdb --lipids POPC --ratio 1 \
@@ -195,4 +205,21 @@ print(f'  box: {p.box}')
 p.save('system.top', overwrite=True); p.save('system.gro', overwrite=True)
 print('  wrote GROMACS system.top + system.gro')
 "
+
+# ---- 5. generate index groups and peptide metadata ---------------------------
+# MANDATORY: run_prod.sh consumes index.ndx, pepmeta.txt, and min.gro. Without this,
+# every production replicate fails at the pre-flight check. This stage locates the
+# peptide, writes thermostat groups, and emits metadata (first/last residue, sequence).
+$PY $W/scripts/make_index.py system.top system.gro index.ndx pepmeta.txt \
+  || { echo "FAIL: make_index.py"; exit 1; }
+[ -f index.ndx ] && [ -f pepmeta.txt ] || { echo "FAIL: index/peptide metadata not produced"; exit 1; }
+
+# ---- 6. minimize to get min.gro (input for first equilibration) ---------------
+$GMX grompp -f $W/scripts/min.mdp -c system.gro -p system.top -o min.tpr -n index.ndx -maxwarn 5 >grompp_min.log 2>&1 \
+  || { echo "FAIL: grompp min"; tail -25 grompp_min.log; exit 1; }
+$GMX mdrun -deffnm min -nb gpu >md_min.log 2>&1 \
+  || { echo "FAIL: mdrun min"; tail -20 md_min.log; exit 1; }
+echo "min: $(grep -E 'Potential Energy|Maximum force' md_min.log | tail -2 | tr '\n' ' ')"
+[ -f min.gro ] || { echo "FAIL: min.gro not produced"; exit 1; }
+
 echo "BUILD_OK $TAG"
