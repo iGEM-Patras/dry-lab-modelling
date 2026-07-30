@@ -11,8 +11,13 @@
 #   dres : residue index in the PEPTIDE chain to convert to D, or 'none'
 set -euo pipefail
 
-TAG="${1:?usage: build_system.sh <tag> <dres|none>}"
-DRES="${2:-none}"
+TAG="${1:?usage: build_system.sh <tag> [dres|none|auto]}"
+# DRES defaults to "auto": read the D-residue position from the design table rather
+# than from this argument. Passing an explicit value is still allowed but is CROSS-
+# CHECKED against the table and must agree -- see peptide_spec.sh for why (a silent
+# "none" default built the all-L analog of deltorphin II on 2026-07-30 and disabled
+# the chirality gate that would have caught it).
+DRES="${2:-auto}"
 # Amidation is ON by default: the free acid is the wrong species for every
 # peptide in this panel. Pass --no-amidate only for a deliberate control.
 AMIDATE=yes
@@ -38,6 +43,18 @@ mkdir -p "$SYS"; cd "$SYS"
 STAGE="${STAGE:-all}"
 case "$STAGE" in all|cpu|gpu) ;; *) echo "FAIL: STAGE must be all|cpu|gpu (got '$STAGE')"; exit 1 ;; esac
 echo "stage: $STAGE"
+
+# ---- resolve peptide chemistry from the design table, not the command line ------
+. $W/scripts/peptide_spec.sh
+load_peptide_spec "$TAG" || exit 1
+if [ "$DRES" = "auto" ]; then
+  DRES="$SPEC_DRES"
+elif [ "$DRES" != "$SPEC_DRES" ]; then
+  echo "FAIL: dres='$DRES' on the command line contradicts the design table"
+  echo "      ($TAG requires dres=$SPEC_DRES). Fix the caller or the table -- not this check."
+  exit 1
+fi
+echo "  D-residue: $DRES | C-terminus: $SPEC_AMIDE"
 
 # Minimisation, factored out so the split and combined paths run IDENTICAL code.
 do_minimise() {
@@ -289,6 +306,11 @@ if [ "$STAGE" = "cpu" ]; then
   for f in system.top system.gro index.ndx pepmeta.txt; do
     [ -f "$f" ] || { echo "FAIL: CPU stage did not produce $f"; exit 1; }
   done
+  # Record the chemistry this system was ACTUALLY built with, so the production
+  # stage can verify the coordinates it inherits match the peptide it thinks it is
+  # running. Without this, a mismatched build/run pair is undetectable downstream.
+  printf 'BUILT_DRES=%s\nBUILT_AMIDE=%s\n' "$DRES" "$SPEC_AMIDE" > chem.txt
+  echo "  recorded chem.txt: dres=$DRES amide=$SPEC_AMIDE"
   echo "BUILD_CPU_OK $TAG"
   echo "next: STAGE=gpu build_system.sh $TAG (needs --gres=gpu:1)"
   exit 0

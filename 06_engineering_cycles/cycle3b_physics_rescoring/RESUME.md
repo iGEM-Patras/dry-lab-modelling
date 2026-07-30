@@ -82,6 +82,44 @@ files were pushed over the compute bridge, so verify by md5 after any edit):
    always exits 0 — every dependent wave was released regardless of failure, which is
    what made the canary gate inert.
 
+## WRONG MOLECULE BUILT — 2026-07-30 — the worst class of bug in this pipeline
+
+The tilt-corrected build (17818367/68) COMPLETED CLEANLY and was the wrong molecule.
+Its log read: `peptide: TYR-ALA-PHE-GLU-VAL-VAL-GLY-NHE`. Deltorphin II is
+Tyr-**D-Ala**-Phe-Glu-Val-Val-Gly-NH2. The build was launched with dres=`none`, so the
+D-Ala2 inversion never ran and the 155,323-atom system was the ALL-L analog. Every
+downstream check passed: tilt 0.00 deg, tleap Errors=0, groups partitioning exactly,
+min.gro written. Caught only by reading the peptide sequence in the log against the
+design table. Production 17818369 was cancelled while still PENDING — no GPU time lost.
+
+WHY NOTHING CAUGHT IT. `run_prod.sh` has a per-stage chirality gate, and it is SKIPPED
+when DRES_REL=none (run_prod.sh:64). Both build_system.sh (`DRES="${2:-none}"`) and
+run_prod_job.sh (`DRES_REL="${4:-none}"`) defaulted the argument that ARMS that gate.
+A silent default on a safety gate's own input disables the gate. And `none` is a
+LEGITIMATE value for part of the panel (c3b_em1_* are endomorphin-1, all-L), so a
+defaulted `none` is indistinguishable from a correct one by inspection.
+
+FIX — chemistry now comes from the design table, never the command line:
+  scripts/peptide_spec.sh   new. load_peptide_spec <tag> reads DRES+AMIDE from
+                            prod_all.txt (the table of record) and hard-FAILS on an
+                            unknown tag or inconsistent replicate rows.
+  build_system.sh           DRES defaults to `auto` (= from table). An explicit value
+                            is cross-checked and must AGREE, else FAIL.
+                            Writes chem.txt recording what it actually built with.
+  run_prod_job.sh           positional defaults REMOVED; reads the table, then
+                            cross-checks chem.txt. Missing chem.txt => refuse to run
+                            (older build, chemistry unverifiable).
+
+Guards verified on the cluster against the real prod_all.txt: unknown tag -> exit 1;
+`dres=none` for c3b_dtII_DOR -> exit 1 with the contradiction named; all six panel tags
+resolve (dtI/dtII x DOR/MOR = dres 2, em1 x DOR/MOR = none, all amide=yes).
+
+STANDING CHECK for every future build: read the `peptide:` line in the build log and
+confirm the sequence against prod_all.txt. Clean tleap output proves the system is
+physically valid, NOT that it is the intended molecule.
+
+Chain relaunched (all-L system deleted): cpu 17826633 -> gpu 17826634 -> prod 17826635.
+
 ## TILT GATE FIRED ON THE FIRST REAL SYSTEM — 2026-07-30 (the gate earned its keep)
 
 Run 17818364 FAILED in 14 s at the tilt gate: `TILT_DEG=19.65` on c3b_dtII_DOR, from 372
