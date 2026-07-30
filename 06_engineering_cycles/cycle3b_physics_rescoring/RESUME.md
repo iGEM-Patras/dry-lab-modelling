@@ -82,6 +82,54 @@ files were pushed over the compute bridge, so verify by md5 after any edit):
    always exits 0 — every dependent wave was released regardless of failure, which is
    what made the canary gate inert.
 
+## PANEL PRE-FLIGHT SWEEP — 2026-07-30 (job 17826637, 46 s wall, all 6 tags PASS)
+
+New `STAGE=orient` mode in build_system.sh: runs stages 1-3b (spec -> chirality -> amide
+-> memembed -> tilt fix/assert) then stops before packing. Emits ORIENT_OK, NOT
+BUILD_OK/BUILD_CPU_OK — a pre-flight dir has no topology and nothing runnable, so it can
+never be mistaken for a usable system. New `SYSROOT` env var redirects output (scripts,
+envs, prod_all.txt still resolve under $W) so a sweep cannot touch systems/ or a build in
+flight. Sweep driver: sweep_orient.sh. Costs ~8 s/tag vs ~40 min for a full build.
+
+FINDING 1 — memembed mis-orientation is SYSTEMATIC, not a one-off:
+
+  tag             tilt_pre  tilt_post   min rec-pep (pre -> post)   D-centre
+  c3b_dtI_MOR       36.43     0.00        2.09 -> 2.09 A            V=-2.481 D ok
+  c3b_dtI_DOR       35.25     0.00        2.60 -> 2.60 A            V=-2.502 D ok
+  c3b_em1_MOR       24.76     0.00        2.01 -> 2.01 A            all-L by design
+  c3b_em1_DOR       22.95     0.00        1.74 -> 1.74 A            all-L by design
+  c3b_dtII_DOR      18.28     0.00        2.75 -> 2.75 A            V=-2.504 D ok
+  c3b_dtII_MOR      17.38     0.00        2.29 -> 2.29 A            V=-2.498 D ok
+
+6/6 exceeded the 10 deg gate (17.4-36.4 deg), EVERY ONE with memembed exiting 0 and the
+build recording "orientation: --preoriented". Never trust that exit code. The fix took
+all six to 0.00 deg with min rec-pep distance unchanged to 0.00 A in every case — rigid
+rotation now confirmed panel-wide, not just on the pilot. Chemistry resolved from
+prod_all.txt correctly for all six: dtI/dtII -> dres=2 (D-centre asserted), em1 -> none
+(reported as not applicable rather than silently skipped).
+
+This supersedes the earlier "4 of 6" reading at the bottom of this file: it is 6 of 6.
+
+FINDING 2 — several systems carry very close receptor-peptide contacts. Measured on
+heavy atoms with hydrogens EXCLUDED, so these are real, not H-placement artifacts.
+Worst pair per tag:
+
+  c3b_em1_DOR   1.74 A  LYS108:NZ  - NHE5:N      4 pairs <2.6,  14 <3.0
+  c3b_dtI_MOR   2.09 A  TRP320:NE1 - GLY7:O      8 pairs <2.6,  17 <3.0
+  c3b_em1_MOR   2.01 A  TRP31:CZ3  - NHE5:N      5 pairs <2.6,  10 <3.0
+  c3b_dtII_MOR  2.29 A  GLN126:OE1 - VAL6:CG2    4 pairs <2.6,  10 <3.0
+  c3b_dtI_DOR   2.60 A  TYR129:CE1 - TYR1:N      1 pair  <2.6,   3 <3.0
+  c3b_dtII_DOR  2.75 A  TYR129:CE1 - TYR1:N      0 pairs <2.6,   2 <3.0
+
+These are Boltz co-fold artifacts, NOT introduced by the tilt fix (distances unchanged
+through it). 1.74 A between an amide N and a charged Lys NZ is well inside vdW contact.
+Minimisation should relieve them, so this is a WATCH not a blocker — but it means the
+post-min check must RE-MEASURE these contacts, otherwise a system that failed to relax
+enters production with a clash driving the first ns of dynamics. NOT YET IMPLEMENTED;
+do this before authorising the full panel.
+
+Artifacts: cycle3b_preflight_sweep.csv, cycle3b_preflight_sweep.png
+
 ## WRONG MOLECULE BUILT — 2026-07-30 — the worst class of bug in this pipeline
 
 The tilt-corrected build (17818367/68) COMPLETED CLEANLY and was the wrong molecule.

@@ -30,7 +30,11 @@ export AMBERHOME=$E
 export PATH=$E/bin:$PATH
 PY=$E/bin/python
 
-SYS=$W/systems/$TAG
+# SYSROOT lets a pre-flight sweep (STAGE=orient) write into an isolated tree so it
+# cannot touch systems/ or disturb a build already in flight. Scripts, envs and the
+# design table still resolve under $W -- only the OUTPUT location moves.
+SYSROOT="${SYSROOT:-$W/systems}"
+SYS=$SYSROOT/$TAG
 mkdir -p "$SYS"; cd "$SYS"
 
 # ---- STAGE split: keep the CPU-bound hour off the contended GPU node ----------
@@ -41,7 +45,11 @@ mkdir -p "$SYS"; cd "$SYS"
 #   STAGE=gpu  stage 6 only, on pgpu --gres=gpu:1 (minutes)              -> BUILD_OK
 #   STAGE=all  everything in one job (default; unchanged behaviour)
 STAGE="${STAGE:-all}"
-case "$STAGE" in all|cpu|gpu) ;; *) echo "FAIL: STAGE must be all|cpu|gpu (got '$STAGE')"; exit 1 ;; esac
+# STAGE=orient is a PRE-FLIGHT: run stages 1-3b (pose -> chirality -> amide ->
+# memembed -> tilt fix/assert) and stop before packing. Costs ~1 min of CPU instead of
+# ~40 min, and exercises the IDENTICAL code path the real build uses, so a sweep across
+# the panel cannot drift from production behaviour.
+case "$STAGE" in all|cpu|gpu|orient) ;; *) echo "FAIL: STAGE must be all|cpu|gpu|orient (got '$STAGE')"; exit 1 ;; esac
 echo "stage: $STAGE"
 
 # ---- resolve peptide chemistry from the design table, not the command line ------
@@ -228,6 +236,23 @@ d0,d1 = mind(o), mind(n)
 print(f"  pose through fix: min rec-pep dist {d0:.2f} -> {d1:.2f} A")
 sys.exit(0 if abs(d0-d1) < 0.05 else 1)
 PYEOF
+fi
+
+# STAGE=orient stops HERE -- everything chemistry- and orientation-related has run and
+# been gated; packing adds 40 min of CPU and tests nothing new about the input pose.
+# Distinct marker (not BUILD_OK/BUILD_CPU_OK) so a pre-flight can never be mistaken for
+# a usable system: there is no topology, no min.gro, nothing runnable in this directory.
+if [ "$STAGE" = "orient" ]; then
+  # Report the D-centre only where one is expected; for all-L tags (em1) there is no
+  # residue index to assert on and calling chirality.py with 'none' is meaningless.
+  if [ "$DRES" != "none" ]; then
+    $PY $W/scripts/chirality.py assert pep_chir.pdb "$DRES" \
+      || { echo "FAIL: D-centre absent or inverted at res $DRES"; exit 1; }
+  else
+    echo "  all-L peptide by design (dres=none); no chirality assertion applicable"
+  fi
+  echo "ORIENT_OK $TAG"
+  exit 0
 fi
 
 # ---- 4. pack bilayer ------------------------------------------------------

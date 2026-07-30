@@ -1,0 +1,7 @@
+tag,tilt_pre,tilt_post,dist_pre,dist_post,n_ca,chir_V,orient_ok,n_lt26,n_lt30,worst_pair,worst_A,receptor,peptide
+c3b_dtII_DOR,18.28,0.0,2.75,2.75,372,-2.504,1,0,2,TYR129:CE1-TYR1:N,2.75,DOR,deltorphin II
+c3b_dtII_MOR,17.38,0.0,2.29,2.29,400,-2.498,1,4,10,GLN126:OE1-VAL6:CG2,2.29,MOR,deltorphin II
+c3b_dtI_DOR,35.25,0.0,2.6,2.6,372,-2.502,1,1,3,TYR129:CE1-TYR1:N,2.6,DOR,deltorphin I
+c3b_dtI_MOR,36.43,0.0,2.09,2.09,400,-2.481,1,8,17,TRP320:NE1-GLY7:O,2.09,MOR,deltorphin I
+c3b_em1_DOR,22.95,0.0,1.74,1.74,372,,1,4,14,LYS108:NZ-NHE5:N,1.74,DOR,endomorphin-1
+c3b_em1_MOR,24.76,0.0,2.01,2.01,400,,1,5,10,TRP31:CZ3-NHE5:N,2.01,MOR,endomorphin-1
