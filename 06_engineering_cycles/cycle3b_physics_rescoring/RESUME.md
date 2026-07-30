@@ -63,6 +63,49 @@ submitted the menk builds without `--dependency`, so they ran 3 s after submit,
 before any pose could exist (`FAIL: no pose`) — use
 `sbatch --dependency=afterok:<foldjob>` next time.
 
+## STATUS 2026-07-30 — three scaffolding defects fixed; single-pair pilot queued
+
+Repo `0703ec9`. Fixed and deployed to the cluster (cluster copy is NOT a git repo —
+files were pushed over the compute bridge, so verify by md5 after any edit):
+
+1. `build_system.sh` never produced `index.ndx`, `pepmeta.txt`, `min.gro`. It ended at
+   `system.top`/`system.gro`, but `run_prod.sh` pre-flights on those three files, so all
+   18 replicates died in 3-5 s. NOW: after packing/parametrisation the build runs
+   `make_index.py` (peptide location + thermostat groups) and then grompp+mdrun on
+   `min.mdp` to produce `min.gro`. Order matters — `make_index.py` must run BEFORE the
+   minimisation grompp, because that grompp takes `-n index.ndx`.
+2. `tilt.py` was validated but never wired in. NOW asserted (`--max-deg 10 --rec-chain A`)
+   immediately after a successful memembed and BEFORE packing, so a silently-mis-oriented
+   bundle fails the build instead of consuming a GPU-day to measure reorientation.
+3. `run_prod_job.sh` (new) wraps `run_prod.sh` and `exit $JOB_EXIT`, so `afterok`
+   dependencies actually gate. Previously a job's last line echoed the status, which
+   always exits 0 — every dependent wave was released regardless of failure, which is
+   what made the canary gate inert.
+
+PILOT IN FLIGHT (one receptor pair, not the full panel — deliberate, per the decision to
+pilot before committing 6.7 GPU-days):
+  build 17818362  c3b_dtII_DOR      3 h  pgpu --gres=gpu:1
+  prod  17818363  c3b_dtII_DOR rep1 12 h afterok:17818362
+
+SCHEDULER TRAP (cost two dead jobs, 17818360/61): `pgpu` has a QOS minimum on gres/gpu.
+Submitting without `--gres=gpu:1` is accepted, returns a job id, and pends FOREVER with
+reason `(QOSMinGRES)`. It looks identical to waiting for a busy node. Correct submission:
+`sbatch -p pgpu -A kzanaj --gres=gpu:1 --cpus-per-task=8 --mem=32G --time=...`.
+Always read the pending REASON, not just the STATE.
+
+Walltimes are sized from measured throughput, not guesses: packmol-memgen 61 min CPU;
+min+NVT 200 ps+NPT 1 ns = 37.4 min; production 20 ns at 71.5 ns/day = 6.7 h.
+
+### What to check when the pilot lands
+Build log must show: `topology:`, `amide verified in final topology`, `Errors = 0`,
+`TILT_DEG` under 10, `min:` energies, and `BUILD_OK`. Then `systems/c3b_dtII_DOR/`
+must contain all of `system.top system.gro index.ndx pepmeta.txt min.gro`.
+Production log must reach `PROD_OK`; a chirality-discard exits 3 by design (D-centre
+inverted) and that replicate must be discarded, not averaged in.
+Only if the pilot is clean: fan out the remaining 5 systems x 3 reps.
+**Stage 2 remains unauthorised until the G1/G2/G3 calibration gate passes.** A failed
+gate terminates the cycle and is reported as a negative methodological result.
+
 ## Resume sequence
 
 1. Deploy the fixed `build_system.sh`; confirm `bash -n` passes on the cluster.
