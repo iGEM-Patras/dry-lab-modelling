@@ -28,6 +28,38 @@ PY=$E/bin/python
 SYS=$W/systems/$TAG
 mkdir -p "$SYS"; cd "$SYS"
 
+# ---- STAGE split: keep the CPU-bound hour off the contended GPU node ----------
+# pgpu is a SINGLE node with gpu:2 and is usually saturated, so a build that asks
+# for a GPU up front waits for the whole packing hour it does not need. Only the
+# minimisation (stage 6) actually uses the GPU. Split:
+#   STAGE=cpu  stages 1-5 on pshort_el8 (no GPU, 5 idle nodes, 2 h limit) -> BUILD_CPU_OK
+#   STAGE=gpu  stage 6 only, on pgpu --gres=gpu:1 (minutes)              -> BUILD_OK
+#   STAGE=all  everything in one job (default; unchanged behaviour)
+STAGE="${STAGE:-all}"
+case "$STAGE" in all|cpu|gpu) ;; *) echo "FAIL: STAGE must be all|cpu|gpu (got '$STAGE')"; exit 1 ;; esac
+echo "stage: $STAGE"
+
+# Minimisation, factored out so the split and combined paths run IDENTICAL code.
+do_minimise() {
+  $GMX grompp -f $W/scripts/min.mdp -c system.gro -p system.top -o min.tpr -n index.ndx -maxwarn 5 >grompp_min.log 2>&1 \
+    || { echo "FAIL: grompp min"; tail -25 grompp_min.log; exit 1; }
+  $GMX mdrun -deffnm min -nb gpu >md_min.log 2>&1 \
+    || { echo "FAIL: mdrun min"; tail -20 md_min.log; exit 1; }
+  echo "min: $(grep -E 'Potential Energy|Maximum force' md_min.log | tail -2 | tr '\n' ' ')"
+  [ -f min.gro ] || { echo "FAIL: min.gro not produced"; exit 1; }
+}
+
+# STAGE=gpu resumes from the CPU stage's output: verify it, minimise, done.
+if [ "$STAGE" = "gpu" ]; then
+  for f in system.top system.gro index.ndx pepmeta.txt; do
+    [ -f "$f" ] || { echo "FAIL: STAGE=gpu needs $f from the CPU stage; not found in $SYS"; exit 1; }
+  done
+  echo "resuming from CPU stage output in $SYS"
+  do_minimise
+  echo "BUILD_OK $TAG"
+  exit 0
+fi
+
 # --resume: skip straight to the post-packing steps if a parametrized topology
 # already exists. Packing costs ~30 min of CPU per system and the topology on disk
 # is already the correct (amidated) species, so there is nothing to gain by redoing
@@ -215,11 +247,18 @@ $PY $W/scripts/make_index.py system.top system.gro index.ndx pepmeta.txt \
 [ -f index.ndx ] && [ -f pepmeta.txt ] || { echo "FAIL: index/peptide metadata not produced"; exit 1; }
 
 # ---- 6. minimize to get min.gro (input for first equilibration) ---------------
-$GMX grompp -f $W/scripts/min.mdp -c system.gro -p system.top -o min.tpr -n index.ndx -maxwarn 5 >grompp_min.log 2>&1 \
-  || { echo "FAIL: grompp min"; tail -25 grompp_min.log; exit 1; }
-$GMX mdrun -deffnm min -nb gpu >md_min.log 2>&1 \
-  || { echo "FAIL: mdrun min"; tail -20 md_min.log; exit 1; }
-echo "min: $(grep -E 'Potential Energy|Maximum force' md_min.log | tail -2 | tr '\n' ' ')"
-[ -f min.gro ] || { echo "FAIL: min.gro not produced"; exit 1; }
+# STAGE=cpu stops HERE: minimisation is the only GPU work, so it is handed to a
+# separate short pgpu job. Emitting a DISTINCT marker (BUILD_CPU_OK, not BUILD_OK)
+# matters -- BUILD_OK asserts min.gro exists, and run_prod.sh pre-flights on it.
+if [ "$STAGE" = "cpu" ]; then
+  for f in system.top system.gro index.ndx pepmeta.txt; do
+    [ -f "$f" ] || { echo "FAIL: CPU stage did not produce $f"; exit 1; }
+  done
+  echo "BUILD_CPU_OK $TAG"
+  echo "next: STAGE=gpu build_system.sh $TAG (needs --gres=gpu:1)"
+  exit 0
+fi
+
+do_minimise
 
 echo "BUILD_OK $TAG"

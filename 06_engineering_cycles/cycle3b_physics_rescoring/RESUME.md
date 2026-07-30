@@ -83,9 +83,21 @@ files were pushed over the compute bridge, so verify by md5 after any edit):
    what made the canary gate inert.
 
 PILOT IN FLIGHT (one receptor pair, not the full panel — deliberate, per the decision to
-pilot before committing 6.7 GPU-days):
-  build 17818362  c3b_dtII_DOR      3 h  pgpu --gres=gpu:1
-  prod  17818363  c3b_dtII_DOR rep1 12 h afterok:17818362
+pilot before committing 6.7 GPU-days). SPLIT-STAGE build (17818362/63 combined-build
+version was cancelled — it queued the CPU-bound packing hour behind the contended GPU):
+  cpu  17818364  c3b_cpu_dtII_DOR   2 h  pshort_el8 (NO gpu, 5 idle nodes) -> BUILD_CPU_OK
+  gpu  17818365  c3b_gpu_dtII_DOR  30 m  pgpu --gres=gpu:1  afterok:cpu    -> BUILD_OK
+  prod 17818366  c3b_prod_..._r1   12 h  pgpu --gres=gpu:1  afterok:gpu    -> PROD_OK
+
+WHY SPLIT: only the minimisation needs a GPU; stages 1-5 (pack/parametrise/index) are
+CPU-only and were making the whole build wait on the saturated 2-GPU pgpu node behind a
+higher-priority pending job (est. up to ~1.5 d). pshort_el8 has 5 idle nodes and no GPU
+contention, so the CPU stage starts in minutes; only a ~5-min GPU minimisation then
+competes for the scarce card. build_system.sh gained a STAGE switch (all|cpu|gpu);
+minimisation is factored into one do_minimise() so both paths run IDENTICAL code. The CPU
+stage emits BUILD_CPU_OK (NOT BUILD_OK — the latter asserts min.gro, which only the GPU
+stage produces). Guards verified locally: bad STAGE value and STAGE=gpu with missing
+inputs both FAIL+exit 1.
 
 SCHEDULER TRAP (cost two dead jobs, 17818360/61): `pgpu` has a QOS minimum on gres/gpu.
 Submitting without `--gres=gpu:1` is accepted, returns a job id, and pends FOREVER with
