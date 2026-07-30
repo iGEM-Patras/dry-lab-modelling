@@ -168,14 +168,49 @@ else
 fi
 echo "orientation: ${ORIENT:-memgen internal}"
 
-# ---- 3b. assert tilt is acceptable (< 10 deg from membrane normal) -----------
+# ---- 3b. correct, then assert, the membrane-normal alignment -----------------
 # MANDATORY after memembed/memgen: a tilted bundle will rotate during equilibration,
 # so production would measure reorientation, not binding. memembed occasionally fails
-# silently with tilts up to 35 deg while logging success. Tilt is orientation-only
-# (sign-agnostic); this gate accepts upright or inverted.
+# silently while logging success -- observed 19.65 deg on c3b_dtII_DOR while reporting
+# a clean exit and "--preoriented". Tilt is orientation-only (sign-agnostic); upright
+# and inverted are both acceptable.
+#
+# Gate the file that is actually PACKED (complex_start.pdb, DUM stripped), NOT
+# complex_oriented.pdb. The tilt value is identical either way because DUM atoms are
+# not CAs and never enter the measurement, but asserting on a file that packing does
+# not consume is how a gate silently goes stale.
+#
+# tilt.py fix rigid-body rotates EVERY atom about the receptor CA centroid, so the
+# docked peptide pose is carried along; it asserts Rg and an interatomic distance are
+# preserved, then re-measures from the written file. Rotating about the centroid also
+# leaves the solute's z-centre where memembed put it, which is what packmol-memgen
+# --preoriented uses to place the bilayer.
 if [ -n "$ORIENT" ]; then
-  $PY $W/scripts/tilt.py assert complex_oriented.pdb --max-deg 10 --rec-chain A \
-    || { echo "FAIL: post-orient tilt gate"; exit 1; }
+  echo "  pre-fix tilt:"
+  $PY $W/scripts/tilt.py measure complex_start.pdb --rec-chain A
+  $PY $W/scripts/tilt.py fix complex_start.pdb complex_upright.pdb --rec-chain A \
+    || { echo "FAIL: tilt fix could not re-orient the complex"; exit 1; }
+  mv complex_upright.pdb complex_start.pdb
+  # Independent re-assert on the moved file: fix already self-checks, but the gate
+  # must hold on the exact bytes that go into packing.
+  $PY $W/scripts/tilt.py assert complex_start.pdb --max-deg 10 --rec-chain A \
+    || { echo "FAIL: post-fix tilt gate"; exit 1; }
+  # The rigid-body rotation must not have broken the docked pose.
+  $PY - <<'PYEOF' || { echo "FAIL: pose not preserved through tilt fix"; exit 1; }
+import sys, numpy as np
+def rd(f):
+    A=[l for l in open(f) if l.startswith(("ATOM","HETATM")) and l[17:20].strip()!="DUM"]
+    xyz=lambda l: np.array([float(l[30:38]),float(l[38:46]),float(l[46:54])])
+    return {c: np.array([xyz(l) for l in A if l[21]==c]) for c in {l[21] for l in A}}
+def mind(d):
+    a,b=d["A"],d["B"]
+    return float(np.sqrt(((a[:,None,:]-b[None,:,:])**2).sum(-1)).min())
+o,n = rd("complex_oriented.pdb"), rd("complex_start.pdb")
+if set(o)!=set(n): print(f"  REJECT: chains changed {sorted(o)}->{sorted(n)}"); sys.exit(1)
+d0,d1 = mind(o), mind(n)
+print(f"  pose through fix: min rec-pep dist {d0:.2f} -> {d1:.2f} A")
+sys.exit(0 if abs(d0-d1) < 0.05 else 1)
+PYEOF
 fi
 
 # ---- 4. pack bilayer ------------------------------------------------------

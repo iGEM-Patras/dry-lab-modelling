@@ -82,12 +82,39 @@ files were pushed over the compute bridge, so verify by md5 after any edit):
    always exits 0 — every dependent wave was released regardless of failure, which is
    what made the canary gate inert.
 
+## TILT GATE FIRED ON THE FIRST REAL SYSTEM — 2026-07-30 (the gate earned its keep)
+
+Run 17818364 FAILED in 14 s at the tilt gate: `TILT_DEG=19.65` on c3b_dtII_DOR, from 372
+receptor CA atoms — while memembed exited 0 and the build logged `orientation:
+--preoriented`. This is EXACTLY the silent memembed failure the gate was written for. The
+rigid-body and chain-preservation checks all passed; only the orientation was wrong, so
+nothing upstream would have caught it. Without the gate this system would have packed a
+bilayer around a 20 deg-tilted bundle and the 20 ns window would have measured the
+receptor righting itself, not the peptide binding. SLURM then marked the two dependent
+jobs `DependencyNeverSatisfied` — correct behaviour, and proof the afterok wiring works.
+
+FIX (verified on the real failing file before relaunch, not assumed):
+`tilt.py fix` is now wired in ahead of the assert. Measured on the actual c3b_dtII_DOR
+complex: 19.65 -> 0.00 deg; min receptor-peptide distance 2.754 -> 2.754 A (docked pose
+untouched, rotation genuinely rigid); z-centre -0.82 -> -0.92 A (solute stays where
+memembed put it, so --preoriented bilayer placement is still valid); z-extent 111.5 ->
+121.6 A. That last number is the independent physical check — straightening a tilted
+bundle MUST lengthen its projection on the membrane normal. If z-extent ever DECREASES,
+the rotation went the wrong way and the "fix" is wrong; do not trust the 0.00 deg alone.
+
+SECOND BUG found while fixing this: the gate asserted on `complex_oriented.pdb` but
+packing consumes `complex_start.pdb` (DUM-stripped). Same tilt value either way (DUM
+atoms are not CAs and never enter the measurement), so it was harmless TODAY — but
+validating a file the pipeline does not consume is how a gate goes stale silently. The
+gate now measures, fixes, re-asserts, and re-checks the pose all on complex_start.pdb.
+
 PILOT IN FLIGHT (one receptor pair, not the full panel — deliberate, per the decision to
-pilot before committing 6.7 GPU-days). SPLIT-STAGE build (17818362/63 combined-build
-version was cancelled — it queued the CPU-bound packing hour behind the contended GPU):
-  cpu  17818364  c3b_cpu_dtII_DOR   2 h  pshort_el8 (NO gpu, 5 idle nodes) -> BUILD_CPU_OK
-  gpu  17818365  c3b_gpu_dtII_DOR  30 m  pgpu --gres=gpu:1  afterok:cpu    -> BUILD_OK
-  prod 17818366  c3b_prod_..._r1   12 h  pgpu --gres=gpu:1  afterok:gpu    -> PROD_OK
+pilot before committing 6.7 GPU-days). SPLIT-STAGE build. Superseded chains: 17818362/63
+(combined build — queued the CPU hour behind the contended GPU), 17818364/65/66 (died at
+the tilt gate above). CURRENT:
+  cpu  17818367  c3b_cpu_dtII_DOR   2 h  pshort_el8 (NO gpu, 5 idle nodes) -> BUILD_CPU_OK
+  gpu  17818368  c3b_gpu_dtII_DOR  30 m  pgpu --gres=gpu:1  afterok:cpu    -> BUILD_OK
+  prod 17818369  c3b_prod_..._r1   12 h  pgpu --gres=gpu:1  afterok:gpu    -> PROD_OK
 
 WHY SPLIT: only the minimisation needs a GPU; stages 1-5 (pack/parametrise/index) are
 CPU-only and were making the whole build wait on the saturated 2-GPU pgpu node behind a
