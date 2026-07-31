@@ -456,3 +456,65 @@ fall back to memgen's internal orientation), then pin an explicit common box and
 per-leaflet lipid count so all 8 systems are geometrically identical. Add the tilt
 number to the build log. Rebuilds are CPU-only, ~30 min each, and 5 `pshort_el8` nodes
 are idle, so all 8 fit in one wave.
+
+---
+
+# GATE EVALUATOR + PRE-REGISTRATION AMENDMENT — 2026-07-31
+
+## The pre-registered G2 is unpassable; amended to G2' before any data existed
+
+Writing the gate evaluator surfaced a defect in the pre-registered criterion.
+G2 ("replicate SD of ddG_sel <= 1.5 kcal/mol on every control") demands
+sigma_rep <= 1.06 kcal/mol -- below the 1-2 kcal/mol MM-GBSA uncertainty
+CYCLE3B_DESIGN.md states as expected. Monte-Carlo over the pre-registered
+anchors: a method with a PERFECT calibration slope passes all three gates 21%
+of the time at sigma_rep=1.0, 3% at 1.5.
+
+The decisive diagnostic: power FALLS as replicates rise (0.076 at n=2 to 0.000
+at n=10, sigma_rep=1.5). More sampling makes a correct method fail more often.
+That is an estimator defect, not a property of the method under test, so no
+compute budget rescues it.
+
+**G2' thresholds the SEM instead of the SD.** Power rises with replicates
+(0.21 at n=2 to 1.00 at n=10) while the false-pass rate against a null method
+is unchanged at ~2%. Not a weakening -- the threshold value stays at 1.5;
+only the statistic changed. Relaxing the threshold instead would have raised
+the false-pass rate, which is why that route was rejected.
+
+Filed BEFORE any Stage-1 dG_bind value existed. That timing is the only
+condition under which amending a pre-registered criterion is legitimate.
+Full argument, power table, and the two honest readings of a pass/fail at
+n=3: `AMENDMENT_G2.md`. Evidence: `gate_calibration.png` / `.csv`.
+
+## scripts/gate.py
+
+`gate.py evaluate <results.csv> [--out gate_verdict.json] [--sem-max 1.5]`
+
+Input: one row per control x receptor x replicate, columns
+`control,receptor,rep,dG_bind`. ddG_sel is formed WITHIN a replicate index
+(dG(OPRM1) - dG(OPRD1)), not by averaging each receptor arm first -- this
+keeps the arms balanced and makes the replicate spread an honest estimate on
+the difference. A replicate present for only one receptor (e.g. a
+chirality-discarded run, run_prod.sh exit 3) is DROPPED with a note, never
+averaged in.
+
+Exits 0 on a clean evaluation regardless of verdict: a FAIL is a result, not
+an error. Callers read `gate_verdict.json`.
+
+Verified against five synthetic cases with known verdicts before any real
+data: clean pass, null method, sign-flipped, too-noisy, and one with a
+deliberately dropped replicate (confirmed n=3 for that control while the
+others keep 4). All five matched; G1/G2'/G3 observably fire independently.
+
+## STILL OUTSTANDING
+
+**The pipeline has no MM-GBSA scoring stage.** `run_prod.sh` produces
+trajectories and stops; nothing converts them to dG_bind. `gate.py` consumes
+a CSV that nothing currently writes. That stage is the next thing to build --
+gmx_MMPBSA is installed at /data/users/kzanaj/envs/gmxmmpbsa (verified in the
+software probe), but the run script, the index groups it needs, and the
+per-replicate CSV writer do not exist yet.
+
+**Recommendation, not authorised:** extend Stage 1 to n=5 (40 runs, ~5.8
+GPU-days, still under the pre-registered 6.7 GPU-day budget) to lift G2' power
+from 35% to 85%. Separate decision; the amendment does not take it.
