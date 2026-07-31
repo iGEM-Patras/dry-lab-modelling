@@ -82,6 +82,37 @@ files were pushed over the compute bridge, so verify by md5 after any edit):
    always exits 0 — every dependent wave was released regardless of failure, which is
    what made the canary gate inert.
 
+## MY DEFECT, NOT THE PIPELINE'S: overwrote a script while a job was running it
+
+Job 17826633 (c3b_cpu_dtII_DOR) ran 01:43:27 -> 02:24:14 and FAILED at 40 min with:
+
+    scripts/build_system.sh: line 241: syntax error near unexpected token `}'
+
+Line 241 is inside a Python heredoc and is perfectly valid. `bash -n` passes on the file.
+The build had already done everything right before dying: dres=2 from the table, D-centre
+V=-2.504 confirmed, NHE amide, tilt 29.40 -> 0.00 deg, rec-pep 2.75 -> 2.75 A.
+
+CAUSE: build_system.sh mtime = 02:09:20, i.e. INSIDE the job's run window. I deployed the
+contacts.py wiring while 17826633 was executing that very file. Bash does not slurp a
+script; it reads it incrementally BY BYTE OFFSET. The file grew 18003 -> 19054 bytes
+under the running shell, so bash resumed at a now-stale offset, landed mid-construct and
+reported a syntax error at a line that was never wrong. Both dependents then died
+DependencyNeverSatisfied.
+
+Note the trap: `bash -n` after the fact CANNOT reproduce this. The file on disk is valid.
+The corruption existed only in the running shell's read position.
+
+FIX -- deployment is now ATOMIC. Write to scripts/.NAME.new then os.replace() onto the
+target. rename(2) swaps the directory entry; a running bash holds the ORIGINAL inode and
+keeps reading the original bytes to completion, so an in-flight job finishes on the
+version it started with and only new invocations pick up the new file. Also verify a
+sha256 of every deployed file, and check `squeue | grep c3b_` before deploying at all.
+
+NEVER write in place to a script on this cluster. In-place is what broke this run.
+
+Relaunched clean (17826633's partial systems/c3b_dtII_DOR removed first):
+  cpu 17836485 -> gpu 17836486 (afterok) -> prod 17836487 (afterok)
+
 ## POST-MIN CONTACT GATE ADDED — 2026-07-31 (closes the gap FINDING 2 opened)
 
 New `scripts/contacts.py`, two modes:
