@@ -82,6 +82,49 @@ files were pushed over the compute bridge, so verify by md5 after any edit):
    always exits 0 — every dependent wave was released regardless of failure, which is
    what made the canary gate inert.
 
+## POST-MIN CONTACT GATE ADDED — 2026-07-31 (closes the gap FINDING 2 opened)
+
+New `scripts/contacts.py`, two modes:
+  record  <top> <coords> <pepmeta> <out>    baseline the interface BEFORE minimisation
+  check   <top> <coords> <pepmeta> <base>   re-measure AFTER, compare, exit 1 on fail
+
+Wired into build_system.sh: `record` runs right after make_index.py (CPU stage, writes
+contacts_pre.txt); `check` runs at the end of do_minimise() (GPU stage). contacts_pre.txt
+was added to BOTH stage handoff validation lists so a missing baseline fails immediately
+with a clear cause instead of 20 min later inside the gate.
+
+Thresholds: HARD_A=2.20 (FAIL), WARN_A=2.50 (warn). A heavy-atom H-bond sits at 2.6-3.0 A
+and tightens to ~2.5 A when strong, so >=2.5 A is chemically sensible; below 2.2 A there
+is no non-bonded interpretation, that is overlap.
+
+WHY POTENTIAL ENERGY CANNOT SUBSTITUTE: do_minimise already read Potential Energy and
+Maximum force from md_min.log. Both are whole-system numbers over ~155k atoms of lipid
+and water. A single 1.7 A contact at the receptor-peptide interface is far inside their
+noise. The interface must be measured directly.
+
+TWO IMPLEMENTATION DETAILS THAT MATTER:
+- Minimum-image convention is applied. min.gro comes back from GROMACS with coordinates
+  wrapped into the box; a receptor-peptide pair straddling a boundary would otherwise
+  measure across the whole cell (~100 A) and a real clash would read as a pass.
+- Heavy atoms are selected by atomic_number, not by name prefix. Amber names CA/CB start
+  with C -- so does chlorine -- and name-prefix guessing is how hydrogens leak back into
+  a "heavy atom" selection.
+
+GATE TESTS (jobs 17826639, 17826640, 17826641 on pshort_el8):
+  T1 record on real c3b_dtII_MOR -> min 2.29 A, GLN126:OE1-VAL406:CG2, 4 pairs <2.6
+     INDEPENDENT CROSS-CHECK: identical to the sweep's value, which came from a separate
+     PDB-parsing code path. Two implementations agree on the same number.
+  T2 unchanged coords         -> WARN + exit 0 (2.29 is above the 2.2 floor: correct)
+  T4 peptide -1.0 A into rec  -> 1.75 A, FAIL exit 1
+  T7 missing baseline         -> clean FAIL message, exit 1 (was a raw traceback; fixed)
+  T8 truncated baseline       -> clean FAIL message, exit 1
+  T3/T6 FAILED AS TESTS, NOT AS GATE: displacing the peptide "away from the receptor
+     centroid" (T3) and "+4 A along the membrane normal" (T6) BOTH made contacts worse
+     (2.06 A and 0.54 A). The orthosteric pocket is enclosed laterally AND capped from
+     above by the receptor N-terminal tail (TRP31, SER30 are the atoms hit). There is no
+     guessable "out" vector. T9 replaced guessing with a measured scan over +-5..25 A on
+     each axis, picking the displacement that maximises the min distance.
+
 ## PANEL PRE-FLIGHT SWEEP — 2026-07-30 (job 17826637, 46 s wall, all 6 tags PASS)
 
 New `STAGE=orient` mode in build_system.sh: runs stages 1-3b (spec -> chirality -> amide

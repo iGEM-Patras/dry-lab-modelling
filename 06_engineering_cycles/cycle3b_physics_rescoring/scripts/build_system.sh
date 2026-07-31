@@ -72,11 +72,20 @@ do_minimise() {
     || { echo "FAIL: mdrun min"; tail -20 md_min.log; exit 1; }
   echo "min: $(grep -E 'Potential Energy|Maximum force' md_min.log | tail -2 | tr '\n' ' ')"
   [ -f min.gro ] || { echo "FAIL: min.gro not produced"; exit 1; }
+
+  # Interface gate. Potential energy above is a whole-system number over ~155k atoms of
+  # lipid and water -- a single 1.7 A clash at the receptor-peptide interface is far
+  # inside its noise, so it cannot tell us whether minimisation did the one job we need
+  # it to do here. Measure the interface directly against the pre-min baseline.
+  $PY $W/scripts/contacts.py check system.top min.gro pepmeta.txt contacts_pre.txt \
+    || { echo "FAIL: receptor-peptide clash survived minimisation"; exit 1; }
 }
 
 # STAGE=gpu resumes from the CPU stage's output: verify it, minimise, done.
 if [ "$STAGE" = "gpu" ]; then
-  for f in system.top system.gro index.ndx pepmeta.txt; do
+  # contacts_pre.txt included: do_minimise's post-min gate compares against it, so a
+  # missing baseline must fail HERE with a clear cause, not 20 min later inside the gate.
+  for f in system.top system.gro index.ndx pepmeta.txt contacts_pre.txt; do
     [ -f "$f" ] || { echo "FAIL: STAGE=gpu needs $f from the CPU stage; not found in $SYS"; exit 1; }
   done
   echo "resuming from CPU stage output in $SYS"
@@ -323,12 +332,17 @@ $PY $W/scripts/make_index.py system.top system.gro index.ndx pepmeta.txt \
   || { echo "FAIL: make_index.py"; exit 1; }
 [ -f index.ndx ] && [ -f pepmeta.txt ] || { echo "FAIL: index/peptide metadata not produced"; exit 1; }
 
+# Baseline the receptor-peptide interface BEFORE minimisation, so the post-min gate has
+# something to compare against. Written by the CPU stage; consumed by the GPU stage.
+$PY $W/scripts/contacts.py record system.top system.gro pepmeta.txt contacts_pre.txt \
+  || { echo "FAIL: could not baseline receptor-peptide contacts"; exit 1; }
+
 # ---- 6. minimize to get min.gro (input for first equilibration) ---------------
 # STAGE=cpu stops HERE: minimisation is the only GPU work, so it is handed to a
 # separate short pgpu job. Emitting a DISTINCT marker (BUILD_CPU_OK, not BUILD_OK)
 # matters -- BUILD_OK asserts min.gro exists, and run_prod.sh pre-flights on it.
 if [ "$STAGE" = "cpu" ]; then
-  for f in system.top system.gro index.ndx pepmeta.txt; do
+  for f in system.top system.gro index.ndx pepmeta.txt contacts_pre.txt; do
     [ -f "$f" ] || { echo "FAIL: CPU stage did not produce $f"; exit 1; }
   done
   # Record the chemistry this system was ACTUALLY built with, so the production
