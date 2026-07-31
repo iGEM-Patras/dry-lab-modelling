@@ -11,8 +11,13 @@ This project supports an enkephalin-based analgesic strategy built on **proenkep
 
 1. **Plasmid audit** of four PENK expression cassettes — identity, gene order, linker, and PENK ORF integrity verified against the native reference (UniProt P01210). **One real defect found** (plasmid 1, truncated PENK).
 2. **Restriction-digest QC** — a two-tier digest scheme (insert release + identity fingerprint) with a virtual gel, designed to confirm construct identity before transfection.
-3. **Human anti-NEP (MME) siRNA design** — four validated-in-silico siRNA duplexes targeting the CDS shared by all MME transcript variants, with off-target and thermodynamic scoring.
+3. **Human anti-NEP (MME) siRNA design** — a **human-exclusive** siRNA panel targeting the CDS shared by all MME transcript variants, with off-target, seed-divergence and thermodynamic scoring. The original four-duplex panel was **withdrawn**: it is cross-reactive with mouse *Mme* (one guide a perfect 19/19 match), which the wet lab's exclusivity requirement rules out (§3).
 4. **Lipoplex CG-MD** — coarse-grained MARTINI simulations comparing three lipid formulations (permanent-cation DOTAP, protonated ionizable MC3-H⁺, neutral MC3⁰) across triplicate replicates, resolving the pH-dependent DNA-binding behaviour that motivates the ionizable-lipid choice.
+
+**Two findings post-date the original four workstreams and change what should be ordered:**
+
+- **No commercial antibody can detect the engineered product** (§2c). The construct recodes every enkephalin core to `YGGFEVVG`; all registry anti-enkephalin antibodies are raised against native `YGGFM` and will miss it. A custom anti-`YGGFEVVG` polyclonal must be raised, and it is on the critical path.
+- **The original siRNA panel is mouse cross-reactive** (§3) and has been replaced by a human-exclusive panel. The corollary is that the exclusive guides cannot be validated in a mouse model, so a separate rodent surrogate is needed for any in-vivo work.
 
 A fifth workstream was added after the first four: **payload engineering cycles** (§5b) — three pre-registered DBTL iterations attempting to bias the expressed peptide toward the δ opioid receptor. It returned a **negative result**, and is reported here in full because the negative result is load-bearing: it defines where the computational screen stops and the wet-lab assay must begin, and it forced the retraction of an earlier selectivity number.
 
@@ -82,28 +87,103 @@ The virtual gel (`engPENK_therapy_qc_gel.png`) shows all five digests vs a 1 kb-
 
 ---
 
+## 2c. Detection reagents — no commercial antibody can see this construct's product
+
+**This is the most wet-lab-actionable finding in the project and it has a procurement lead
+time, so it is stated before the results that depend on it.**
+
+The engineered therapy construct (§2b) recodes all seven enkephalin cores
+`YGGF[M/L]` → **`YGGFEVVG`**. Verified from `engPENK_insert_annotated.gb` (885 nt, CDS 13..879,
+288 aa ORF): **7 identical copies of `YGGFEVVG`, zero copies of `YGGFM` or `YGGFL`.** Native
+human PENK (P01210) carries 6× `YGGFM` + 1× `YGGFL`.
+
+Every anti-enkephalin antibody in the Antibody Registry is raised against the *native mature
+pentapeptide*, so none of them can detect the engineered product:
+
+| RRID | antibody | immunogen / epitope | verdict |
+|---|---|---|---|
+| AB_2530349 | anti-Met-enkephalin mAb 1194/334 | `YGGFM` pentapeptide | **will not detect** |
+| AB_2492947 | anti-Met-enkephalin pAb | PENK aa 237–241 (= `YGGFM`) | **will not detect** |
+| AB_3430419 | anti-Met-enkephalin | Met-enkephalin | **will not detect** |
+| — | precursor-directed anti-PENK | PENK backbone | detects precursor only; **cannot show maturation** |
+| — | **custom anti-`YGGFEVVG`–KLH** | the engineered octapeptide | **required — must be custom-raised** |
+
+The shared `YGGF` N-terminal core is not sufficient rescue: anti-Met-enkephalin antibodies are
+raised against the whole pentapeptide and typically require the free C-terminal Met, a residue
+that does not exist in the product.
+
+**Action.** Place the custom anti-`YGGFEVVG` polyclonal order now — it is on the critical path
+for every expression and maturation readout, and a custom polyclonal is a multi-week lead item.
+A precursor-directed anti-PENK is a useful companion (it confirms the protein is made) but
+cannot distinguish precursor from processed octapeptide, which is precisely the question the
+construct is designed to answer.
+
+Full assessment, including the targeting-ligand analysis from `LIPOPLEX(1).docx`, is in
+`antibody_assessment.md` / `.pdf`; the per-antibody verdict table is
+`penk_epitope_check.csv`.
+
+---
+
 ## 3. Human anti-NEP (MME) siRNA design
 
 **Rationale.** Neprilysin (NEP / CD10, gene **MME**) is the principal enkephalin-degrading peptidase. Silencing it prolongs the half-life of the enkephalins produced by the PENK construct — the knockdown arm of the therapy.
 
 **Target.** All four human MME transcript variants (NM_000902.5, NM_007287/288/289) share an **identical 2,253 bp CDS**; every design targets that shared CDS, so a single siRNA silences all isoforms.
 
-**Pipeline.** 2,084 candidate 19-mers enumerated across the CDS → **228** pass sequence rules (Reynolds + Ui-Tei: GC 30–52%, positional base preferences, no long homopolymer/GC runs) → ranked by thermodynamic duplex-end asymmetry (favouring guide-strand RISC loading) → off-target screened by NCBI blastn-short against human `refseq_rna`.
+> ### Superseded — the original panel is cross-reactive with mouse
+>
+> An earlier version of this section recommended four duplexes (`si-MME-1` … `si-MME-4`)
+> selected on human on-target identity, thermodynamic asymmetry and human off-target load.
+> They satisfy those criteria. They do **not** satisfy the wet lab's later-stated requirement
+> that the siRNA be **exclusively human, with no mouse cross-reactivity**, and that constraint
+> was not part of the original screen:
+>
+> | superseded | CDS pos | identity vs mouse *Mme* (NM_008604.4) | status |
+> |---|---|---|---|
+> | si-MME-1 | 759  | 18/19 | cross-reactive |
+> | si-MME-2 | 1032 | 17/19 | cross-reactive |
+> | si-MME-3 | 1224 | 16/19 | cross-reactive |
+> | si-MME-4 | 1590 | **19/19 — perfect match** | fully cross-reactive |
+>
+> Across the full original panel, 8 of 11 guides retain ≥17/19 in mouse and two (CDS1590,
+> CDS1616) are perfect mouse matches. **Do not order these.** They are retained here only so
+> the record shows which reagents were withdrawn and why.
 
-**Four recommended duplexes** (all 19/19 on-target, 0 off-targets ≥17/19; standard 3′ dTdT overhangs):
+**Re-screen under the exclusivity constraint.** Rescreening the whole human CDS (751 codons,
+2,253 nt) gives 307 composition- and asymmetry-filtered 19-mers, of which **26 fall to ≤15/19
+against mouse *Mme***. Those were ranked on seed divergence (guide positions 2–8, where a
+mismatch most reliably abolishes activity), human off-target burden (BLASTn vs human
+`refseq_rna`, word size 7), duplex-end asymmetry, and GC content.
 
-| # | CDS pos | Guide / antisense (5'→3') | GC% | ΔΔG | worst off-target |
-|---|---------|---------------------------|-----|-----|------------------|
-| si-MME-1 | 759 | UUCCUGACGAAUCAAUCUGdTdT | 42.1 | +1.31 | 16/19 |
-| si-MME-2 | 1032 | UUCUGGAGCAUAAACAACCdTdT | 42.1 | +2.33 | 16/19 |
-| si-MME-3 | 1224 | AUAGUUUGCACAACGUCUCdTdT | 42.1 | +0.98 | 14/19 |
-| si-MME-4 | 1590 | UAUCCACUCAUCUUUGUCCdTdT | 42.1 | +1.93 | 16/19 |
+**Human-exclusive panel — order these instead:**
 
-Passenger strands, mRNA positions, and full scoring are in `sirna_design_table.csv`; the design figure is `sirna_design_figure.png`.
+| rank | CDS pos | Guide / antisense (5'→3') | GC% | mouse | seed MM | human off-targets ≥17/19 | composite |
+|---|---|---|---|---|---|---|---|
+| **1** | 303 | `AAAGUUGCCGUAACGGGAGdTdT` | 52.6 | 14/19 | 2 (pos 4,7) | **0** | 85.8 |
+| 2 | 1307 | `UCCUCGACCACAUGUUUACdTdT` | 47.4 | 14/19 | 2 (pos 3,6) | 4 | 74.3 |
+| 3 | 2101 | `UGGAGUUAACCGCAUACUCdTdT` | 47.4 | 15/19 | 3 (pos 2,5,8) | **0** | 61.6 |
+| 4 | 412 | `UACAAGACCUGUACAAUGCdTdT` | 42.1 | 15/19 | 2 (pos 5,8) | 1 | 57.8 |
+| 5 | 635 | `UGAAUUACAUGAUUCACAGdTdT` | 31.6 | 14/19 | 3 (pos 6,7,8) | 84 | 54.5 |
+
+**Recommended lead: CDS303** — guide `AAAGUUGCCGUAACGGGAGdTdT`, passenger
+`CUCCCGUUACGGCAACUUUdTdT`. 19/19 on human *MME*, 14/19 on mouse with two mismatches inside the
+seed, zero human off-targets at ≥17/19, and ΔΔG = 4.20 kcal/mol favouring correct guide-strand
+loading. **CDS2101** is the best three-seed-mismatch alternative and also carries zero ≥17/19
+off-targets. Order both plus a scrambled control.
+
+**Consequence — this must be said to the wet lab explicitly.** Exclusivity is a two-edged
+requirement. Guides selected *not* to hit mouse *Mme* **cannot be tested in a mouse model**.
+Knockdown validation has to be done in human cells, and any in-vivo rodent efficacy work needs a
+separate, mouse-targeting surrogate siRNA designed and validated alongside it. Budget for two
+reagent sets, not one.
+
+Full scoring for both panels is in `sirna_human_exclusive_panel.csv` (new) and
+`sirna_human_exclusivity.csv` (cross-reactivity audit of the superseded panel).
 
 **Validation recommended:** qPCR of MME at 48 h (expect ≥70% knockdown for ≥2 duplexes) + NEP activity/CD10 Western; use ≥2 independent effective siRNAs to control for off-target phenotypes. A context-dependence caveat from the project bibliography is recorded — this design provides tool reagents, not a settled biological strategy.
 
 ---
+
 
 ## 4. Lipoplex coarse-grained MD
 
@@ -169,7 +249,8 @@ The two-arm concept and its dorsal-horn mechanism are shown in `therapy_delivery
 |-----------|-------------|-------------------|
 | Plasmid audit | Which construct to use (plasmid 3); which is defective (plasmid 1) | Use plasmid 3; Sanger-verify or discard plasmid 1 |
 | Restriction QC | Identity/gene-order check before transfection | 2-digest protocol + virtual gel |
-| siRNA design | Knockdown reagents for the NEP arm | 4 orderable duplexes + validation plan |
+| siRNA design | Knockdown reagents for the NEP arm, **human-exclusive** | 2 orderable duplexes (CDS303, CDS2101) + scrambled control; separate rodent surrogate needed |
+| Detection reagents | That **no commercial antibody detects the engineered product** | Custom anti-`YGGFEVVG`–KLH polyclonal — order now, long lead |
 | Lipoplex CG-MD | pH-dependent DNA binding of the delivery vehicle | Formulation ranking + convergence-backed screen |
 | Peptide engineering cycles | That δ-selectivity **cannot** be resolved by co-fold confidence at the effect sizes our designs produce | Shortlist of 2 payloads for radioligand binding |
 
@@ -230,6 +311,34 @@ is load-bearing.
 
 ![δ vs μ co-folds](figures/dor_mor_fullMSA_comparison.png)
 
+### Cycle 3b — physics rescoring (in progress, Stage 1)
+
+Because the co-fold confidence score cannot resolve δ/μ preference at the magnitude these
+designs produce, cycle 3b replaces it with a physics-based readout: explicit-solvent membrane
+MD of each peptide–receptor complex followed by MM-PBSA interaction energetics, on the same
+7 × 2 panel.
+
+Status: **Stage 1 (pipeline validation) running; Stage 2 (full panel) is not authorised** and
+will not be until a G1/G2/G3 calibration gate demonstrates the method separates a positive
+control from a negative one. A method that cannot reproduce a known answer cannot be trusted
+on an unknown one, and cycle 2's retracted number came from exactly that omission.
+
+Four build-time defects were found and gated during Stage 1 validation, each of which would
+have produced a clean-looking but meaningless result:
+
+| defect | why the existing checks missed it | gate installed |
+|---|---|---|
+| receptor mis-embedded in the bilayer (tilt up to 29.4°) | the embedding tool exits 0 while leaving the protein tilted | tilt measured from receptor Cα inertia; hard-fail > 10° |
+| **wrong stereoisomer built** — D-Ala² inversion silently skipped | parametrisation reported 0 errors; an all-L analog is chemically valid, just not the intended molecule | chirality asserted post-build; per-tag chemistry read from the design table, never defaulted |
+| interface clashes < 2.1 Å surviving minimisation | minimiser reports whole-system energy over ~155k atoms; one bad contact is inside its noise | interface contact measured directly, before and after minimisation |
+| a panel-wide mis-orientation, not a one-off | only one system had been examined | pre-flight sweep across all six poses, as a mode of the production build so it cannot drift |
+
+The mis-orientation proved **systematic — all six co-folded poses were affected**, so this
+gating changed the panel's inputs rather than merely catching one bad job.
+
+Full state, thresholds, and the defect log are in
+`06_engineering_cycles/cycle3b_physics_rescoring/RESUME.md`.
+
 Full per-cycle pre-registrations, results, and prediction scorecards are in
 `06_engineering_cycles/`.
 
@@ -240,6 +349,12 @@ Full per-cycle pre-registrations, results, and prediction scorecards are in
 Every tool version, force field, database accession, and published design rule is recorded in `methods_references.md`. The full analysis code, input topologies, protocols, and figures are versioned in the accompanying Git repository. The MD parameter-provenance caveat is stated in both the methods log and the results above.
 
 *This brief reports the final 200 ns MD results (all 9 replicates converged).*
+
+**Revision, 2026-07-31.** This edition supersedes the 2026-07-24 brief. Changes: §2c added
+(no commercial antibody detects the engineered product — custom reagent required); §3 siRNA
+panel replaced after the original four duplexes were found cross-reactive with mouse *Mme*;
+§5b extended with cycle 3b physics-rescoring status and its four gated build defects. The
+plasmid audit (§1, §2, §2b) and lipoplex MD (§4) results are unchanged.
 
 *Update on the peptide–receptor co-folds: these **did** complete. An earlier version of this
 brief recorded them as blocked by a cluster disk-quota limit during MSA generation; that
