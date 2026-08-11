@@ -1,0 +1,90 @@
+{
+  "verdict": "PASS",
+  "G1": {
+    "pass": true,
+    "checks": {
+      "deltorphin_II > 0": true,
+      "deltorphin_I > 0": true,
+      "endomorphin_1 < 0": true,
+      "deltorphins ranked above endomorphin-1": true
+    }
+  },
+  "G2p": {
+    "pass": true,
+    "sem_max": 1.5,
+    "checks": {
+      "deltorphin_II": true,
+      "deltorphin_I": true,
+      "endomorphin_1": true,
+      "met_enkephalin": true
+    },
+    "sem": {
+      "deltorphin_II": 0.145,
+      "deltorphin_I": 0.198,
+      "endomorphin_1": 0.169,
+      "met_enkephalin": 0.161
+    }
+  },
+  "G3": {
+    "pass": true,
+    "slope": 1.2026,
+    "ci95": [
+      1.0194,
+      1.3858
+    ],
+    "r": 0.9774,
+    "n_points": 12,
+    "df": 10
+  },
+  "per_control": {
+    "deltorphin_II": {
+      "n": 3,
+      "mean": 6.535333333333331,
+      "sd": 0.2514683545365804,
+      "sem": 0.14518532218436694,
+      "experimental": 5.39,
+      "values": [
+        6.825,
+        6.408,
+        6.373
+      ]
+    },
+    "deltorphin_I": {
+      "n": 3,
+      "mean": 5.565666666666665,
+      "sd": 0.34300048590830495,
+      "sem": 0.19803142287133232,
+      "experimental": 5.7,
+      "values": [
+        5.909,
+        5.223,
+        5.565
+      ]
+    },
+    "endomorphin_1": {
+      "n": 3,
+      "mean": -4.865333333333335,
+      "sd": 0.29274619268802105,
+      "sem": 0.16901709315266703,
+      "experimental": -2.99,
+      "values": [
+        -5.11,
+        -4.541,
+        -4.945
+      ]
+    },
+    "met_enkephalin": {
+      "n": 3,
+      "mean": 0.8936666666666705,
+      "sd": 0.2791170602692258,
+      "sem": 0.16114830988185452,
+      "experimental": 0.0,
+      "values": [
+        0.588,
+        0.958,
+        1.135
+      ]
+    }
+  },
+  "note": "G2' is the amended criterion (SEM); see AMENDMENT_G2.md. G1 and G3 are exactly as pre-registered."
+}

@@ -1,0 +1,18 @@
+Cycle 3b Stage-1 MM-GBSA — parameters fixed by CYCLE3B_DESIGN.md, not by defaults.
+&general
+  sys_name             = "c3b"
+  startframe           = 1
+  endframe             = 100
+  interval             = 1
+  forcefields          = "leaprc.protein.ff14SB"
+  PBRadii              = 4
+  temperature          = 300.0
+  qh_entropy           = 0
+  interaction_entropy  = 0
+  c2_entropy           = 0
+  verbose              = 2
+/
+&gb
+  igb                  = 8
+  saltcon              = 0.15
+/
