@@ -18,9 +18,19 @@ TAG="${1:?usage: build_system.sh <tag> [dres|none|auto]}"
 # "none" default built the all-L analog of deltorphin II on 2026-07-30 and disabled
 # the chirality gate that would have caught it).
 DRES="${2:-auto}"
-# Amidation is ON by default: the free acid is the wrong species for every
-# peptide in this panel. Pass --no-amidate only for a deliberate control.
-AMIDATE=yes
+# Amidation comes from the design table, NOT from a default. It used to default to
+# "yes" here with the comment "the free acid is the wrong species for every peptide
+# in this panel" -- which was true of the four designed peptides but NOT of
+# met-enkephalin, the neutral reference, which is a free acid (CYCLE3B_DESIGN.md
+# line 79). A hardcoded default would have silently built the amidated analog of
+# the one control whose whole job is to sit at ddG ~ 0.
+#
+# Worse than the DRES incident: AMIDATE drives the chemistry, but chem.txt recorded
+# SPEC_AMIDE. If they disagreed the build used one species and the provenance file
+# claimed the other -- an undetectable mismatch. AMIDATE is now resolved FROM the
+# table below (after load_peptide_spec), and an explicit --no-amidate is cross-
+# checked against it exactly as DRES is.
+AMIDATE=auto
 for a in "$@"; do [ "$a" = "--no-amidate" ] && AMIDATE=no; done
 
 W=/data/users/kzanaj/boltz_dock/cycle3b
@@ -62,7 +72,14 @@ elif [ "$DRES" != "$SPEC_DRES" ]; then
   echo "      ($TAG requires dres=$SPEC_DRES). Fix the caller or the table -- not this check."
   exit 1
 fi
-echo "  D-residue: $DRES | C-terminus: $SPEC_AMIDE"
+if [ "$AMIDATE" = "auto" ]; then
+  AMIDATE="$SPEC_AMIDE"
+elif [ "$AMIDATE" != "$SPEC_AMIDE" ]; then
+  echo "FAIL: --no-amidate contradicts the design table"
+  echo "      ($TAG requires amide=$SPEC_AMIDE). Fix the caller or the table -- not this check."
+  exit 1
+fi
+echo "  D-residue: $DRES | C-terminus: amide=$AMIDATE (from design table)"
 
 # Minimisation, factored out so the split and combined paths run IDENTICAL code.
 do_minimise() {
@@ -348,8 +365,8 @@ if [ "$STAGE" = "cpu" ]; then
   # Record the chemistry this system was ACTUALLY built with, so the production
   # stage can verify the coordinates it inherits match the peptide it thinks it is
   # running. Without this, a mismatched build/run pair is undetectable downstream.
-  printf 'BUILT_DRES=%s\nBUILT_AMIDE=%s\n' "$DRES" "$SPEC_AMIDE" > chem.txt
-  echo "  recorded chem.txt: dres=$DRES amide=$SPEC_AMIDE"
+  printf 'BUILT_DRES=%s\nBUILT_AMIDE=%s\n' "$DRES" "$AMIDATE" > chem.txt
+  echo "  recorded chem.txt: dres=$DRES amide=$AMIDATE"
   echo "BUILD_CPU_OK $TAG"
   echo "next: STAGE=gpu build_system.sh $TAG (needs --gres=gpu:1)"
   exit 0
