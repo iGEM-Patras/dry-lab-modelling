@@ -90,8 +90,8 @@ SEED=$(( 20260728 + 1000*REP + $(echo "$TAG" | cksum | cut -d" " -f1) % 1000 ))
 echo "=== $TAG rep$REP | seed $SEED | peptide $PEP_SEQ ==="
 
 # ---- NVT with replicate-specific velocities --------------------------------
-sed "s/^gen_seed.*/gen_seed = $SEED/" $W/scripts/nvt.mdp > nvt_r.mdp
-grep -q "gen_seed = $SEED" nvt_r.mdp || { echo "FAIL: seed not set"; exit 1; }
+sed "s/^gen[-_]seed[[:space:]]*=.*/gen-seed = $SEED/" $W/scripts/nvt.mdp > nvt_r.mdp
+grep -qE "^gen-seed[[:space:]]*=[[:space:]]*$SEED\b" nvt_r.mdp || { echo "FAIL: seed not set"; exit 1; }
 $GMX grompp -f nvt_r.mdp -c $SYS/min.gro -p system.top -n index.ndx -o nvt.tpr -maxwarn 2
 $GMX mdrun -deffnm nvt -nb gpu -ntmpi 1 -ntomp 8
 gate "post-NVT" nvt.gro
