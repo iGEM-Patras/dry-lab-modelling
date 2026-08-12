@@ -85,7 +85,12 @@ echo "  D-residue: $DRES | C-terminus: amide=$AMIDATE (from design table)"
 do_minimise() {
   $GMX grompp -f $W/scripts/min.mdp -c system.gro -p system.top -o min.tpr -n index.ndx -maxwarn 5 >grompp_min.log 2>&1 \
     || { echo "FAIL: grompp min"; tail -25 grompp_min.log; exit 1; }
-  $GMX mdrun -deffnm min -nb gpu >md_min.log 2>&1 \
+  # MIN_NB=cpu runs the identical minimisation on a CPU partition; see MIN_ON_CPU.md.
+  MIN_NB="${MIN_NB:-gpu}"
+  if [ "$MIN_NB" = "cpu" ]; then MIN_ARGS="-nb cpu -ntmpi 1 -ntomp ${SLURM_CPUS_PER_TASK:-8}"
+  else MIN_ARGS="-nb gpu"; fi
+  echo "  minimising with: $MIN_ARGS"
+  $GMX mdrun -deffnm min $MIN_ARGS >md_min.log 2>&1 \
     || { echo "FAIL: mdrun min"; tail -20 md_min.log; exit 1; }
   echo "min: $(grep -E 'Potential Energy|Maximum force' md_min.log | tail -2 | tr '\n' ' ')"
   [ -f min.gro ] || { echo "FAIL: min.gro not produced"; exit 1; }
@@ -105,7 +110,7 @@ if [ "$STAGE" = "gpu" ]; then
   for f in system.top system.gro index.ndx pepmeta.txt contacts_pre.txt; do
     [ -f "$f" ] || { echo "FAIL: STAGE=gpu needs $f from the CPU stage; not found in $SYS"; exit 1; }
   done
-  echo "resuming from CPU stage output in $SYS"
+  echo "resuming from CPU stage output in $SYS (min backend: ${MIN_NB:-gpu})"
   do_minimise
   echo "BUILD_OK $TAG"
   exit 0
