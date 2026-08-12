@@ -81,7 +81,7 @@ pep.save(out, overwrite=True)
 print(f"  [gate] peptide extracted ({len(pep.atoms)} atoms): {seq}")
 PYEOF
   [ -s "pep_${stage}.pdb" ] || { echo "FAIL: could not extract peptide at stage '$stage'"; exit 1; }
-  $PY $W/scripts/chirality.py assert "pep_${stage}.pdb" "$DRES" --by-position \
+  $PY $W/scripts/chirality.py assert "pep_${stage}.pdb" "$DRES_REL" --by-position \
     || { echo "FAIL: chirality inverted or unreadable at stage '$stage' - DISCARD this run"; exit 3; }
   echo "  [gate:$stage] chirality OK"
 }
