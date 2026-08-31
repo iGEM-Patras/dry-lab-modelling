@@ -14,6 +14,7 @@ The full narrative — rationale, results, and honest limitations — is in **[`
 | [`04_lipoplex_md/`](04_lipoplex_md/) | Lipoplex coarse-grained MD | pH-dependent DNA binding of the delivery vehicle across 3 formulations |
 | [`05_presentation/`](05_presentation/) | Slides + wet-lab handouts | Bench-facing summaries of the above |
 | [`06_engineering_cycles/`](06_engineering_cycles/) | Payload engineering (3 pre-registered DBTL cycles) | A **negative result**: no computational route ranks these designs; the wet-lab assay is required |
+| [`07_invitro_penk/`](07_invitro_penk/) | Cell-free processing assay design | The cassette swap is predicted **neutral for convertases, adverse for cathepsin L** — a falsifiable bench test |
 
 ## Key results at a glance
 
@@ -21,11 +22,14 @@ The full narrative — rationale, results, and honest limitations — is in **[`
 - **Two human-exclusive anti-MME siRNAs** (CDS303, CDS2101) target the CDS shared by all MME transcript variants. The **original four-duplex panel was withdrawn**: it is cross-reactive with mouse *Mme* (one guide a perfect 19/19 match). The corollary is that the exclusive guides cannot be validated in a mouse model — a separate rodent surrogate is needed for in-vivo work.
 - **No commercial antibody detects the engineered product.** The construct recodes every enkephalin core to `YGGFEVVG`; registry anti-enkephalin antibodies are raised against native `YGGFM`. A custom anti-`YGGFEVVG` polyclonal must be raised and is on the critical path.
 - **Lipoplex MD reproduces the ionizable-lipid pH switch** (200 ns × 3 seeds, mean ± SEM): protonated MC3-H⁺ binds DNA as tightly as permanent-cation DOTAP (~0.47 nm closest approach); neutral MC3⁰ holds DNA ~1.3 nm away with an RDF peak at the bulk value. Contacts plateau by ~100 ns, so the 100–200 ns analysis window is equilibrated.
+- **The two processing routes are affected unequally by the cassette swap.** PC1/3 and PC2 cut C-terminal to the dibasic; cathepsin L/V cut N-terminal to it. The swap leaves the convertase scissile context identical at all 7 cassettes but moves the cathepsin P2 residue from Phe (7/7 within the preferred Leu/Trp/Phe/Tyr set) to Val (0/7). Separately, 5 of 7 engineered cassettes are Gly-extended PAM substrates where no native cassette is. Both are directly testable in the cell-free assay in `07_invitro_penk/`.
 - **Payload δ-selectivity engineering returned a negative result** across three pre-registered cycles. The final cycle (3b, MM-GBSA physics rescoring) **failed its calibration gate**: it gets the *direction* of δ/μ preference right (G1 pass) but cannot resolve the *magnitude* at n=5 (G2′ and G3 fail; regression CI spans zero). Recommendation: radioligand competition binding on `YGGFEVVG` and `YGGFDIIG`.
 
 ## Status
 
 All dry-lab workstreams are **complete**. Cycle 3b terminated on 2026-08-31 per its pre-registration; see [`06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md`](06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md) for the terminal verdict. No further computational work is planned — the project's open questions are now wet-lab questions.
+
+`07_invitro_penk/` is the first of those wet-lab questions worked up into a benchtop design. It is a **design, not a result**: no experimental data exists yet.
 
 ## Reproducibility
 
