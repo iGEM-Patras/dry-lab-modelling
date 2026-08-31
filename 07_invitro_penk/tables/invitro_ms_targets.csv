@@ -1,0 +1,157 @@
+construct,pool,peptide_id,species_class,name,sequence,length,amidated,n_oxidation,origin,neutral_mono,mz_1,mz_2,mz_3
+engPENK,1.0,E119,product_C,E119 C-product,MDELYPME,8,False,0,endoprotease cut,1026.4038,1027.4111,514.2092,343.1419
+engPENK,1.0,E119,product_C_oxMet,E119 C-product +1ox(Met),MDELYPME,8,False,1,Met oxidation artefact,1042.3987,1043.406,522.2066,348.4735
+engPENK,1.0,E119,product_C_oxMet,E119 C-product +2ox(Met),MDELYPME,8,False,2,Met oxidation artefact,1058.3936,1059.4009,530.2041,353.8052
+engPENK,1.0,E119,product_N,E119 N-product (pre-CPE),GFEVVGKK,8,False,0,endoprotease cut,862.4913,863.4985,432.2529,288.5044
+engPENK,1.0,E278,product_N,E278 N-product (pre-CPE),EVPEMEKR,8,False,0,endoprotease cut,1016.4961,1017.5034,509.2553,339.8393
+engPENK,1.0,E119,product_N_CPE,E119 N-product after CPE,GFEVVG,6,False,0,CPE trim,606.3013,607.3086,304.1579,203.1077
+engPENK,1.0,E278,product_N_CPE,E278 N-product after CPE,EVPEME,6,False,0,CPE trim,732.3,733.3073,367.1573,245.1073
+engPENK,1.0,E278,product_N_CPE_oxMet,E278 N-product after CPE +1ox(Met),EVPEME,6,False,1,Met oxidation artefact,748.2949,749.3022,375.1547,250.4389
+engPENK,1.0,E278,product_N_oxMet,E278 N-product (pre-CPE) +1ox(Met),EVPEMEKR,8,False,1,Met oxidation artefact,1032.491,1033.4983,517.2528,345.1709
+engPENK,1.0,E278,substrate,E278 intact,EVPEMEKRYGGFEVVG,16,False,0,ordered junction peptide,1824.8716,1825.8789,913.4431,609.2978
+engPENK,1.0,E119,substrate,E119 intact,GFEVVGKKMDELYPME,16,False,0,ordered junction peptide,1870.8845,1871.8918,936.4495,624.6354
+engPENK,1.0,E278,substrate_oxMet,E278 intact +1ox(Met),EVPEMEKRYGGFEVVG,16,False,1,Met oxidation artefact,1840.8665,1841.8738,921.4406,614.6295
+engPENK,1.0,E119,substrate_oxMet,E119 intact +1ox(Met),GFEVVGKKMDELYPME,16,False,1,Met oxidation artefact,1886.8794,1887.8867,944.447,629.9671
+engPENK,1.0,E119,substrate_oxMet,E119 intact +2ox(Met),GFEVVGKKMDELYPME,16,False,2,Met oxidation artefact,1902.8743,1903.8816,952.4444,635.2987
+engPENK,2.0,E151,product_C,E151 C-product,DAEEDDSL,8,False,0,endoprotease cut,892.3298,893.3371,447.1722,298.4505
+engPENK,2.0,E221,product_N,E221 N-product (pre-CPE),EAKELQKR,8,False,0,endoprotease cut,1000.5665,1001.5738,501.2905,334.5295
+engPENK,2.0,E221,product_N_CPE,E221 N-product after CPE,EAKELQ,6,False,0,CPE trim,716.3705,717.3777,359.1925,239.7974
+engPENK,2.0,E151,substrate,E151 intact,GFEVVGKKDAEEDDSL,16,False,0,ordered junction peptide,1736.8105,1737.8178,869.4125,579.9441
+engPENK,2.0,E221,substrate,E221 intact,EAKELQKRYGGFEVVG,16,False,0,ordered junction peptide,1808.9421,1809.9494,905.4783,603.988
+engPENK,3.0,E244,product_C,E244 C-product,YGGFEVVG,8,False,0,endoprotease cut,826.3861,827.3934,414.2003,276.4693
+engPENK,3.0,E244,product_N,E244 N-product (pre-CPE),WWMDYQKR,8,False,0,endoprotease cut,1211.5546,1212.5619,606.7846,404.8588
+engPENK,3.0,E244,product_N_CPE,E244 N-product after CPE,WWMDYQ,6,False,0,CPE trim,927.3585,928.3658,464.6865,310.1268
+engPENK,3.0,E244,product_N_CPE_oxMet,E244 N-product after CPE +1ox(Met),WWMDYQ,6,False,1,Met oxidation artefact,943.3534,944.3607,472.684,315.4584
+engPENK,3.0,E244,product_N_oxMet,E244 N-product (pre-CPE) +1ox(Met),WWMDYQKR,8,False,1,Met oxidation artefact,1227.5495,1228.5568,614.782,410.1904
+engPENK,3.0,E244,substrate,E244 intact,WWMDYQKRYGGFEVVG,16,False,0,ordered junction peptide,2019.9302,2020.9374,1010.9724,674.3173
+engPENK,3.0,E244,substrate_oxMet,E244 intact +1ox(Met),WWMDYQKRYGGFEVVG,16,False,1,Met oxidation artefact,2035.9251,2036.9323,1018.9698,679.649
+engPENK,4.0,E141,product_N,E141 N-product (pre-CPE),GSEILAKR,8,False,0,endoprotease cut,872.508,873.5152,437.2613,291.8433
+engPENK,4.0,E141,product_N_CPE,E141 N-product after CPE,GSEILA,6,False,0,CPE trim,588.3119,589.3192,295.1632,197.1112
+engPENK,4.0,E141,substrate,E141 intact,GSEILAKRYGGFEVVG,16,False,0,ordered junction peptide,1680.8835,1681.8908,841.449,561.3018
+engPENK,5.0,E231,product_C,E231 C-product,VGRPEWWM,8,False,0,endoprotease cut,1059.496,1060.5033,530.7553,354.1726
+engPENK,5.0,E231,product_C_oxMet,E231 C-product +1ox(Met),VGRPEWWM,8,False,1,Met oxidation artefact,1075.4909,1076.4982,538.7527,359.5043
+engPENK,5.0,E231,product_N,E231 N-product (pre-CPE),GFEVVGRR,8,False,0,endoprotease cut,918.5035,919.5108,460.2591,307.1751
+engPENK,5.0,E099,product_N,E099 N-product (pre-CPE),ESHLLAKR,8,False,0,endoprotease cut,952.5454,953.5527,477.28,318.5224
+engPENK,5.0,E099,product_N_CPE,E099 N-product after CPE,ESHLLA,6,False,0,CPE trim,668.3493,669.3566,335.1819,223.7904
+engPENK,5.0,E099,substrate,E099 intact,ESHLLAKRYGGFEVVG,16,False,0,ordered junction peptide,1760.921,1761.9282,881.4678,587.9809
+engPENK,5.0,E231,substrate,E231 intact,GFEVVGRRVGRPEWWM,16,False,0,ordered junction peptide,1959.989,1960.9963,981.0018,654.3369
+engPENK,5.0,E231,substrate_oxMet,E231 intact +1ox(Met),GFEVVGRRVGRPEWWM,16,False,1,Met oxidation artefact,1975.9839,1976.9912,988.9992,659.6686
+engPENK,6.0,E207,product_C,E207 C-product,SPQLEDEA,8,False,0,endoprotease cut,887.3872,888.3945,444.7009,296.803
+engPENK,6.0,E207,product_N,E207 N-product (pre-CPE),VVGRGLKR,8,False,0,endoprotease cut,883.5716,884.5788,442.7931,295.5311
+engPENK,6.0,E109,product_N,E109 N-product (pre-CPE),GFEVVGKR,8,False,0,endoprotease cut,890.4974,891.5047,446.256,297.8397
+engPENK,6.0,E207,product_N_CPE,E207 N-product after CPE,VVGRGL,6,False,0,CPE trim,599.3755,600.3828,300.695,200.7991
+engPENK,6.0,E109,substrate,E109 intact,GFEVVGKRYGGFEVVG,16,False,0,ordered junction peptide,1698.873,1699.8802,850.4438,567.2983
+engPENK,6.0,E207,substrate,E207 intact,VVGRGLKRSPQLEDEA,16,False,0,ordered junction peptide,1752.9482,1753.9555,877.4814,585.3234
+engPENK,7.0,E254,product_C,E254 C-product,FAEALPSD,8,False,0,endoprotease cut,848.3916,849.3989,425.2031,283.8045
+engPENK,7.0,E194,product_N,E194 N-product (pre-CPE),NEEEVSKR,8,False,0,endoprotease cut,989.4778,990.4851,495.7462,330.8332
+engPENK,7.0,E194,product_N_CPE,E194 N-product after CPE,NEEEVS,6,False,0,CPE trim,705.2817,706.289,353.6481,236.1012
+engPENK,7.0,E254,substrate,E254 intact,GFEVVGKRFAEALPSD,16,False,0,ordered junction peptide,1720.8784,1721.8857,861.4465,574.6334
+engPENK,7.0,E194,substrate,E194 intact,NEEEVSKRYGGFEVVG,16,False,0,ordered junction peptide,1797.8533,1798.8606,899.9339,600.2917
+engPENK,,,PAM_product,engPENK 100-109 amidated,YGGFEVV,7,True,0,"PAM: -Gly, C-term amide",768.3806,769.3879,385.1976,257.1342
+engPENK,,,proprotein_fragment,engPENK 279-288 (pre-CPE),YGGFEVVGRF,10,False,0,Stage 2 full-length digest,1129.5556,1130.5629,565.7851,377.5258
+engPENK,,,proprotein_fragment,engPENK 195-207 (pre-CPE),YGGFEVVGRGL,11,False,0,Stage 2 full-length digest,1152.5928,1153.6,577.3037,385.2049
+engPENK,,,proprotein_fragment,engPENK 208-221 (pre-CPE),SPQLEDEAKELQ,12,False,0,Stage 2 full-length digest,1385.6674,1386.6747,693.841,462.8964
+engPENK,,,proprotein_fragment,engPENK 232-244 (pre-CPE),VGRPEWWMDYQ,11,False,0,Stage 2 full-length digest,1465.6449,1466.6521,733.8297,489.5556
+engPENK,,,proprotein_fragment,engPENK 120-141 (pre-CPE),MDELYPMEPEEEANGSEILA,20,False,0,Stage 2 full-length digest,2265.9657,2266.973,1133.9901,756.3292
+engPENK,,,proprotein_fragment,engPENK 255-278 (pre-CPE),FAEALPSDEEGESYSKEVPEME,22,False,0,Stage 2 full-length digest,2472.0526,2473.0599,1237.0336,825.0248
+engPENK,,,proprotein_fragment,engPENK 152-194 (pre-CPE),DAEEDDSLANSSDLLKELLETGDNRERSHHQDGSDNEEEVS,41,False,0,Stage 2 full-length digest,4583.988,4584.9953,2293.0013,1529.0033
+engPENK,,,proprotein_fragment,engPENK 25-99 (pre-CPE),ECSQDCATCSYRLVRPADINFLACVMECEGKLPSLKIWETCKELLQLSKPELPQDGTSTLRENSKPEESHLLA,73,False,0,Stage 2 full-length digest,8192.9798,8193.9871,4097.4972,2732.0005
+engPENK,,,proprotein_fragment_oxMet,engPENK 232-244 (pre-CPE) +1ox(Met),VGRPEWWMDYQ,11,False,1,Met oxidation artefact,1481.6398,1482.6471,741.8272,494.8872
+engPENK,,,proprotein_fragment_oxMet,engPENK 120-141 (pre-CPE) +1ox(Met),MDELYPMEPEEEANGSEILA,20,False,1,Met oxidation artefact,2281.9606,2282.9679,1141.9876,761.6608
+engPENK,,,proprotein_fragment_oxMet,engPENK 120-141 (pre-CPE) +2ox(Met),MDELYPMEPEEEANGSEILA,20,False,2,Met oxidation artefact,2297.9556,2298.9628,1149.9851,766.9925
+engPENK,,,proprotein_fragment_oxMet,engPENK 255-278 (pre-CPE) +1ox(Met),FAEALPSDEEGESYSKEVPEME,22,False,1,Met oxidation artefact,2488.0475,2489.0548,1245.031,830.3565
+engPENK,,,proprotein_fragment_oxMet,engPENK 25-99 (pre-CPE) +1ox(Met),ECSQDCATCSYRLVRPADINFLACVMECEGKLPSLKIWETCKELLQLSKPELPQDGTSTLRENSKPEESHLLA,73,False,1,Met oxidation artefact,8208.9747,8209.982,4105.4946,2737.3322
+native,1.0,N142,product_C,N142 C-product,DAEEDDSL,8,False,0,endoprotease cut,892.3298,893.3371,447.1722,298.4505
+native,1.0,N229,product_C,N229 C-product,YGGFLKRF,8,False,0,endoprotease cut,986.5338,987.5411,494.2742,329.8519
+native,1.0,N142,product_N,N142 N-product (pre-CPE),RYGGFMKK,8,False,0,endoprotease cut,985.5168,986.524,493.7657,329.5129
+native,1.0,N229,product_N,N229 N-product (pre-CPE),WWMDYQKR,8,False,0,endoprotease cut,1211.5546,1212.5619,606.7846,404.8588
+native,1.0,N229,product_N_CPE,N229 N-product after CPE,WWMDYQ,6,False,0,CPE trim,927.3585,928.3658,464.6865,310.1268
+native,1.0,N229,product_N_CPE_oxMet,N229 N-product after CPE +1ox(Met),WWMDYQ,6,False,1,Met oxidation artefact,943.3534,944.3607,472.684,315.4584
+native,1.0,N142,product_N_oxMet,N142 N-product (pre-CPE) +1ox(Met),RYGGFMKK,8,False,1,Met oxidation artefact,1001.5117,1002.5189,501.7631,334.8445
+native,1.0,N229,product_N_oxMet,N229 N-product (pre-CPE) +1ox(Met),WWMDYQKR,8,False,1,Met oxidation artefact,1227.5495,1228.5568,614.782,410.1904
+native,1.0,N142,substrate,N142 intact,RYGGFMKKDAEEDDSL,16,False,0,ordered junction peptide,1859.836,1860.8433,930.9253,620.9526
+native,1.0,N229,substrate,N229 intact,WWMDYQKRYGGFLKRF,16,False,0,ordered junction peptide,2180.0778,2181.0851,1091.0462,727.6999
+native,1.0,N142,substrate_oxMet,N142 intact +1ox(Met),RYGGFMKKDAEEDDSL,16,False,1,Met oxidation artefact,1875.8309,1876.8382,938.9227,626.2842
+native,1.0,N229,substrate_oxMet,N229 intact +1ox(Met),WWMDYQKRYGGFLKRF,16,False,1,Met oxidation artefact,2196.0727,2197.08,1099.0436,733.0315
+native,2.0,N195,product_C,N195 C-product,SPQLEDEA,8,False,0,endoprotease cut,887.3872,888.3945,444.7009,296.803
+native,2.0,N185,product_C,N185 C-product,YGGFMRGL,8,False,0,endoprotease cut,899.4324,900.4396,450.7235,300.8181
+native,2.0,N185,product_C_oxMet,N185 C-product +1ox(Met),YGGFMRGL,8,False,1,Met oxidation artefact,915.4273,916.4345,458.7209,306.1497
+native,2.0,N195,product_N,N195 N-product (pre-CPE),GFMRGLKR,8,False,0,endoprotease cut,963.5436,964.5509,482.7791,322.1885
+native,2.0,N185,product_N,N185 N-product (pre-CPE),NEEEVSKR,8,False,0,endoprotease cut,989.4778,990.4851,495.7462,330.8332
+native,2.0,N195,product_N_CPE,N195 N-product after CPE,GFMRGL,6,False,0,CPE trim,679.3476,680.3548,340.6811,227.4565
+native,2.0,N185,product_N_CPE,N185 N-product after CPE,NEEEVS,6,False,0,CPE trim,705.2817,706.289,353.6481,236.1012
+native,2.0,N195,product_N_CPE_oxMet,N195 N-product after CPE +1ox(Met),GFMRGL,6,False,1,Met oxidation artefact,695.3425,696.3498,348.6785,232.7881
+native,2.0,N195,product_N_oxMet,N195 N-product (pre-CPE) +1ox(Met),GFMRGLKR,8,False,1,Met oxidation artefact,979.5386,980.5458,490.7766,327.5201
+native,2.0,N195,substrate,N195 intact,GFMRGLKRSPQLEDEA,16,False,0,ordered junction peptide,1832.9203,1833.9276,917.4674,611.9807
+native,2.0,N185,substrate,N185 intact,NEEEVSKRYGGFMRGL,16,False,0,ordered junction peptide,1870.8996,1871.9069,936.4571,624.6405
+native,2.0,N195,substrate_oxMet,N195 intact +1ox(Met),GFMRGLKRSPQLEDEA,16,False,1,Met oxidation artefact,1848.9152,1849.9225,925.4649,617.3124
+native,2.0,N185,substrate_oxMet,N185 intact +1ox(Met),NEEEVSKRYGGFMRGL,16,False,1,Met oxidation artefact,1886.8945,1887.9018,944.4545,629.9721
+native,3.0,N209,product_C,N209 C-product,YGGFMRRV,8,False,0,endoprotease cut,984.4964,985.5036,493.2555,329.1727
+native,3.0,N216,product_C,N216 C-product,VGRPEWWM,8,False,0,endoprotease cut,1059.496,1060.5033,530.7553,354.1726
+native,3.0,N209,product_C_oxMet,N209 C-product +1ox(Met),YGGFMRRV,8,False,1,Met oxidation artefact,1000.4913,1001.4985,501.2529,334.5044
+native,3.0,N216,product_C_oxMet,N216 C-product +1ox(Met),VGRPEWWM,8,False,1,Met oxidation artefact,1075.4909,1076.4982,538.7527,359.5043
+native,3.0,N209,product_N,N209 N-product (pre-CPE),EAKELQKR,8,False,0,endoprotease cut,1000.5665,1001.5738,501.2905,334.5295
+native,3.0,N216,product_N,N216 N-product (pre-CPE),RYGGFMRR,8,False,0,endoprotease cut,1041.5291,1042.5363,521.7718,348.1836
+native,3.0,N209,product_N_CPE,N209 N-product after CPE,EAKELQ,6,False,0,CPE trim,716.3705,717.3777,359.1925,239.7974
+native,3.0,N216,product_N_oxMet,N216 N-product (pre-CPE) +1ox(Met),RYGGFMRR,8,False,1,Met oxidation artefact,1057.524,1058.5312,529.7693,353.5153
+native,3.0,N209,substrate,N209 intact,EAKELQKRYGGFMRRV,16,False,0,ordered junction peptide,1967.0523,1968.0596,984.5334,656.6914
+native,3.0,N216,substrate,N216 intact,RYGGFMRRVGRPEWWM,16,False,0,ordered junction peptide,2083.0145,2084.0218,1042.5145,695.3454
+native,3.0,N209,substrate_oxMet,N209 intact +1ox(Met),EAKELQKRYGGFMRRV,16,False,1,Met oxidation artefact,1983.0472,1984.0545,992.5309,662.023
+native,3.0,N216,substrate_oxMet,N216 intact +1ox(Met),RYGGFMRRVGRPEWWM,16,False,1,Met oxidation artefact,2099.0094,2100.0167,1050.512,700.6771
+native,3.0,N216,substrate_oxMet,N216 intact +2ox(Met),RYGGFMRRVGRPEWWM,16,False,2,Met oxidation artefact,2115.0043,2116.0116,1058.5094,706.0087
+native,4.0,N236,product_C,N236 C-product,FAEALPSD,8,False,0,endoprotease cut,848.3916,849.3989,425.2031,283.8045
+native,4.0,N260,product_C,N260 C-product,YGGFMRF,7,False,0,endoprotease cut,876.3952,877.4025,439.2049,293.139
+native,4.0,N260,product_C_oxMet,N260 C-product +1ox(Met),YGGFMRF,7,False,1,Met oxidation artefact,892.3902,893.3974,447.2024,298.4707
+native,4.0,N236,product_N,N236 N-product (pre-CPE),RYGGFLKR,8,False,0,endoprotease cut,995.5665,996.5738,498.7905,332.8628
+native,4.0,N260,product_N,N260 N-product (pre-CPE),EVPEMEKR,8,False,0,endoprotease cut,1016.4961,1017.5034,509.2553,339.8393
+native,4.0,N236,product_N_CPE,N236 N-product after CPE,RYGGFL,6,False,0,CPE trim,711.3704,712.3777,356.6925,238.1307
+native,4.0,N260,product_N_CPE,N260 N-product after CPE,EVPEME,6,False,0,CPE trim,732.3,733.3073,367.1573,245.1073
+native,4.0,N260,product_N_CPE_oxMet,N260 N-product after CPE +1ox(Met),EVPEME,6,False,1,Met oxidation artefact,748.2949,749.3022,375.1547,250.4389
+native,4.0,N260,product_N_oxMet,N260 N-product (pre-CPE) +1ox(Met),EVPEMEKR,8,False,1,Met oxidation artefact,1032.491,1033.4983,517.2528,345.1709
+native,4.0,N236,substrate,N236 intact,RYGGFLKRFAEALPSD,16,False,0,ordered junction peptide,1825.9475,1826.9548,913.981,609.6564
+native,4.0,N260,substrate,N260 intact,EVPEMEKRYGGFMRF,15,False,0,ordered junction peptide,1874.8808,1875.888,938.4477,625.9675
+native,4.0,N260,substrate_oxMet,N260 intact +1ox(Met),EVPEMEKRYGGFMRF,15,False,1,Met oxidation artefact,1890.8757,1891.883,946.4451,631.2992
+native,4.0,N260,substrate_oxMet,N260 intact +2ox(Met),EVPEMEKRYGGFMRF,15,False,2,Met oxidation artefact,1906.8706,1907.8779,954.4426,636.6308
+native,5.0,N135,product_C,N135 C-product,YGGFMKKD,8,False,0,endoprotease cut,944.4426,945.4499,473.2286,315.8215
+native,5.0,N135,product_C_oxMet,N135 C-product +1ox(Met),YGGFMKKD,8,False,1,Met oxidation artefact,960.4375,961.4448,481.226,321.1531
+native,5.0,N135,product_N,N135 N-product (pre-CPE),GSEILAKR,8,False,0,endoprotease cut,872.508,873.5152,437.2613,291.8433
+native,5.0,N135,product_N_CPE,N135 N-product after CPE,GSEILA,6,False,0,CPE trim,588.3119,589.3192,295.1632,197.1112
+native,5.0,N135,substrate,N135 intact,GSEILAKRYGGFMKKD,16,False,0,ordered junction peptide,1798.94,1799.9473,900.4773,600.6539
+native,5.0,N135,substrate_oxMet,N135 intact +1ox(Met),GSEILAKRYGGFMKKD,16,False,1,Met oxidation artefact,1814.9349,1815.9422,908.4747,605.9856
+native,6.0,N106,product_C,N106 C-product,YGGFMKKM,8,False,0,endoprotease cut,960.4561,961.4634,481.2353,321.1593
+native,6.0,N099,product_C,N099 C-product,YGGFMKRY,8,False,0,endoprotease cut,1020.4851,1021.4924,511.2498,341.169
+native,6.0,N106,product_C_oxMet,N106 C-product +1ox(Met),YGGFMKKM,8,False,1,Met oxidation artefact,976.451,977.4583,489.2328,326.491
+native,6.0,N106,product_C_oxMet,N106 C-product +2ox(Met),YGGFMKKM,8,False,2,Met oxidation artefact,992.446,993.4532,497.2303,331.8226
+native,6.0,N099,product_C_oxMet,N099 C-product +1ox(Met),YGGFMKRY,8,False,1,Met oxidation artefact,1036.48,1037.4873,519.2473,346.5006
+native,6.0,N099,product_N,N099 N-product (pre-CPE),ESHLLAKR,8,False,0,endoprotease cut,952.5454,953.5527,477.28,318.5224
+native,6.0,N106,product_N,N106 N-product (pre-CPE),RYGGFMKR,8,False,0,endoprotease cut,1013.5229,1014.5302,507.7687,338.8482
+native,6.0,N099,product_N_CPE,N099 N-product after CPE,ESHLLA,6,False,0,CPE trim,668.3493,669.3566,335.1819,223.7904
+native,6.0,N106,product_N_CPE,N106 N-product after CPE,RYGGFM,6,False,0,CPE trim,729.3268,730.3341,365.6707,244.1162
+native,6.0,N106,product_N_CPE_oxMet,N106 N-product after CPE +1ox(Met),RYGGFM,6,False,1,Met oxidation artefact,745.3217,746.329,373.6681,249.4479
+native,6.0,N106,product_N_oxMet,N106 N-product (pre-CPE) +1ox(Met),RYGGFMKR,8,False,1,Met oxidation artefact,1029.5178,1030.5251,515.7662,344.1799
+native,6.0,N099,substrate,N099 intact,ESHLLAKRYGGFMKRY,16,False,0,ordered junction peptide,1955.02,1956.0272,978.5173,652.6806
+native,6.0,N106,substrate,N106 intact,RYGGFMKRYGGFMKKM,16,False,0,ordered junction peptide,1955.9685,1956.9757,978.9915,652.9968
+native,6.0,N099,substrate_oxMet,N099 intact +1ox(Met),ESHLLAKRYGGFMKRY,16,False,1,Met oxidation artefact,1971.0149,1972.0222,986.5147,658.0122
+native,6.0,N106,substrate_oxMet,N106 intact +1ox(Met),RYGGFMKRYGGFMKKM,16,False,1,Met oxidation artefact,1971.9634,1972.9707,986.989,658.3284
+native,6.0,N106,substrate_oxMet,N106 intact +2ox(Met),RYGGFMKRYGGFMKKM,16,False,2,Met oxidation artefact,1987.9583,1988.9656,994.9864,663.66
+native,7.0,N113,product_C,N113 C-product,MDELYPME,8,False,0,endoprotease cut,1026.4038,1027.4111,514.2092,343.1419
+native,7.0,N113,product_C_oxMet,N113 C-product +1ox(Met),MDELYPME,8,False,1,Met oxidation artefact,1042.3987,1043.406,522.2066,348.4735
+native,7.0,N113,product_C_oxMet,N113 C-product +2ox(Met),MDELYPME,8,False,2,Met oxidation artefact,1058.3936,1059.4009,530.2041,353.8052
+native,7.0,N113,substrate,N113 intact,RYGGFMKKMDELYPME,16,False,0,ordered junction peptide,1993.91,1994.9173,997.9623,665.6439
+native,7.0,N113,substrate_oxMet,N113 intact +1ox(Met),RYGGFMKKMDELYPME,16,False,1,Met oxidation artefact,2009.9049,2010.9122,1005.9597,670.9756
+native,7.0,N113,substrate_oxMet,N113 intact +2ox(Met),RYGGFMKKMDELYPME,16,False,2,Met oxidation artefact,2025.8998,2026.9071,1013.9572,676.3072
+native,,,proprotein_fragment,native 230-236 (pre-CPE),YGGFL,5,False,0,Stage 2 full-length digest,555.2693,556.2766,278.6419,186.097
+native,,,proprotein_fragment,native 100-106 (pre-CPE),YGGFM,5,False,0,Stage 2 full-length digest,573.2257,574.233,287.6201,192.0825
+native,,,proprotein_fragment,native 196-209 (pre-CPE),SPQLEDEAKELQ,12,False,0,Stage 2 full-length digest,1385.6674,1386.6747,693.841,462.8964
+native,,,proprotein_fragment,native 217-229 (pre-CPE),VGRPEWWMDYQ,11,False,0,Stage 2 full-length digest,1465.6449,1466.6521,733.8297,489.5556
+native,,,proprotein_fragment,native 114-135 (pre-CPE),MDELYPMEPEEEANGSEILA,20,False,0,Stage 2 full-length digest,2265.9657,2266.973,1133.9901,756.3292
+native,,,proprotein_fragment,native 237-260 (pre-CPE),FAEALPSDEEGESYSKEVPEME,22,False,0,Stage 2 full-length digest,2472.0526,2473.0599,1237.0336,825.0248
+native,,,proprotein_fragment,native 143-185 (pre-CPE),DAEEDDSLANSSDLLKELLETGDNRERSHHQDGSDNEEEVS,41,False,0,Stage 2 full-length digest,4583.988,4584.9953,2293.0013,1529.0033
+native,,,proprotein_fragment,native 25-99 (pre-CPE),ECSQDCATCSYRLVRPADINFLACVMECEGKLPSLKIWETCKELLQLSKPELPQDGTSTLRENSKPEESHLLA,73,False,0,Stage 2 full-length digest,8192.9798,8193.9871,4097.4972,2732.0005
+native,,,proprotein_fragment_oxMet,native 100-106 (pre-CPE) +1ox(Met),YGGFM,5,False,1,Met oxidation artefact,589.2206,590.2279,295.6176,197.4142
+native,,,proprotein_fragment_oxMet,native 217-229 (pre-CPE) +1ox(Met),VGRPEWWMDYQ,11,False,1,Met oxidation artefact,1481.6398,1482.6471,741.8272,494.8872
+native,,,proprotein_fragment_oxMet,native 114-135 (pre-CPE) +1ox(Met),MDELYPMEPEEEANGSEILA,20,False,1,Met oxidation artefact,2281.9606,2282.9679,1141.9876,761.6608
+native,,,proprotein_fragment_oxMet,native 114-135 (pre-CPE) +2ox(Met),MDELYPMEPEEEANGSEILA,20,False,2,Met oxidation artefact,2297.9556,2298.9628,1149.9851,766.9925
+native,,,proprotein_fragment_oxMet,native 237-260 (pre-CPE) +1ox(Met),FAEALPSDEEGESYSKEVPEME,22,False,1,Met oxidation artefact,2488.0475,2489.0548,1245.031,830.3565
+native,,,proprotein_fragment_oxMet,native 25-99 (pre-CPE) +1ox(Met),ECSQDCATCSYRLVRPADINFLACVMECEGKLPSLKIWETCKELLQLSKPELPQDGTSTLRENSKPEESHLLA,73,False,1,Met oxidation artefact,8208.9747,8209.982,4105.4946,2737.3322
+native,,,PAM_product,"Adrenorphin/metorphamide (amidated, PAM product)",YGGFMRRV,8,True,0,"PAM two-step amidation (-Gly, +NH2; -58.00548 Da from Gly-extended)",983.5123,984.5196,492.7634,328.8447

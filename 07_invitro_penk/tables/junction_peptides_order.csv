@@ -1,0 +1,25 @@
+peptide_id,construct,cassette,cut_after,tier,peptide,length,MW_monoisotopic_MH,MW_average,pool,quantity,purity_spec,format,solubility_note
+E119,engPENK,2,119,T2_dibasic_slow,GFEVVGKKMDELYPME,16,1871.8918,1873.1768,1,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","acidic peptide - dissolve in water, adjust pH with dilute NH4OH"
+E278,engPENK,7,278,T1_canonical,EVPEMEKRYGGFEVVG,16,1825.8789,1827.0456,1,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","acidic peptide - dissolve in water, adjust pH with dilute NH4OH"
+N142,native,3,142,T2_dibasic_slow,RYGGFMKKDAEEDDSL,16,1860.8433,1862.0052,1,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","acidic peptide - dissolve in water, adjust pH with dilute NH4OH"
+N229,native,6,229,T1_canonical,WWMDYQKRYGGFLKRF,16,2181.0851,2182.53,1,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","basic peptide - dissolve in water, dilute acetic acid if needed"
+E151,engPENK,3,151,T2_dibasic_slow,GFEVVGKKDAEEDDSL,16,1737.8178,1738.8263,2,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","acidic peptide - dissolve in water, adjust pH with dilute NH4OH"
+E221,engPENK,5,221,T1_canonical,EAKELQKRYGGFEVVG,16,1809.9494,1811.0266,2,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+N185,native,4,185,T1_canonical,NEEEVSKRYGGFMRGL,16,1871.9069,1873.0775,2,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+N195,native,4,195,T1_canonical,GFMRGLKRSPQLEDEA,16,1833.9276,1835.0725,2,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+E244,engPENK,6,244,T1_canonical,WWMDYQKRYGGFEVVG,16,2020.9374,2022.2676,3,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+N209,native,5,209,T1_canonical,EAKELQKRYGGFMRRV,16,1968.0596,1969.2976,3,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","basic peptide - dissolve in water, dilute acetic acid if needed"
+N216,native,5,216,T1_canonical,RYGGFMRRVGRPEWWM,16,2084.0218,2085.4424,3,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","basic peptide - dissolve in water, dilute acetic acid if needed"
+E141,engPENK,3,141,T1_canonical,GSEILAKRYGGFEVVG,16,1681.8908,1682.8971,4,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+N236,native,6,236,T1_canonical,RYGGFLKRFAEALPSD,16,1826.9548,1828.0587,4,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+N260,native,7,260,T1_canonical,EVPEMEKRYGGFMRF,15,1875.888,1877.1736,4,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+E099,engPENK,1,99,T1_canonical,ESHLLAKRYGGFEVVG,16,1761.9282,1762.9852,5,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+E231,engPENK,5,231,T1_canonical,GFEVVGRRVGRPEWWM,16,1960.9963,1962.2636,5,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+N135,native,3,135,T1_canonical,GSEILAKRYGGFMKKD,16,1799.9473,1801.0977,5,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","basic peptide - dissolve in water, dilute acetic acid if needed"
+E109,engPENK,1,109,T1_canonical,GFEVVGKRYGGFEVVG,16,1699.8802,1700.9141,6,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+E207,engPENK,4,207,T1_canonical,VVGRGLKRSPQLEDEA,16,1753.9555,1754.9648,6,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+N099,native,1,99,T1_canonical,ESHLLAKRYGGFMKRY,16,1956.0272,1957.2852,6,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","basic peptide - dissolve in water, dilute acetic acid if needed"
+N106,native,1,106,T1_canonical,RYGGFMKRYGGFMKKM,16,1956.9757,1958.402,6,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","basic peptide - dissolve in water, dilute acetic acid if needed"
+E194,engPENK,4,194,T1_canonical,NEEEVSKRYGGFEVVG,16,1798.8606,1799.9144,7,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term","acidic peptide - dissolve in water, adjust pH with dilute NH4OH"
+E254,engPENK,6,254,T1_canonical,GFEVVGKRFAEALPSD,16,1721.8857,1722.918,7,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN
+N113,native,2,113,T2_dibasic_slow,RYGGFMKKMDELYPME,16,1994.9173,1996.3557,7,1 mg,>95% (HPLC),"lyophilised, free acid C-term, free amine N-term",dissolve in water or 10% MeCN

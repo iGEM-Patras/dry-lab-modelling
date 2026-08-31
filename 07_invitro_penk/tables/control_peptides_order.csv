@@ -1,0 +1,9 @@
+peptide_id,role,peptide,note,MW_monoisotopic_MH,quantity,purity_spec
+STD-MENK,Reference standard / native positive control,YGGFM,"Met-enkephalin; final native product of cassettes 1,2,3,5,7",574.233,0.5 mg (5 mg for STD-MENK),>95% (HPLC)
+STD-LENK,Reference standard,YGGFL,Leu-enkephalin; final native product of cassette 6,556.2766,0.5 mg (5 mg for STD-MENK),>95% (HPLC)
+STD-ENGC,Reference standard / engineered product,YGGFEVVG,"engPENK cassette product, Gly-extended -> PAM substrate",827.3934,0.5 mg (5 mg for STD-MENK),>95% (HPLC)
+STD-ENGA,Reference standard / PAM product,YGGFEVV,AMIDATED (C-terminal NH2). PAM product of YGGFEVVG. Order explicitly as the amide,769.3879,0.5 mg (5 mg for STD-MENK),>95% (HPLC)
+STD-ADR,Reference standard,YGGFMRRV,Adrenorphin/metorphamide; order as C-terminal AMIDE (YGGFMRRV-NH2),984.5196,0.5 mg (5 mg for STD-MENK),>95% (HPLC)
+STD-CPE,CPE substrate control,YGGFMKR,CPE should trim to YGGFM; tests CPE activity independently of the endoproteases,858.4291,0.5 mg (5 mg for STD-MENK),>95% (HPLC)
+STD-PCF,PC fluorogenic reference substrate,pGlu-RTKR-AMC,"pGlu-Arg-Thr-Lys-Arg-AMC, the standard PC1/3 and PC2 substrate used in Yoon2022; buy from vendor catalogue",,0.5 mg (5 mg for STD-MENK),>95% (HPLC)
+STD-CTL,Cathepsin L/V fluorogenic reference,Z-FR-AMC,"Z-Phe-Arg-AMC, standard cathepsin substrate used in Yoon2022; buy from vendor catalogue",,0.5 mg (5 mg for STD-MENK),>95% (HPLC)

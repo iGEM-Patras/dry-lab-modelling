@@ -1,0 +1,33 @@
+construct,cut_after,motif,kind,P6_P1,P1p_P6p,tier,cassette,predicted_enzyme
+native,3,R,monobasic_licensed,MAR,FLTLCT,T3_monobasic_licensed,,PC2 / furin-like; requires P4 or P6 basic
+native,39,R,monobasic_licensed,SYRLVR,PADINF,T3_monobasic_licensed,,PC2 / furin-like; requires P4 or P6 basic
+native,60,K,monobasic_licensed,KLPSLK,IWETCK,T3_monobasic_licensed,,PC2 / furin-like; requires P4 or P6 basic
+native,99,KR,dibasic,HLLAKR,YGGFMK,T1_canonical,1,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+native,106,KR,dibasic,GGFMKR,YGGFMK,T1_canonical,1,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+native,113,KK,dibasic,GGFMKK,MDELYP,T2_dibasic_slow,2,PC2 preferentially; KK is a slower pair
+native,135,KR,dibasic,EILAKR,YGGFMK,T1_canonical,3,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+native,142,KK,dibasic,GGFMKK,DAEEDD,T2_dibasic_slow,3,PC2 preferentially; KK is a slower pair
+native,185,KR,dibasic,EEVSKR,YGGFMR,T1_canonical,4,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+native,195,KR,dibasic,MRGLKR,SPQLED,T1_canonical,4,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+native,209,KR,dibasic,KELQKR,YGGFMR,T1_canonical,5,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+native,216,RR,dibasic,GGFMRR,VGRPEW,T1_canonical,5,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+native,219,R,monobasic_licensed,MRRVGR,PEWWMD,T3_monobasic_licensed,5,PC2 / furin-like; requires P4 or P6 basic
+native,229,KR,dibasic,MDYQKR,YGGFLK,T1_canonical,6,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+native,236,KR,dibasic,GGFLKR,FAEALP,T1_canonical,6,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+native,260,KR,dibasic,PEMEKR,YGGFMR,T1_canonical,7,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,3,R,monobasic_licensed,MAR,FLTLCT,T3_monobasic_licensed,,PC2 / furin-like; requires P4 or P6 basic
+engPENK,39,R,monobasic_licensed,SYRLVR,PADINF,T3_monobasic_licensed,,PC2 / furin-like; requires P4 or P6 basic
+engPENK,60,K,monobasic_licensed,KLPSLK,IWETCK,T3_monobasic_licensed,,PC2 / furin-like; requires P4 or P6 basic
+engPENK,99,KR,dibasic,HLLAKR,YGGFEV,T1_canonical,1,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,109,KR,dibasic,EVVGKR,YGGFEV,T1_canonical,1,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,119,KK,dibasic,EVVGKK,MDELYP,T2_dibasic_slow,2,PC2 preferentially; KK is a slower pair
+engPENK,141,KR,dibasic,EILAKR,YGGFEV,T1_canonical,3,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,151,KK,dibasic,EVVGKK,DAEEDD,T2_dibasic_slow,3,PC2 preferentially; KK is a slower pair
+engPENK,194,KR,dibasic,EEVSKR,YGGFEV,T1_canonical,4,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,207,KR,dibasic,GRGLKR,SPQLED,T1_canonical,4,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,221,KR,dibasic,KELQKR,YGGFEV,T1_canonical,5,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,231,RR,dibasic,EVVGRR,VGRPEW,T1_canonical,5,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,234,R,monobasic_licensed,GRRVGR,PEWWMD,T3_monobasic_licensed,5,PC2 / furin-like; requires P4 or P6 basic
+engPENK,244,KR,dibasic,MDYQKR,YGGFEV,T1_canonical,6,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,254,KR,dibasic,EVVGKR,FAEALP,T1_canonical,6,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)
+engPENK,278,KR,dibasic,PEMEKR,YGGFEV,T1_canonical,7,PC1/3 + PC2 (PC2 favours KR at enkephalin flanks)

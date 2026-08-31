@@ -1,0 +1,8 @@
+pool,n_peptides,isotope_warnings
+1,4,none
+2,4,none
+3,3,none
+4,3,none
+5,3,none
+6,4,1956.0272 M+1 overlaps 1956.9757 (isotope deconvolution required)
+7,3,none

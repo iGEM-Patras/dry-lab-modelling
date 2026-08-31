@@ -1,0 +1,15 @@
+construct,cassette,core,dibasic,PC_P2,PC_P1,PC_P1p,CTSL_P2,CTSL_P1,CTSL_P1p,CTSL_P2_hydrophobic,CTSL_P1_hydrophobic,P2_in_Yoon_preferred
+native,1,YGGFM,KR,K,R,Y,F,M,K,True,True,True
+native,2,YGGFM,KK,K,K,M,F,M,K,True,True,True
+native,3,YGGFM,KK,K,K,D,F,M,K,True,True,True
+native,4,YGGFM,R,M,R,G,F,M,R,True,True,True
+native,5,YGGFM,RR,R,R,V,F,M,R,True,True,True
+native,6,YGGFL,KR,K,R,F,F,L,K,True,True,True
+native,7,YGGFM,R,M,R,F,F,M,R,True,True,True
+engPENK,1,YGGFEVVG,KR,K,R,Y,V,G,K,True,False,False
+engPENK,2,YGGFEVVG,KK,K,K,M,V,G,K,True,False,False
+engPENK,3,YGGFEVVG,KK,K,K,D,V,G,K,True,False,False
+engPENK,4,YGGFEVVG,R,G,R,G,V,G,R,True,False,False
+engPENK,5,YGGFEVVG,RR,R,R,V,V,G,R,True,False,False
+engPENK,6,YGGFEVVG,KR,K,R,F,V,G,K,True,False,False
+engPENK,7,YGGFEVVG,R,G,R,F,V,G,R,True,False,False
