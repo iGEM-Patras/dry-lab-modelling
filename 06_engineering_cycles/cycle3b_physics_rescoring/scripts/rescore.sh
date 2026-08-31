@@ -57,23 +57,105 @@ for f in prod.xtc prod.tpr system.top index.ndx pepmeta.txt; do
   [ -s "$f" ] || { echo "FAIL: $RUN/$f missing or empty"; exit 2; }
 done
 
-# ---- last 10 ns only (design: equilibration discarded) -----------------------
-# Production is 15 ns; keep t >= 5000 ps. Do not assume frame counts -- read them.
+# ---- frame selection ----------------------------------------------------------
+# Two modes.
+#
+#   default (BOUND_MODE unset): last 10 ns, 100 evenly spaced snapshots.
+#
+#   BOUND_MODE=1: select only frames in which the peptide is genuinely IN THE POCKET,
+#     drawn from the WHOLE trajectory, then subsample 100 of them. This exists because
+#     9 of 40 replicates were refused by the membrane gate below -- the peptide leaves
+#     the site and touches the bilayer during the last-10ns window. An energy averaged
+#     over frames where the ligand has left the pocket is not a binding energy under any
+#     solvation model, so the refusal was correct; but the frames where it IS bound still
+#     carry the information we want.
+#
+#     gmx_MMPBSA 1.5.0.3 registers memopt/mthick/mctrdz on the &pb namelist ONLY, so there
+#     is no implicit-membrane GB. Rescoring the escaped runs in PB would put them on a
+#     different energy scale from the GB results for every other arm, and a delta/mu
+#     comparison mixing the two is meaningless. Conditional-GB keeps all 40 commensurable.
+#     See docs/MEMBRANE_RESCORING_OPTIONS.md.
+#
+#     A conditional energy MUST be reported with the residency fraction. It answers
+#     "how tight is the bound pose while it exists", not "how strong is the binding".
 TEND=$($GMX check -f prod.xtc 2>&1 | awk '/Last frame/{print $NF}')
 [ -n "$TEND" ] || { echo "FAIL: could not read trajectory end time"; exit 2; }
-TBEGIN=$(python3 -c "print(max(0.0, float('$TEND') - 10000.0))")
-echo "trajectory ends $TEND ps; rescoring window ${TBEGIN}-${TEND} ps (last 10 ns)"
 
-# 100 evenly spaced snapshots across that window
-DT=$(python3 -c "print(round((float('$TEND')-float('$TBEGIN'))/100.0, 4))")
-echo System | $GMX trjconv -f prod.xtc -s prod.tpr -n index.ndx \
-    -b "$TBEGIN" -e "$TEND" -dt "$DT" -pbc mol -o rescore_window.xtc >/dev/null 2>&1
+if [ "${BOUND_MODE:-0}" = "1" ]; then
+  MEMB_CUT=${MEMB_CUT:-0.4}
+  RMSD_CUT=${RMSD_CUT:-0.52}
+  MEMB_XVG=$W/frameclass/${TAG}_r${REP}_memb.xvg
+  RMSD_XVG=$W/frameclass/${TAG}_r${REP}_ligrmsd.xvg
+  for f in "$MEMB_XVG" "$RMSD_XVG"; do
+    [ -s "$f" ] || { echo "FAIL: missing $f -- run classify_frames.sbatch first"; exit 2; }
+  done
+
+  "$PY" - "$MEMB_XVG" "$RMSD_XVG" "$MEMB_CUT" "$RMSD_CUT" > .bound_frames.ndx <<'PYEOF'
+import sys
+mp, rp, mc, rc = sys.argv[1], sys.argv[2], float(sys.argv[3]), float(sys.argv[4])
+def rd(p):
+    o = []
+    for ln in open(p):
+        if ln.startswith(("#", "@")):
+            continue
+        f = ln.split()
+        if len(f) >= 2:
+            o.append((float(f[0]), float(f[1])))
+    return o
+m, r = rd(mp), rd(rp)
+n = min(len(m), len(r))
+if n == 0:
+    sys.exit("FAIL: empty per-frame series")
+# The AND is only meaningful if both series share a time base -- verify, do not assume.
+# Tolerance is half a frame interval: that is tight enough to catch a genuine off-by-one
+# or a different stride, while ignoring the last-digit differences the two .xvg writers
+# produce for the same time (e.g. 14.800000 vs 14.800001).
+dt = (m[-1][0] - m[0][0]) / max(1, n - 1)
+tol = max(0.5 * abs(dt), 1e-4)
+for i in range(0, n, max(1, n // 50)):
+    if abs(m[i][0] - r[i][0]) > tol:
+        sys.exit("FAIL: memb/rmsd series time bases differ at index %d (%.6f vs %.6f, "
+                 "tolerance %.6f) -- different stride or frame offset"
+                 % (i, m[i][0], r[i][0], tol))
+idx = [i for i in range(n) if m[i][1] > mc and r[i][1] <= rc]
+if not idx:
+    sys.exit("FAIL: no bound frames under memb>%g nm and rmsd<=%g nm" % (mc, rc))
+k = max(1, len(idx) // 100)
+sel = idx[::k][:100]
+sys.stderr.write("bound frames %d of %d (%.1f%%), subsampled to %d\n"
+                 % (len(idx), n, 100.0 * len(idx) / n, len(sel)))
+# trjconv -fr wants an INDEX FILE of frame NUMBERS, and that numbering is ONE-BASED:
+# verified 2026-08-31 -- emitting the 0-based index 56 extracted t=550 ps, i.e. the 56th
+# frame (0-based 55), not t=560 ps. Emitting i+1 is therefore required. The extracted
+# times are cross-checked against .bound_times.txt after extraction, so a future change
+# to this convention fails loudly instead of silently scoring the wrong frames.
+with open(".bound_times.txt", "w") as fh:
+    fh.write("\n".join("%.6f" % (m[i][0] * 1000.0) for i in sel) + "\n")
+print("[ frames ]")
+print("\n".join(str(i + 1) for i in sel))
+PYEOF
+  [ -s .bound_frames.ndx ] || { echo "FAIL: bound-frame selection produced nothing"; exit 2; }
+  NSEL=$(grep -cv '^\[' .bound_frames.ndx)
+  echo "BOUND_MODE: $NSEL frames selected (memb>${MEMB_CUT} nm, ligand RMSD<=${RMSD_CUT} nm)"
+
+  echo System | $GMX trjconv -f prod.xtc -s prod.tpr -n index.ndx \
+      -fr .bound_frames.ndx -pbc mol -o rescore_window.xtc >/dev/null 2>&1 \
+      || { echo "FAIL: trjconv could not extract the selected bound frames"; exit 2; }
+  # chirality checkpoints must sample the frames actually being scored
+  TBEGIN=$(head -1 .bound_times.txt)
+else
+  TBEGIN=$(python3 -c "print(max(0.0, float('$TEND') - 10000.0))")
+  echo "trajectory ends $TEND ps; rescoring window ${TBEGIN}-${TEND} ps (last 10 ns)"
+  DT=$(python3 -c "print(round((float('$TEND')-float('$TBEGIN'))/100.0, 4))")
+  echo System | $GMX trjconv -f prod.xtc -s prod.tpr -n index.ndx \
+      -b "$TBEGIN" -e "$TEND" -dt "$DT" -pbc mol -o rescore_window.xtc >/dev/null 2>&1
+fi
 
 NFR=$($GMX check -f rescore_window.xtc 2>&1 | awk '/^Step/{print $2}')
 echo "frames extracted: ${NFR:-unknown}"
 if [ -n "${NFR:-}" ] && [ "$NFR" -lt 90 ]; then
-  echo "FAIL: only $NFR frames in the last-10ns window; expected ~100."
-  echo "      A short/crashed production run must not be silently rescored on fewer frames."
+  echo "FAIL: only $NFR frames extracted; expected ~100."
+  echo "      A short/crashed run, or too few bound frames, must not be silently rescored."
   exit 2
 fi
 
@@ -107,9 +189,23 @@ echo "index groups: Receptor=$GREC Ligand=$GLIG"
 load_peptide_spec "$TAG" || { echo "FAIL: refusing to rescore $TAG with unknown chemistry"; exit 2; }
 DRES="$SPEC_DRES"
 if [ "$DRES" != "none" ]; then
-  for FR in 0 25 50 75 100; do
+  # Checkpoints must land INSIDE the extracted window. In bound mode the window is a
+  # scattered subset of the trajectory, so interpolating TBEGIN..TEND would -dump times
+  # that are absent; take the actual selected times instead.
+  if [ "${BOUND_MODE:-0}" = "1" ]; then
+    CHK_TIMES=$(awk 'NR==FNR{a[NR]=$1; n=NR; next} END{
+        for (i=0; i<=4; i++) { k=int(i*(n-1)/4)+1; print a[k] } }' \
+        .bound_times.txt .bound_times.txt)
+  else
+    CHK_TIMES=$(for FR in 0 25 50 75 100; do
+        python3 -c "print(float('$TBEGIN') + ($FR/100.0)*(float('$TEND')-float('$TBEGIN')))"
+      done)
+  fi
+  FR=0
+  for T in $CHK_TIMES; do
+    FR=$((FR+25))
     echo Ligand | $GMX trjconv -f rescore_window.xtc -s prod.tpr -n mmgbsa.ndx \
-        -dump "$(python3 -c "print(float('$TBEGIN') + ($FR/100.0)*(float('$TEND')-float('$TBEGIN')))")" \
+        -dump "$T" \
         -o "chk_${FR}.pdb" >/dev/null 2>&1
     [ -s "chk_${FR}.pdb" ] || { echo "FAIL: could not extract peptide at ${FR}% of window"; exit 2; }
     "$PY" "$W/scripts/chirality.py" assert "chk_${FR}.pdb" "$DRES" --by-position \
@@ -129,13 +225,50 @@ fi
 # Implicit-solvent GB has no lipid phase, so keeping the bilayer would have it modelled
 # as water anyway. Reducing the topology to the solute is only defensible while the
 # peptide does not touch lipid -- so that is MEASURED here, per run, not assumed.
+#
+# In BOUND_MODE the contact measurement is made on rescore_window.xtc -- the frames
+# actually being scored -- rather than on a time range of prod.xtc. Selection already
+# excludes contacting frames, so this becomes a VERIFICATION of the selection rather
+# than a filter: if it ever trips in bound mode, the selection logic is wrong.
 { cat index.ndx; echo; sed -n '/^\[ *Ligand *\]/,$p' mmgbsa.ndx; } > .contact.ndx
-"$GMX" mindist -f prod.xtc -s prod.tpr -n .contact.ndx -b "$TBEGIN" \
+if [ "${BOUND_MODE:-0}" = "1" ]; then
+  CONTACT_SRC=rescore_window.xtc
+  CONTACT_B=""
+else
+  CONTACT_SRC=prod.xtc
+  CONTACT_B="-b $TBEGIN"
+fi
+# shellcheck disable=SC2086
+"$GMX" mindist -f "$CONTACT_SRC" -s prod.tpr -n .contact.ndx $CONTACT_B \
     -od .mindist.xvg -on .numcont.xvg -d 0.4 -group >/dev/null 2>&1 <<'SEL'
 Ligand
 MEMB
 SEL
 [ -s .mindist.xvg ] || { echo "FAIL: could not measure ligand-membrane distance"; exit 2; }
+
+# In bound mode, .mindist.xvg was measured on the extracted window, so its time column IS
+# the list of frames actually being scored. Compare it against the times we intended to
+# select: this catches a frame-indexing error directly, instead of inferring it from a
+# downstream contact count. (trjconv -fr is 1-based; an off-by-one here silently scores
+# neighbouring frames, which is exactly the failure this check exists to surface.)
+if [ "${BOUND_MODE:-0}" = "1" ]; then
+  "$PY" - .mindist.xvg .bound_times.txt <<'PYEOF' || exit 6
+import sys
+got = [float(l.split()[0]) for l in open(sys.argv[1])
+       if not l.startswith(("#", "@")) and l.split()]
+want = [float(l) for l in open(sys.argv[2]) if l.strip()]
+if len(got) != len(want):
+    sys.exit("FAIL: window has %d frames but %d were selected" % (len(got), len(want)))
+bad = [(i, w, g) for i, (w, g) in enumerate(zip(want, got)) if abs(w - g) > 1.0]
+if bad:
+    i, w, g = bad[0]
+    sys.exit("FAIL: extracted frame times do not match the selection -- %d of %d differ; "
+             "first at position %d (wanted %.3f ps, got %.3f ps). trjconv -fr indexing "
+             "is wrong; the scored frames are NOT the bound frames."
+             % (len(bad), len(want), i, w, g))
+print("  frame selection verified: %d extracted times match the bound set" % len(got))
+PYEOF
+fi
 
 read -r MINDIST MEANDIST NFRD <<EOF
 $(grep -v '^[#@]' .mindist.xvg | awk '{s+=$2; if(m==""||$2<m)m=$2; n++} END{printf "%.3f %.3f %d", m, s/n, n}')
@@ -150,10 +283,17 @@ echo "  ligand-membrane: min ${MINDIST} nm, mean ${MEANDIST} nm over ${NFRD} fra
 } > mindist_ligand_memb.txt
 
 if [ "$(python3 -c "print(1 if $CPCT > 1.0 else 0)")" = "1" ]; then
+  if [ "${BOUND_MODE:-0}" = "1" ]; then
+    echo "FAIL: bound-frame selection kept ${CPCT}% contacting frames -- selection is broken."
+    echo "      Frames were chosen with min-distance > ${MEMB_CUT} nm, so this must not happen."
+    echo "      Do NOT relax this check; fix the selection."
+    exit 5
+  fi
   echo "FAIL: the peptide contacts the bilayer in ${CPCT}% of frames (min ${MINDIST} nm)."
   echo "      Reducing the topology to the solute would then discard interactions that do"
   echo "      NOT cancel between complex and free receptor. Rescoring refused for this run;"
   echo "      it needs a membrane-aware model (ipb/memopt), not a stripped topology."
+  echo "      Conditional bound-state scoring is available: rerun with BOUND_MODE=1."
   exit 4
 fi
 
@@ -175,5 +315,10 @@ cp "$W/scripts/mmgbsa.in" ./mmgbsa.in
 # corrupt lines. The array sets STAGE1_CSV per task; merged afterwards.
 OUT="${STAGE1_CSV:-$W/results_stage1.csv}"
 "$PY" "$W/scripts/collect_dg.py" "${TAG}_r${REP}_FINAL.dat" "$TAG" "$REP" >> "$OUT"
-echo "RESCORE_OK $TAG rep$REP"
+# Record which frame definition produced this number. A conditional bound-state energy
+# and a last-10ns energy are NOT on the same footing and must never be pooled silently.
+{ echo "# $TAG rep$REP mode=${BOUND_MODE:+bound}${BOUND_MODE:-full10ns} frames=${NFR}"
+  [ "${BOUND_MODE:-0}" = "1" ] && echo "# bound_selection memb_cut=${MEMB_CUT} rmsd_cut=${RMSD_CUT} n_bound_total=${NSEL}"
+} > rescore_mode.txt
+echo "RESCORE_OK $TAG rep$REP mode=${BOUND_MODE:+bound}${BOUND_MODE:-full10ns}"
 tail -3 "$OUT"
