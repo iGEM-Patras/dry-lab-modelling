@@ -149,6 +149,74 @@ report the units used.
 
 ---
 
+---
+
+## 2A. Materials — what to order
+
+Enzymes, in the exact form the source used [Yoon2022]. Catalogue numbers are the ones
+cited in the paper; verify availability before ordering.
+
+| item | source in [Yoon2022] | cat. no. | notes |
+|---|---|---|---|
+| Human recombinant cathepsin L | R&D Systems | #952-CY-010 | no preactivation needed |
+| Human recombinant cathepsin V | R&D Systems | #1080-CY-010 | **requires preactivation** (§2.3) |
+| Human recombinant PC1/3 | R&D Systems | #2810-SE-010 | |
+| Human recombinant PC2 | R&D Systems | #6018-SE-010 | must be 7B2-matured — confirm with vendor |
+| Cathepsin H | R&D Systems | — | only for the coupled AMC assay (§2B) |
+| CPE, PAM, furin | not used in [Yoon2022] | — | source separately; conditions in §2.4-2.6 are [UniProt]-derived |
+
+Fluorogenic substrates for activity normalisation:
+
+| substrate | supplier in [Yoon2022] | used for |
+|---|---|---|
+| Z-Phe-Arg-AMC | Bachem | cathepsin L and V titration |
+| pERTKR-AMC (pGlu-Arg-Thr-Lys-Arg-AMC) | R&D Systems | PC1/3 and PC2 titration |
+| Z-Tyr-Lys-Arg-AMC | GenScript | cross-enzyme specific-activity comparison |
+| Z-Leu/Trp/Phe/Tyr/Val/Gly/Ala-Lys-Arg-AMC | GenScript | **P2 preference series — see §2B** |
+
+Reagents: octyl-β-glucopyranoside (Sigma-Aldrich), DTT (Promega), urea (Teknova),
+acetonitrile and TFA (Fisher Chemical), C18 SPE stage-tips (3M), BEH C18 packing
+(Waters), DMSO, BSA, MES, GEMSA (CPE inhibitor), ascorbate, CuSO₄, catalase.
+
+Instrumentation used in the source: **Dionex UltiMate 3000 nano LC + Orbitrap Q-Exactive**
+(Thermo Fisher); 75 µm ID × 25 cm BEH C18 (1.7 µm) at 65 °C, 0.3 µL/min, 60 min 5-30% B
+then 15 min 30-85% B (B = 100% ACN in 0.1% TFA; A = 0.1% TFA in water). MS1 at 70,000
+resolution over m/z 250-1500; MS2 at 17,500, HCD NCE 30 [verbatim Yoon2022]. Any
+comparable nano-LC-Orbitrap will do; these are the settings the reference conditions were
+established on.
+
+---
+
+## 2B. Activity normalisation — do this before the real experiment
+
+Section 2's "CRITICAL" note says to normalise by activity, not mass. This is how.
+
+1. **Titrate each enzyme against its fluorogenic substrate** — Z-Phe-Arg-AMC for the
+   cathepsins, pERTKR-AMC for PC1/3 and PC2 — in that enzyme's own buffer (§2.1-2.3),
+   37 °C, monitoring AMC at **ex 360 / em 460 nm**.
+2. Take the initial linear rate. Define **1 unit = 1 pmol AMC released per minute** at
+   37 °C under those conditions, and record it; the absolute definition matters less than
+   using the same one for every arm.
+3. **Load equal units, not equal ng**, into the PENK reactions. As a sanity anchor, the
+   source's own MSP-MS loadings were cathepsin L 0.04, cathepsin V 0.16, PC1/3 3.6, and
+   PC2 5.4 ng/µL — a ~135-fold mass spread that reflects exactly this normalisation.
+4. **Optional but recommended — run the P2 series directly.** The central prediction of
+   this study is a P2 effect, and it can be tested on pure chemistry before any PENK
+   substrate is consumed: assay cathepsin L against Z-**F**-KR-AMC (the native P2) versus
+   Z-**V**-KR-AMC (the engineered P2), with Z-**L**-KR-AMC and Z-**Y**-KR-AMC as
+   preferred-set positives and Z-**G**-KR-AMC / Z-**A**-KR-AMC as poor-P2 negatives.
+   In [Yoon2022] cathepsin L was most active on Z-L-KR-AMC, Z-F-KR-AMC, and Z-Y-KR-AMC.
+   The Phe-vs-Val rate ratio measured here is the cleanest possible statement of the
+   predicted defect, uncontaminated by folding or accessibility.
+   Note the cathepsins need a **coupled assay with cathepsin H** to liberate AMC from
+   Z-Xaa-Lys-Arg-AMC (add cathepsin H at 0.5 ng/µL in 50 mM MES to bring pH to 6.5, then
+   30 min at 37 °C); PC1/3 and PC2 give the same result with or without it [Yoon2022].
+   Fluorogenic assay buffer for the cathepsins: 5 mM citrate-phosphate pH 5.5, 4 mM DTT,
+   1 mM EDTA, 50 mM NaCl, 1% DMSO, 60 µM substrate, plus 0.001% BSA for cathepsin L;
+   for PC1/3 and PC2: 5 mM Na-acetate pH 5.5, 5 mM CaCl₂, 50 mM NaCl [verbatim Yoon2022].
+
+---
+
 ## 3. Buffer incompatibilities — read before combining enzymes
 
 These cannot all go in one tube:
@@ -175,8 +243,11 @@ These cannot all go in one tube:
 3. Remove the **t = 0 aliquot before adding enzyme.**
 4. Add enzyme; start timer.
 5. Sample at **0, 15, 30, 60, 120 min** (the published assay reads 30 and 60 min).
-6. **Quench: add aliquot to 8 M urea (≈6.4 M final), vortex, store at −70 °C** [verbatim Yoon2022].
-7. Desalt by C18 SPE; LC-MS/MS.
+6. **Quench: transfer a 10 µL aliquot into 60 µL of 8 M urea, vortex, store at −70 °C**
+   [verbatim Yoon2022]. This gives **6.86 M urea final** in 70 µL.
+7. Acidify with 40 µL 1% TFA; desalt on C18 SPE stage-tips, eluting sequentially with 50%
+   then 80% ACN in 0.1% TFA; dry in a SpeedVac; store at −70 °C [verbatim Yoon2022].
+8. Resuspend in 40 µL 0.1% TFA for LC-MS/MS.
 
 ### Stage 2 — full-length proprotein (confirm in context)
 
