@@ -1,0 +1,56 @@
+{
+  "verdict": "FAIL",
+  "reason": "a control has < 2 usable replicates; SEM undefined",
+  "per_control": {
+    "deltorphin_II": {
+      "n": 1,
+      "mean": 12.060000000000002,
+      "sd": NaN,
+      "sem": NaN,
+      "experimental": 5.39,
+      "values": [
+        12.06
+      ]
+    },
+    "deltorphin_I": {
+      "n": 1,
+      "mean": 19.79,
+      "sd": NaN,
+      "sem": NaN,
+      "experimental": 5.7,
+      "values": [
+        19.79
+      ]
+    },
+    "endomorphin_1": {
+      "n": 4,
+      "mean": 0.5374999999999996,
+      "sd": 7.803129180014899,
+      "sem": 3.9015645900074496,
+      "experimental": -2.99,
+      "values": [
+        4.82,
+        -10.06,
+        -0.31,
+        7.7
+      ]
+    },
+    "met_enkephalin": {
+      "n": 5,
+      "mean": 27.634000000000004,
+      "sd": 2.8479518956611596,
+      "sem": 1.2736428070695482,
+      "experimental": 0.0,
+      "values": [
+        30.27,
+        26.94,
+        27.43,
+        30.19,
+        23.34
+      ]
+    }
+  },
+  "G1": null,
+  "G2p": null,
+  "G3": null
+}
