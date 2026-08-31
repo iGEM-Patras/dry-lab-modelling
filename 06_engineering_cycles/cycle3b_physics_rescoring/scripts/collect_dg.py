@@ -20,23 +20,65 @@ TAG2CONTROL = {
 
 
 def parse_dat(path):
+    # Return (avg, sd, sem) for the GB BINDING DELTA.
+    #
+    # WHY THIS IS FUSSY (bug found 2026-08-31 by the first real rescoring run)
+    #   gmx_MMPBSA 1.5.0.3 prints four total rows: Complex, Receptor, Ligand, and the
+    #   delta. The delta row is labelled with a UNICODE DELTA GLYPH -- U+0394 followed by
+    #   TOTAL -- while the first three are plain "TOTAL". The previous implementation
+    #   matched (?:DELTA\s+TOTAL|Delta\s+TOTAL|TOTAL) and took the LAST hit. That pattern
+    #   never matches the delta glyph, so the last hit was the LIGAND's absolute energy
+    #   (-123.33 kcal/mol) rather than dG_bind (-67.48). It passed the physical-range
+    #   guard because a ligand's absolute GB energy happens to fall inside it. That is
+    #   exactly the "plausible-looking dG" this module exists to prevent.
+    #
+    # Rules now enforced:
+    #   1. Anchor on the "Delta (Complex - Receptor - Ligand)" header, never on a total row.
+    #   2. Stop at the next block header so the search cannot stray into a later section.
+    #   3. Accept the total row with or without the leading delta glyph.
+    #   4. Require EXACTLY ONE total row in that block.
+    #   5. Cross-check that the printed components sum to the printed total.
     txt = open(path, errors="replace").read()
 
-    # Narrow to the GB delta block before matching TOTAL.
-    m = re.search(r"GENERALIZED BORN.*?(Delta\s*\(Complex\s*-\s*Receptor\s*-\s*Ligand\)|"
-                  r"DELTA\s+TOTAL|Delta TOTAL)", txt, re.S | re.I)
-    if not m:
-        raise SystemExit(f"FAIL: no GB delta block in {path}; "
-                         f"MM-GBSA may have failed while still exiting 0")
-    tail = txt[m.start():]
+    anchor = re.search(r"^Delta\s*\(\s*Complex\s*-\s*Receptor\s*-\s*Ligand\s*\)",
+                       txt, re.M | re.I)
+    if not anchor:
+        raise SystemExit("FAIL: no 'Delta (Complex - Receptor - Ligand)' block in "
+                         + path + "; MM-GBSA may have failed while still exiting 0")
+    tail = txt[anchor.end():]
 
-    rows = re.findall(r"^\s*(?:DELTA\s+TOTAL|Delta\s+TOTAL|TOTAL)\s+"
-                      r"(-?\d+\.\d+)\s+(-?\d+\.\d+)\s+(-?\d+\.\d+)",
-                      tail, re.M)
-    if not rows:
-        raise SystemExit(f"FAIL: no TOTAL row parsed from the delta block of {path}")
+    nxt = re.search(r"^(?:Complex|Receptor|Ligand|Delta)\b", tail, re.M | re.I)
+    if nxt:
+        tail = tail[:nxt.start()]
 
-    avg, sd, sem = (float(x) for x in rows[-1])
+    num = r"(-?\d+\.\d+)"
+    rows = re.findall(r"^\s*\u0394?TOTAL\s+" + num + r"\s+" + num + r"\s+" + num
+                      + r"\s+" + num + r"\s+" + num, tail, re.M)
+    if len(rows) != 1:
+        raise SystemExit("FAIL: expected exactly one total row in the delta block of "
+                         + path + ", found " + str(len(rows))
+                         + "; refusing to guess which one is dG_bind")
+
+    avg, sd_prop, sd, sem_prop, sem = (float(x) for x in rows[0])
+
+    # ---- cross-check: components must reproduce the total --------------------
+    comps = {}
+    for line in tail.splitlines():
+        m = re.match(r"^\s*\u0394?([A-Z0-9][A-Z0-9 \-]*?)\s+(-?\d+\.\d+)\s", line)
+        if m:
+            comps[m.group(1).strip()] = float(m.group(2))
+    wanted = ["BOND", "ANGLE", "DIHED", "VDWAALS", "EEL", "1-4 VDW", "1-4 EEL",
+              "EGB", "ESURF"]
+    missing = [w for w in wanted if w not in comps]
+    if missing:
+        raise SystemExit("FAIL: delta block of " + path + " is missing components "
+                         + repr(missing) + "; cannot verify the total")
+    ssum = sum(comps[w] for w in wanted)
+    if abs(ssum - avg) > 0.15:
+        raise SystemExit("FAIL: delta components sum to %.2f but the total row says %.2f "
+                         "in %s. The parse is reading the wrong row -- refusing to emit "
+                         "a number." % (ssum, avg, path))
+
     return avg, sd, sem
 
 
