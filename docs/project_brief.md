@@ -19,11 +19,27 @@ This project supports an enkephalin-based analgesic strategy built on **proenkep
 - **No commercial antibody can detect the engineered product** (§2c). The construct recodes every enkephalin core to `YGGFEVVG`; all registry anti-enkephalin antibodies are raised against native `YGGFM` and will miss it. A custom anti-`YGGFEVVG` polyclonal must be raised, and it is on the critical path.
 - **The original siRNA panel is mouse cross-reactive** (§3) and has been replaced by a human-exclusive panel. The corollary is that the exclusive guides cannot be validated in a mouse model, so a separate rodent surrogate is needed for any in-vivo work.
 
-A fifth workstream was added after the first four: **payload engineering cycles** (§5b) — three pre-registered DBTL iterations attempting to bias the expressed peptide toward the δ opioid receptor. It returned a **negative result**, and is reported here in full because the negative result is load-bearing: it defines where the computational screen stops and the wet-lab assay must begin, and it forced the retraction of an earlier selectivity number.
+A fifth workstream was added after the first four: **payload engineering cycles** (§5b) — three pre-registered DBTL iterations attempting to bias the expressed peptide toward the δ opioid receptor. It returned a **negative result**, and is reported here in full because the negative result is load-bearing: it defines where the computational screen stops and the wet-lab assay must begin, and it forced the retraction of an earlier selectivity number. The final iteration (cycle 3b, physics rescoring) **completed on 2026-08-31 and also failed its calibration gate** — MM-GBSA gets the direction of δ/μ preference right but cannot resolve its magnitude at n=5 (§5b). All computational routes to ranking these designs are now exhausted; the recommendation to run radioligand competition binding on YGGFEVVG and YGGFDIIG is final rather than provisional.
 
 **Scope note on the payload.** The four cassette plasmids carry the **native** human PENK sequence — they are the expression-system test-bed. The engineered anionic-address PENK (the therapy payload) is a separate construct: it currently exists as a **cloning-ready insert** (`engineered_PENK_GC-optimized.fasta` / `engPENK_insert_annotated.gb`), not yet assembled into an expression plasmid. It is audited here as the payload (§1) and kept out of the four-plasmid restriction QC (§2); §2b then assembles it into a therapy plasmid on the test-bed backbone with its own purpose-built QC.
 
 ---
+
+**Lipoplex targeting (§4c, added 2026-08-12).** Of the receptor pairs proposed in the project
+bibliography, `TfR + P2X3` is supported and `TfR + TRPV1` is not: P2X3 presents 70.3% of itself
+extracellularly in one 279-residue loop against TRPV1's 6.7% across four short loops. P2X3's exposed
+face is *more* conserved between human and rat (95.7%) than the protein average, so one reagent should
+serve both model and human — unlike TfR itself at 75.3%. A registry-wide screen (103 P2X3 records) then found two reagents whose published immunogen sequence
+could be verified directly against the ectodomain: **ABclonal A10232** (AB_2757757, immunogen aa 44–317,
+essentially the whole ectodomain, listed rat, human 95.6% identical there) and **Atlas HPA057776**
+(AB_2683526, aa 184–260, listed human, rat 92.2%). These supersede the earlier lead on epitope evidence —
+PA5-77682's immunogen remains undisclosed, so its epitope is vendor-asserted rather than verified.
+Neither new reagent is validated for live-cell binding, so the binding gate stands.
+
+The reagent shortlist excludes the field's
+most-cited P2X3 antibody (Alomone APR-016): its epitope maps to aa 383–397, the cytoplasmic tail.
+No marketed P2X3 antibody is validated for live-cell surface binding, so a binding test gates all
+formulation work.
 
 ## 1. Plasmid audit — four PENK cassettes
 
@@ -243,6 +259,93 @@ The two-arm concept and its dorsal-horn mechanism are shown in `therapy_delivery
 
 ---
 
+## 4c. Lipoplex surface targeting — which receptor, which antibody
+
+**Added 2026-08-12.** The project bibliography («Antibodies on the lipoplex») proposed two-level
+targeting: a blood–brain-barrier handle plus a nociceptor handle, with `TfR + P2X3` and
+`TfR + TRPV1` as the two candidate pairs. TfR and TRPV1 were already assessed
+(`antibody_assessment.md`); **P2X3, NaV1.7, NaV1.8, TRPA1 and INSR had never been assessed.**
+This section closes that gap.
+
+**Method.** For each target, reviewed UniProt entries for human/rat/mouse were resolved by
+`gene_exact` + `organism_id` — not by recalled accession; three recalled accessions were wrong and
+were caught by a length check before use. Two quantities were computed: the fraction of the protein
+annotated as extracellular (what an antibody can reach on an intact cell), and cross-species identity
+computed twice — over the whole protein and over the concatenated extracellular segments only.
+The **difference** between those two is the informative number, because a reagent is raised against
+the ectodomain, not the average protein.
+
+| Target | Role | % extracellular | Largest loop (aa) | Identity, full (h/rat) | Identity, **ectodomain** | Δ | Tier |
+|---|---|---|---|---|---|---|---|
+| TfR / TFRC | BBB crossing | 88.4% | 672 | 76.7% | 75.3% | −1.3 | B |
+| INSR | BBB crossing | 66.9% | 731 | 94.4% | **95.5%** | +1.0 | **A** |
+| **P2X3** | nociceptor | **70.3%** | **279** | 94.0% | **95.7%** | **+1.7** | **A** |
+| NaV1.7 / SCN9A | nociceptor | 16.9% | 79 | 93.1% | 90.0% | −3.1 | C |
+| NaV1.8 / SCN10A | nociceptor | 14.2% | 69 | 83.2% | 65.6% | −17.6 | C |
+| TRPV1 | nociceptor | 6.7% | 32 | 85.8% | 53.4% | −32.4 | D |
+| TRPA1 | nociceptor | 4.8% | 28 | 79.7% | 60.7% | −18.9 | D |
+
+Tiers: **A** ectodomain >50% and >90% conserved · **B** large ectodomain, species-restricted ·
+**C** limited surface · **D** not a viable antibody surface.
+
+**Result: `TfR + P2X3` is well founded; `TfR + TRPV1` is not.** P2X3 presents 70.3% of its mass
+extracellularly in a single contiguous 279-residue loop. TRPV1 presents 6.7% across four loops whose
+largest is 32 aa — a tenfold difference in available surface, independently confirming the existing
+assessment's rejection of TRPV1 as a surface handle.
+
+**The conservation result runs the other way for P2X3.** Every failing target is *less* conserved on
+its exposed face than overall (TRPV1 loses 32 points, TRPA1 19, NaV1.8 18). P2X3's ectodomain is
+*more* conserved (95.7%) than the whole protein (94.0%), so an anti-P2X3 reagent validated in rat
+should transfer to human. Note the contrast with **TfR at 75.3%**, which is precisely why anti-TfR
+clones are species-specific and non-interchangeable (§ shortlist, `antibody_assessment.md`). On this
+axis the nociceptor half of the pair is better behaved than the BBB half. **INSR** is a credible
+second BBB handle (66.9%, 95.5%) that does not inherit TfR's species restriction.
+
+### Reagent shortlist — and a reagent that must not be used
+
+The methods sections of 99 open-access P2X3 antibody papers were mined for cited RRIDs, each resolved
+against the Antibody Registry. Five genuine anti-P2X3 reagents were found. Every vendor epitope was
+checked against the P2X3 sequence; the ectodomain is **aa 44–322** of 397.
+
+| Clone | RRID | Reacts | Verdict |
+|---|---|---|---|
+| **PA5-77682** | AB_2736292 | mouse, rat | **Lead** — only reagent explicitly raised against the extracellular domain |
+| APR-016 | AB_2313760 | h/m/r | **Do not use for targeting** — epitope is cytoplasmic |
+| PA5-115707 | AB_2900342 | h/m/r | Backup — epitope undisclosed |
+| RA10109 | AB_2157931 | not stated | Caution — flow listed, whole antiserum, epitope undisclosed |
+| H68.4 | AB_2533029 | h/m/r + | Detection only — binds TfR cytoplasmic tail |
+
+> ### The most-cited P2X3 antibody cannot bind an intact cell
+> **Alomone APR-016** is the field's most-used P2X3 antibody. Its vendor epitope
+> `(C)VEKQSTDSGAYSIGH` was located in the sequence at **aa 383–397** — the C-terminal
+> **cytoplasmic** tail, outside the 44–322 ectodomain. It cannot bind a live cell and is unusable as
+> a targeting ligand, however many papers cite it; those papers use it for western blot and
+> permeabilized IHC, which is valid. Separately, the listed peptide is the **rat** sequence — human
+> P2X3 reads `AEKQSTDSGAFSIGH` at those positions (13/15 identical).
+
+### Honest limitation — this application is unprecedented
+
+PubMed: 283 papers on P2X3 as a nociceptor marker and 52 on clinical antagonists (the gefapixant
+programme), but only **9** touching live-cell surface antibody work and **13** any nanoparticle
+targeting. A further 97 open-access surface/live-cell papers were screened for any P2X3 catalogue
+number used in an unpermeabilized context: **zero hits.** The biology is established and the topology
+is favourable, but **P2X3 has never been used as a nanoparticle-targeting ligand.** That is a novelty
+claim requiring validation, not a citable precedent. TfR, by contrast, carries 324 brain-delivery
+papers.
+
+Consequences, carried into the wet-lab handout: request immunogen sequences from the vendor for both
+PA5 reagents before ordering (neither discloses one); the first experiment is a live-cell binding
+test on unpermeabilized cells with a viability gate, with a permeabilized control in parallel so that
+a negative is still informative; formulation work follows only after that gate passes. Also note P2X3
+is not exclusively neuronal — bladder urothelium and airway expression is the mechanism behind
+gefapixant's cough indication and taste side-effects, so a particle reaching systemic circulation has
+off-target tissue. And as the bibliography already notes, a nociceptor marker is not the same thing as
+a central pain compartment; whether P2X3+ peripheral terminals suit this delivery route is a separate
+question this analysis does not address.
+
+*Deliverables: `LIPOPLEX_TARGETING.md`, `lipoplex_targeting_assessment.csv`,
+`antibody_shortlist_p2x3.csv`, `lipoplex_wetlab_handout.pdf`.*
+
 ## 5. What each deliverable establishes
 
 | Workstream | Establishes | Actionable output |
@@ -309,35 +412,83 @@ Gly is the recognition signal for **peptidylglycine α-amidating monooxygenase (
 `...VVG` payload can be amidated to `...VV-NH₂` *in vivo*; the terminal Gly in every design
 is load-bearing.
 
-![δ vs μ co-folds](figures/dor_mor_fullMSA_comparison.png)
+![δ vs μ co-folds]({{artifact:art_d018e931-b760-46c6-b065-1c5c3dd83047}})
 
-### Cycle 3b — physics rescoring (in progress, Stage 1)
+### Cycle 3b — physics rescoring (COMPLETE — negative result, 2026-08-31)
 
 Because the co-fold confidence score cannot resolve δ/μ preference at the magnitude these
-designs produce, cycle 3b replaces it with a physics-based readout: explicit-solvent membrane
-MD of each peptide–receptor complex followed by MM-PBSA interaction energetics, on the same
-7 × 2 panel.
+designs produce, cycle 3b replaced it with a physics-based readout: explicit-solvent membrane
+MD of each peptide–receptor complex followed by MM-GBSA interaction energetics.
 
-Status: **Stage 1 (pipeline validation) running; Stage 2 (full panel) is not authorised** and
-will not be until a G1/G2/G3 calibration gate demonstrates the method separates a positive
-control from a negative one. A method that cannot reproduce a known answer cannot be trusted
-on an unknown one, and cycle 2's retracted number came from exactly that omission.
+**Outcome: the Stage-1 calibration gate FAILED. Stage 2 was never authorised, and per the
+pre-registration cycle 3b terminates as a negative methodological result.** The project
+recommendation is unchanged: radioligand competition binding on YGGFEVVG and YGGFDIIG.
 
-Four build-time defects were found and gated during Stage 1 validation, each of which would
-have produced a clean-looking but meaningless result:
+The gate ran on the complete panel — 4 control peptides × 2 receptors × 5 replicates = 40
+production runs, all scored:
+
+| control | computed ΔΔG (μ−δ) | SEM | experimental | 
+|---|---:|---:|---:|
+| met-enkephalin (non-selective) | +26.38 | 1.46 | 0.00 |
+| deltorphin I (δ-selective) | +15.18 | 4.95 | +5.70 |
+| deltorphin II (δ-selective) | +7.48 | 3.24 | +5.39 |
+| endomorphin-1 (μ-selective) | −0.91 | 3.32 | −2.99 |
+
+- **G1 PASS** — every sign and ranking check holds. The method gets the *direction* right:
+  both deltorphins δ-preferring, endomorphin-1 μ-preferring, deltorphins ranked above
+  endomorphin-1.
+- **G2′ FAIL** — only met-enkephalin (SEM 1.46) falls under the 1.5 kcal/mol threshold;
+  the others are 3.2–5.0.
+- **G3 FAIL** — computed-vs-experimental slope 0.594, 95% CI [−1.024, 2.213], r = 0.179.
+  The CI spans zero, so the correlation is not distinguishable from none.
+
+**Reading.** The failure is replicate scatter, not a broken pipeline: per-replicate ΔΔG within
+a single control spans 27 kcal/mol for deltorphin I. Met-enkephalin is the informative case —
+it has the *tightest* replicate agreement and is also the *most wrong* (+26.4 computed vs 0.0
+experimental). A reproducible large error is a systematic one, consistent with these being
+enthalpy-dominated effective energies with no entropy term; met-enkephalin is the smallest and
+most flexible of the four, so the missing configurational-entropy penalty should hit it hardest.
+
+**Method amendment, disclosed.** Nine of the 40 runs were initially refused by a membrane-
+proximity gate — the peptide had left the pocket and contacted the bilayer, where a
+non-membrane implicit-solvent model is invalid. Implicit-membrane GB is not available
+(`memopt`/`mthick` are `&pb`-only), and rescoring those arms in PB would place them on a
+different energy scale from the other 31. Instead **all 40 runs were recomputed** on a single
+conditional bound-state frame definition (frames with ligand–lipid distance > 0.4 nm AND
+ligand RMSD to docked pose ≤ 0.52 nm). Recomputing all 40 rather than splicing in 9 was
+deliberate: the two frame definitions are different quantities and must not be pooled. Where
+both exist, they agree to a median 1.04 kcal/mol — inside MM-GBSA's own uncertainty.
+
+**Mandatory caveat when quoting any single value.** A bound-state ΔG describes how tight the
+pose is *while it exists*, not how strong binding is. Three runs have residency < 50%
+(deltorphin II at μ: 10.7%, 13.6%). The merge tooling refuses to emit a ΔG without its
+residency fraction.
+
+**Residency is itself a reportable observable** and does not depend on the failed energy model:
+deltorphin II holds the δ pocket in 82–100% of frames but the μ pocket in as little as 10.7%.
+That is the right direction for a δ-selective peptide, and it is measured rather than modelled.
+
+Five build-time defects were found and gated during Stage 1, each of which would have produced
+a clean-looking but meaningless result:
 
 | defect | why the existing checks missed it | gate installed |
 |---|---|---|
 | receptor mis-embedded in the bilayer (tilt up to 29.4°) | the embedding tool exits 0 while leaving the protein tilted | tilt measured from receptor Cα inertia; hard-fail > 10° |
 | **wrong stereoisomer built** — D-Ala² inversion silently skipped | parametrisation reported 0 errors; an all-L analog is chemically valid, just not the intended molecule | chirality asserted post-build; per-tag chemistry read from the design table, never defaulted |
 | interface clashes < 2.1 Å surviving minimisation | minimiser reports whole-system energy over ~155k atoms; one bad contact is inside its noise | interface contact measured directly, before and after minimisation |
-| a panel-wide mis-orientation, not a one-off | only one system had been examined | pre-flight sweep across all six poses, as a mode of the production build so it cannot drift |
+| a panel-wide mis-orientation, not a one-off | only one system had been examined | pre-flight sweep across all six poses, as a mode of the production build |
+| **energy parser returned the ligand's absolute energy, not ΔG** | the wrong value (−123 kcal/mol) is physically plausible and passed the range check | parser anchored on the Δ-block header and cross-checked against the component sum |
 
-The mis-orientation proved **systematic — all six co-folded poses were affected**, so this
-gating changed the panel's inputs rather than merely catching one bad job.
+A sixth defect was caught during the bound-state recomputation: GROMACS `trjconv -fr` takes
+**1-based** frame indices, so 0-based selection scored the frame *before* each intended one —
+silently, with a plausible result. It was caught only because the membrane check had been
+repurposed from filter to *verification*: frame selection guarantees zero lipid contact, the
+re-measurement found 15%, and the run refused itself. Had that check been deleted as redundant
+once it stopped filtering, the wrong numbers would have shipped.
 
-Full state, thresholds, and the defect log are in
-`06_engineering_cycles/cycle3b_physics_rescoring/RESUME.md`.
+Full state, thresholds, defect log, and the terminal verdict are in
+`06_engineering_cycles/cycle3b_physics_rescoring/` (`GATE_VERDICT_BOUND.md`,
+`bound_results_with_residency.csv`, `bound_gate_summary.png`).
 
 Full per-cycle pre-registrations, results, and prediction scorecards are in
 `06_engineering_cycles/`.
@@ -350,7 +501,13 @@ Every tool version, force field, database accession, and published design rule i
 
 *This brief reports the final 200 ns MD results (all 9 replicates converged).*
 
-**Revision, 2026-07-31.** This edition supersedes the 2026-07-24 brief. Changes: §2c added
+**Revision, 2026-08-12.** This edition supersedes the 2026-07-31 brief. Change: **§4c added** —
+lipoplex surface-targeting assessment (P2X3, NaV1.7, NaV1.8, TRPA1, INSR, none previously assessed),
+resolving the bibliography's `TfR + P2X3` vs `TfR + TRPV1` proposals in favour of the former, with a
+reagent shortlist that excludes the field's most-cited P2X3 antibody on epitope-location grounds.
+All other sections unchanged.
+
+**Revision, 2026-07-31.** That edition superseded the 2026-07-24 brief. Changes: §2c added
 (no commercial antibody detects the engineered product — custom reagent required); §3 siRNA
 panel replaced after the original four duplexes were found cross-reactive with mouse *Mme*;
 §5b extended with cycle 3b physics-rescoring status and its four gated build defects. The
