@@ -1,0 +1,12 @@
+tissue,PCSK1,PCSK2,SCG5,CPE,PAM,CTSL,FURIN,MME,ANPEP,PENK_endogenous,convertase_competent,amidation_competent,chaperone_present,limiting_factor,ANPEP_over_MME
+Brain_Hypothalamus,22.28,8.61,146.9,379.5,50.8,36.42,14.73,0.1,1.08,21.16,True,True,True,none,10.62
+Brain_Cortex,10.96,14.31,148.68,550.18,18.56,27.89,30.09,0.21,1.56,1.35,True,True,True,none,7.45
+Pituitary,19.66,1.32,563.15,539.17,69.27,89.85,76.76,0.5,2.39,4.86,True,True,True,none,4.76
+Adrenal_Gland,0.36,0.19,0.61,59.71,78.93,83.94,32.87,0.21,8.57,0.65,False,True,False,PCSK2 absent,41.45
+Brain_Spinal_cord_cervical_c-1,0.46,1.14,126.53,177.2,11.47,52.67,13.01,0.21,0.92,2.89,False,True,True,PCSK1 absent,4.39
+Nerve_Tibial,1.07,4.97,1.36,123.91,56.68,106.36,65.22,42.94,42.31,3.13,True,True,True,none,0.99
+Cells_Cultured_fibroblasts,1.8,0.03,31.52,43.95,119.39,426.45,65.89,640.48,810.48,7.94,False,True,True,PCSK2 absent,1.27
+Skin_Sun_Exposed_Lower_leg,0.38,5.3,0.88,55.82,33.0,41.07,101.71,1.44,47.38,0.33,False,True,False,PCSK1 absent,32.95
+Muscle_Skeletal,0.06,0.05,0.14,19.49,36.24,34.23,45.2,7.76,1.5,0.21,False,True,False,PCSK2 absent,0.19
+Liver,0.04,0.05,5.38,5.74,2.69,67.07,192.92,5.81,159.81,0.02,False,True,True,PCSK2 absent,27.49
+Whole_Blood,0.01,0.01,0.15,0.62,5.2,11.66,108.07,22.18,158.98,0.06,False,True,False,PCSK2 absent,7.17

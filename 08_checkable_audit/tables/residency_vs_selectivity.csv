@@ -1,0 +1,5 @@
+peptide,residency_OPRD1_pct,residency_OPRM1_pct,delta_residency_pct,sd,n_replicates,sem,ddG_exp_kcal_mol,ddG_source
+deltorphin_I,93.04,82.64,10.4,24.083,5,10.77,5.705,"control_calibration_targets.csv; RT*ln(Ki ratio), T=300 K (verified to 1e-5)"
+deltorphin_II,75.66,57.98,17.68,44.109,5,19.726,5.39,"control_calibration_targets.csv; RT*ln(Ki ratio), T=300 K (verified to 1e-5)"
+endomorphin_1,97.42,99.98,-2.56,5.725,5,2.56,-2.987,"control_calibration_targets.csv; RT*ln(Ki ratio), T=300 K (verified to 1e-5)"
+met_enkephalin,100.0,100.0,0.0,0.0,5,0.0,0.413,"control_calibration_targets.csv; RT*ln(Ki ratio), T=300 K (verified to 1e-5)"
