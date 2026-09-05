@@ -1,0 +1,58 @@
+{
+  "version": 3,
+  "created_at": "2026-09-01T20:29:26.060Z",
+  "task_summary": "Reanalyze PENK project against the wet lab's actual plan, with immunogenicity tooling",
+  "agents": [],
+  "phases": [
+    {
+      "name": "Plan",
+      "delegations": [
+        {
+          "steps": [
+            {
+              "title": "Pin HEK293T expression and redo the competence claim",
+              "description": "The prior audit concluded on cultured fibroblasts; the wet lab uses HEK293T. Pull PCSK1, PCSK2, SCG5, PCSK1N, CPE, PAM, FURIN, MME, ANPEP expression for HEK293 from a citable cell-line source (EBI Expression Atlas cell-line experiments, HPA cell-line RNA, or a primary paper), recording accession and units for each value. Rebuild the competence table as hek293t_processing_competence.csv with a provenance column per gene. State explicitly whether the fibroblast conclusion holds, weakens, or reverses for HEK293T."
+            },
+            {
+              "title": "Resolve the PC2 paradox for their two-stage design",
+              "description": "The guide uses HEK293T both to EXPRESS PENK (steps 25-31) and then isolates PENK and adds PC1/3 externally (steps 32-35). If HEK293T lack PC2, that is a defect for the therapeutic concept but arguably a feature for the in vitro assay, since it yields unprocessed substrate. Work out which it is for each stage, and whether secreted material will be intact proPENK or partially processed. Produce a short written verdict with the supporting expression numbers."
+            },
+            {
+              "title": "Install MHC tooling and score the engineered epitope",
+              "description": "Install an MHC binding predictor (MHCflurry for class I; add a class II predictor if one is installable) into a dedicated conda env, downloading models. Score the engineered junction YGGFEVVG and its neighbourhood against common HLA alleles, with native YGGFM/YGGFL as the comparator and a known-immunogenic and known-null peptide as controls. Save immunogenicity_predictions.csv plus a figure, and state the tool version, model release, and allele panel."
+            },
+            {
+              "title": "Check the four constructs for P2A and signal-peptide risk",
+              "description": "Parse the four SnapGene .dna files and the repo's 01_plasmid_audit. For each cassette determine PENK's position relative to IRES/P2A, whether PENK retains its native signal peptide at the true N-terminus, and whether a P2A remnant lands on PENK's C-terminus (which sits next to the processing junctions). Cross-check against the known truncation defect in plasmid 1. Deliver construct_risk_table.csv naming, per plasmid, the specific risk to secretion and to processing."
+            },
+            {
+              "title": "Audit the Greek guide for hidden errors",
+              "description": "Go through ΑΝΑΛΥΣΗ ΘΕΜΑΤΟΣ line by line against references: the PC1/3 pH and Ca2+ conditions in step 33, the claim that cell counting identifies peak proenkephalin, the IRES vs P2A expression-ratio reasoning, the NEB strain naming, size-exclusion as a PENK isolation route, and the siRNA arm covering only neprilysin. Produce guide_error_audit.csv with columns: step, what it says, what is wrong or unsupported, severity, correction, reference."
+            },
+            {
+              "title": "Reconcile the two engineering-cycle numberings",
+              "description": "The guide defines cycles 1-6 (IRES vs P2A, mammalian expression, lipoplex modelling, formulation, siRNA, toxicity); the repo defines cycles 1, 2, 3a, 3b on entirely different content. Map one onto the other, identify which guide cycles have dry-lab backing and which have none, and flag any guide cycle whose stated deliverable is contradicted by a closed dry-lab result. Save cycle_reconciliation.csv."
+            },
+            {
+              "title": "Write the bilingual referenced report and figures",
+              "description": "Assemble everything into PENK_REANALYSIS.md with a full reference list carrying DOIs and access status, plus an explicit 'what the dry lab should hand the wet lab' action section answering the user's question about how to aid them. Build a figure set: HEK293T vs fibroblast vs brain competence, the immunogenicity result, and a construct risk map. Translate to PENK_REANALYSIS_EL.md with the same protected-token discipline used for the protocol, render both PDFs, cross-check every numeric claim against recomputation, and push to the repo."
+            }
+          ]
+        }
+      ],
+      "id": "phase-0"
+    }
+  ],
+  "desired_outputs": [
+    "Corrected audit re-run against HEK293T (the cells actually used), not fibroblasts",
+    "MHC binding / immunogenicity prediction for the engineered YGGFEVVG epitope, tool installed and run",
+    "Error list against the Greek wet-lab guide (ΑΝΑΛΥΣΗ ΘΕΜΑΤΟΣ), each with a reference",
+    "Construct-level check of the four plasmids for P2A remnant and signal-peptide risk",
+    "A 'what you should do to aid them' brief — dry-lab-to-wet-lab handoff actions",
+    "Greek + English versions of the final document, fully referenced with DOIs"
+  ],
+  "feasibility": {
+    "rationale": "The wet-lab guide names HEK293T, which invalidates the fibroblast basis of my last audit's central claim — that reanalysis is straightforward once a cell-line expression source is pinned (EBI Expression Atlas is reachable; HPA needs a working endpoint). MHC prediction tooling is pip-installable and the epitope is short, so immunogenicity becomes answerable rather than deferred. Main uncertainty is whether class II allele coverage is adequate in an open tool; class I is well covered. Construct checks depend on the .dna files parsing cleanly.",
+    "confidence": "medium"
+  }
+}

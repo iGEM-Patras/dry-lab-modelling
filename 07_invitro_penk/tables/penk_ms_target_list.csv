@@ -1,0 +1,26 @@
+species,sequence,c_term,mh_monoisotopic,source,n_met,is_oxidation_satellite,origin
+engPENK YGGFEVV-NH2,YGGFEVV,amide,769.3879,construct,0,False,engineered cassette
+engPENK YGGFEVVG-NH2 (opt B),YGGFEVVG,amide,826.4094,construct,0,False,engineered cassette
+engPENK YGGFEVVG acid,YGGFEVVG,free acid,827.3934,construct,0,False,engineered cassette
+engPENK YGGFEVVGRF,YGGFEVVGRF,free acid,1130.5629,construct,0,False,engineered cassette
+engPENK YGGFEVVGRGL,YGGFEVVGRGL,free acid,1153.6,construct,0,False,engineered cassette
+Leu-enkephalin,YGGFL,free acid,556.2766,endogenous PENK,0,False,core 6
+Met-enkephalin,YGGFM,free acid,574.233,endogenous PENK,1,False,"cores 1,2,3 (+core 5 after full BAM processing)"
+Met-enkephalin +1ox,YGGFM,free acid,590.2279,endogenous PENK,1,False,"cores 1,2,3 (+core 5 after full BAM processing)"
+Met-enk-Arg-Phe,YGGFMRF,free acid,877.4025,endogenous PENK,1,False,"core 7, precursor C-terminus"
+Met-enk-Arg-Phe +1ox,YGGFMRF,free acid,893.3974,endogenous PENK,1,False,"core 7, precursor C-terminus"
+Met-enk-Arg-Gly-Leu,YGGFMRGL,free acid,900.4396,endogenous PENK,1,False,"core 4, RGL flank"
+Met-enk-Arg-Gly-Leu +1ox,YGGFMRGL,free acid,916.4345,endogenous PENK,1,False,"core 4, RGL flank"
+Adrenorphin/metorphamide,YGGFMRRV,amide,984.5196,endogenous PENK,1,False,"core 5, PAM product"
+Adrenorphin/metorphamide +1ox,YGGFMRRV,amide,1000.5145,endogenous PENK,1,False,"core 5, PAM product"
+Peptide F (core1-2),YGGFMKRYGGFMKK,free acid,1669.8341,endogenous PENK,2,False,cores 1+2 unseparated
+Peptide F (core1-2) +1ox,YGGFMKRYGGFMKK,free acid,1685.829,endogenous PENK,2,False,cores 1+2 unseparated
+Peptide F (core1-2) +2ox,YGGFMKRYGGFMKK,free acid,1701.824,endogenous PENK,2,False,cores 1+2 unseparated
+BAM-8-22,VGRPEWWMDYQKRYG,free acid,1970.933,endogenous PENK,1,False,"core 5, N-trimmed (non-opioid)"
+BAM-8-22 +1ox,VGRPEWWMDYQKRYG,free acid,1986.9279,endogenous PENK,1,False,"core 5, N-trimmed (non-opioid)"
+BAM-20,YGGFMRRVGRPEWWMDYQKR,free acid,2618.2656,endogenous PENK,2,False,core 5 intermediate
+BAM-20 +1ox,YGGFMRRVGRPEWWMDYQKR,free acid,2634.2605,endogenous PENK,2,False,core 5 intermediate
+BAM-20 +2ox,YGGFMRRVGRPEWWMDYQKR,free acid,2650.2554,endogenous PENK,2,False,core 5 intermediate
+BAM-22,YGGFMRRVGRPEWWMDYQKRYG,free acid,2838.3504,endogenous PENK,2,False,core 5 intermediate
+BAM-22 +1ox,YGGFMRRVGRPEWWMDYQKRYG,free acid,2854.3453,endogenous PENK,2,False,core 5 intermediate
+BAM-22 +2ox,YGGFMRRVGRPEWWMDYQKRYG,free acid,2870.3402,endogenous PENK,2,False,core 5 intermediate

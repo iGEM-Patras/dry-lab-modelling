@@ -1,0 +1,7 @@
+peptide,metric,value_angstrom,source
+YGGFEVVG,tyr1_oh_to_phe4_ring,12.05,"Boltz-2 DOR co-folded model, chain B"
+YGGFEVVG,ca_end_to_end,12.12,"Boltz-2 DOR co-folded model, chain B"
+YGGFEVVG,rg_ca,4.31,"Boltz-2 DOR co-folded model, chain B"
+YGGFM,tyr1_oh_to_phe4_ring,8.05,"Boltz-2 DOR co-folded model, chain B"
+YGGFM,ca_end_to_end,6.81,"Boltz-2 DOR co-folded model, chain B"
+YGGFM,rg_ca,3.38,"Boltz-2 DOR co-folded model, chain B"

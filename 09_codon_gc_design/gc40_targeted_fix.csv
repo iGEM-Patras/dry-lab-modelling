@@ -1,0 +1,5 @@
+fragment,GC_as_sent,GC_targeted_fix,gc_rich_win_before,gc_rich_win_after,AT_run_ge9,homopolymer_ge6,ARE_ATTTA,polyA_AATAAA
+mEGFP-IRES-His-PENK,58.6,51.8,196,28,2,4,1,0
+mEGFP-P2A-His-PENK,57.5,51.9,75,14,1,0,1,0
+His-PENK-IRES-mEGFP,58.6,51.8,203,25,2,4,1,0
+His-PENK-P2A-mEGFP,51.6,51.3,15,0,1,0,1,0

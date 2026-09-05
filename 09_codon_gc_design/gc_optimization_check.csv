@@ -1,0 +1,17 @@
+check,value,verdict
+CDS length,867 nt,in frame (867/3 = 289 codons incl. stop)
+overall GC,59.86%,the '60%' they refer to
+translated protein length,288 aa,matches intended engPENK exactly
+residue-by-residue vs reference,288/288 identical,NO amino-acid change
+internal stop codons,0,clean
+YGGFEVVG cassettes,7/7 present,all engineered epitopes intact
+dibasic KR/RR/KK sites,12/12 present,all PC2 processing sites intact
+signal peptide,MARFLTLCTWLLLLGPGLLATVRA,"intact, 24 aa"
+codons differing from native PENK,151 of 260 shared residues (58.1%),all synonymous
+max local GC (50-nt window),68%,below the 70% synthesis threshold
+windows >=70% GC,0,no GC-rich problem regions
+homopolymer runs >=6 nt,none,clean
+cassette codon diversity,7 distinct DNA sequences for 7 identical peptides,deliberate anti-repeat design - PROTECT THIS
+cryptic splice donors (GGTGAG/GGTAAG),7,worth a look if expression is low; not urgent for a cDNA construct
+internal restriction sites,"KpnI 2, BsaI 2, AgeI 2, PstI 6",avoid these enzymes for cloning; NheI/XhoI flanks are clean
+cloning flanks in 885-nt version,"5' GCTAGC GCCACC (NheI + Kozak), 3' CTCGAG (XhoI)",ready to clone

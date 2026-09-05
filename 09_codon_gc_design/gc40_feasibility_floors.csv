@@ -1,0 +1,5 @@
+fragment,GC_as_sent,GC_best_recode,target,verdict,GC_floor_no_guardrails,CAI,AT_run_ge9,homopolymer_ge6,ARE_ATTTA,polyA_AATAAA
+megfp_ires_his_penk,58.6,44.3,40.0,floors at 44.3%,35.7,0.713,18,14,5,0
+megfp_p2a_his_penk,57.5,41.1,40.0,floors at 41.1%,29.8,0.624,18,10,5,0
+his_penk_ires_megfp,58.6,44.2,40.0,floors at 44.2%,35.7,0.688,18,14,5,0
+his_penk_p2a_megfp,51.6,40.6,40.0,floors at 40.6%,29.8,0.624,18,10,5,0

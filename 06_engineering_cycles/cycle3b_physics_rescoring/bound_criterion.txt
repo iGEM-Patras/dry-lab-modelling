@@ -1,0 +1,23 @@
+Bound-frame criterion, chosen from the empirical distribution:
+
+  reference set : 52,026 frames drawn from the runs with ZERO lipid contact
+                  (these define "in the pocket" without circularity -- none of the
+                  escaped runs contribute to the reference)
+
+  ligand RMSD quantiles over that reference set (nm):
+      p50   0.1765
+      p75   0.2860
+      p90   0.4423
+      p95   0.5203
+      p97.5 0.5956
+      p99   0.6597
+
+  A frame counts as BOUND when BOTH hold:
+      (1) min ligand-lipid distance  > 0.4 nm     [no bilayer contact]
+      (2) ligand RMSD from docked pose <= 0.52 nm  [p95 of the reference set]
+
+  Rationale for p95 rather than a rounder number: it admits 95% of frames that are
+  already known to be pocket-resident, so the criterion is calibrated on observed
+  bound-state geometry rather than picked by eye. Using p99 (0.66 nm) would admit
+  visibly displaced poses; p90 (0.44 nm) would discard 10% of genuinely bound frames
+  and shrink the already-thin escaped-run samples further.

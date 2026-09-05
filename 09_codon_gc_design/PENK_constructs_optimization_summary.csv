@@ -1,0 +1,5 @@
+Construct,Target GC,Original GC,Optimized GC,Optimized CAI,AT_run ≥9,Homopolymer ≥6,ARE motif,Length (bp),Protein valid
+mEGFP-P2A-His-PENK,40.0%,57.5%,40.0%,0.962,No,No,No,1674,Yes
+His-PENK-P2A-mEGFP,40.0%,51.6%,40.0%,0.977,No,No,No,1671,Yes
+mEGFP-IRES-His-PENK,45.0%,58.6%,58.6%,0.829,No,Yes,No,2197,Yes
+His-PENK-IRES-mEGFP,45.0%,58.6%,58.6%,0.864,No,Yes,No,2194,Yes

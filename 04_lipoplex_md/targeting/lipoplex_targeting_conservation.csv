@@ -1,0 +1,15 @@
+target,vs,full_pct,ext_pct,ext_len_human,delta
+P2X3,rat,94.0,95.7,279,1.7
+P2X3,mouse,93.7,95.3,279,1.6
+TRPV1,rat,85.8,53.4,56,-32.4
+TRPV1,mouse,86.8,66.7,56,-20.1
+TRPA1,rat,79.7,60.7,54,-18.9
+TRPA1,mouse,79.8,62.5,54,-17.3
+NaV1.7_SCN9A,rat,93.1,90.0,270,-3.1
+NaV1.7_SCN9A,mouse,93.3,87.4,270,-5.9
+NaV1.8_SCN10A,rat,83.2,65.6,223,-17.6
+NaV1.8_SCN10A,mouse,82.5,65.5,223,-17.1
+INSR,rat,94.4,95.5,925,1.0
+INSR,mouse,94.4,94.7,925,0.3
+TfR_TFRC,rat,76.7,75.3,672,-1.3
+TfR_TFRC,mouse,77.0,76.0,672,-1.0

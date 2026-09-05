@@ -1,0 +1,13 @@
+
+96c96
+< $GMX mdrun -deffnm nvt -nb gpu -ntmpi 1 -ntomp 8
+---
+> $GMX mdrun -deffnm nvt -nb cpu -ntmpi ${GMX_NTMPI:-4} -ntomp ${GMX_NTOMP:-8}
+100c100
+< $GMX mdrun -deffnm npt -nb gpu -ntmpi 1 -ntomp 8
+---
+> $GMX mdrun -deffnm npt -nb cpu -ntmpi ${GMX_NTMPI:-4} -ntomp ${GMX_NTOMP:-8}
+113c113
+< $GMX mdrun -deffnm prod -nb gpu -ntmpi 1 -ntomp 8 $PROD_EXTRA
+---
+> $GMX mdrun -deffnm prod -nb cpu -ntmpi ${GMX_NTMPI:-4} -ntomp ${GMX_NTOMP:-8} $PROD_EXTRA

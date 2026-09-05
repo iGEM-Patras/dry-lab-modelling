@@ -1,0 +1,6 @@
+rrid,antibody,epitope_immunogen,verdict,reason
+AB_2530349,anti-Met-enkephalin mAb clone 1194/334,YGGFM (pentapeptide),WILL NOT DETECT,Construct encodes YGGFEVVG. Anti-Met-enkephalin mAbs are raised against the full pentapeptide and most require the free C-terminal Met; that residue does not exist in the product.
+AB_2492947,"anti-Met-enkephalin pAb, immunogen PENK 237-241",PENK aa 237-241 = YGGFM,WILL NOT DETECT,"Same reason. Immunogen is explicitly the 237-241 Met-enkephalin peptide, absent from the construct."
+AB_3430419,anti-Met-enkephalin (P01210),Met-enkephalin,WILL NOT DETECT,Targets the native mature pentapeptide.
+n/a,custom anti-YGGFEVVG,the engineered octapeptide,REQUIRED - must be custom-raised,7 identical copies of YGGFEVVG per precursor. A custom polyclonal against YGGFEVVG-KLH is the only reagent that can detect the product.
+n/a,generic anti-PENK (precursor-directed),PENK backbone outside YGGF repeats,USE for precursor expression only,Detects the unprocessed precursor; cannot confirm the mature peptide was released.

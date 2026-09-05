@@ -1,0 +1,10 @@
+species,sequence,c_term,mh,nep_canonical_aromatic_P1prime,nep_large_aliphatic_P1prime,nep_val_P1prime_disfavoured,nep_detail,apn_Tyr1_Gly2,ace_dipeptide,ace_product,ace_prod_mh,ace_prod_is_panel_member,shipped_nep_count,ace_product_identity
+Leu-enkephalin,YGGFL,free acid,556.2766,1,0,0,G3-F4[good],True,FL,YGG,296.1241,,1,novel fragment
+Met-enkephalin,YGGFM,free acid,574.233,1,0,0,G3-F4[good],True,FM,YGG,296.1241,,1,novel fragment
+Met-enk-Arg-Phe,YGGFMRF,free acid,877.4025,1,1,0,G3-F4[good]; F4-M5[med],True,RF,YGGFM,574.233,Met-enkephalin,2,Met-enkephalin
+Met-enk-Arg-Gly-Leu,YGGFMRGL,free acid,900.4396,1,1,0,G3-F4[good]; F4-M5[med],True,GL,YGGFMR,730.3341,,2,novel fragment
+Adrenorphin/metorphamide,YGGFMRRV,amide,984.5196,1,1,0,G3-F4[good]; F4-M5[med],True,RV,YGGFMR,730.3341,,2,novel fragment
+Peptide F (core1-2),YGGFMKRYGGFMKK,free acid,1669.8341,3,2,0,G3-F4[good]; F4-M5[med]; R7-Y8[good]; G10-F11[good]; F11-M12[med],True,KK,YGGFMKRYGGFM,1413.6442,,5,novel fragment
+BAM-8-22,VGRPEWWMDYQKRYG,free acid,1970.933,4,1,0,E5-W6[good]; W6-W7[good]; W7-M8[med]; D9-Y10[good]; R13-Y14[good],False,YG,VGRPEWWMDYQKR,1750.8482,,5,novel fragment
+BAM-20,YGGFMRRVGRPEWWMDYQKR,free acid,2618.2656,4,2,1,G3-F4[good]; F4-M5[med]; R7-V8[poor]; E12-W13[good]; W13-W14[good]; W14-M15[med]; D16-Y17[good],True,KR,YGGFMRRVGRPEWWMDYQ,2334.0695,,7,novel fragment
+BAM-22,YGGFMRRVGRPEWWMDYQKRYG,free acid,2838.3504,5,2,1,G3-F4[good]; F4-M5[med]; R7-V8[poor]; E12-W13[good]; W13-W14[good]; W14-M15[med]; D16-Y17[good]; R20-Y21[good],True,YG,YGGFMRRVGRPEWWMDYQKR,2618.2656,BAM-20,8,BAM-20

@@ -1,0 +1,6 @@
+version,GC,CAI,cassette_codon_diversity,windows_ge68pct_GC,windows_le38pct_GC,AT_runs_ge8nt,homopolymers_ge6nt
+current 59.9%,59.9,0.828,7/7,14,0,0,0
+45% constrained,45.0,0.775,7/7,0,16,0,0
+50% constrained,50.0,0.831,7/7,0,7,0,0
+52% constrained,52.0,0.854,7/7,0,0,0,0
+40% constrained (best possible),41.3,0.744,7/7,0,56,0,0

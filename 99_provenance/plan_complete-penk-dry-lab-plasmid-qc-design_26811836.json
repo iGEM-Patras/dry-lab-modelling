@@ -1,0 +1,61 @@
+{
+  "version": 3,
+  "created_at": "2026-07-23T00:07:28.410Z",
+  "task_summary": "Complete PENK dry-lab: plasmid QC design, human anti-NEP siRNA, lipoplex MD replicates, project brief, Git archive",
+  "agents": [],
+  "phases": [
+    {
+      "name": "Plan",
+      "delegations": [
+        {
+          "steps": [
+            {
+              "title": "Verify the four cassette plasmids",
+              "description": "Parse each of the four SnapGene .dna maps (mEGFP-IRES-PENK, mEGFP-P2A-PENK, PENK-IRES-mEGFP, PENK-P2A-mEGFP) with Biopython. For each: confirm the engineered PENK CDS (867 bp, 7×YGGFEVVG) is present and intact, locate and verify the IRES vs P2A linker and the mEGFP ORF, check reading frames (P2A must be in-frame fusion; IRES is cap-independent so PENK/mEGFP are separate ORFs), and record the vector backbone and total plasmid length. Produce a per-plasmid feature table (plasmid_feature_audit.csv) and flag any frame or junction problem."
+            },
+            {
+              "title": "Design restriction-digest QC",
+              "description": "For each plasmid, computationally find a double-digest (one enzyme cutting inside the gene cassette, one elsewhere in the backbone, per the roadmap) that yields a clean, unambiguous two-band pattern distinguishing correct clones. Prefer enzymes already in a common buffer and present as single/low-copy sites. Compute expected fragment sizes, render a publication-quality virtual agarose gel (all four plasmids side by side against a standard ladder) as restriction_qc_gel.png, and write the wet-lab digest protocol (enzymes, buffer, expected bands) to restriction_qc_protocol.md."
+            },
+            {
+              "title": "Design human anti-NEP (MME) siRNA",
+              "description": "Fetch human MME/neprilysin mRNA (RefSeq NM_000902) from NCBI. Design candidate 21-nt siRNA duplexes using established rules (Reynolds/Ui-Tei/Amarzguioui): GC 30-52%, asymmetric thermodynamic end stability, seed checks, avoidance of internal repeats/immunostimulatory motifs, and a low-complexity/poly-N filter. BLAST/screen top candidates against the human transcriptome for off-targets (seed-region and full-length). Deliver a ranked table (anti_MME_siRNA_candidates.csv) of the top ~10 duplexes with sense/antisense sequences, target position, GC%, end-stability ΔΔG, and off-target flags, plus a short design-rationale note. Explicitly note this replaces the rodent-only reagent the audit flagged."
+            },
+            {
+              "title": "Stage lipoplex MD replicate campaign",
+              "description": "Reconstruct the MARTINI 2 CG-MD setup from the prior run (DOTAP/DOPE/chol and MC3-protonated/DOPE/chol, 120:80:40, one 60-bp B-DNA, 150 mM NaCl, 50 ns, dt=1 fs). Prepare input decks for: 3 replicates each of DOTAP and MC3-protonated (distinct random seeds/velocities to error-bar the RDF and contact metrics), plus one MC3-neutral (deprotonated) box to visualize the pH charge-switch directly. Write the SLURM submission scripts (partition pgpu, account kzanaj, gmxcuda env) and stage all inputs to cluster scratch. Save the job specs locally as md_replicate_plan.md before submitting."
+            },
+            {
+              "title": "Run and monitor the MD campaign on pgpu",
+              "description": "Submit the 7 CG-MD jobs to pgpu, then wait on completion notifications and harvest trajectories. Handle any resubmission needed. This is the long-wall-time step; on completion, pull back the equilibrated-window (40-50 ns) trajectory summaries and raw metric time series for analysis."
+            },
+            {
+              "title": "Analyze MD replicates with error bars",
+              "description": "For each formulation, compute over the 40-50 ns equilibrated window: DNA-lipid close-contact count, minimum DNA-lipid distance, first-shell RDF peak height, and DNA radius of gyration — now as mean ± SD across the 3 replicates. Produce lipoplex_replicate_metrics.csv and a figure (lipoplex_replicate_comparison.png) with error bars showing whether the MC3>DOTAP condensation margin survives replication, plus a panel contrasting MC3-protonated vs MC3-neutral condensation to illustrate the charge switch. Update the conclusion (does the ~1.9× RDF margin hold?)."
+            },
+            {
+              "title": "Consolidate project brief",
+              "description": "Write a single consolidated project brief (penk_project_brief.pdf via markdown->PDF) covering: therapeutic rationale (endogenous-opioid, δ-preference, PAG-RVM circuit, nose-to-brain route), the four constructs, the verified engineered insert, the delivery-vehicle findings (MC3 vs DOTAP + pH switch, now replicated), the siRNA/NEP arm with its honest counter-indication, the six Engineering Cycles and current status, and the open caveats. This is the single-page-picture recovery document after the WSL loss."
+            },
+            {
+              "title": "Assemble and stage Git repository",
+              "description": "Build a clean repo (penk-in-silico/) with structured directories (audit/, sequences/, plasmid_qc/, sirna/, lipoplex_md/, reports/), the code audit (md + pdf), all analysis scripts with reproducible lineage, the deliverables from the steps above, a top-level README.md documenting the project and how to regenerate each result, and a .gitignore for large trajectory files. Initialize git, commit with a sensible history, and stage for push. If a GitHub token has been added, create the remote and push; otherwise save the repo as a downloadable archive (penk-in-silico.tar.gz) and give the exact push commands."
+            }
+          ]
+        }
+      ],
+      "id": "phase-0"
+    }
+  ],
+  "desired_outputs": [
+    "Restriction-digest QC protocol + virtual gel figure for all four plasmids",
+    "Human anti-MME (neprilysin) siRNA design table with off-target/thermodynamic scoring",
+    "Lipoplex CG-MD replicate results (DOTAP ×3, MC3-protonated ×3, MC3-neutral) with error-barred RDF/contact metrics",
+    "Consolidated project brief PDF",
+    "Git repository of the full code audit + deliverables, staged for GitHub"
+  ],
+  "feasibility": {
+    "rationale": "All inputs are in hand (four plasmid .dna maps, verified engineered insert, both lipoplex reports, the audit). Local sequence/QC/siRNA work is fully deterministic; the lipoplex replicate campaign is a straightforward re-run of an already-working MARTINI pipeline on the reconnected pgpu cluster (hours of wall time, not a research risk). The only external dependency is a GitHub token for the final push.",
+    "confidence": "high"
+  }
+}

@@ -1,0 +1,10 @@
+peptide,sequence,amide,copies,mh,met,nep,ace,origin,mh_ox
+Met-enkephalin,YGGFM,False,4,574.2329910000001,1,1,True,"cores 1,2,3 direct; core 5 after full BAM processing",590.2279010000001
+Leu-enkephalin,YGGFL,False,1,556.2765610000001,0,1,True,core 6,
+Met-enk-Arg-Gly-Leu,YGGFMRGL,False,1,900.4396210000002,1,2,True,"core 4, monobasic downstream",916.4345310000002
+Met-enk-Arg-Phe,YGGFMRF,False,1,877.4025110000001,1,2,True,"core 7, precursor C-terminus",893.3974210000001
+Adrenorphin/metorphamide,YGGFMRRV,True,1,984.5196050000002,1,2,False,"core 5, PAM product of ...RRVG",1000.5145150000002
+BAM-22,YGGFMRRVGRPEWWMDYQKRYG,False,1,2838.3503610000002,2,8,True,core 5 intermediate,2854.345271
+BAM-20,YGGFMRRVGRPEWWMDYQKR,False,1,2618.2655710000004,2,7,True,core 5 intermediate,2634.2604810000003
+BAM-8-22,VGRPEWWMDYQKRYG,False,1,1970.932991,1,5,True,"core 5, N-terminally trimmed (non-opioid)",1986.9279009999998
+Peptide F (core1-2),YGGFMKRYGGFMKK,False,1,1669.8341309999998,2,5,True,cores 1+2 unseparated intermediate,1685.8290409999997

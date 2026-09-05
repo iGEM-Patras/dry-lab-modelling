@@ -1,0 +1,8 @@
+peptide,seq,amide,shipped_nep_count,corrected_canonical_nep,poor_p1prime_val,nep_detail,shipped_ace,corrected_ace
+Met-enkephalin,YGGFM,False,1,1,0,G3-F4[good],yes,yes
+Leu-enkephalin,YGGFL,False,1,1,0,G3-F4[good],yes,yes
+MERF (native core7),YGGFMRF,False,2,1,0,G3-F4[good]; F4-M5[med],yes,yes
+engPENK octapeptide,YGGFEVVG,False,3,1,2,G3-F4[good]; E5-V6[poor]; V6-V7[poor],yes,yes
+option A  YGGFEVV-NH2,YGGFEVV,True,2,1,1,G3-F4[good]; E5-V6[poor],no,yes (slower)
+option B  YGGFEVVG-NH2,YGGFEVVG,True,3,1,2,G3-F4[good]; E5-V6[poor]; V6-V7[poor],no,yes (slower)
+engMERF analogue,YGGFEVVGRF,False,3,1,2,G3-F4[good]; E5-V6[poor]; V6-V7[poor],yes,yes

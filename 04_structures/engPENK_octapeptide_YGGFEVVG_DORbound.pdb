@@ -1,0 +1,65 @@
+TITLE     ENGINEERED PENK OCTAPEPTIDE YGGFEVVG, DOR-BOUND CONFORMATION
+REMARK 220 Source: Boltz-2 co-folded complex with human delta-opioid receptor (OPRD1).
+REMARK 220 This is the RECEPTOR-BOUND conformation, extracted from the complex.
+REMARK 220 A linear octa/penta-peptide is not folded in isolation - see README.
+REMARK 220 All-L stereochemistry; free acid C-terminus; no post-translational modification.
+ATOM      1  N   TYR A   1       2.781   7.849   1.396  1.00 80.79           N  
+ATOM      2  CA  TYR A   1       2.994   7.754   2.845  1.00 80.79           C  
+ATOM      3  C   TYR A   1       4.074   8.718   3.307  1.00 80.79           C  
+ATOM      4  O   TYR A   1       4.931   9.105   2.518  1.00 80.79           O  
+ATOM      5  CB  TYR A   1       3.369   6.319   3.232  1.00 80.79           C  
+ATOM      6  CG  TYR A   1       3.596   6.148   4.715  1.00 80.79           C  
+ATOM      7  CD1 TYR A   1       2.545   6.266   5.617  1.00 80.79           C  
+ATOM      8  CD2 TYR A   1       4.867   5.883   5.211  1.00 80.79           C  
+ATOM      9  CE1 TYR A   1       2.754   6.111   6.990  1.00 80.79           C  
+ATOM     10  CE2 TYR A   1       5.084   5.724   6.580  1.00 80.79           C  
+ATOM     11  CZ  TYR A   1       4.026   5.839   7.464  1.00 80.79           C  
+ATOM     12  OH  TYR A   1       4.238   5.687   8.810  1.00 80.79           O  
+ATOM     13  N   GLY A   2       4.039   9.026   4.575  1.00 79.49           N  
+ATOM     14  CA  GLY A   2       4.937   9.965   5.223  1.00 79.49           C  
+ATOM     15  C   GLY A   2       6.323  10.183   4.636  1.00 79.49           C  
+ATOM     16  O   GLY A   2       6.930  11.215   4.892  1.00 79.49           O  
+ATOM     17  N   GLY A   3       6.804   9.214   3.889  1.00 84.93           N  
+ATOM     18  CA  GLY A   3       8.103   9.363   3.263  1.00 84.93           C  
+ATOM     19  C   GLY A   3       8.267  10.642   2.465  1.00 84.93           C  
+ATOM     20  O   GLY A   3       9.323  11.268   2.496  1.00 84.93           O  
+ATOM     21  N   PHE A   4       7.235  11.045   1.732  1.00 87.56           N  
+ATOM     22  CA  PHE A   4       7.300  12.283   0.976  1.00 87.56           C  
+ATOM     23  C   PHE A   4       7.411  13.491   1.897  1.00 87.56           C  
+ATOM     24  O   PHE A   4       8.124  14.451   1.588  1.00 87.56           O  
+ATOM     25  CB  PHE A   4       6.074  12.422   0.074  1.00 87.56           C  
+ATOM     26  CG  PHE A   4       6.040  11.423  -1.053  1.00 87.56           C  
+ATOM     27  CD1 PHE A   4       6.953  11.505  -2.086  1.00 87.56           C  
+ATOM     28  CD2 PHE A   4       5.104  10.406  -1.070  1.00 87.56           C  
+ATOM     29  CE1 PHE A   4       6.930  10.590  -3.127  1.00 87.56           C  
+ATOM     30  CE2 PHE A   4       5.076   9.487  -2.110  1.00 87.56           C  
+ATOM     31  CZ  PHE A   4       5.992   9.579  -3.135  1.00 87.56           C  
+ATOM     32  N   GLU A   5       6.709  13.444   3.009  1.00 85.84           N  
+ATOM     33  CA  GLU A   5       6.787  14.518   3.987  1.00 85.84           C  
+ATOM     34  C   GLU A   5       8.124  14.498   4.717  1.00 85.84           C  
+ATOM     35  O   GLU A   5       8.674  15.551   5.055  1.00 85.84           O  
+ATOM     36  CB  GLU A   5       5.623  14.405   4.973  1.00 85.84           C  
+ATOM     37  CG  GLU A   5       5.410  15.632   5.837  1.00 85.84           C  
+ATOM     38  CD  GLU A   5       6.161  15.572   7.158  1.00 85.84           C  
+ATOM     39  OE1 GLU A   5       6.530  14.459   7.575  1.00 85.84           O  
+ATOM     40  OE2 GLU A   5       6.371  16.646   7.769  1.00 85.84           O  
+ATOM     41  N   VAL A   6       8.673  13.317   4.958  1.00 83.77           N  
+ATOM     42  CA  VAL A   6       9.937  13.175   5.673  1.00 83.77           C  
+ATOM     43  C   VAL A   6      11.093  13.763   4.869  1.00 83.77           C  
+ATOM     44  O   VAL A   6      11.898  14.537   5.393  1.00 83.77           O  
+ATOM     45  CB  VAL A   6      10.209  11.693   6.007  1.00 83.77           C  
+ATOM     46  CG1 VAL A   6      11.629  11.519   6.523  1.00 83.77           C  
+ATOM     47  CG2 VAL A   6       9.205  11.194   7.030  1.00 83.77           C  
+ATOM     48  N   VAL A   7      11.179  13.420   3.601  1.00 78.57           N  
+ATOM     49  CA  VAL A   7      12.277  13.890   2.770  1.00 78.57           C  
+ATOM     50  C   VAL A   7      12.049  15.317   2.288  1.00 78.57           C  
+ATOM     51  O   VAL A   7      12.961  15.936   1.743  1.00 78.57           O  
+ATOM     52  CB  VAL A   7      12.516  12.957   1.563  1.00 78.57           C  
+ATOM     53  CG1 VAL A   7      12.867  11.556   2.030  1.00 78.57           C  
+ATOM     54  CG2 VAL A   7      11.291  12.930   0.660  1.00 78.57           C  
+ATOM     55  N   GLY A   8      10.851  15.818   2.457  1.00 69.70           N  
+ATOM     56  CA  GLY A   8      10.558  17.190   2.069  1.00 69.70           C  
+ATOM     57  C   GLY A   8      10.965  18.175   3.136  1.00 69.70           C  
+ATOM     58  O   GLY A   8      11.328  19.312   2.833  1.00 69.70           O  
+TER
+END

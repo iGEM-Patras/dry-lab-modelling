@@ -1,0 +1,50 @@
+{
+  "version": 3,
+  "created_at": "2026-07-19T22:44:47.100Z",
+  "task_summary": "GROMACS MD + MM-GBSA binding free energies for δ/µ selectivity of YGGFEVVG",
+  "agents": [],
+  "phases": [
+    {
+      "name": "Plan",
+      "delegations": [
+        {
+          "steps": [
+            {
+              "title": "Build GROMACS+AmberTools env on cluster",
+              "description": "conda-install a CUDA-enabled GROMACS 2024 plus AmberTools and gmx_MMPBSA into /data/users/kzanaj/envs/gmxmmpbsa (separate from boltz2). Verify `gmx` runs and detects the RTX 2080 Ti GPU, and `gmx_MMPBSA --help` works. Deliverable: env_build.log with versions (gromacs, ambertools, gmx_MMPBSA, python)."
+            },
+            {
+              "title": "Prepare 4 receptor-peptide complexes",
+              "description": "From the Boltz-2 PDBs, extract clean receptor+peptide for the 4 systems: engineered YGGFEVVG × DOR, YGGFEVVG × MOR, and met-enkephalin YGGFM × DOR, YGGFM × MOR (YGGFM is the ~35× δ-preferring native reference the design must match). Protonate at pH 7.4, cap/verify termini, split receptor vs ligand chains for MM-GBSA. Deliverable: 4 prepared PDBs + a prep log noting any missing atoms rebuilt."
+            },
+            {
+              "title": "GROMACS system setup (solvate + ionize)",
+              "description": "For each complex: CHARMM36m force field, TIP3P water in a padded dodecahedral box, 0.15 M NaCl neutralized. Apply Cα position restraints on the receptor to preserve the 7TM bundle without an explicit membrane. Deliverable: per-complex topology + solvated .gro, plus a table of system sizes (atoms, waters, ions)."
+            },
+            {
+              "title": "Minimize and equilibrate",
+              "description": "Steepest-descent energy minimization, then NVT (100 ps, 310 K, V-rescale) and NPT (100 ps, Parrinello-Rahman) equilibration with restraints on. Deliverable: equilibration plots (temperature, pressure, density, potential energy) as equil_<system>.png and confirmation each system is stable."
+            },
+            {
+              "title": "Production MD (GPU)",
+              "description": "Run ~20 ns GPU-accelerated production MD per complex (Cα-restrained receptor, free peptide+side chains), 2 fs timestep, saved every 10 ps. Four SLURM jobs on partition pgpu. Deliverable: trajectories + RMSD/RMSF plots (peptide and pocket) as md_rmsd_<system>.png to confirm the peptide stays bound over the run."
+            },
+            {
+              "title": "MM-GBSA binding free energies",
+              "description": "Run gmx_MMPBSA on the equilibrated portion of each trajectory (GB model, single-trajectory protocol) to get ΔG_bind per complex, with per-residue energy decomposition at the interface. Deliverable: mmgbsa_results.csv (ΔG and component terms ΔE_vdw/ΔE_elec/ΔG_solv per complex) + a per-residue decomposition table for the engineered complexes."
+            },
+            {
+              "title": "δ/µ selectivity figure + report",
+              "description": "Compute the selectivity metric ΔΔG = ΔG_bind(DOR) − ΔG_bind(MOR) for engineered YGGFEVVG vs the enkephalin reference; a more negative value = δ-preferring. Publication-grade figure (apply_figure_style) comparing the four ΔG_bind bars + the two ΔΔG selectivity values, with error bars from MM-GBSA frame variance. Write mmgbsa_selectivity_report.md interpreting whether the MD/MM-GBSA readout supports the δ-preference claim, cross-referenced to the Tier A ChEMBL baseline (enkephalin δ/µ≈0.028) and the honest-negative Boltz ipTM result. Save figure + CSV + report as artifacts."
+            }
+          ]
+        }
+      ],
+      "id": "phase-0"
+    }
+  ],
+  "feasibility": {
+    "rationale": "The Boltz-2 co-folds give credible starting poses; MM-GBSA on short restrained-MD trajectories is the tractable way to get a *relative* δ vs µ binding-energy comparison on an 11 GB card. Two caveats set expectations: (1) no explicit lipid bilayer — receptors are solvated with Cα position restraints to hold the 7TM fold, defensible for a same-peptide/two-homologous-receptor comparison where systematic errors partly cancel, but not a membrane-accurate absolute ΔG; (2) MM-GBSA is an end-point approximation, so the readout is a ranked ΔΔG (does YGGFEVVG favor DOR the way enkephalin does?), not a definitive affinity. This is a genuine, honest test of the design's central premise that static structure could not deliver.",
+    "confidence": "medium"
+  }
+}

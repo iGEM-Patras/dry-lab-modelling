@@ -1,0 +1,7 @@
+step,guide_assumption,computed_reality,consequence,verdict,severity
+"Stage 1: transfect HEK293T, express engPENK",cells secrete processed enkephalin peptides,"HEK293 has PCSK1 0.1 / PCSK2 0.1 / SCG5 0.0 nTPM -> no convertase, no 7B2",engPENK accumulates as UNPROCESSED precursor; no small opioid peptides form,assumption fails,critical
+"Stage 2: isolate precursor, add convertase in vitro","a second, redundant confirmation step",this is the ONLY step that can generate peptides at all,Stage 2 is not confirmatory - it is the entire experiment,"mislabelled, not wrong",reframe
+siRNA knockdown of degrading peptidases,knockdown extends peptide half-life in the cells,HEK293 MME 0.7 / ANPEP 0.1 nTPM -> both already absent,nothing to knock down; a null result here is uninformative,not testable in this cell line,critical
+mEGFP fluorescence as expression read-out,reporter signal tracks PENK level,IRES second-gene expression 6-100% (mostly 20-50%) of cap-dependent (Mizuguchi 2000),in plasmid 3 mEGFP is IRES-driven and systematically under-reads PENK,quantitatively biased,moderate
+Amidation of Gly-extended cassettes,not addressed in the guide,PAM 37.5 nTPM - abundantly present in HEK293,the one engineered mechanism that DOES work in this cell line,assumption holds,favourable
+Endogenous PENK background,not addressed,PENK 0.0 nTPM in HEK293,zero endogenous background - any signal is construct-derived,genuine advantage,favourable

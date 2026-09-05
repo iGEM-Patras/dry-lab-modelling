@@ -1,0 +1,50 @@
+name,seq,base,mh_monoisotopic,kind,nox,route_ambiguous
+ACE(Leu-enkephalin),YGG,ACE(Leu-enkephalin),296.1241,ACE product,0,True
+ACE(Met-enkephalin),YGG,ACE(Met-enkephalin),296.1241,ACE product,0,True
+Leu-enkephalin,YGGFL,Leu-enkephalin,556.2766,granule product,0,False
+Met-enkephalin,YGGFM,Met-enkephalin,574.233,granule product,0,True
+ACE(Met-enk-Arg-Phe),YGGFM,ACE(Met-enk-Arg-Phe),574.233,ACE product,0,True
+Met-enkephalin +1ox,YGGFM,Met-enkephalin,590.2279,granule product,1,True
+ACE(Met-enk-Arg-Phe) +1ox,YGGFM,ACE(Met-enk-Arg-Phe),590.2279,ACE product,1,True
+ACE(Met-enk-Arg-Gly-Leu),YGGFMR,ACE(Met-enk-Arg-Gly-Leu),730.3341,ACE product,0,True
+ACE(Adrenorphin/metorphamide),YGGFMR,ACE(Adrenorphin/metorphamide),730.3341,ACE product,0,True
+ACE(Met-enk-Arg-Gly-Leu) +1ox,YGGFMR,ACE(Met-enk-Arg-Gly-Leu),746.329,ACE product,1,True
+ACE(Adrenorphin/metorphamide) +1ox,YGGFMR,ACE(Adrenorphin/metorphamide),746.329,ACE product,1,True
+Met-enk-Arg-Phe,YGGFMRF,Met-enk-Arg-Phe,877.4025,granule product,0,False
+Met-enk-Arg-Phe +1ox,YGGFMRF,Met-enk-Arg-Phe,893.3974,granule product,1,False
+Met-enk-Arg-Gly-Leu,YGGFMRGL,Met-enk-Arg-Gly-Leu,900.4396,granule product,0,False
+Met-enk-Arg-Gly-Leu +1ox,YGGFMRGL,Met-enk-Arg-Gly-Leu,916.4345,granule product,1,False
+Adrenorphin/metorphamide,YGGFMRRV,Adrenorphin/metorphamide,984.5196,granule product,0,False
+Adrenorphin/metorphamide +1ox,YGGFMRRV,Adrenorphin/metorphamide,1000.5145,granule product,1,False
+ACE(Peptide F (core1-2)),YGGFMKRYGGFM,ACE(Peptide F (core1-2)),1413.6442,ACE product,0,False
+ACE(Peptide F (core1-2)) +1ox,YGGFMKRYGGFM,ACE(Peptide F (core1-2)),1429.6391,ACE product,1,False
+ACE(Peptide F (core1-2)) +2ox,YGGFMKRYGGFM,ACE(Peptide F (core1-2)),1445.634,ACE product,2,False
+Peptide F (core1-2),YGGFMKRYGGFMKK,Peptide F (core1-2),1669.8341,granule product,0,False
+Peptide F (core1-2) +1ox,YGGFMKRYGGFMKK,Peptide F (core1-2),1685.829,granule product,1,False
+Peptide F (core1-2) +2ox,YGGFMKRYGGFMKK,Peptide F (core1-2),1701.8239,granule product,2,False
+ACE(BAM-8-22),VGRPEWWMDYQKR,ACE(BAM-8-22),1750.8482,ACE product,0,False
+ACE(BAM-8-22) +1ox,VGRPEWWMDYQKR,ACE(BAM-8-22),1766.8431,ACE product,1,False
+BAM-8-22,VGRPEWWMDYQKRYG,BAM-8-22,1970.933,granule product,0,False
+BAM-8-22 +1ox,VGRPEWWMDYQKRYG,BAM-8-22,1986.9279,granule product,1,False
+ACE(BAM-20),YGGFMRRVGRPEWWMDYQ,ACE(BAM-20),2334.0695,ACE product,0,False
+ACE(BAM-20) +1ox,YGGFMRRVGRPEWWMDYQ,ACE(BAM-20),2350.0644,ACE product,1,False
+ACE(BAM-20) +2ox,YGGFMRRVGRPEWWMDYQ,ACE(BAM-20),2366.0593,ACE product,2,False
+enkelytin PENK(237-258) acid,FAEALPSDEEGESYSKEVPEME,enkelytin PENK(237-258) acid,2473.0599,C-terminal / antibacterial,0,False
+enkelytin PENK(237-258) acid +1ox,FAEALPSDEEGESYSKEVPEME,enkelytin PENK(237-258) acid,2489.0548,C-terminal / antibacterial,1,False
+enkelytin +1P,FAEALPSDEEGESYSKEVPEME,enkelytin +1P,2553.0262,C-terminal / antibacterial,0,False
+enkelytin +1P +1ox,FAEALPSDEEGESYSKEVPEME,enkelytin +1P,2569.0211,C-terminal / antibacterial,1,False
+BAM-20,YGGFMRRVGRPEWWMDYQKR,BAM-20,2618.2656,granule product,0,True
+ACE(BAM-22),YGGFMRRVGRPEWWMDYQKR,ACE(BAM-22),2618.2656,ACE product,0,True
+enkelytin +2P,FAEALPSDEEGESYSKEVPEME,enkelytin +2P,2632.9925,C-terminal / antibacterial,0,False
+BAM-20 +1ox,YGGFMRRVGRPEWWMDYQKR,BAM-20,2634.2605,granule product,1,True
+ACE(BAM-22) +1ox,YGGFMRRVGRPEWWMDYQKR,ACE(BAM-22),2634.2605,ACE product,1,True
+enkelytin +2P +1ox,FAEALPSDEEGESYSKEVPEME,enkelytin +2P,2648.9874,C-terminal / antibacterial,1,False
+ACE(BAM-22) +2ox,YGGFMRRVGRPEWWMDYQKR,ACE(BAM-22),2650.2554,ACE product,2,True
+BAM-20 +2ox,YGGFMRRVGRPEWWMDYQKR,BAM-20,2650.2554,granule product,2,True
+BAM-22,YGGFMRRVGRPEWWMDYQKRYG,BAM-22,2838.3504,granule product,0,False
+BAM-22 +1ox,YGGFMRRVGRPEWWMDYQKRYG,BAM-22,2854.3453,granule product,1,False
+BAM-22 +2ox,YGGFMRRVGRPEWWMDYQKRYG,BAM-22,2870.3402,granule product,2,False
+Peptide B PENK(210-258),YGGFMRRVGRPEWWMDYQKRYGGFLKRFAEALPSDEEGESYSKEVPEME,Peptide B PENK(210-258),5893.7624,granule product,0,False
+Peptide B PENK(210-258) +1ox,YGGFMRRVGRPEWWMDYQKRYGGFLKRFAEALPSDEEGESYSKEVPEME,Peptide B PENK(210-258),5909.7573,granule product,1,False
+Peptide B PENK(210-258) +2ox,YGGFMRRVGRPEWWMDYQKRYGGFLKRFAEALPSDEEGESYSKEVPEME,Peptide B PENK(210-258),5925.7522,granule product,2,False
+Peptide B PENK(210-258) +3ox,YGGFMRRVGRPEWWMDYQKRYGGFLKRFAEALPSDEEGESYSKEVPEME,Peptide B PENK(210-258),5941.7471,granule product,3,False

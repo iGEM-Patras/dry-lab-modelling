@@ -1,0 +1,41 @@
+{
+  "_note": "AlphaFold-database-style confidence JSON. Values are Boltz-2 confidences, NOT AlphaFold. pLDDT is for the peptide within the delta-opioid-receptor complex it was co-folded in, not for the free peptide.",
+  "sequence": "YGGFEVVG",
+  "residueNumber": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "confidenceScore": [
+    80.79,
+    79.49,
+    84.93,
+    87.56,
+    85.84,
+    83.77,
+    78.57,
+    69.7
+  ],
+  "confidenceCategory": [
+    "Confident (90 > pLDDT > 70)",
+    "Confident (90 > pLDDT > 70)",
+    "Confident (90 > pLDDT > 70)",
+    "Confident (90 > pLDDT > 70)",
+    "Confident (90 > pLDDT > 70)",
+    "Confident (90 > pLDDT > 70)",
+    "Confident (90 > pLDDT > 70)",
+    "Low (70 > pLDDT > 50)"
+  ],
+  "meanPLDDT": 81.33,
+  "chain_pTM": 0.9815,
+  "interface_ipTM": 0.8087,
+  "complex_ipTM": 0.9718,
+  "predictor": "Boltz-2",
+  "parent_complex": "human delta-opioid receptor (OPRD1) + peptide, co-folded",
+  "peptide_chain_in_parent": "B"
+}

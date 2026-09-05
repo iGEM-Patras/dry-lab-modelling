@@ -1,0 +1,35 @@
+12a13,42
+> 
+> # ---- peptide chemistry from the design table, NEVER a positional default ----
+> # This script used to call run_prod.sh with TWO arguments, so DRES_REL took its
+> # "${4:-none}" default -- and run_prod.sh's gate() returns early when DRES_REL is
+> # 'none'. This job therefore claimed to exercise "all 3 chirality gates" while
+> # SKIPPING all three: a validation pass with the stereochemical checks disarmed.
+> # Same defect class that cost the 2026-07-30 build (see scripts/peptide_spec.sh),
+> # where c3b_dtII_DOR was built dres=none and came out as the all-L analogue of
+> # deltorphin II. Chemistry now comes from prod_all.txt and is cross-checked
+> # against what the build actually produced, exactly as run_prod_job.sh does.
+> . $W/scripts/peptide_spec.sh
+> load_peptide_spec c3b_dtII_DOR || exit 1
+> [ -f systems/c3b_dtII_DOR/chem.txt ] || {
+>   echo "FAIL: systems/c3b_dtII_DOR/chem.txt missing -- built by an older"
+>   echo "      build_system.sh that did not record its chemistry. Rebuild rather"
+>   echo "      than assume: a dres=none build is indistinguishable from a correct"
+>   echo "      one by inspection of the coordinates."; exit 1; }
+> . systems/c3b_dtII_DOR/chem.txt
+> if [ "$BUILT_DRES" != "$SPEC_DRES" ] || [ "$BUILT_AMIDE" != "$SPEC_AMIDE" ]; then
+>   echo "FAIL: build/run chemistry mismatch for c3b_dtII_DOR"
+>   echo "      built with dres=$BUILT_DRES amide=$BUILT_AMIDE"
+>   echo "      table says dres=$SPEC_DRES amide=$SPEC_AMIDE"
+>   echo "      The system is not the molecule this job thinks it is -- rebuild."; exit 1
+> fi
+> echo "  build/run chemistry agree: dres=$SPEC_DRES amide=$SPEC_AMIDE"
+> [ "$SPEC_DRES" = "none" ] && {
+>   echo "FAIL: dres=none would make gate() skip all three chirality gates,"
+>   echo "      so this job could not validate them. Refusing to run."; exit 1; }
+> echo "  chirality gates ARMED on D-residue $SPEC_DRES"
+> echo
+18c48
+< PROD_NSTEPS=100000 bash scripts/run_prod.sh c3b_dtII_DOR 1
+---
+> PROD_NSTEPS=100000 bash scripts/run_prod.sh c3b_dtII_DOR 1 "$SPEC_AMIDE" "$SPEC_DRES"

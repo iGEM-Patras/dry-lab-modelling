@@ -1,0 +1,11 @@
+fragment,element,gc_rich_windows
+mEGFP-IRES-His-PENK,mEGFP,157
+mEGFP-IRES-His-PENK,IRES,25
+mEGFP-IRES-His-PENK,Engineered PENK,14
+mEGFP-P2A-His-PENK,mEGFP,47
+mEGFP-P2A-His-PENK,P2A,14
+mEGFP-P2A-His-PENK,Engineered PENK,14
+His-PENK-IRES-mEGFP,mEGFP,157
+His-PENK-IRES-mEGFP,IRES,28
+His-PENK-IRES-mEGFP,Engineered PENK,18
+His-PENK-P2A-mEGFP,engineered penk,15

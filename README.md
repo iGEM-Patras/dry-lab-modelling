@@ -15,6 +15,11 @@ The full narrative — rationale, results, and honest limitations — is in **[`
 | [`05_presentation/`](05_presentation/) | Slides + wet-lab handouts | Bench-facing summaries of the above |
 | [`06_engineering_cycles/`](06_engineering_cycles/) | Payload engineering (3 pre-registered DBTL cycles) | A **negative result**: no computational route ranks these designs; the wet-lab assay is required |
 | [`07_invitro_penk/`](07_invitro_penk/) | Cell-free processing assay design | The cassette swap is predicted **neutral for convertases, adverse for cathepsin L** — a falsifiable bench test |
+| [`08_checkable_audit/`](08_checkable_audit/) | Independent audit of the wet-lab guide | 17 findings (5 critical) against the Greek bench guide, each with a reference |
+| [`09_codon_gc_design/`](09_codon_gc_design/) | GC recoding for synthesis | All four constructs at target GC, protein untouched — with the CAI cost stated |
+| [`10_immunogenicity_antibody/`](10_immunogenicity_antibody/) | MHC-I prediction + antibody detectability | Engineered epitope ≈ native immunogenicity; **P2A junction is the worst of the three** |
+| [`11_wetlab_protocols/`](11_wetlab_protocols/) | Amendments 1–5 (EN + GR) | Dry-lab findings translated into bench actions |
+| [`99_provenance/`](99_provenance/) | Plans, resume briefs, as-received inputs | Traceability from request to result |
 
 ## Key results at a glance
 
@@ -25,9 +30,22 @@ The full narrative — rationale, results, and honest limitations — is in **[`
 - **The two processing routes are affected unequally by the cassette swap.** PC1/3 and PC2 cut C-terminal to the dibasic; cathepsin L/V cut N-terminal to it. The swap leaves the convertase scissile context identical at all 7 cassettes but moves the cathepsin P2 residue from Phe (7/7 within the preferred Leu/Trp/Phe/Tyr set) to Val (0/7). Separately, 5 of 7 engineered cassettes are Gly-extended PAM substrates where no native cassette is. Both are directly testable in the cell-free assay in `07_invitro_penk/`.
 - **Payload δ-selectivity engineering returned a negative result** across three pre-registered cycles. The final cycle (3b, MM-GBSA physics rescoring) **failed its calibration gate**: it gets the *direction* of δ/μ preference right (G1 pass) but cannot resolve the *magnitude* at n=5 (G2′ and G3 fail; regression CI spans zero). Recommendation: radioligand competition binding on `YGGFEVVG` and `YGGFDIIG`.
 
+- **The four ordered constructs now sit at synthesis-friendly GC** (40 % for the P2A pair, 45 % for the IRES pair) with **every cistron's protein byte-identical** to before. The cost is codon adaptation (CAI 0.65–0.74) — a real trade, not a free lunch, and one a transfection settles faster than more modelling. Order sheet: [`09_codon_gc_design/PENK_order_sheet.csv`](09_codon_gc_design/PENK_order_sheet.csv).
+- **The engineered epitope is not more immunogenic than the native one it replaces** (1.86 % vs 1.77 % strong MHC-I binders across 6,120 allele-peptide pairs). The **P2A remnant junction ranks highest of the three groups** (2.07 %) — an argument for the IRES cassettes if immunogenicity of a persistently expressed product matters. See [`10_immunogenicity_antibody/`](10_immunogenicity_antibody/).
+- **HEK293T cannot process proenkephalin to small opioid peptides.** PCSK1, PCSK2 and SCG5 (7B2) are all effectively absent (nTPM ≤ 0.1); CPE and PCSK1N are present. The competence claim must be made against HEK293T — the cells actually used — not against fibroblasts. Table: [`08_checkable_audit/tables/hek293t_processing_competence.csv`](08_checkable_audit/tables/hek293t_processing_competence.csv).
+- **The wet-lab guide's engineering-cycle numbering does not map onto the dry-lab cycles.** Six guide cycles vs four repo cycles, reconciled in [`06_engineering_cycles/cycle_reconciliation.csv`](06_engineering_cycles/cycle_reconciliation.csv) — guide Cycle 3 *is* a dry-lab cycle but belongs to the lipoplex workstream, not `06_`.
+
 ## Status
 
 All dry-lab workstreams are **complete**. Cycle 3b terminated on 2026-08-31 per its pre-registration; see [`06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md`](06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md) for the terminal verdict. No further computational work is planned — the project's open questions are now wet-lab questions.
+
+**What the wet lab should do next**, in order of what unblocks the most: (1) order the four
+recoded constructs from `09_codon_gc_design/PENK_order_sheet.csv`; (2) commission the custom
+anti-`YGGFEVVG` polyclonal — nothing downstream can be detected without it; (3) run the
+cell-free processing assay in `07_invitro_penk/`, which is where HEK293T's missing convertases
+stop being a modelling caveat and start being a measurement; (4) radioligand competition
+binding on `YGGFEVVG` and `YGGFDIIG`, since cycle 3b established no computational route ranks
+them. Amendments 1–5 in `11_wetlab_protocols/` state each of these as a bench-actionable change.
 
 `07_invitro_penk/` is the first of those wet-lab questions worked up into a benchtop design. It is a **design, not a result**: no experimental data exists yet.
 

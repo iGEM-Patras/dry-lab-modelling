@@ -1,0 +1,5 @@
+Construct,File,Length (bp),Target GC %,Final GC %,CAI,AT-runs ≥9,Homopolymers ≥6,ARE (ATTTA),polyA signal,GC-rich windows ≥68%
+mEGFP-P2A-His-PENK,mEGFP_P2A_His_PENK_GC40.dna,1674,40.0,40.02,0.736,0,0,0,0,8
+His-PENK-P2A-mEGFP,His_PENK_P2A_mEGFP_GC40.dna,1671,40.0,39.98,0.733,0,0,0,0,0
+mEGFP-IRES-His-PENK,mEGFP_IRES_His_PENK_GC45.dna,2197,45.0,45.02,0.694,0,4,0,0,25
+His-PENK-IRES-mEGFP,His_PENK_IRES_mEGFP_GC45.dna,2194,45.0,44.99,0.651,0,4,0,0,107

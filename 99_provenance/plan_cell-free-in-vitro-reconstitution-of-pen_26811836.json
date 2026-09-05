@@ -1,0 +1,58 @@
+{
+  "version": 3,
+  "created_at": "2026-08-31T20:25:06.057Z",
+  "task_summary": "Cell-free in vitro reconstitution of PENK proteolytic processing",
+  "agents": [],
+  "phases": [
+    {
+      "name": "Plan",
+      "delegations": [
+        {
+          "steps": [
+            {
+              "title": "Enumerate every cleavage junction from the sequences",
+              "description": "Computationally scan native P01210 (267 aa) and engPENK (288 aa) for all processing determinants: dibasic KR/KK/RR/RK, monobasic R/K sites with the P4/P6 basic-residue context that licenses convertase cleavage, C-terminal Gly-Lys-Arg amidation signals, and the signal-peptidase site. Score each site into tiers (canonical dibasic / context-licensed monobasic / disfavoured) using published convertase specificity rules rather than a flat motif match. Deliverable: penk_junction_map.csv with position, flanking 6+6 context, tier, predicted enzyme (PC1/3 vs PC2), and whether native and engPENK differ at that site."
+            },
+            {
+              "title": "Fetch and pin the enzyme-condition literature",
+              "description": "Retrieve primary sources via PubMed/PMC and DOI for each enzyme in the cascade: PC1/3 and PC2 pH optima and Ca2+ dependence, the obligate 7B2 requirement for PC2 activity, CPE pH optimum and Co2+/Zn2+ handling, PAM's copper/ascorbate/O2 requirement and its two catalytic domains (PHM then PAL), and furin as the TGN-side alternative. Extract exact buffer compositions and specific activities into a table. Deliverable: enzyme_conditions.csv plus a reference list with DOIs — every numeric condition traceable to a source, no recalled values."
+            },
+            {
+              "title": "Design the junction peptide panel",
+              "description": "Design synthetic peptides spanning each junction identified in step 1, for both native and engPENK arms. Each peptide sized for unambiguous MS (target 12-20mer), centred on the scissile bond with authentic flanking context, checked for solubility (GRAVY, net charge at assay pH), for internal Cys (avoid, or specify TCEP), and for mass collisions against every other peptide in the panel. Include the Gly-extended cassette species so PAM amidation is directly testable. Deliverable: junction_peptides_order.csv, vendor-ready, with sequence, purity spec, quantity, and per-peptide rationale."
+            },
+            {
+              "title": "Compute the full MS target list",
+              "description": "Calculate exact monoisotopic [M+H]+ (and 2+/3+ where relevant) for every substrate, every predicted cleavage product, and every partial-processing intermediate in both arms, including amidated (-0.98 Da) and Gly-extended forms and CPE-trimmed variants. Flag isobaric and near-isobaric pairs and compute the resolving power needed to separate each. Cross-check against the existing 49-peak native panel for consistency. Deliverable: invitro_ms_targets.csv with a resolving-power column and an explicit isobaric-collision list."
+            },
+            {
+              "title": "Write the staged reconstitution protocol",
+              "description": "Full benchtop protocol for both stages: Stage 1 junction peptides, Stage 2 recombinant proprotein. Specify sequential-addition reactions that mimic the granule maturation gradient (PC1/3 at pH 6.0 then PC2/7B2 at pH 5.5 then CPE then PAM), single-enzyme control reactions for attribution, no-enzyme and heat-killed controls, timepoints, quench chemistry, and the inhibitor panel used to confirm attribution. State the scope boundary: this measures site accessibility and product identity, not physiological rates. Deliverable: PENK_INVITRO_PROTOCOL.md."
+            },
+            {
+              "title": "Build the figures",
+              "description": "Publication-grade figures via the figure-style skill: (a) junction map aligning native and engPENK with tier-coded sites and the seven cassettes marked; (b) staged cascade schematic showing each enzyme addition with its buffer condition and the mass shift it produces; (c) an interpretation decision tree mapping observed-vs-expected peak patterns onto specific conclusions (site not cut / cut by wrong enzyme / over-trimmed / amidation failed). Deliverable: penk_invitro_figures.png panels, each verified for label overlap."
+            },
+            {
+              "title": "Assemble, cross-check, and stage to the repo",
+              "description": "Compile protocol, tables and figures into a single referenced PDF. Verify internally: every mass in the protocol recomputed against the CSV, every citation resolved to a live DOI, every claim about native processing checked against the existing Amendment documents for contradictions (and any contradiction reported, not silently reconciled). Push to kei-zan/dry-lab-modelling under a new 07_invitro_processing/ directory and verify by content hash. Deliverables: PENK_INVITRO_PROTOCOL.pdf and the staged repo directory."
+            }
+          ]
+        }
+      ],
+      "id": "phase-0"
+    }
+  ],
+  "desired_outputs": [
+    "Wet-lab protocol document (PDF + markdown) with buffers, enzymes, order of addition, quench, controls",
+    "Junction peptide order table (native + engPENK) ready to send to a vendor",
+    "Site-by-site cleavage prediction table with tier-scored confidence",
+    "MS target list with exact monoisotopic masses for every predicted product and intermediate",
+    "Figures: junction map, staged cascade schematic, decision tree for interpreting results",
+    "Fully referenced methods section with DOIs"
+  ],
+  "feasibility": {
+    "rationale": "All sequence-derived quantities (junctions, masses, peptide designs) are computed exactly from P01210 and the annotated construct, both already verified in hand. Enzyme conditions, pH/Ca2+ optima and specificity rules come from primary literature, which I will fetch and cite rather than recall. The genuine limitation is that no in vitro reconstitution reproduces granule enzyme stoichiometry, so the protocol yields site accessibility and product identity, not physiological rates — this will be stated as a scope boundary rather than buried.",
+    "confidence": "high"
+  }
+}

@@ -1,0 +1,5 @@
+construct,snapgene_file,length_bp,target_GC,GC_parent,GC_recoded,CAI_parent,CAI_recoded,nt_changed,pct_identity,protein_identical_all_cistrons,YGGFEVVG_copies,IRES_byte_identical,Kozak_untouched,signal_peptide_untouched,AT_run_ge9,homopolymer_ge6,ARE_ATTTA,polyA_AATAAA,homopolymers_preexisting_in_IRES,GCrich_windows_ge68
+mEGFP-P2A-His-PENK,mEGFP_P2A_His_PENK_GC40.dna,1674,40.0,57.5,40.02,0.863,0.736,386,76.9,True,7,n/a,True,True,0,0,0,0,0,8
+His-PENK-P2A-mEGFP,His_PENK_P2A_mEGFP_GC40.dna,1671,40.0,51.6,39.98,0.767,0.733,360,78.5,True,7,n/a,True,True,0,0,0,0,0,0
+mEGFP-IRES-His-PENK,mEGFP_IRES_His_PENK_GC45.dna,2197,45.0,58.6,45.02,0.753,0.694,392,82.2,True,7,True,True,True,0,4,0,0,4,25
+His-PENK-IRES-mEGFP,His_PENK_IRES_mEGFP_GC45.dna,2194,45.0,58.6,44.99,0.709,0.651,402,81.7,True,7,True,True,True,0,4,0,0,4,107

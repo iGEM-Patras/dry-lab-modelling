@@ -1,0 +1,8 @@
+112c112
+< "$PY" "$W/scripts/collect_dg.py" "${TAG}_r${REP}_FINAL.dat" "$TAG" "$REP" >> "$W/results_stage1.csv"
+---
+> "$PY" "$W/scripts/collect_dg.py" "${TAG}_r${REP}_FINAL.dat" "$TAG" "$REP" >> "$W/results_smoke_rep777.csv"
+114c114
+< tail -3 "$W/results_stage1.csv"
+---
+> tail -3 "$W/results_smoke_rep777.csv"

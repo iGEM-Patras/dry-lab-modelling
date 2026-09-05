@@ -1,0 +1,6 @@
+substrate,seq,amide,lost_dipeptide,ace_product,prod_mh,note
+MERF (native),YGGFMRF,False,RF,YGGFM,574.233,→ regenerates Met-enkephalin
+engMERF analogue,YGGFEVVGRF,False,RF,YGGFEVVG,827.3934,→ regenerates octapeptide
+engPENK octapeptide,YGGFEVVG,False,VG,YGGFEV,671.3035,inactivating
+option A -NH2,YGGFEVV,True,VV-NH2,YGGFE,572.2351,inactivating
+option B -NH2,YGGFEVVG,True,VG-NH2,YGGFEV,671.3035,inactivating

@@ -1,0 +1,20 @@
+# ChimeraX — engineered PENK story, three shots
+# usage:  chimerax --script engPENK_video.cxc
+set bgColor black
+# ---------- shot 1: the receptor-peptide complex, AlphaFold pLDDT colours
+open DOR_engPENK_complex_annotated.pdb
+hide atoms; show cartoon
+color bfactor palette alphafold
+lighting soft; graphics silhouettes true width 1.4
+view; turn y 2 180 models #1     ; # 180-frame slow spin
+# ---------- shot 2: pull focus to the peptide
+color /A #5a5a5aff target c
+transparency /A 65 target c
+show /B atoms; style /B stick
+color bfactor /B palette alphafold
+view /B; zoom 0.8
+# ---------- shot 3: the pharmacophore measurement
+distance /B:1@OH /B:4@CZ color yellow dashes 6 radius 0.09
+label /B residues text "{0.name}{0.number}" height 1.1 color white
+# 12.05 A Tyr1-OH to Phe4 ring, vs 8.05 A in the native peptide
+# save frames:  movie record ; turn y 2 180 ; movie encode engPENK.mp4 framerate 30
