@@ -1,0 +1,5 @@
+species,sequence,c_term,mh_monoisotopic,source,n_met,is_oxidation_satellite,origin,native_counterpart,note
+engPENK adrenorphin-counterpart,YGGFEVVGRRV,amide,1237.68,construct,0,False,cassette 5 + PAM (Gly-extended -> amide),"YGGFMRRV-NH2 (adrenorphin/metorphamide, 984.5196)",
+engPENK adrenorphin-counterpart acid,YGGFEVVGRRVG,free acid,1295.6855,construct,0,False,cassette 5 pre-PAM intermediate,YGGFMRRVG (pre-PAM),
+engPENK BAM-20 counterpart,YGGFEVVGRRVGRPEWWMDYQKR,free acid,2871.426,construct,0,False,cassette 5 BAM intermediate,BAM-20 (2618.2656),"NEAR-ISOBARIC with BAM-22 +2ox (2870.3402, delta 1.09 Da) - needs resolving power >2600 or MS2 confirmation"
+engPENK BAM-22 counterpart,YGGFEVVGRRVGRPEWWMDYQKRYG,free acid,3091.5107,construct,0,False,cassette 5 BAM intermediate,BAM-22 (2838.3504),

@@ -169,8 +169,25 @@ so endogenous PENK products are not mistaken for construct output:
 | Endogenous MERGL | `YGGFMRGL` | 900.44 | native core 4 |
 | Endogenous MERF | `YGGFMRF` | 877.40 | native core 7 |
 
-**Predicted outcome:** five clean octapeptides plus two extended species — *not* seven identical
-peptides. See Section 7.2 for why that is the design and not a defect.
+**Predicted outcome:** **four** clean octapeptides (cassettes 1, 2, 3, 6) plus **three** extended
+species (cassettes 4, 5, 7) — *not* seven identical peptides. See Section 7.2 for why that is the
+design and not a defect.
+
+Cassette 5 is the non-obvious one: its downstream flank is dibasic (`RRV`), but in native PENK
+core 5 does not release a pentapeptide — it enters the BAM-22 → BAM-20 → adrenorphin route
+[5,6]. The engineered cassette follows the same route, giving four additional species that
+were absent from the original target list:
+
+| Engineered species | Sequence | [M+H]+ | Native counterpart |
+|---|---|---|---|
+| adrenorphin counterpart | `YGGFEVVGRRV`-NH2 | 1237.68 | `YGGFMRRV`-NH2 (984.52) |
+| pre-PAM intermediate | `YGGFEVVGRRVG` | 1295.69 | `YGGFMRRVG` |
+| BAM-20 counterpart | `YGGFEVVGRRVGRPEWWMDYQKR` | 2871.43 | BAM-20 (2618.27) |
+| BAM-22 counterpart | `YGGFEVVGRRVGRPEWWMDYQKRYG` | 3091.51 | BAM-22 (2838.35) |
+
+These are calculated, not measured. Note that the engineered BAM-20 counterpart (2871.43) lies
+1.09 Da from native BAM-22 +2ox (2870.34) — resolving power >2600 or MS2 confirmation is needed
+to separate them, and the acquisition range must extend to 3100 Da rather than 2900.
 
 ### Controls and handling — not optional
 - **Untransfected and empty-vector controls**, same cell line and passage, every run. They define
@@ -263,7 +280,7 @@ PENK, the three checks that separate a real problem from this expected result ar
 
 1. **Is anything being cleaved?** If no cassette yields product, the fault is enzyme
    availability, not architecture — HEK293T lacks PC1/3, PC2 and 7B2 entirely (Section 3).
-2. **Are five cassettes clean and two extended?** That is the predicted outcome, not a failure.
+2. **Are four cassettes clean and three extended?** That is the predicted outcome, not a failure.
 3. **Is detection the limit?** No commercial anti-enkephalin antibody binds `YGGFEVVG`; the
    custom anti-`YGGFEVVG` polyclonal gates the entire expression readout.
 
