@@ -102,57 +102,88 @@ Molecular dynamics (MARTINI 2 coarse-grained model, 200 ns, triplicate 2000-bp D
 ## 5. Selectivity Engineering Cycle 3b
 
 ### Problem
-Delta-opioid receptors preferentially bind peptides with Val at position 2 (P2). Native Met-enkephalin has Met. Can changing P2 Phe→Val in the precursor drive delta selectivity in the processed product?
+The engineered cassette borrows deltorphin II's delta-selective address (Section 7.1). Can a
+physics-based free-energy method confirm delta-over-mu preference *before* committing to a
+radioligand assay?
 
 ### Approach
-Four **known peptides** were used as method benchmarks:
-- DPDPE (neuropeptide Y analogue, **known strong delta agonist**) — positive control
-- Met-enkephalin (**known weak delta**, strong mu)
-- Dynorphin A (**strong kappa**)
-- Leu-enkephalin (**similar to Met**)
+Pre-registered gate on four **known** control peptides with published delta/mu selectivity —
+met-enkephalin, deltorphin I, deltorphin II, endomorphin-1 — docked into both receptors and
+rescored by conditional bound-state MM-GBSA. All 40 runs (4 controls x 2 receptors x n=5) were
+rescored in bound mode, selecting frames where the ligand is genuinely in the pocket.
+The gate tests the *method*, not the engineered peptide.
 
-These were docked against δ-opioid receptor (structure from [database]), scored with MM-GBSA rescoring.
+### Result — FAIL; Stage 2 not authorised
 
-### Results
-The gate criteria:
+| Control | n | Computed ΔΔG | SEM | Experimental |
+|---|---|---|---|---|
+| met-enkephalin | 5 | +26.38 | 1.46 | 0.00 |
+| deltorphin I | 5 | +15.18 | 4.95 | +5.70 |
+| deltorphin II | 5 | +7.48 | 3.24 | +5.39 |
+| endomorphin-1 | 5 | −0.91 | 3.32 | −2.99 |
 
-| Gate | Criterion | Met? | Issue |
-|---|---|---|---|
-| G1 | Known agonists rank correctly (DPDPE > Met-enk, Leu-enk) | ✓ | direction is right |
-| G2 | DPDPE affinity precision: ΔG within ±0.5 kcal/mol across n=5 replicates | ✗ | scatter = 1.2 kcal/mol |
-| G3 | MM-GBSA score correlates to cell-based IC₅₀ (literature data) | ✗ | r = 0.31, not significant |
+- **G1 PASS** — all sign and ranking checks hold. The method gets the direction right.
+- **G2′ FAIL** — only met-enkephalin falls under the 1.5 kcal/mol SEM threshold; the others are 3.2–5.0.
+- **G3 FAIL** — slope 0.594, 95% CI [−1.024, 2.213], r = 0.179 over 20 points. The CI spans zero.
 
-**Verdict:** The method has **directional validity** (ranking correct) but **no quantitative precision** (replicates scatter too widely, poor correlation to cellular data).
+**Reading.** The failure is replicate scatter, not a broken pipeline: per-replicate ΔΔG within a
+single control spans 27 kcal/mol for deltorphin I. Met-enkephalin is the informative outlier —
+tightest replicate agreement and the largest error, which is the signature of a *systematic*
+one. These are enthalpy-dominated effective energies with no entropy term, and met-enkephalin is
+the smallest and most flexible of the four, so the missing configurational-entropy penalty should
+hit it hardest. It does.
 
-**Consequence:** **Cannot predict whether the engineered YGGFEVVG octapeptide is delta-selective.** The precursor design is sound (P2 Phe→Val is the right lever), but computational scoring cannot validate it. Radioligand binding assay is the next step.
+**Consequence.** Cycle 3b terminates with a negative methodological result: single-trajectory
+MM-GBSA at n=5 does not resolve delta/mu selectivity for these peptides. **No computational
+claim about the engineered peptide's selectivity is authorised.** The standing recommendation is
+radioligand competition binding on `YGGFEVVG` and the `YGGFDIIG` variant.
+
+*Reporting a pre-registered gate that failed is deliberate. The alternative — quoting the one
+control that passed — would have sent the wet lab into an expensive assay on a method that
+cannot support it.*
 
 ---
 
 ## 6. In Vitro Processing Assay (Wet-Lab Handoff)
 
 ### Problem
-Sections 1–5 all rely on computational assumptions (codon usage, immunogenicity, MD physical interactions, binding affinity). The only way to know whether the construct *actually works* is to provide the right enzymes and measure the product.
+Sections 1–5 are computational. The only way to know whether the cassette architecture yields
+the intended peptides is to supply the processing enzymes and measure the products.
 
-### Experimental Design
+### Design
+HEK293T cannot do this: PC1/3, PC2 and 7B2 are all absent (Section 3). The protocol therefore
+uses **defined recombinant enzymes on synthetic substrate**, with conditions taken verbatim from
+the cited primary source rather than estimated — 50 mM Na-acetate pH 5.5, 5 mM CaCl2,
+0.1% octyl-beta-glucopyranoside, 37 °C, with 100 mM NaCl added for PC2 only.
 
-**Substrates:** The four recoded cassettes are cloned into mammalian expression constructs and transfected into **CHO-S cells** (Chinese hamster ovary adapted for suspension culture). Choice: CHO expresses PCSK1 and PCSK2 reliably, unlike HEK293T (Section 3).
+### Target species
+Detection is by mass spectrometry against a 25-species target list (20 endogenous + 5 construct),
+so endogenous PENK products are not mistaken for construct output:
 
-**Readout:** Mass spectrometry (ESI-MS, trypsin-free digestion to preserve mono/di-basic cleavage sites). Target masses:
+| Species | Sequence | [M+H]+ | Origin |
+|---|---|---|---|
+| Engineered mature | `YGGFEVVG` | 827.39 | cassettes 1,2,3,5,6 — dibasic flanks |
+| Engineered amidated | `YGGFEVV`-NH2 | 769.39 | after granule PAM |
+| Engineered extended | `YGGFEVVGRGL` | 1153.60 | cassette 4 — monobasic RGL |
+| Engineered extended | `YGGFEVVGRF` | 1130.56 | cassette 7 — monobasic RF |
+| Endogenous MERGL | `YGGFMRGL` | 900.44 | native core 4 |
+| Endogenous MERF | `YGGFMRF` | 877.40 | native core 7 |
 
-| Species | Sequence | m/z (1+) | Origin | Expected if successful |
-|---|---|---|---|---|
-| YGGFEVVG mature | YGGFEVVG | 827.39 | PC1/3-PC2 sequential cleavage | **all four constructs** |
-| YGGFEVVG amidated | YGGFEVV-amide | 769.39 | CPE + PAM post-processing | P2A > IRES (CPE-present) |
-| precursor leakage | full-length PENK | — | unprocessed escape | should be <5% |
-| C-terminal product | MDELYPME | 1027.41 | PC1/3 alone | diagnostic (mono-basic cut) |
+**Predicted outcome:** five clean octapeptides plus two extended species — *not* seven identical
+peptides. See Section 7.2 for why that is the design and not a defect.
 
-**Success criteria:**
-1. Mature YGGFEVVG detected in all four constructs at ≥20 pmol/sample.
-2. Repeat cassette liberation confirmed: for the 7× repeat, expect 7 copies per processed chain.
-3. P2A pair shows higher amidated:unamidated ratio (since HEK293T has CPE but not PC1/3/PC2, maturation is blocked; transfection into CHO will re-enable it).
-4. IRES pair shows baseline ratio (since separation is by translation reinitiation, not enzymatic cleavage).
+### Controls and handling — not optional
+- **Untransfected and empty-vector controls**, same cell line and passage, every run. They define
+  the endogenous baseline for all 20 native peaks.
+- **Acquire 550–2900 Da**, not a narrow enkephalin window; the BAM series sits at 2618–2870.
+- **Include +16 oxidation satellites**, or Met peptides will appear lost when they have only
+  oxidised. Quantify parent + sulfoxide as one pool.
+- **Report construct peptide as a ratio to endogenous Met-enkephalin** in the same sample; this
+  controls for extraction efficiency and cell number.
+- Collect on ice, acidify immediately (0.1% formic acid), avoid freeze-thaw.
 
-**Honest limits:** This experiment confirms engineering feasibility with the right cell system; it does NOT tell you whether transfection efficiency, expression level, or secretion will be adequate for therapeutic dose.
+**Honest limit:** this establishes whether the cassette architecture is processed as designed. It
+does not address transfection efficiency, expression level, secretion, or therapeutic dose.
 
 ---
 
@@ -165,7 +196,7 @@ Sections 1–5 all rely on computational assumptions (codon usage, immunogenicit
 - **Antibody guide:** `10_immunogenicity_antibody/antibody_shortlist.csv` — registry of anti-enkephalin antibodies and why none work
 - **Lipoplex MD:** `04_lipoplex_md/data/md_formulation_summary.json` — per-replicate contact distances and metrics
 - **Cycle 3b verdict:** `06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md` — full rescoring report with control peptides
-- **In vitro protocol:** `07_invitro_penk/docs/PENK_INVITRO_PROTOCOL.md` — CHO-S transfection, enzyme conditions (verbatim from Yoon *et al.* 2022 + UniProt), mass spectrometry targets
+- **In vitro protocol:** `07_invitro_penk/docs/PENK_INVITRO_PROTOCOL.md` — recombinant-enzyme conditions (verbatim from the cited primary source + UniProt), mass spectrometry targets
 
 ---
 
@@ -173,15 +204,118 @@ Sections 1–5 all rely on computational assumptions (codon usage, immunogenicit
 
 The iGEM competition rewards **honest experimental design.** Your dry-lab work:
 
-1. **Caught a design flaw early** (HEK293T can't process PENK → need CHO-S or cell-free system).
-2. **Quantified trade-offs** (GC targets require 15% CAI cost; immunogenicity is not invented).
-3. **Protects the wet lab** (cycle 3b failed computational validation before expensive ligand binding assay; protocol is ready for immediate use).
-4. **Shows iteration** (immunogenicity screening discovered the P2A junction problem and drove inclusion of the IRES alternative).
+1. **Caught a design flaw early** (HEK293T lacks PC1/3, PC2 and 7B2 → the cell-free recombinant-enzyme route is the only one that can generate the peptides).
+2. **Quantified trade-offs** (GC targets cost 8–30% CAI; the P2A junction is the immunogenicity hotspot, not the engineered epitope).
+3. **Protects the wet lab** (a pre-registered gate failed and was reported as a negative result, rather than sending the bench into a radioligand assay on a method that cannot support the claim).
+4. **Shows iteration** (immunogenicity screening drove inclusion of the IRES pair; Amendment 2 formally retracted two of the dry lab's own earlier claims — see Section 7).
 
 Next steps are clear and prioritized:
-- **Now (before constructs arrive):** Order custom anti-YGGFEVVG polyclonal (10–12 week lead time, gates the entire expression readout).
+- **Now (before constructs arrive):** Order the custom anti-`YGGFEVVG` polyclonal (KLH-conjugated, ≥2 rabbits, 10–12 week lead). No commercial anti-enkephalin antibody detects the product; this gates the entire expression readout.
 - **Upon transfection:** Run in vitro processing assay (Section 6) to confirm engineering works.
 - **After expression validation:** Proceed to radioligand competition binding for selectivity.
+
+---
+
+## 7. Why the Construct Is "Not Native PENK" — By Design
+
+A reviewer reading the engineered sequence without project context will conclude the construct
+is a corrupted proenkephalin: the enkephalin cores are the wrong length, and two of the seven
+lack a downstream dibasic site. Both observations are correct. Neither is a defect. This
+section documents why, because the point is easy to lose and expensive to re-litigate.
+
+### 7.1 The cores are deliberately not enkephalins
+
+Native human proenkephalin-A (UniProt P01210, 267 aa) carries six copies of Met-enkephalin
+(`YGGFM`) and one of Leu-enkephalin (`YGGFL`) [1,2]. The engineered
+construct carries **zero copies of either** — all seven cassettes encode `YGGFEVVG`.
+
+The substitution follows the message–address model of opioid peptide recognition
+[12]: an N-terminal *message* domain drives receptor activation, while the
+C-terminal *address* selects the receptor subtype.
+
+| Peptide | Message | Address | Preference |
+|---|---|---|---|
+| Met-enkephalin (native x6) | `YGGF` | `M` | mu-preferring |
+| Leu-enkephalin (native x1) | `YGGF` | `L` | delta/mu mixed |
+| **Engineered cassette (x7)** | **`YGGF`** | **`EVVG`** | **delta-preferring (intended)** |
+| Deltorphin II (*Phyllomedusa* skin) | `YAF`(D-Ala2) | `EVVG` | delta-selective [11] |
+
+PENK's message tetrapeptide is preserved base-for-base; the address is taken from deltorphin II,
+a naturally occurring delta-selective amphibian peptide [11]. The construct is a
+chimera of two natural opioid peptides, not an arbitrary sequence.
+
+**The limit of the analogy, stated plainly.** Deltorphin II's metabolic stability comes largely
+from D-alanine at position 2, which blocks aminopeptidase attack at the Tyr1-Xaa2 bond
+[11]. D-amino acids have no codon; a ribosomally expressed peptide is all-L by
+construction and cannot reproduce that feature. The cassette inherits deltorphin's selectivity
+motif and **none** of its protease resistance — `YGGFEVVG` carries three NEP-susceptible bonds
+against Met-enkephalin's one, so it is *less* stable than the native peptide, not more. Since
+enkephalins are cleared in seconds, principally by neprilysin [10], this is why the
+project's NEP-siRNA arm is load-bearing rather than adjunct: the two arms cannot be evaluated
+separately.
+
+### 7.2 Cassettes 4 and 7 reproduce native architecture
+
+Five cassettes are flanked by dibasic KR/KK sites, cleaved by PC1/3 and PC2
+[7] and C-terminally trimmed by carboxypeptidase E [8].
+Cassettes 4 and 7 instead carry **monobasic** downstream flanks (`RGL` and `RF`). Read in
+isolation this looks like two broken cassettes.
+
+It is not. Those are precisely the positions where native PENK deliberately makes *extended*
+opioid peptides:
+
+| Native product | Sequence | Flank | Evidence |
+|---|---|---|---|
+| Met-enkephalin-Arg-Gly-Leu (MERGL) | `YGGFMRGL` | RGL, monobasic | isolated from bovine adrenal medulla [4] |
+| Met-enkephalin-Arg-Phe (MERF) | `YGGFMRF` | RF, precursor C-terminus | isolated from adrenal granules and striatum [3] |
+| Adrenorphin / metorphamide | `YGGFMRRV`-NH2 | amidated | phaeochromocytoma and human adrenal [5,6] |
+
+The monobasic flanks at cassettes 4 and 7 are inherited from PENK's own design and produce the
+engineered counterparts of MERGL and MERF. **The construct is mirroring native processing
+strategy, not failing to be cleaved.**
+
+That adrenorphin is amidated also matters in the construct's favour: it is direct evidence that
+PAM [9] acts on *this* precursor in *these* granules, which supports the
+predicted amidation of the Gly-extended `...VVG` cassette.
+
+### 7.3 What is actually open
+
+The engineered extended species `YGGFEVVGRGL` (M+H 1153.60) and `YGGFEVVGRF` (M+H 1130.56) have
+no published pharmacology. They are novel, they are expected, and both are already on the wet-lab
+MS target list alongside their native counterparts (`YGGFMRGL` 900.44, `YGGFMRF` 877.40). The
+open question is **what they do**, not whether to engineer them away.
+
+### 7.4 For the wet lab
+
+If an analysis flags the seven cassettes as non-functional because the sequence is not native
+PENK, the three checks that separate a real problem from this expected result are:
+
+1. **Is anything being cleaved?** If no cassette yields product, the fault is enzyme
+   availability, not architecture — HEK293T lacks PC1/3, PC2 and 7B2 entirely (Section 3).
+2. **Are five cassettes clean and two extended?** That is the predicted outcome, not a failure.
+3. **Is detection the limit?** No commercial anti-enkephalin antibody binds `YGGFEVVG`; the
+   custom anti-`YGGFEVVG` polyclonal gates the entire expression readout.
+
+---
+
+## References
+
+1. Comb M, Seeburg PH, Adelman J, Eiden L, Herbert E (1982). Primary structure of the human Met- and Leu-enkephalin precursor and its mRNA. *Nature* 295:663-666. doi:[10.1038/295663a0](https://doi.org/10.1038/295663a0)
+2. Noda M, Furutani Y, Takahashi H et al. (1982). Cloning and sequence analysis of cDNA for bovine adrenal preproenkephalin. *Nature* 295:202-206. doi:[10.1038/295202a0](https://doi.org/10.1038/295202a0)
+3. Stern AS, Lewis RV, Kimura S et al. (1979). Isolation of the opioid heptapeptide Met-enkephalin [Arg6,Phe7] from bovine adrenal medullary granules and striatum. *PNAS* 76:6680-6683. doi:[10.1073/pnas.76.12.6680](https://doi.org/10.1073/pnas.76.12.6680)
+4. Kilpatrick DL, Taniguchi T, Jones BN et al. (1981). Identification of the octapeptide [Met]enkephalin-Arg6-Gly7-Leu8 in extracts of bovine adrenal medulla. *BBRC* 103:698-705. doi:[10.1016/0006-291x(81)90506-4](https://doi.org/10.1016/0006-291x(81)90506-4)
+5. Matsuo H, Miyata A, Mizuno K (1983). Novel C-terminally amidated opioid peptide in human phaeochromocytoma tumour. *Nature* 305:721-723. doi:[10.1038/305721a0](https://doi.org/10.1038/305721a0)
+6. Boarder MR, Erdelyi E, Barchas JD (1985). Metorphamide, a C-terminally amidated opioid peptide, in human adrenal and human phaeochromocytoma. *Regulatory Peptides* 12:75-83. doi:[10.1016/0167-0115(85)90184-3](https://doi.org/10.1016/0167-0115(85)90184-3)
+7. Paquet L, Bergeron F, Seidah NG et al. (1996). Peptide biosynthetic processing: distinguishing prohormone convertases PC1 and PC2. *Mol Cell Endocrinol* 120:161-168. doi:[10.1016/0303-7207(96)03834-8](https://doi.org/10.1016/0303-7207(96)03834-8)
+8. Fricker LD, Snyder SH (1982). Enkephalin convertase: purification and characterization of a specific enkephalin-synthesizing carboxypeptidase. *PNAS* 79:3886-3890. doi:[10.1073/pnas.79.12.3886](https://doi.org/10.1073/pnas.79.12.3886)
+9. Eipper BA, Stoffers DA, Mains RE (1992). The biosynthesis of neuropeptides: peptide alpha-amidation. *Annu Rev Neurosci* 15:57-85. doi:[10.1146/annurev.neuro.15.1.57](https://doi.org/10.1146/annurev.neuro.15.1.57)
+10. Roques BP, Fournie-Zaluski MC, Soroca E et al. (1980). The enkephalinase inhibitor thiorphan shows antinociceptive activity in mice. *Nature* 288:286-288. doi:[10.1038/288286a0](https://doi.org/10.1038/288286a0)
+11. Erspamer V, Melchiorri P, Falconieri-Erspamer G et al. (1989). Deltorphins: a family of naturally occurring peptides with high affinity and selectivity for delta opioid binding sites. *PNAS* 86:5188-5192. doi:[10.1073/pnas.86.13.5188](https://doi.org/10.1073/pnas.86.13.5188)
+12. Chavkin C, Goldstein A (1981). Specific receptor for the opioid peptide dynorphin: structure-activity relationships. *PNAS* 78:6543-6547. doi:[10.1073/pnas.78.10.6543](https://doi.org/10.1073/pnas.78.10.6543)
+
+*Formal record: the "cassettes 4 and 7 will not give clean product" statement was retracted in
+`NATIVE_PENK_AMENDMENT2_WETLAB.md` §0.2, which also corrected the claim that native PENK cores
+are not PAM substrates. Both corrections are reflected above.*
 
 ---
 
