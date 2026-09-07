@@ -187,35 +187,6 @@ does not address transfection efficiency, expression level, secretion, or therap
 
 ---
 
-## Methods & Data
-
-- **Plasmid optimization:** `09_codon_gc_design/PENK_recode_validation.csv` — validated per-cistron translation, homopolymer checks
-- **Ordering sheet:** `09_codon_gc_design/PENK_order_sheet.csv` — synthesis parameters for all four cassettes
-- **HEK293T audit:** `08_checkable_audit/tables/hek293t_processing_competence.csv` — expression data from public datasets (re-quantified against Ensembl GRCh38)
-- **MHC predictions:** `10_immunogenicity_antibody/mhc_predictions_full.csv` and `mhc_group_summary.csv` — full MHCflurry 2.x run
-- **Antibody guide:** `10_immunogenicity_antibody/antibody_shortlist.csv` — registry of anti-enkephalin antibodies and why none work
-- **Lipoplex MD:** `04_lipoplex_md/data/md_formulation_summary.json` — per-replicate contact distances and metrics
-- **Cycle 3b verdict:** `06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md` — full rescoring report with control peptides
-- **In vitro protocol:** `07_invitro_penk/docs/PENK_INVITRO_PROTOCOL.md` — recombinant-enzyme conditions (verbatim from the cited primary source + UniProt), mass spectrometry targets
-
----
-
-## Why This Matters
-
-The iGEM competition rewards **honest experimental design.** Your dry-lab work:
-
-1. **Caught a design flaw early** (HEK293T lacks PC1/3, PC2 and 7B2 → the cell-free recombinant-enzyme route is the only one that can generate the peptides).
-2. **Quantified trade-offs** (GC targets cost 8–30% CAI; the P2A junction is the immunogenicity hotspot, not the engineered epitope).
-3. **Protects the wet lab** (a pre-registered gate failed and was reported as a negative result, rather than sending the bench into a radioligand assay on a method that cannot support the claim).
-4. **Shows iteration** (immunogenicity screening drove inclusion of the IRES pair; Amendment 2 formally retracted two of the dry lab's own earlier claims — see Section 7).
-
-Next steps are clear and prioritized:
-- **Now (before constructs arrive):** Order the custom anti-`YGGFEVVG` polyclonal (KLH-conjugated, ≥2 rabbits, 10–12 week lead). No commercial anti-enkephalin antibody detects the product; this gates the entire expression readout.
-- **Upon transfection:** Run in vitro processing assay (Section 6) to confirm engineering works.
-- **After expression validation:** Proceed to radioligand competition binding for selectivity.
-
----
-
 ## 7. Why the Construct Is "Not Native PENK" — By Design
 
 A reviewer reading the engineered sequence without project context will conclude the construct
@@ -295,6 +266,35 @@ PENK, the three checks that separate a real problem from this expected result ar
 2. **Are five cassettes clean and two extended?** That is the predicted outcome, not a failure.
 3. **Is detection the limit?** No commercial anti-enkephalin antibody binds `YGGFEVVG`; the
    custom anti-`YGGFEVVG` polyclonal gates the entire expression readout.
+
+---
+
+## Methods & Data
+
+- **Plasmid optimization:** `09_codon_gc_design/PENK_recode_validation.csv` — validated per-cistron translation, homopolymer checks
+- **Ordering sheet:** `09_codon_gc_design/PENK_order_sheet.csv` — synthesis parameters for all four cassettes
+- **HEK293T audit:** `08_checkable_audit/tables/hek293t_processing_competence.csv` — expression data from public datasets (re-quantified against Ensembl GRCh38)
+- **MHC predictions:** `10_immunogenicity_antibody/mhc_predictions_full.csv` and `mhc_group_summary.csv` — full MHCflurry 2.x run
+- **Antibody guide:** `10_immunogenicity_antibody/antibody_shortlist.csv` — registry of anti-enkephalin antibodies and why none work
+- **Lipoplex MD:** `04_lipoplex_md/data/md_formulation_summary.json` — per-replicate contact distances and metrics
+- **Cycle 3b verdict:** `06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md` — full rescoring report with control peptides
+- **In vitro protocol:** `07_invitro_penk/docs/PENK_INVITRO_PROTOCOL.md` — recombinant-enzyme conditions (verbatim from the cited primary source + UniProt), mass spectrometry targets
+
+---
+
+## Why This Matters
+
+The iGEM competition rewards **honest experimental design.** Your dry-lab work:
+
+1. **Caught a design flaw early** (HEK293T lacks PC1/3, PC2 and 7B2 → the cell-free recombinant-enzyme route is the only one that can generate the peptides).
+2. **Quantified trade-offs** (GC targets cost 8–30% CAI; the P2A junction is the immunogenicity hotspot, not the engineered epitope).
+3. **Protects the wet lab** (a pre-registered gate failed and was reported as a negative result, rather than sending the bench into a radioligand assay on a method that cannot support the claim).
+4. **Shows iteration** (immunogenicity screening drove inclusion of the IRES pair; Amendment 2 formally retracted two of the dry lab's own earlier claims — see Section 7).
+
+Next steps are clear and prioritized:
+- **Now (before constructs arrive):** Order the custom anti-`YGGFEVVG` polyclonal (KLH-conjugated, ≥2 rabbits, 10–12 week lead). No commercial anti-enkephalin antibody detects the product; this gates the entire expression readout.
+- **Upon transfection:** Run in vitro processing assay (Section 6) to confirm engineering works.
+- **After expression validation:** Proceed to radioligand competition binding for selectivity.
 
 ---
 
