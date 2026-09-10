@@ -1,0 +1,5 @@
+order_name,length_bp,enzyme_5,enzyme_3,flank_5,flank_3,v5_8mer_cov_pct,v6_8mer_cov_pct,v5_IDT_score_observed,v6_est_IDT_score,codons_recoded,protein_unchanged,IRES_unchanged
+mEGFP_P2A_His_PENK_GC40_v6_HindIII_XbaI,1700,HindIII,XbaI,CATTAGCACT,ACGCTCTTAC,47.1,16.2,"<10, accepted",0.0,60,True,True
+His_PENK_IRES_mEGFP_GC45_v6_BamHI_NotI,2222,BamHI,NotI,CATTAGCACT,ACGCTCTTAC,53.1,27.3,"<10, accepted",4.0,60,True,True
+mEGFP_IRES_His_PENK_GC45_v6_BamHI_XbaI,2223,BamHI,XbaI,CATTAGCACT,ACGCTCTTAC,54.1,28.4,10,4.0,60,True,True
+His_PENK_P2A_mEGFP_GC40_v6_HindIII_NotI,1699,HindIII,NotI,CATTAGCACT,ACGCTCTTAC,52.7,20.0,"<10, accepted",0.0,55,True,True

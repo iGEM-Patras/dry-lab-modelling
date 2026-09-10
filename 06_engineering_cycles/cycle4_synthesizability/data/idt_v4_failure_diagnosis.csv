@@ -1,0 +1,4 @@
+finding,idt_score,cause,present_in_wetlab_files,fixed_in_v5
+CATTAGCACT at 1 and 1691,10.0,5' flank equals reverse complement of 3' flank AGTGCTAATG,True,True
+AGTGCTAATG at 1691 and 1,10.0,"same inverted repeat, scored from 3' end",True,True
+8-mer repeats cover 49.5%,3.8,7x YGGFEVVG cassettes plus codon reuse; inherent to the design,True,False

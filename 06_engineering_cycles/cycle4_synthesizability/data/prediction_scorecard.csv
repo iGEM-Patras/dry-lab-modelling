@@ -1,0 +1,6 @@
+round,construct,my_prediction,idt_observed,outcome,cause
+v4,mEGFP_P2A_His_PENK_GC40,"orderable, no complexity flags",DENIED 23.8,FALSIFIED,"terminal inverted repeat (5' flank = revcomp 3' flank), inherited from wet-lab files untested"
+v5,mEGFP_P2A_His_PENK_GC40,2.8 ACCEPT,accepted (<10),CONFIRMED,
+v5,His_PENK_P2A_mEGFP_GC40,5.1 ACCEPT,accepted (<10),CONFIRMED,
+v5,His_PENK_IRES_mEGFP_GC45,5.2 ACCEPT,accepted (<10),CONFIRMED,
+v5,mEGFP_IRES_His_PENK_GC45,5.6 ACCEPT,DENIED 10.0 (repeats 6.0 + C-window 4.0),FALSIFIED,repeat sub-score predicted to 0.4; missed second rule (12-base window >80% single base) entirely

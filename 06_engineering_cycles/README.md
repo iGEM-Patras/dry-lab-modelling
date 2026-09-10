@@ -26,6 +26,7 @@ reducing the μ-mediated adverse-effect profile that makes conventional opioids 
 | **2** | Enhance address hydrophobicity / anionic residue (literature-guided) | 5 variants | ✅ complete | **Primary hypothesis falsified** — 4 of 5 predictions wrong; V4/V5 retained |
 | **3a** | Validate pose convergence as a selectivity metric | *no new sequences* | ✅ complete | **H3a rejected** — does not replicate; metric retired |
 | **3b** | ~~Combine Cycle 2's two independent wins~~ → **change the observable**: explicit-solvent MD + MM-GBSA ΔΔG in kcal/mol | controls + 2 survivors, acid & amide | 📋 pre-registered, gated | Original premise **withdrawn** (V5's win within noise at n=20). Stage 1 must calibrate on experimental controls before the panel is run |
+| **4** | **Can the cassette be manufactured?** Iteratively reverse-engineer the vendor's synthesis-complexity rules from its rejection reports | 4 constructs × 3 rounds (v4→v5→v6) | 🔄 v4/v5 scored, v6 pre-registered | v4 **denied 23.8** (inverted-repeat flanks, inherited from wet-lab files); v5 fixed 3 of 4; v6 recodes mature PENK, **awaiting vendor** |
 
 - [`cycle1_deltorphin_chimera/CYCLE1.md`](cycle1_deltorphin_chimera/CYCLE1.md) — retrospective writeup **+ correction notice**
 - [`cycle2_delta_selectivity/CYCLE2_DESIGN.md`](cycle2_delta_selectivity/CYCLE2_DESIGN.md) — pre-registration (committed before the runs)
@@ -46,6 +47,15 @@ identical Design inputs and no Learn edges between them. That inflates cycle cou
 reducing cycle depth. Conversely, Cycle 3 **is** split into 3a and 3b because 3a's
 result determines what metric 3b is judged on — a genuine sequential dependency.
 
+By the same rule, Cycle 4's three rounds (v4 → v5 → v6) are **one cycle**, not three. Each
+round's design is determined by the previous round's rejection report, so they form a
+sequential chain — but they share one hypothesis ("this cassette is manufacturable") and
+one oracle. They are documented as rounds *within* Cycle 4 rather than as Cycles 4/5/6.
+
+Cycle 4 is also the first **wet–dry** loop here: its Test step is an external
+manufacturer's feasibility engine, not a simulation. The Learn edge crosses the
+dry/wet boundary, which is what the project needs to demonstrate.
+
 ## Track record
 
 Predictions are committed and pushed **before** the corresponding runs are launched, so
@@ -55,8 +65,18 @@ the falsification record is auditable in the git history.
 |---|---|---|---|---|
 | 2 | 5 | 1 | **4** | `f2d6ade` (before job `ac2c837e`) |
 | 3a | 5 | 3 | **2** (both decisive) | `ec7123d` (before job `1391bb2a`) |
+| 4 (v4) | 1 | 0 | **1** | — (not pre-registered; see below) |
+| 4 (v5) | 4 | 3 | **1** | — (not pre-registered; see below) |
+| 4 (v6) | 5 | *pending* | *pending* | this commit (before vendor submission) |
 
-**Cumulative: 10 predictions, 4 confirmed, 6 falsified.** The two Cycle 3a falsifications
+**Cumulative: 15 predictions scored, 7 confirmed, 8 falsified** (+5 pending).
+
+Cycle 4's first two rounds were **not** pre-registered — the v4 and v5 predictions were
+made informally in conversation and only written down after the vendor had answered. They
+are recorded in the scorecard for honesty, but they do not carry the same evidential
+weight as a committed prediction and are marked as such. v6 is the first round of this
+cycle to follow the project's own rule. This is itself a finding: the cheapest, fastest
+oracle in the project was the one where pre-registration discipline slipped first. The two Cycle 3a falsifications
 rejected the cycle's own hypothesis; the three confirmations include P5, which predicted
 that our *previous* cycle's ranking was unreliable — and it was.
 
