@@ -34,25 +34,50 @@ purified protein. ε₂₈₀ = 32 890 M⁻¹cm⁻¹ (reduced) from 3 Trp + 11 T
 ## 2. Finding #1 — the engPENK-first P2A construct carries a dead tail
 
 In `His_PENK_P2A_mEGFP`, engPENK is cistron 1, so the P2A peptide stays **fused to the
-C-terminus** of the engPENK product after ribosome skipping: 22 extra residues,
-`ATNFSLLKQAGDVEENPGP` preceded by the last cassette.
+C-terminus** of the engPENK product after ribosome skipping: **19 extra residues**,
+`ATNFSLLKQAGDVEENPGP`, immediately after the last cassette.
 
-**That tail contains no dibasic site.** PC1/3 and PC2 cut at KR/RR/KK; the tail has none.
-Consequence: **the terminal cassette of this construct cannot be released as a free
-peptide.** It will stay fused to 22 residues of P2A through the entire digest.
+**That tail contains no dibasic site.** PC1/3 and PC2 cut at KR/RR/KK; the tail has a
+single K at position 8 and no dibasic. Consequence: **cassette 7 of this construct cannot
+be released as a short peptide.** It stays fused to 19 residues of P2A through the digest.
 
-This affects **1 of 7 cassettes in 1 of 4 constructs** — the other six cassettes in that
-construct are internal and release normally. It is not fatal, but it means:
+### This costs zero free octapeptide — do not re-order
 
-- Expect a **~2.5 kDa C-terminal species** in this construct's digest that the other
-  three do not produce (`YGGFEVVGRF` + P2A tail).
-- For maximum free-peptide yield, the three **payload-downstream** constructs
-  (`mEGFP_P2A_His_PENK`, and both IRES constructs) are the better substrates.
-- The tail is a useful **internal negative control**: a species that should *not* be
-  cleaved, in the same tube as species that should.
+Cassette 7 was **never** going to yield free `YGGFEVVG`. Its C-terminal context is `RF`,
+ending at the stop codon, and CPE removes only C-terminal **basic** residues — it cannot
+remove Phe. Cassette 7's product is `YGGFEVVGRF` in *every* construct: an extended
+species, by design. It is the engineered equivalent of native PENK's terminal
+`YGGFMRF` (Met-enkephalin-Arg-Phe, MERF), itself a naturally extended end-product.
+
+Per-cassette fate, calculated from the ordered sequences:
+
+| Cassette | position (proprotein) | C-terminal context | product |
+|---|---|---|---|
+| 1 | 100 | `KR` | **`YGGFEVVG`** free octapeptide |
+| 2 | 110 | `KK` | **`YGGFEVVG`** free octapeptide |
+| 3 | 142 | `KK` | **`YGGFEVVG`** free octapeptide |
+| 4 | 195 | `RGL` | `YGGFEVVGRGL` extended (CPE cannot remove Leu) |
+| 5 | 222 | `RR` | **`YGGFEVVG`** free octapeptide |
+| 6 | 245 | `KR` | **`YGGFEVVG`** free octapeptide |
+| 7 | 279 | `RF` (terminal) | `YGGFEVVGRF` extended (CPE cannot remove Phe) |
+
+**Free-octapeptide yield is 5 of 7 cassettes, identical in all four constructs.** The five
+octapeptide-yielding cassettes are all internal and unaffected by anything at the
+C-terminus. The P2A tail changes one *minor extended species* into a different minor
+extended species, in one of four constructs:
+
+| Construct | cassette 7 product | length | [M+H]⁺ (monoisotopic) |
+|---|---|---|---|
+| the other three | `YGGFEVVGRF` | 10 aa | 1130.5629 |
+| `His_PENK_P2A_mEGFP` | `YGGFEVVGRF` + P2A tail | 29 aa | 3098.5218 |
+
+So: **nothing is lost that the experiment was measuring.** Add 3098.52 to the MS target
+list for that one construct and treat it as a **free internal negative control** — a
+species that should *not* be cleaved, sitting in the same tube as five that should. That
+is a control the panel did not previously have.
 
 This was not caught earlier because the cistron-order panel was designed for expression
-comparison, not for digest yield.
+comparison, not for digest yield — and, as it turns out, digest yield is not affected.
 
 ---
 
@@ -149,7 +174,59 @@ The full pairwise matrix is in `tables/enzyme_compatibility_matrix.csv`.
 
 ---
 
-## 6. What this does not resolve
+## 6. Steric accessibility of the seven cleavage sites — checked, passes
+
+**Question:** the payload is intrinsically disordered by design, but is every dibasic site
+actually accessible to PC1/3 and PC2, or does any of them sit buried in the one folded
+domain the protein has?
+
+**Source of the answer:** the corrected AlphaFold run already in this repo
+(`04_structures/engPENK_alphafold_per_residue_plddt.csv`, 288-aa proprotein — the run
+validated in `cycle3b_physics_rescoring/ALPHAFOLD_RESUBMIT_NOTE.md` after the earlier
+DNA-submitted run was rejected). No new prediction was needed. AlphaFold's own
+`fraction_disordered` for this model is **0.83**, pTM 0.26.
+
+The protein has exactly two structural regions:
+
+| Region | residues | mean pLDDT | reading |
+|---|---|---|---|
+| **folded anchor** | 1–77 | **84.4** | signal peptide + the Cys-rich domain (all 6 Cys) |
+| **disordered payload** | 78–288 | **~30** | the seven cassettes and every dibasic site |
+
+Per-site, over a 10-residue window centred on each scissile bond:
+
+| Cassette | site (proprotein) | pLDDT at N-terminal dibasic | pLDDT across cassette | accessible |
+|---|---|---|---|---|
+| 1 | 98–99 | 26.8 | 28.2 | yes |
+| 2 | 108–109 | 29.6 | 28.3 | yes |
+| 3 | 140–141 | 25.9 | 24.8 | yes |
+| 4 | 193–194 | 33.2 | 32.8 | yes |
+| 5 | 220–221 | 34.8 | 33.7 | yes |
+| 6 | 243–244 | 35.6 | 31.9 | yes |
+| 7 | 277–278 | 36.3 | 25.6 | yes |
+
+**All 7 of 7 sites are at pLDDT 26–36 — deeply disordered, far below the 50 threshold.**
+Not one lies inside the folded anchor; the first dibasic site sits **21 residues past** the
+anchor's C-terminal boundary. A disordered site is an extended site, which is the
+conformation PC1/3 and PC2 require. There is no steric reason for any cassette to
+under-cut.
+
+**What this does and does not license.** It says no site is *occluded*. It does not predict
+*rates* — pLDDT is a confidence measure, not a free energy, and cleavage kinetics depend on
+sequence context and enzyme concentration, which this does not model. If a cassette
+under-performs in the digest, the cause is kinetic or compositional, not steric, and the
+per-site sequence context in `cleavage_predictions.csv` is where to look.
+
+**Corollary for the His tag.** The tag sits at the mature N-terminus, i.e. at the start of
+the *folded* anchor, and the nearest dibasic site is 66 residues downstream with the whole
+anchor in between. Processing interference is therefore implausible. But note the pLDDT run
+was done **without** the tag, so it says nothing about whether appending His6-GS perturbs
+the anchor's own fold — that is a solubility/folding question, not a processing one, and it
+is still open.
+
+---
+
+## 7. What this does not resolve
 
 - **Yield is unknown.** Nothing here predicts how much protein comes off the column;
   that is what the transfection will tell you. If yield is low, the IRES constructs
@@ -157,21 +234,25 @@ The full pairwise matrix is in `tables/enzyme_compatibility_matrix.csv`.
 - **The aggregation risk is calculated, not measured.** \|z\|/kDa is a heuristic. A
   dynamic light scattering read or a simple post-exchange spin-and-A280 (§4 step 5)
   settles it empirically in one afternoon.
-- **Whether the His tag interferes with processing is untested.** It sits at the
-  N-terminus, upstream of the first cassette, and the nearest dibasic is ~75 residues
-  away, so interference is unlikely — but it is an assumption, not a result.
+- **Whether appending His6-GS perturbs the folded anchor is untested.** Processing
+  interference is ruled out in §6; the anchor's own fold with the tag on it is not.
+- **Cleavage *rates* are not predicted.** §6 rules out steric occlusion only.
 - **Disulfide state of the secreted protein is unknown.** Six Cys in a secreted protein
   passing through the ER will likely be oxidised; this has not been checked and affects
   only how accessible the N-terminal region is.
 
 ---
 
-## 7. Files
+## 8. Files
 
 - `tables/substrate_properties.csv` — per-construct mass, pI, charge, A280, C-terminal end
 - `tables/purification_plan.csv` — the four buffer steps with rationale
 - `tables/enzyme_compatibility_matrix.csv` — full pairwise co-incubation matrix
 - `substrate_prep_bridge.png` — charge-vs-pH curve and enzyme staging
+- `tables/cassette_fate.csv` — per-cassette C-terminal context and product
+- `tables/cassette_yield_accounting.csv` — free-octapeptide yield per construct
+- `tables/cassette_accessibility.csv` — per-site pLDDT windows
+- `cassette_accessibility.png` — pLDDT profile with cleavage sites, and cassette fate
 
 **Data sources.** Sequences: the ordered v6 FASTA files in
 `06_engineering_cycles/cycle4_synthesizability/data/`. Mass, pI, ε₂₈₀: Biopython

@@ -155,3 +155,4 @@ native,,,proprotein_fragment_oxMet,native 114-135 (pre-CPE) +2ox(Met),MDELYPMEPE
 native,,,proprotein_fragment_oxMet,native 237-260 (pre-CPE) +1ox(Met),FAEALPSDEEGESYSKEVPEME,22,False,1,Met oxidation artefact,2488.0475,2489.0548,1245.031,830.3565
 native,,,proprotein_fragment_oxMet,native 25-99 (pre-CPE) +1ox(Met),ECSQDCATCSYRLVRPADINFLACVMECEGKLPSLKIWETCKELLQLSKPELPQDGTSTLRENSKPEESHLLA,73,False,1,Met oxidation artefact,8208.9747,8209.982,4105.4946,2737.3322
 native,,,PAM_product,"Adrenorphin/metorphamide (amidated, PAM product)",YGGFMRRV,8,True,0,"PAM two-step amidation (-Gly, +NH2; -58.00548 Da from Gly-extended)",983.5123,984.5196,492.7634,328.8447
+His_PENK_P2A_mEGFP_GC40,,C7TAIL,negative_control_uncleavable,cassette 7 + P2A tail (no dibasic),YGGFEVVGRFATNFSLLKQAGDVEENPGP,29,False,0,P2A stays fused to cistron-1 C-terminus; no dibasic in tail,3097.5145,3098.5218,1549.7645,1033.5121

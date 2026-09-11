@@ -1,0 +1,8 @@
+cassette,pos,C_ext,product,basis
+1,84,KRYG,YGGFEVVG (free octapeptide),"dibasic KR -> PC cut, CPE trims basics"
+2,94,KKMD,YGGFEVVG (free octapeptide),"dibasic KK -> PC cut, CPE trims basics"
+3,126,KKDA,YGGFEVVG (free octapeptide),"dibasic KK -> PC cut, CPE trims basics"
+4,179,RGLK,YGGFEVVGRGL (extended),RGL then KR downstream; CPE cannot remove L
+5,206,RRVG,YGGFEVVG (free octapeptide),"dibasic RR -> PC cut, CPE trims basics"
+6,229,KRFA,YGGFEVVG (free octapeptide),"dibasic KR -> PC cut, CPE trims basics"
+7,263,RF,YGGFEVVGRF (extended),native-equivalent C-terminus; CPE cannot remove F
