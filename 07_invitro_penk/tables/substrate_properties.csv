@@ -1,0 +1,5 @@
+construct,mature_aa,kDa,pI,z_at_pH5.5,z_at_pH8.0,eps280,A280_1mg_per_mL,Cys,C_term_tail
+His_PENK_IRES_mEGFP_GC45,272,30.93,5.19,-5.8,-17.9,32890,1.063,6,"native, ends ...YGGFEVVGRF"
+His_PENK_P2A_mEGFP_GC40,291,32.9,5.1,-7.7,-19.9,32890,1.0,6,"P2A 22aa, no dibasic - NOT releasable"
+mEGFP_IRES_His_PENK_GC45,272,30.93,5.19,-5.8,-17.9,32890,1.063,6,"native, ends ...YGGFEVVGRF"
+mEGFP_P2A_His_PENK_GC40,272,30.93,5.19,-5.8,-17.9,32890,1.063,6,"native, ends ...YGGFEVVGRF"

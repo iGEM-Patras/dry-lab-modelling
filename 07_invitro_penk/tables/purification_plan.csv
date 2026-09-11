@@ -1,0 +1,5 @@
+step,buffer,rationale
+1 capture,"lysis/bind: 50 mM NaH2PO4 pH 8.0, 300 mM NaCl, 10 mM imidazole","pH 8.0 keeps protein at z=-18 (soluble, far from pI 5.19); 300 mM NaCl suppresses non-specific ionic binding; 10 mM imidazole blocks weak binders"
+2 wash,same + 20-30 mM imidazole,9 His residues total -> tag binds tightly; can afford a stringent wash
+3 elute,same + 250 mM imidazole,single-step elution; His6 elutes cleanly at 250 mM
+4 buffer-exchange,"-> digest buffer 50 mM Na-acetate pH 5.5, 5 mM CaCl2 (spin desalt, 3-10 kDa MWCO)",CRITICAL: exchange DIRECTLY into digest buffer; do not concentrate then acidify. See aggregation note.

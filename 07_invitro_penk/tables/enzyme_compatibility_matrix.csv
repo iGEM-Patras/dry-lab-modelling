@@ -1,0 +1,7 @@
+,PC1/3,PC2+7B2,Cathepsin L,CPE,PAM,Furin
+PC1/3,-,co-incubation OK,co-incubation OK,co-incubation OK,INCOMPATIBLE: pH 5.5 vs 5.0,INCOMPATIBLE: pH 5.5 vs 6.0
+PC2+7B2,co-incubation OK,-,co-incubation OK,co-incubation OK,INCOMPATIBLE: pH 5.5 vs 5.0,INCOMPATIBLE: pH 5.5 vs 6.0
+Cathepsin L,co-incubation OK,co-incubation OK,-,INCOMPATIBLE: EDTA vs metal,INCOMPATIBLE: EDTA vs metal; pH 5.5 vs 5.0,INCOMPATIBLE: pH 5.5 vs 6.0
+CPE,co-incubation OK,co-incubation OK,INCOMPATIBLE: EDTA vs metal,-,INCOMPATIBLE: pH 5.5 vs 5.0,INCOMPATIBLE: pH 5.5 vs 6.0
+PAM,INCOMPATIBLE: pH 5.0 vs 5.5,INCOMPATIBLE: pH 5.0 vs 5.5,INCOMPATIBLE: EDTA vs metal; pH 5.0 vs 5.5,INCOMPATIBLE: pH 5.0 vs 5.5,-,INCOMPATIBLE: pH 5.0 vs 6.0
+Furin,INCOMPATIBLE: pH 6.0 vs 5.5,INCOMPATIBLE: pH 6.0 vs 5.5,INCOMPATIBLE: pH 6.0 vs 5.5,INCOMPATIBLE: pH 6.0 vs 5.5,INCOMPATIBLE: pH 6.0 vs 5.0,-

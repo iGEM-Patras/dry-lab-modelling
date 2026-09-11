@@ -56,3 +56,11 @@ tables/   junction_peptides_order   24 peptides, vendor-ready
 Reference 2 (Dupuy 2003) was read from its abstract only — it is paywalled. Confirm before
 publication. Reference 3 (Shennan 1995) reports zymogen *maturation* parameters, not
 mature-enzyme turnover optima, and must not be used as an assay optimum.
+
+## Substrate preparation (added after the v6 constructs were ordered)
+
+`docs/SUBSTRATE_PREP_BRIDGE.md` covers the step this protocol assumes away: getting
+engPENK out of the lab's own conditioned medium and into the digest tube. It contains two
+findings that change how the digest should be set up — a non-cleavable P2A tail on the
+`His_PENK_P2A_mEGFP` construct, and the digest buffer sitting 0.3 pH units from the
+substrate's pI. Read it before the first digest.
