@@ -1,0 +1,42 @@
+[
+ {
+  "id": "NATIVE_P01210",
+  "SP_score": 0.9998,
+  "TM_score": 0.0001,
+  "other": 0.0001,
+  "SP_predicted": true,
+  "threshold": 0.725
+ },
+ {
+  "id": "V6_His_PENK_IRES_mEGFP_GC45__Met",
+  "SP_score": 0.9998,
+  "TM_score": 0.0002,
+  "other": 0.0001,
+  "SP_predicted": true,
+  "threshold": 0.725
+ },
+ {
+  "id": "V6_His_PENK_P2A_mEGFP_GC40__Met",
+  "SP_score": 0.9998,
+  "TM_score": 0.0002,
+  "other": 0.0001,
+  "SP_predicted": true,
+  "threshold": 0.725
+ },
+ {
+  "id": "V6_mEGFP_IRES_His_PENK_GC45__Met",
+  "SP_score": 0.9998,
+  "TM_score": 0.0002,
+  "other": 0.0001,
+  "SP_predicted": true,
+  "threshold": 0.725
+ },
+ {
+  "id": "V6_mEGFP_P2A_His_PENK_GC40__P2Aremnant",
+  "SP_score": 0.9997,
+  "TM_score": 0.0002,
+  "other": 0.0001,
+  "SP_predicted": true,
+  "threshold": 0.725
+ }
+]

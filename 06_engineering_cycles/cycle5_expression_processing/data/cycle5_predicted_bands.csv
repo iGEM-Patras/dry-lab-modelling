@@ -1,0 +1,7 @@
+construct,species,kDa,kind,secreted
+mEGFP_P2A_His_PENK_GC40,"His-engPENK, SP removed",30.9,engPENK,yes
+mEGFP_P2A_His_PENK_GC40,"read-through, SP internal",62.3,fusion_stuck,NO
+His_PENK_P2A_mEGFP_GC40,"His-engPENK, SP removed",32.8,engPENK,yes
+His_PENK_P2A_mEGFP_GC40,"read-through, SP removed",59.6,fusion_sec,yes
+mEGFP_IRES_His_PENK_GC45,"His-engPENK, SP removed",30.9,engPENK,yes
+His_PENK_IRES_mEGFP_GC45,"His-engPENK, SP removed",30.9,engPENK,yes

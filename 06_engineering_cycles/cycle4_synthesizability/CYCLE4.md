@@ -1,6 +1,6 @@
 # Cycle 4 — Can the designed cassette actually be manufactured?
 
-**Status:** in progress · v4 and v5 tested and scored, v6 **pre-registered below**
+**Status:** **CLOSED** · v6 accepted by the vendor and **ordered**. Pre-registration scored below.
 **Type:** wet–dry closed loop — the first cycle in this repo whose Test step is an
 external instrument (the vendor's synthesis-feasibility engine) rather than a simulation
 **Learn input:** the four ordering-ready constructs produced by the tag-relocation work
@@ -182,6 +182,34 @@ P5 is the one to watch. It is the same class of prediction that failed in round 
 the two-rule model has only ever been validated against two reports. If a third rule
 exists, P5 is how we find out.
 
+### Outcome — all four accepted and ordered
+
+| Prediction | Outcome | Evidence |
+|---|---|---|
+| **P1** all four accepted (total < 10) | **CONFIRMED** | all four passed the gate and were ordered |
+| **P2** both P2A constructs score exactly 0.0 | **UNRESOLVED** | needs the itemised score |
+| **P3** both IRES constructs keep exactly one 4.0 C-flag | **UNRESOLVED** | needs the itemised score |
+| **P4** no repeat flag on any construct | **UNRESOLVED** | needs the itemised score |
+| **P5** no third scoring rule appears | **CONFIRMED** | a third rule would have added points; all four stayed under 10 |
+
+**Scored: 2 of 5 confirmed, 0 falsified, 3 unresolved.**
+
+The three unresolved predictions are unresolved for a structural reason worth recording:
+**the vendor's acceptance path returns a verdict, not a breakdown.** Only denials itemise.
+P2–P4 were written as point-level predictions against a report that acceptance does not
+generate, so they became unfalsifiable the moment the constructs passed.
+
+That is a flaw in how the predictions were written, not in the result. The lesson for
+future cycles: **a prediction must name a read-out the experiment will actually produce
+under both outcomes.** "Scores exactly 0.0" is only checkable on a rejection. Had P2–P4
+been phrased against what the accept path does return, they would have scored.
+
+This also caps what Cycle 4 can claim. The two-rule model reproduced both denial reports
+to within 0.5 points and correctly predicted four acceptances — but "correctly predicted
+the verdict" is weaker evidence than "correctly predicted the score", and only the former
+is in hand. The model is validated at verdict level, on 6 observations (2 denials, 4
+acceptances), not at point level.
+
 ![Cycle 4 synthesizability](cycle4_synthesizability.png)
 
 **Figure.** (A) Complexity score by design round against the denial threshold; black
@@ -193,11 +221,11 @@ documented cut-off.
 
 ## Track record contribution
 
-| Round | Predictions | Confirmed | Falsified |
-|---|---|---|---|
-| v4 | 1 | 0 | **1** |
-| v5 | 4 | 3 | **1** |
-| v6 | 5 | *pending* | *pending* |
+| Round | Predictions | Confirmed | Falsified | Unresolved |
+|---|---|---|---|---|
+| v4 | 1 | 0 | **1** | 0 |
+| v5 | 4 | 3 | **1** | 0 |
+| v6 | 5 | 2 | 0 | **3** |
 
 Both falsifications were informative rather than merely wrong: v4's revealed a defect
 sitting in the wet lab's own files that nobody had detected, and v5's revealed an entire

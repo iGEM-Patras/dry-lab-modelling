@@ -1,0 +1,6 @@
+peptide,role,mono_M,MH+,M2H2+
+YGGFEVVG,engineered payload - the target,826.3861,827.3934,414.2003
+YGGFEVVGRGL,"C-extended, expected if CPE absent",1152.5928,1153.6,577.3037
+YGGFEVVGRF,C-extended heptapeptide analogue,1129.5556,1130.5629,565.7851
+YGGFM,"native Met-enkephalin, positive control",573.2257,574.233,287.6201
+YGGFL,"native Leu-enkephalin, specificity control",555.2693,556.2766,278.6419
