@@ -148,3 +148,33 @@ make that visible instead of silent.
 - `data/lambda_schedule.csv` — the 27-window λ schedule
 - `data/fep_budget.csv` — the measured-throughput budget table
 - `mdp/ti_00.mdp` … `ti_26.mdp` — per-window production inputs
+
+---
+
+## 8. Gate script dry-run — C3/C4 are load-bearing, demonstrated not asserted
+
+`scripts/gate_ti.py` scores C1–C5 and was dry-run on two synthetic datasets before any
+real window exists (`dryrun/`). The well-behaved case passes and reports the target; the
+non-converged case fails and withholds it. Exit codes 0 and 3 respectively.
+
+**The finding that justifies adding C3 and C4.** In the deliberately non-converged case —
+15.0 kcal/mol spread between replicates and λ overlap of 0.01 — the *correlation* gate
+still **passed** at r = 0.802, p = 0.03:
+
+| gate | well-behaved | non-converged |
+|---|---|---|
+| C1 signs | PASS (6/7) | **PASS (6/7)** |
+| C2 correlation | PASS (r = 0.997) | **PASS (r = 0.802)** |
+| C3 λ overlap | PASS (0.10) | FAIL (0.01) |
+| C4 replicate spread | PASS (1.0 kcal/mol) | FAIL (15.0 kcal/mol) |
+| **C5 target** | reported | **withheld** |
+
+So a campaign with unusable sampling would have cleared a correlation-and-sign gate of
+exactly the kind used in Cycles 3b and 6, and produced a plausible ΔΔG for `YGGFEVVG`.
+C3 and C4 are the only reason it is caught. This is the concrete form of the risk named in
+§6: TI's characteristic failure is a smooth, believable number from unconverged windows.
+
+Two implementation notes recorded because both cost a fix:
+- `ndarray.ptp()` is removed in NumPy 2 — use `np.ptp(arr)`.
+- C4 is evaluated on controls only. The target has no reference value, so its replicate
+  spread cannot be a pass criterion without circularity; it is reported alongside the ΔΔG.

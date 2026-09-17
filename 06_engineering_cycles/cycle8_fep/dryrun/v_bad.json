@@ -1,0 +1,99 @@
+{
+  "n_controls_scored": 7,
+  "gates": {
+    "C1_signs": {
+      "pass": true,
+      "correct": 6,
+      "of": 7,
+      "required": "at least 6 of 7"
+    },
+    "C2_correlation": {
+      "pass": true,
+      "pearson_r": 0.8022,
+      "p": 0.03,
+      "spearman_rho": 0.8571,
+      "required": "|r| > 0.754"
+    },
+    "C3_overlap": {
+      "pass": false,
+      "worst_overlap": 0.01,
+      "required": ">= 0.03 everywhere",
+      "failing_legs": [
+        {
+          "system": "ENDOMORPHIN-1",
+          "receptor": "OPRD1",
+          "replicate": 1,
+          "min_overlap": 0.01
+        },
+        {
+          "system": "ENDOMORPHIN-1",
+          "receptor": "OPRM1",
+          "replicate": 1,
+          "min_overlap": 0.01
+        },
+        {
+          "system": "ENDOMORPHIN-1",
+          "receptor": "OPRD1",
+          "replicate": 2,
+          "min_overlap": 0.01
+        },
+        {
+          "system": "ENDOMORPHIN-1",
+          "receptor": "OPRM1",
+          "replicate": 2,
+          "min_overlap": 0.01
+        },
+        {
+          "system": "FENTANYL",
+          "receptor": "OPRD1",
+          "replicate": 1,
+          "min_overlap": 0.01
+        },
+        {
+          "system": "FENTANYL",
+          "receptor": "OPRM1",
+          "replicate": 1,
+          "min_overlap": 0.01
+        },
+        {
+          "system": "FENTANYL",
+          "receptor": "OPRD1",
+          "replicate": 2,
+          "min_overlap": 0.01
+        },
+        {
+          "system": "FENTANYL",
+          "receptor": "OPRM1",
+          "replicate": 2,
+          "min_overlap": 0.01
+        },
+        {
+          "system": "NALTREXONE",
+          "receptor": "OPRD1",
+          "replicate": 1,
+          "min_overlap": 0.01
+        },
+        {
+          "system": "NALTREXONE",
+          "receptor": "OPRM1",
+          "replicate": 1,
+          "min_overlap": 0.01
+        }
+      ]
+    },
+    "C4_replicates": {
+      "pass": false,
+      "worst_spread_kcal": 15.013,
+      "required": "< 1.5 kcal/mol for every control"
+    }
+  },
+  "C5_target": {
+    "reported": false,
+    "reason": "one or more of C1-C4 failed; per pre-registration the target ddG is withheld",
+    "failed_gates": [
+      "C3_overlap",
+      "C4_replicates"
+    ]
+  },
+  "verdict": "FAIL"
+}

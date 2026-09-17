@@ -1,0 +1,39 @@
+{
+  "n_controls_scored": 7,
+  "gates": {
+    "C1_signs": {
+      "pass": true,
+      "correct": 6,
+      "of": 7,
+      "required": "at least 6 of 7"
+    },
+    "C2_correlation": {
+      "pass": true,
+      "pearson_r": 0.9974,
+      "p": 0.0,
+      "spearman_rho": 1.0,
+      "required": "|r| > 0.754"
+    },
+    "C3_overlap": {
+      "pass": true,
+      "worst_overlap": 0.1,
+      "required": ">= 0.03 everywhere",
+      "failing_legs": []
+    },
+    "C4_replicates": {
+      "pass": true,
+      "worst_spread_kcal": 0.998,
+      "required": "< 1.5 kcal/mol for every control"
+    }
+  },
+  "C5_target": {
+    "reported": true,
+    "system": "engPENK_YGGFEVVG",
+    "ddG": 1.2,
+    "ddG_sem": 0.0,
+    "n_rep": 2,
+    "interpretation": "delta-preferring",
+    "caveat": "binding preference only; says nothing about agonist efficacy"
+  },
+  "verdict": "PASS"
+}
