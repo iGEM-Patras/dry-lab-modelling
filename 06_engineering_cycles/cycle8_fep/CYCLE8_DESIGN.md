@@ -178,3 +178,107 @@ Two implementation notes recorded because both cost a fix:
 - `ndarray.ptp()` is removed in NumPy 2 — use `np.ptp(arr)`.
 - C4 is evaluated on controls only. The target has no reference value, so its replicate
   spread cannot be a pass criterion without circularity; it is reported alongside the ΔΔG.
+
+---
+
+## 9. Prerequisite validation — five errors caught before production (2026-09-17)
+
+Five separate faults were found by staged validation jobs costing under two hours of
+`pshort_el8` and ~20 min of GPU. Each would have failed or corrupted the full campaign.
+
+| # | Fault | How it would have presented |
+|---|---|---|
+| 1 | `tc-grps = SOLU MEMB SOLV` — no group named `SOLU` exists | all 864 windows fail identically at `grompp` |
+| 2 | `couple-moltype = LIG` — topology names molecules `system1/2/3` | `grompp` fatal, "did not find any molecules of type 'LIG'" |
+| 3 | `couple-intramol = no` with a flexible peptide | `mdrun` fatal: perturbed excluded pairs beyond the pair-list cutoff |
+| 4 | calibration assumed n=7 with a correlation gate | only 4 peptide systems exist; correlation gate is unreachable |
+| 5 | diagnostic scripts using `\| head` under `exec > >(tee …)` | SIGPIPE, exit 141 — three jobs "failed" with truncated reports |
+
+**Authoritative values, read from an existing `prod.tpr` rather than assumed:**
+thermostat groups are **`Protein MEMB SOLV`** (grpname list: System, Protein, MEMB, SOLV,
+rest), `ref-t 310 310 310`, `tau-t 1 1 1`.
+
+**Ligand moleculetype is `system2`**, confirmed by atom count against chemical formula, not
+by inference: `system1` = 5755 atoms (receptor), `system2` = **75 atoms**, `system3` = 134
+atoms (POPC). Met-enkephalin is C27H35N5O7S = exactly **75 atoms**. Decoupling `system1` by
+mistake would not have errored — it would have run for weeks and produced a number.
+
+**`couple-intramol = yes` is exact here, not a compromise.** `no` gives the ideal-gas
+reference required for an *absolute* ΔG. This cycle computes ΔΔG = ΔG(δ) − ΔG(μ) for the
+**same** ligand, so intramolecular and solvent contributions are identical in both legs and
+cancel exactly; the difference is unchanged. The solvent leg remains in the protocol as a
+convergence control, not as a term in the answer.
+
+### Chirality verification — the deltorphins are usable, which lifts Cycle 7's worst limit
+
+Host notes warn that `parm10.dat` has **zero improper terms on the CX α-carbon**, so
+chirality is purely geometric and the force field **cannot detect an inversion**.
+`scripts/check_chirality.py` computes the signed volume (N−CA)×(C−CA)·(CB−CA) for every
+chiral residue and uses the receptor's own L-residues as the internal reference, so no sign
+convention is needed — a D-residue is whichever residue carries the minority sign.
+
+| System | chiral residues | inverted | verdict |
+|---|---|---|---|
+| deltorphin I | 358 | **1** — resid 2, ALA | D-Ala² correct |
+| deltorphin II | 358 | **1** — resid 2, ALA | D-Ala² correct |
+| met-enkephalin | 355 | 0 | all-L correct |
+| endomorphin-1 | 356 | 0 | all-L correct |
+
+The two all-L peptides are the negative controls for the same test that produced the
+positive result. **Consequence:** deltorphin I (+5.70) and II (+5.39) are available, so this
+cycle covers the strongly δ-selective regime that Cycle 7's ChEMBL panel could not reach
+(its maximum was +2.13). Those are also the two compounds the Boltz-2 affinity head called
+with the **wrong sign** at n=4.
+
+*Caveat on an argument, not on the result:* the inference that the peptide occupied low
+residue numbers was wrong — the receptor is first in the file. The chirality conclusion
+stands on a **differential**: all four systems share the same receptor, and the inverted
+residue appears only in the two deltorphins. A receptor alanine would have appeared in all
+four.
+
+### Revised gate: ORDINAL, not correlational
+
+Only 4 peptide systems exist on disk, so n=4 and the critical |r| is **0.950** — no honest
+method clears that. **C2 is therefore replaced for this cycle:**
+
+| id | criterion | threshold |
+|---|---|---|
+| C1 | signs of ΔΔG correct across the 4 controls | **4 of 4** |
+| C2′ | ranking correct (Spearman ρ) | **ρ = 1.0** (note p = 0.33 at n=4; ordinal evidence, not significance) |
+| C3 | per-window λ overlap | no adjacent overlap < 0.03 |
+| C4 | replicate agreement | < 1.5 kcal/mol per control |
+| C5 | report `YGGFEVVG` | only if C1–C4 pass |
+
+**What TI adds over Cycle 7 is not statistical power** — Cycle 7 had n=13 and a real
+correlation gate. It is (a) no compression slope to correct for, and (b) coverage of the
+strongly δ-selective end. Both must be stated whenever this result is quoted next to
+Cycle 7's.
+
+### Reused assets and the remaining gap
+
+**41 complete equilibrated replicates** exist at
+`/data/users/kzanaj/boltz_dock/cycle3b/systems/c3b_{dtI,dtII,em1,menk}_{DOR,MOR}/rep{1..5}/`
+(`npt.gro` + `system.top` + `index.ndx` + `prod.tpr`). The membrane build is therefore off
+the critical path — this matters because Cycle 3b's membrane gate refused 9 of 40 runs.
+
+Excluded pending confirmation: `c3b_bogus_DOR` (name suggests a deliberate negative control)
+and `c3b_dtII_DOR/rep99` (looks like a re-run, not a 6th replicate — pooling it would
+corrupt C4).
+
+**Gap: `YGGFEVVG` has no equilibrated system.** All four on disk are controls. Build route
+chosen: rebuild the peptide into an existing equilibrated receptor+bilayer box (route B),
+because our peptide is all-L standard — no mirrored residue needed — and reusing the
+validated box avoids the membrane gate. Post-build checks, all mandatory before any
+production window: system2 atom count = **113** (C39H54N8O12 for YGGFEVVG), chirality check
+returns **zero** inverted residues, all 27 windows grompp, and the peptide is still in the
+orthosteric pocket.
+
+### Execution architecture
+
+λ windows are independent, so production runs as a **SLURM array over windows** on `pgpu`
+rather than one monolithic job: short tasks backfill where a multi-week job cannot, a failed
+window costs one window, and partial results can be scored continuously. `pgpu` returns the
+same start estimate for 8 h / 48 h / 168 h requests, so walltime is free — but the partition
+has only **2 GPUs**, so total wall time remains work ÷ 2 slots. `pibu_el8` is estimated
+7 November at every request size and `pcmpg_el8` is not available to this account, so `pgpu`
+is the only path.
