@@ -1,0 +1,7 @@
+design,legs,total_ns,days_1gpu,days_2gpu,C4_scoreable
+"5 controls + target, 2 rep, 5 ns",20,2700,60.3,30.1,yes
+"4 controls + target, 2 rep, 5 ns",20,2700,60.3,30.1,yes
+"4 controls + target, 2 rep, 3 ns",20,1620,36.2,18.1,yes
+"2 extreme controls + target, 2 rep, 5 ns",12,1620,36.2,18.1,yes
+"2 extreme controls + target, 2 rep, 3 ns",12,972,21.7,10.8,yes
+"4 controls + target, 1 rep, 5 ns",10,1350,30.1,15.1,NO

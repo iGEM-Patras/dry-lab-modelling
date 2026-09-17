@@ -282,3 +282,112 @@ same start estimate for 8 h / 48 h / 168 h requests, so walltime is free — but
 has only **2 GPUs**, so total wall time remains work ÷ 2 slots. `pibu_el8` is estimated
 7 November at every request size and `pcmpg_el8` is not available to this account, so `pgpu`
 is the only path.
+
+---
+
+## 10. Measured throughput, chosen scope, and launch (2026-09-17)
+
+### The pilot replaced an estimate with a measurement
+
+**44.8 ns/day per GPU** for FEP with soft-core decoupling on the 164k-atom system
+(window 0 completed 250 ps in 488 s wall on an RTX 2080 Ti). The host's plain-MD
+benchmark of 71.5 ns/day was measured on a *larger* 270k-atom system, so it was not a
+conservative proxy: FEP costs a factor of **1.60x**, and the earlier budget was
+optimistic by 60%. Every number in section 8 that derives from 71.5 ns/day is
+superseded by `data/fep_budget_measured.csv`.
+
+The pilot also found the `couple-intramol` fault (section 9, #3) and cost ~20 min of
+GPU. Sizing the campaign on the unmeasured rate would have committed weeks on a
+protocol that died in the first seconds of every window.
+
+### Chosen scope — necessary first, extension if time allows
+
+Rationale from the PI: do the absolutely necessary work, and extend toward a complete
+picture only if time permits. Because every λ window is independent and the protocol is
+identical across legs, the extension is **additive** — not a re-run — so both fit in one
+priority-ordered work queue:
+
+| Priority | Systems | Legs | Tasks | ns | Days @2 GPU |
+|---|---|---|---|---|---|
+| **Necessary** | deltorphin II, endomorphin-1 | 8 | 0–215 | 648 | ~7.2 |
+| Extension | deltorphin I, met-enkephalin | 8 | 216–431 | 648 | ~7.2 |
+| Blocked | engPENK (no system yet) | 4 | — | 324 | ~3.6 |
+
+The two necessary controls **bracket the widest available range**: deltorphin II at
+**+5.39** and endomorphin-1 at **−4.82**, a span of **10.21 kcal/mol**. They are also
+the pair the Boltz-2 affinity head called with the **wrong sign** at n=4.
+
+**Gate for the n=2 scope, written before submission:**
+
+| id | criterion | threshold |
+|---|---|---|
+| D1 | signs correct | 2 of 2 |
+| D2 | bracketing: dtII > 0, em1 < 0, computed span | ≥ 5 kcal/mol |
+| D3 | adjacent-window λ overlap | none < 0.03 |
+| D4 | replicate agreement per control | < 1.5 kcal/mol |
+| D5 | report `YGGFEVVG` | only if D1–D4 pass |
+
+**n=2 admits no correlation gate and no magnitude calibration.** If reported, the target
+ΔΔG is a physics estimate *bracketed* by two controls, not a calibrated one. Cycle 7's
+n=13 correlation gate remains the statistically stronger claim; this cycle's contribution
+is the absence of a compression slope and coverage of the δ-selective extreme.
+
+**Rejected: 1 replicate to save 15 days.** It makes D4 unscoreable, and D4 is one of the
+two gates that catch non-convergence — the dry run (section 7) showed sign and
+correlation gates *passing* on data with 15 kcal/mol replicate spread.
+
+### Execution: work queue, not an array
+
+`--array` is host-managed and cannot be nested, which forced a better design: a shared
+work queue on `/data/users/kzanaj/cycle8_prod` with two workers claiming tasks atomically
+via `mkdir` locks. Workers scan from index 0, so **queue order is priority order** and the
+necessary set completes first. Each task checks for a complete `dH/dλ` output and skips
+rather than repeats, so a node failure costs one window. Trajectories are deleted per
+window — only `dH/dλ` is needed, which keeps 432 windows off the disk quota.
+
+### Blocker: `pgpu` node down
+
+`binfservas30` is **`down*`, reason "Not responding"** (`0/0/128/128`). Both workers are
+`PD` with `ReqNodeNotAvail`; **0 of 432 tasks claimed**. The 27 mdp files are staged and
+the queue is resume-safe, so nothing needs resubmitting when the node returns. The ~7-day
+figure is wall-clock **from a running start** — the node's return time is the number that
+decides whether this cycle lands inside the project deadline, and it is not visible from
+here.
+
+Note: the earlier pilot's `NODE_FAIL` (job 18440798, after 20:12) was this same node
+failing, not a script fault. Window 0 had already produced the throughput measurement.
+
+### engPENK system build — proceeding on CPU during the outage
+
+`build_system.sh` has a `MIN_NB=cpu` code path; minimisation is the only GPU step, so the
+build runs entirely on `pshort_el8` and the outage does not block it. *(Correction: an
+earlier note in this session credited a `MIN_ON_CPU.md` document for sanctioning this. The
+`cat` returned nothing — the support is the code path itself, which was read directly, not
+a note file.)*
+
+**Chemistry declared from the design table's own convention, not a default.**
+`prod_all.txt` records all four designed peptides as `amide=yes` and met-enkephalin — the
+neutral reference — as the single `amide=no` entry. `YGGFEVVG` as released by the digest is
+a **free acid**, so `c8_engPENK_{DOR,MOR} → amide=no, dres=none` follows that convention.
+Declared in a **separate** `prod_cycle8.txt` via the `PROD_TABLE` override; Cycle 3b's
+table is untouched as the record of what Cycle 3b ran.
+
+`scripts/peptide_spec.sh` documents why this is not a formality: on 2026-07-30 a positional
+argument silently defaulting to `none` built the **all-L analog of deltorphin II**, and
+because the chirality gate is itself skipped when that argument is `none`, *"a silent
+default in the argument feeding a safety gate disables the gate."* The system passed every
+downstream check.
+
+**Consequence for our peptide, stated plainly:** `dres=none` is correct for `YGGFEVVG`, but
+it also means **the build's own chirality gate will be skipped for the target system**. The
+independent signed-volume check (`scripts/check_chirality.py`) is therefore the only
+chirality verification the target system will receive, and running it post-build is
+mandatory, not optional — it must return **zero** inverted residues.
+
+**Starting poses** are Cycle 7's existing co-folds, with their own confidence on the
+record: `engPENK_YGGFEVVG__OPRD1` ipTM **0.958**, pLDDT 0.836; `__OPRM1` ipTM **0.957**,
+pLDDT 0.804.
+
+**Mandatory post-build checks:** `system2` atom count = **113** (C39H54N8O12), chirality
+returns zero inverted residues, all 27 windows grompp, peptide still in the orthosteric
+pocket.
