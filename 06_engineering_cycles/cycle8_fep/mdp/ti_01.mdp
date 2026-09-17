@@ -1,0 +1,49 @@
+; TI production window 1 of 27  —  init-lambda-state = 1
+integrator               = sd
+dt                       = 0.002
+nsteps                   = 10000000          ; 20 ns per window
+nstcalcenergy            = 100
+nstenergy                = 1000
+nstlog                   = 5000
+nstxout-compressed       = 25000
+; --- free energy ---
+free-energy              = yes
+couple-moltype           = LIG
+couple-lambda0           = vdw-q
+couple-lambda1           = none
+couple-intramol          = no
+init-lambda-state        = 1
+coul-lambdas             = 0.00 0.10 0.20 0.30 0.40 0.50 0.60 0.70 0.80 0.90 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+vdw-lambdas              = 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.05 0.10 0.20 0.30 0.40 0.50 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00
+sc-alpha                 = 0.5
+sc-power                 = 1
+sc-sigma                 = 0.3
+nstdhdl                  = 100
+dhdl-print-energy        = potential
+calc-lambda-neighbors    = -1
+; --- neighbour / electrostatics ---
+cutoff-scheme            = Verlet
+nstlist                  = 20
+coulombtype              = PME
+rcoulomb                 = 1.2
+vdwtype                  = cutoff
+vdw-modifier             = force-switch
+rvdw-switch              = 1.0
+rvdw                     = 1.2
+DispCorr                 = EnerPres
+; --- temperature / pressure (semi-isotropic for the bilayer) ---
+tcoupl                   = no
+ld-seed                  = -1
+tc-grps                  = SOLU MEMB SOLV
+tau-t                    = 1.0 1.0 1.0
+ref-t                    = 310 310 310
+pcoupl                   = C-rescale
+pcoupltype               = semiisotropic
+tau-p                    = 5.0
+compressibility          = 4.5e-5 4.5e-5
+ref-p                    = 1.0 1.0
+; --- constraints ---
+constraints              = h-bonds
+constraint-algorithm     = lincs
+lincs-order              = 6
+continuation             = yes
