@@ -1,0 +1,7 @@
+metric,value
+raw_ddG_pred,0.128
+slope_corrected_ddG,1.23
+uncertainty_kcal,1.76
+calibration_r,0.805
+calibration_n,13.0
+compression_factor,3.2

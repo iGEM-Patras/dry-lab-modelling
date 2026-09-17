@@ -1,0 +1,4 @@
+id,prediction,criterion
+B1,Affinity-head ddG correlates with ChEMBL ddG across the 14 references,"|r| > 0.532 (p<0.05, n=14)"
+B2,Interface ipTM difference correlates with ChEMBL ddG,"|r| > 0.532 (p<0.05, n=14)"
+B3,"If B1 or B2 passes, report engPENK on the passing metric",otherwise engPENK stays unreported
