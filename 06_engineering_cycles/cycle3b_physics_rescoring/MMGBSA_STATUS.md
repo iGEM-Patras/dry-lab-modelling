@@ -108,9 +108,13 @@ would interleave lines. They must be merged into `results_stage1.csv` after the 
 2. **Merge the parts** into `results_stage1.csv`:
    `cat results_parts/*.csv | sort > results_stage1.csv` — then check it has 40 rows and
    8 distinct system/receptor pairs x 5 reps.
-3. **gate.py does not exist.** `rescore.sh` was written to feed it and `collect_dg.py`
-   emits its input format, but the consumer was never written. Nothing downstream can
-   consume results_stage1.csv until it is.
+3. ~~**gate.py does not exist.**~~ **SUPERSEDED — it does exist**, at `scripts/gate.py`.
+   This line was written before `RESUME_2.md` (2026-08-12) recorded it as already written
+   and dry-run on synthetic data, and the gate was subsequently run to a verdict on
+   2026-08-31 (`docs/GATE_VERDICT_BOUND.md` — verdict FAIL). Anyone reading this file for
+   current state should read `GATE_VERDICT_BOUND.md` instead; this document predates the
+   verdict. A stale "next action" was quoted as current on 2026-09-17 and led to a
+   campaign being proposed that had already been run and had already failed.
 4. Exit codes for triage: 2 = setup/consistency failure, 3 = chirality inverted (discard the
    run), 4 = peptide contacts bilayer (needs a membrane-aware model), 90 = /data not mounted,
    91 = disk guard.

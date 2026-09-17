@@ -154,13 +154,14 @@ compromise. Options, cheapest first:
 
 Ordered by value:
 
-1. **Run MM-GBSA on `YGGFEVVG` at δ and μ** on the validated Cycle 3b protocol, so the
-   result is directly comparable to the four calibration peptides. Cost: 2 receptors × 5
-   replicates, ~12 min each at 8 cores / 48 GB, no GPU.
-   **Blocker: `gate.py` does not exist** — documented in `MMGBSA_STATUS.md` "Next actions"
-   item 3. `rescore.sh` was written to feed it and `collect_dg.py` emits its input format,
-   but the consumer was never written, so nothing can consume `results_stage1.csv`.
-   Writing it is a prerequisite and is a dry-lab job.
+1. ~~**Run MM-GBSA on `YGGFEVVG` at δ and μ.**~~ **RETRACTED 2026-09-17 — see §6.**
+   This item contained two errors. `gate.py` **does exist**
+   (`cycle3b_physics_rescoring/scripts/gate.py`); the "does not exist" line in
+   `MMGBSA_STATUS.md` "Next actions" was superseded by `RESUME_2.md` (2026-08-12), which
+   records it as already written and dry-run on synthetic data. More importantly, the
+   MM-GBSA route **has already been run to completion and failed its own pre-registered
+   gate** on 2026-08-31 (`docs/GATE_VERDICT_BOUND.md`, `results/verdict_bound.json`).
+   Proposing it as the path forward was wrong.
 2. **Pocket-residency time for `YGGFEVVG`.** Δ residency tracks experimental ΔΔG across the
    four calibration peptides at **r = 0.915 (p = 0.085, n = 4)** — suggestive but
    under-powered. It is the metric least sensitive to MM-GBSA's known weaknesses, and it
@@ -172,6 +173,90 @@ Ordered by value:
 4. **Pre-register the DOR predictions before the assay runs**, per project convention:
    `YGGFEVVG` is active at DOR; potency within ~10× of Met-enkephalin; **no** significant
    δ-over-μ selectivity; naltrindole abolishes the response.
+
+---
+
+## 4b. Both computational routes are now closed — tested, not assumed
+
+Added 2026-09-17, after testing one route and discovering the other had already been tested.
+
+### Route 1 — Boltz-2 affinity head: FAILED calibration (2026-09-17, Cycle 6)
+
+The peptides are 40–82 heavy atoms, under the head's 128-atom cap, so they can be submitted
+as `ligand` chains. Ten co-folds were run: our octapeptide plus the four literature-calibrated
+controls, against OPRD1 and OPRM1. Three gates were pre-registered before the run.
+
+| Gate | Required | Observed | |
+|---|---|---|---|
+| A1 rank order | ρ = 1.0 | ρ = 0.80 | **FAIL** |
+| A2 correlation | \|r\| > 0.95 (p<0.05, n=4) | r = 0.72 (p = 0.28) | **FAIL** |
+| A3 sign agreement | 3 of 3 | 2 of 3 | **FAIL** |
+
+Deltorphin II is **8448-fold δ-selective** and the head predicts it **μ-preferring** —
+a 6.5 kcal/mol sign error on the most selective peptide in the panel. Met-enkephalin's
+sign is also inverted. The head's two internal sub-predictions disagree by 1.19 kcal/mol
+on average and, for endomorphin-1 at δ, disagree in sign (+0.35 vs −1.79).
+
+Per the pre-registration, the predicted ΔΔG for `YGGFEVVG` is **not reported**. It is
+retained in `cycle6_scored.csv` marked non-reportable. Had the controls been omitted, the
+value would have agreed with the Cycle 2 null and been mistaken for confirmation.
+
+### Route 2 — MM-GBSA: FAILED its gate on 2026-08-31, before this was ever proposed
+
+| control | n | computed ΔΔG | SEM | experimental | \|error\| |
+|---|---|---|---|---|---|
+| met-enkephalin | 5 | +26.38 | **1.46** | 0.00 | **26.4** |
+| deltorphin I | 5 | +15.18 | 4.95 | +5.70 | 9.5 |
+| deltorphin II | 5 | +7.48 | 3.24 | +5.39 | 2.1 |
+| endomorphin-1 | 5 | −0.91 | 3.32 | −2.99 | 2.1 |
+
+**G1 PASS** (signs and ranking correct) · **G2′ FAIL** (3 of 4 SEMs are 3.2–5.0 against a
+1.5 threshold) · **G3 FAIL** (slope CI spans zero, r = 0.179 over 20 points).
+
+Met-enkephalin is the diagnostic: the **tightest** replicate agreement and the **largest**
+error. A reproducible large error is a systematic one — consistent with these being
+enthalpy-dominated energies with no entropy term, which should penalise the smallest and
+most flexible peptide hardest, and does.
+
+Cycle 3b terminated on its own pre-registration with the negative methodological result:
+**single-trajectory MM-GBSA at n=5 does not resolve δ/μ selectivity for these peptides.**
+Running it on `YGGFEVVG` would return a ΔΔG with SEM 3–5 kcal/mol from a method whose
+correlation with experiment is indistinguishable from zero. It cannot separate "no
+selectivity" (~0, our Cycle 2 prediction) from "moderately δ-selective" (~5).
+
+### What survives: residency, as a direction and not a number
+
+| peptide | δ residency | μ residency | Δ | experimental ΔΔG |
+|---|---|---|---|---|
+| deltorphin I | 93.0% | 82.6% | +10.4 | +5.70 |
+| deltorphin II | 75.7% | 58.0% | +17.7 | +5.39 |
+| endomorphin-1 | 97.4% | 100.0% | −2.6 | −2.99 |
+| met-enkephalin | 100.0% | 100.0% | 0.0 | +0.41 |
+
+Pocket residency is **measured, not modelled** — it does not depend on the energy model at
+all, and it is the part of Cycle 3b least sensitive to MM-GBSA's known weaknesses.
+Deltorphin II holds the δ pocket in up to 99% of frames but the μ pocket in as little as
+**10.7%**, which is the right direction for a δ-selective peptide.
+
+But it is **r = 0.915, p = 0.085, n = 4** — suggestive and not significant. It supports a
+directional statement ("δ-preferring" / "no preference") and not a ΔΔG.
+
+### Consequence for the dry lab
+
+**No computational route in this project resolves δ/μ selectivity to significance.** That
+is now a tested conclusion on both routes rather than an untested hope about one. The
+project's standing recommendation — already recorded in `GATE_VERDICT_BOUND.md` before
+either of these tests — is **radioligand competition binding on `YGGFEVVG`**, i.e. the
+wet lab. Cycle 6 does not change that recommendation; it removes the last argument for
+postponing it.
+
+What the dry lab can still deliver, honestly labelled:
+
+- **Residency for `YGGFEVVG` at δ and μ** — a directional observable on the same protocol
+  as the four calibrated controls. ~200 ns of MD across 2 receptors × 5 replicates,
+  ≈3 days on one GPU. Reports "δ-preferring / no preference", never a ΔΔG.
+- **MM-GBSA sign only (G1 level)** — falls out of the same trajectories at no extra cost.
+  G1 is the one criterion that passed, so the sign is usable where the magnitude is not.
 
 ---
 
