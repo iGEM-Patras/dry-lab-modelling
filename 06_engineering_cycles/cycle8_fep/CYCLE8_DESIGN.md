@@ -391,3 +391,75 @@ pLDDT 0.804.
 **Mandatory post-build checks:** `system2` atom count = **113** (C39H54N8O12), chirality
 returns zero inverted residues, all 27 windows grompp, peptide still in the orthosteric
 pocket.
+
+---
+
+## 11. The campaign is no longer GPU-gated (2026-09-18)
+
+`pgpu` has one node, `binfservas30`, `down*` / "Not responding" for >24 h. Both GPU
+workers have been pending with `ReqNodeNotAvail` throughout and 0 of 432 windows were
+claimed. Every CPU workaround for the *co-fold* failed (see `GRAFT_ROUTE_REJECTED.md` and
+the two 2-hour wall kills), so the campaign looked blocked indefinitely.
+
+### An error of mine that cost a day
+
+I had recorded `pibu_el8` as unusable — "estimated 7 November at every request size". That
+was a `--start` estimate for a **large, long** allocation, generalised into a dead
+partition without ever testing a small request. Read directly:
+
+```
+pibu_el8   MaxTime=28-00:00:00   AllowAccounts=ALL   TotalCPUs=2864
+pshort_el8 MaxTime=02:00:00      TotalCPUs=256
+```
+
+`sacctmgr` confirms this account holds a `pibu_el8` association with `normal` QoS, and
+`sbatch --test-only` accepted both 6 h and 12 h requests with a start estimate four hours
+out. In practice the scheduler backfilled the jobs **immediately**. The partition was
+always available; the claim in §10 was wrong, and it is the same failure mode as assuming
+`tc-grps = SOLU` instead of reading `prod.tpr` — an inference standing in for a
+measurement. The user caught it by asking "no pibu_el left?".
+
+### Measured CPU FEP throughput
+
+**5.864 ns/day per 32-core job** (one pre-built λ window, 50 ps, `binfservas*`,
+`-nb cpu -pme cpu`). Against the measured GPU rate of 44.801 ns/day that is **7.6× slower,
+not the 10–20× I had guessed** — 131 core-hours per ns. At 3 ns/window that is
+**12.3 h per window**, ~2 windows/worker/day.
+
+| arm | legs | ns | job-days | wall @ 6 | wall @ 13 |
+|---|---|---|---|---|---|
+| necessary (dtII + em1) | 8 | 648 | 110.5 | 18.4 d | **8.5 d** |
+| extension (dtI + menk) | 8 | 648 | 110.5 | 18.4 d | 8.5 d |
+| target (engPENK) | 4 | 324 | 55.3 | 9.2 d | 4.3 d |
+
+The necessary arm fits the 28-day wall with wide margin. All three arms together need ~10
+concurrent workers to fit; 446 cores were idle, i.e. 13 jobs' worth.
+
+### Running configuration
+
+**13 CPU workers on `pibu_el8`**, 32 cores each, `-pin on`, 14-day wall, pulling the
+**same** atomically-claimed queue as the two pending GPU workers — so CPU and GPU never
+duplicate a window and `pgpu` returning now *accelerates* rather than *enables*. Priority
+order is preserved (workers scan from index 0): the two bracketing controls complete before
+the extension begins. `-cpi` means a node failure costs minutes, not a window.
+Trajectories are deleted per window; only dH/dλ is retained.
+
+First status check: 13 workers RUNNING, 13/432 claimed (one each — claiming verified),
+0 complete, which is correct given 12.3 h/window against ≤1h52m of uptime. No mdrun errors.
+
+### A failed optimisation, and why it was abandoned
+
+A core-count scaling sweep (8/16/32/64, pin on/off) returned **zero for all eight
+configurations**: the script sent `mdrun` output to `/dev/null`, discarding the diagnostic
+needed to explain the failure. That is the third instrumentation self-own of this campaign
+after the `| head` SIGPIPE kills and `find -printf '%f'` printing a basename where a size
+was intended. It was not re-run — the campaign was already progressing at a measured rate,
+and a possible 1.5× from re-sharding did not justify stalling a deadline-constrained run.
+**Standing rule: a test whose purpose is to produce a number must never discard stderr.**
+
+### What does and does not trade against precision
+
+Core count and worker count affect **wall time only** — identical equations of motion,
+identical dH/dλ statistics. The only precision lever is **ns/window**, held at 3 ns.
+Dropping to 2 ns would save a third of the wall time and put the C3/C4 convergence gates at
+genuine risk of a legitimate "did not converge", so it was not done.

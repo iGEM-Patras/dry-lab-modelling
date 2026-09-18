@@ -1,0 +1,10 @@
+arm,legs,ns,job_days,concurrent_jobs,wall_days,cores_used,fits_28d
+necessary (dtII + em1),8,648.0,110.5,6,18.4,192,True
+necessary (dtII + em1),8,648.0,110.5,10,11.1,320,True
+necessary (dtII + em1),8,648.0,110.5,13,8.5,416,True
+extension (dtI + menk),8,648.0,110.5,6,18.4,192,True
+extension (dtI + menk),8,648.0,110.5,10,11.1,320,True
+extension (dtI + menk),8,648.0,110.5,13,8.5,416,True
+target (engPENK),4,324.0,55.3,6,9.2,192,True
+target (engPENK),4,324.0,55.3,10,5.5,320,True
+target (engPENK),4,324.0,55.3,13,4.3,416,True
