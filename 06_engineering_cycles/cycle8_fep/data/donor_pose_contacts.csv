@@ -1,0 +1,11 @@
+receptor,res,name,min_dist_A,contacts_lt4A
+DOR,1,TYR,2.46,22
+DOR,2,GLY,2.69,10
+DOR,3,GLY,1.28,9
+DOR,4,PHE,3.53,9
+DOR,5,MET,1.65,32
+MOR,1,TYR,1.19,19
+MOR,2,GLY,3.18,7
+MOR,3,GLY,2.93,9
+MOR,4,PHE,3.45,7
+MOR,5,MET,2.71,8

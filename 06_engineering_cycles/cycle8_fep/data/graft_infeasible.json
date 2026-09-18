@@ -1,0 +1,11 @@
+{
+ "exit_open_fraction_DOR": 0.0,
+ "exit_open_fraction_MOR": 0.017,
+ "rays": 1000,
+ "ray_clearance_A": 3.0,
+ "ray_length_A": 12.0,
+ "conclusion": "met-enkephalin C-terminus is receptor-enclosed; an 8-mer cannot share its YGGF placement",
+ "attempts_before_test": 3,
+ "peptide_heavy_atoms": 59,
+ "note_57_was_wrong": "prior post-build check said 57 heavy atoms; correct value is 59"
+}
