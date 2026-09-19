@@ -1,10 +1,7 @@
 # Glossary
 
-Lookup reference for the dry-lab repo. Written for someone with a computing background and no
-biology assumed. Terms are grouped by what you are doing when you meet them.
-
-If a term here is still opaque after reading the entry, that is a bug in this file — say so
-and it gets fixed.
+Terminology used throughout this repository, grouped by the task in which it arises rather
+than alphabetically. No biology background assumed.
 
 ---
 

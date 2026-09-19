@@ -2,10 +2,10 @@
 
 Computational audit and design work supporting an enkephalin-based analgesic strategy: **proenkephalin (PENK)** expression combined with a **neprilysin (NEP / MME)** knockdown arm, delivered by cationic / ionizable **lipoplexes**.
 
-> **New to the dry lab?** Read **[`METHODS_GUIDE.md`](METHODS_GUIDE.md)** — what each
-> computational method actually computes, why it was chosen, how to read its output, and the
-> failure modes we hit. Assumes you know the project and can code; assumes no chemistry or
-> bioinformatics. Keep **[`GLOSSARY.md`](GLOSSARY.md)** open alongside it.
+**[`METHODS_GUIDE.md`](METHODS_GUIDE.md)** explains how each computational method works, why it
+was chosen, how to read its output, and where it fails — written for a reader who can program
+but has no chemistry or bioinformatics background. **[`GLOSSARY.md`](GLOSSARY.md)** defines the
+terminology used across the repository.
 
 The full narrative — rationale, results, and honest limitations — is in **[`docs/project_brief.pdf`](docs/project_brief.pdf)**. Every tool version, force field, database accession, and published design rule is recorded in **[`methods_references.md`](methods_references.md)**.
 

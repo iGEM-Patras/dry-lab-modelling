@@ -44,20 +44,19 @@ reducing the μ-mediated adverse-effect profile that makes conventional opioids 
 - [`cycle8_fep/GRAFT_ROUTE_REJECTED.md`](cycle8_fep/GRAFT_ROUTE_REJECTED.md) — a negative result, including two invalid attempts of our own
 - [`cycle9_convergence_metric/`](cycle9_convergence_metric/) — the recalibrated metric that passed
 
-### A note for newcomers
+### Reading this index
 
 **There is no `cycle6/` directory.** Cycle 6 was a calibration attempt at n = 4 that failed
-all its gates; its data lives in [`cycle7_calibration/data/`](cycle7_calibration/data/) because
-Cycle 7 is the same experiment repeated at an adequate sample size. Nothing is missing.
+all its gates; its data is kept in [`cycle7_calibration/data/`](cycle7_calibration/data/),
+since Cycle 7 is the same experiment repeated at an adequate sample size.
 
 **Cycle 3a rejected the pose-convergence metric and Cycle 9 accepted it.** Not a contradiction:
 3a evaluated the metric without calibrating it against experimental values, 9 evaluated it
-against four peptides with published selectivity. Which one you trust depends on whether a
-metric was anchored to reality before being used — that distinction is the repo's main
-methodological lesson.
+against four peptides with published selectivity. The difference is whether the metric was
+anchored to experimental values before being relied on.
 
-**Cycles are counted by their Learn→Design edge**, not by construct count. A parallel
-multi-arm panel is one cycle; only a genuinely sequential dependency splits into two.
+**Cycles are counted by their Learn→Design edge**, not by construct count: a parallel
+multi-arm panel is one cycle, and only a genuinely sequential dependency splits into two.
 
 ## What counts as a cycle here
 

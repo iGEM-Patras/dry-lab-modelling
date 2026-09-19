@@ -1,12 +1,15 @@
 # Methods guide
 
-**For a team member who knows the project but not the computational methods.** You know what
-Epione is and why δ-selectivity matters. This explains *how* the dry lab answers its questions:
-what each technique actually computes, why we picked it, what its numbers mean, and where it
-breaks. Written assuming programming literacy and no chemistry background.
+How the computational work in this repository was done: what each method computes, why it was
+chosen over the alternatives, how to read its output, and the conditions under which it fails.
 
-Companion: [`GLOSSARY.md`](GLOSSARY.md) for term lookup. Tool versions and citations:
-[`methods_references.md`](methods_references.md).
+Written to be followed by a reader who can program but has no background in computational
+chemistry or bioinformatics. Where a method has a known failure mode it is described alongside
+the method rather than omitted — several of them are ones this project hit.
+
+Companion documents: [`GLOSSARY.md`](GLOSSARY.md) for terminology,
+[`methods_references.md`](methods_references.md) for tool versions, force fields and citations,
+and [`docs/project_brief.pdf`](docs/project_brief.pdf) for the scientific narrative.
 
 ---
 
