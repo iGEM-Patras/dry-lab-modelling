@@ -342,7 +342,7 @@ killed two co-folds mid-inference before we moved to a longer-limit partition.
 **You do not need to re-run simulations to work with results.** Every `.csv` and `.xvg` output
 is committed.
 
-**Small scripts worth reading**, because they show the house style:
+**Short scripts that illustrate the conventions described above:**
 
 | Script | Why |
 |---|---|
