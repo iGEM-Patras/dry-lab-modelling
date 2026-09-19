@@ -2,6 +2,11 @@
 
 Computational audit and design work supporting an enkephalin-based analgesic strategy: **proenkephalin (PENK)** expression combined with a **neprilysin (NEP / MME)** knockdown arm, delivered by cationic / ionizable **lipoplexes**.
 
+> **New to the dry lab?** Read **[`METHODS_GUIDE.md`](METHODS_GUIDE.md)** — what each
+> computational method actually computes, why it was chosen, how to read its output, and the
+> failure modes we hit. Assumes you know the project and can code; assumes no chemistry or
+> bioinformatics. Keep **[`GLOSSARY.md`](GLOSSARY.md)** open alongside it.
+
 The full narrative — rationale, results, and honest limitations — is in **[`docs/project_brief.pdf`](docs/project_brief.pdf)**. Every tool version, force field, database accession, and published design rule is recorded in **[`methods_references.md`](methods_references.md)**.
 
 ## Workstreams
@@ -28,7 +33,7 @@ The full narrative — rationale, results, and honest limitations — is in **[`
 - **No commercial antibody detects the engineered product.** The construct recodes every enkephalin core to `YGGFEVVG`; registry anti-enkephalin antibodies are raised against native `YGGFM`. A custom anti-`YGGFEVVG` polyclonal must be raised and is on the critical path.
 - **Lipoplex MD reproduces the ionizable-lipid pH switch** (200 ns × 3 seeds, mean ± SEM): protonated MC3-H⁺ binds DNA as tightly as permanent-cation DOTAP (~0.47 nm closest approach); neutral MC3⁰ holds DNA ~1.3 nm away with an RDF peak at the bulk value. Contacts plateau by ~100 ns, so the 100–200 ns analysis window is equilibrated.
 - **The two processing routes are affected unequally by the cassette swap.** PC1/3 and PC2 cut C-terminal to the dibasic; cathepsin L/V cut N-terminal to it. The swap leaves the convertase scissile context identical at all 7 cassettes but moves the cathepsin P2 residue from Phe (7/7 within the preferred Leu/Trp/Phe/Tyr set) to Val (0/7). Separately, 5 of 7 engineered cassettes are Gly-extended PAM substrates where no native cassette is. Both are directly testable in the cell-free assay in `07_invitro_penk/`.
-- **Payload δ-selectivity engineering returned a negative result** across three pre-registered cycles. The final cycle (3b, MM-GBSA physics rescoring) **failed its calibration gate**: it gets the *direction* of δ/μ preference right (G1 pass) but cannot resolve the *magnitude* at n=5 (G2′ and G3 fail; regression CI spans zero). Recommendation: radioligand competition binding on `YGGFEVVG` and `YGGFDIIG`.
+- **Payload δ-selectivity: three methods failed, two later passed calibration.** Cycles 1–3b returned negatives — 3b's MM-GBSA rescoring got the *direction* right but failed its magnitude gate at n=5. Cycles 7 and 9 then succeeded by calibrating against published reference opioids first: the co-folding affinity head cleared a pre-set correlation gate at n=13 (r = 0.805, p = 0.0009, signs correct 12/13), and the pose-convergence metric that Cycle 3a retired was rehabilitated in Cycle 9 (ρ = 1.000 against four peptides with published selectivity). **Current calibrated estimate for `YGGFEVVG`: +1.23 ± 1.76 kcal/mol δ-over-μ (~7×) — nominally δ-preferring but not statistically separable from native Met-enkephalin.** A rigorous free-energy (TI) campaign is running to settle the magnitude. Radioligand competition binding remains the recommended wet-lab arbiter.
 
 - **The four ordered constructs now sit at synthesis-friendly GC** (40 % for the P2A pair, 45 % for the IRES pair) with **every cistron's protein byte-identical** to before. The cost is codon adaptation (CAI 0.65–0.74) — a real trade, not a free lunch, and one a transfection settles faster than more modelling. Order sheet: [`09_codon_gc_design/PENK_order_sheet.csv`](09_codon_gc_design/PENK_order_sheet.csv).
 - **The engineered epitope is not more immunogenic than the native one it replaces** (1.86 % vs 1.77 % strong MHC-I binders across 6,120 allele-peptide pairs). The **P2A remnant junction ranks highest of the three groups** (2.07 %) — an argument for the IRES cassettes if immunogenicity of a persistently expressed product matters. See [`10_immunogenicity_antibody/`](10_immunogenicity_antibody/).
@@ -37,7 +42,25 @@ The full narrative — rationale, results, and honest limitations — is in **[`
 
 ## Status
 
-All dry-lab workstreams are **complete**. Cycle 3b terminated on 2026-08-31 per its pre-registration; see [`06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md`](06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md) for the terminal verdict. No further computational work is planned — the project's open questions are now wet-lab questions.
+*Last reviewed 2026-09-19. Individual cycle documents are the authority on their own status —
+check `git log -1 --format=%ad -- <file>` before trusting any date here.*
+
+Workstreams `01`–`05` and `08`–`11` are **complete**. Cycle 3b terminated on 2026-08-31 per its
+pre-registration; see [`06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md`](06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md)
+for the terminal verdict.
+
+**Work has continued since, in five further cycles:**
+
+| Cycle | Status |
+|---|---|
+| **4** — synthesis manufacturability | ✅ **closed.** v4 rejected by the vendor (inverted-repeat flanks inherited from wet-lab files); diagnosed and repaired; **v6 accepted, all four constructs ordered** |
+| **5** — expression & processing | 📋 pre-registered, awaiting the wet lab's first transfection |
+| **7** — affinity-head calibration | ✅ **gate passed** at n=13 (r = 0.805). First calibrated δ/μ number for `YGGFEVVG` |
+| **8** — free-energy (TI) campaign | 🔄 **running.** 13 CPU workers; the graft shortcut was rejected by measurement and is written up |
+| **9** — convergence metric, recalibrated | ✅ **gate passed** (ρ = 1.000). The metric Cycle 3a retired, rehabilitated with proper calibration |
+
+The open questions are now **mostly** wet-lab questions — the exception being Cycle 8, whose
+free-energy result is the one remaining computational deliverable.
 
 **What the wet lab should do next**, in order of what unblocks the most: (1) order the four
 recoded constructs from `09_codon_gc_design/PENK_order_sheet.csv`; (2) commission the custom

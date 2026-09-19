@@ -26,13 +26,38 @@ reducing the μ-mediated adverse-effect profile that makes conventional opioids 
 | **2** | Enhance address hydrophobicity / anionic residue (literature-guided) | 5 variants | ✅ complete | **Primary hypothesis falsified** — 4 of 5 predictions wrong; V4/V5 retained |
 | **3a** | Validate pose convergence as a selectivity metric | *no new sequences* | ✅ complete | **H3a rejected** — does not replicate; metric retired |
 | **3b** | ~~Combine Cycle 2's two independent wins~~ → **change the observable**: explicit-solvent MD + MM-GBSA ΔΔG in kcal/mol | controls + 2 survivors, acid & amide | 📋 pre-registered, gated | Original premise **withdrawn** (V5's win within noise at n=20). Stage 1 must calibrate on experimental controls before the panel is run |
-| **4** | **Can the cassette be manufactured?** Iteratively reverse-engineer the vendor's synthesis-complexity rules from its rejection reports | 4 constructs × 3 rounds (v4→v5→v6) | 🔄 v4/v5 scored, v6 pre-registered | v4 **denied 23.8** (inverted-repeat flanks, inherited from wet-lab files); v5 fixed 3 of 4; v6 recodes mature PENK, **awaiting vendor** |
+| **4** | **Can the cassette be manufactured?** Iteratively reverse-engineer the vendor's synthesis-complexity rules from its rejection reports | 4 constructs × 3 rounds (v4→v5→v6) | ✅ complete | v4 **denied 23.8** (inverted-repeat flanks, inherited from wet-lab files); v5 fixed 3 of 4; **v6 accepted — all four constructs ordered** |
+| **5** | What should the first transfection actually produce? | *no new sequences* | 📋 pre-registered | Five falsifiable predictions committed before the bench runs; awaiting wet-lab data |
+| **7** | Does the co-folding **affinity head** predict δ/μ selectivity, tested against published drugs? | *no new sequences* | ✅ **gate PASSED** | n=13, r = 0.805, p = 0.0009, signs correct 12/13. First calibrated number: `YGGFEVVG` **+1.23 ± 1.76 kcal/mol** (~7× δ), not separable from native |
+| **8** | Rigorous **free-energy (TI)** ΔΔG for δ vs μ | controls + target | 🔄 **running** | 13 CPU workers; graft shortcut **rejected by measurement** (`GRAFT_ROUTE_REJECTED.md`) |
+| **9** | Re-test **pose convergence**, this time calibrated against experiment | *no new sequences* | ✅ **gate PASSED** | ρ = 1.000 — ranks 4 reference peptides in exact agreement with published selectivity. Rehabilitates the metric Cycle 3a retired |
 
 - [`cycle1_deltorphin_chimera/CYCLE1.md`](cycle1_deltorphin_chimera/CYCLE1.md) — retrospective writeup **+ correction notice**
 - [`cycle2_delta_selectivity/CYCLE2_DESIGN.md`](cycle2_delta_selectivity/CYCLE2_DESIGN.md) — pre-registration (committed before the runs)
 - [`cycle2_delta_selectivity/CYCLE2_RESULTS.md`](cycle2_delta_selectivity/CYCLE2_RESULTS.md) — results, prediction scoring, Cycle 1 correction
 - [`cycle3a_convergence_metric/CYCLE3A_DESIGN.md`](cycle3a_convergence_metric/CYCLE3A_DESIGN.md) — pre-registration
 - [`cycle3a_convergence_metric/CYCLE3A_RESULTS.md`](cycle3a_convergence_metric/CYCLE3A_RESULTS.md) — held-out replication, scorecard, recommendation
+- [`cycle4_synthesizability/CYCLE4.md`](cycle4_synthesizability/CYCLE4.md) — the vendor-rules cycle, with its pre-registration scored
+- [`cycle5_expression_processing/CYCLE5_DESIGN.md`](cycle5_expression_processing/CYCLE5_DESIGN.md) — pre-registration for the first transfection
+- [`cycle7_calibration/CYCLE7_RESULTS.md`](cycle7_calibration/CYCLE7_RESULTS.md) — the calibrated estimate and its three stated limits
+- [`cycle8_fep/CYCLE8_DESIGN.md`](cycle8_fep/CYCLE8_DESIGN.md) — protocol, measured throughput budget, gate dry-run
+- [`cycle8_fep/GRAFT_ROUTE_REJECTED.md`](cycle8_fep/GRAFT_ROUTE_REJECTED.md) — a negative result, including two invalid attempts of our own
+- [`cycle9_convergence_metric/`](cycle9_convergence_metric/) — the recalibrated metric that passed
+
+### A note for newcomers
+
+**There is no `cycle6/` directory.** Cycle 6 was a calibration attempt at n = 4 that failed
+all its gates; its data lives in [`cycle7_calibration/data/`](cycle7_calibration/data/) because
+Cycle 7 is the same experiment repeated at an adequate sample size. Nothing is missing.
+
+**Cycle 3a rejected the pose-convergence metric and Cycle 9 accepted it.** Not a contradiction:
+3a evaluated the metric without calibrating it against experimental values, 9 evaluated it
+against four peptides with published selectivity. Which one you trust depends on whether a
+metric was anchored to reality before being used — that distinction is the repo's main
+methodological lesson.
+
+**Cycles are counted by their Learn→Design edge**, not by construct count. A parallel
+multi-arm panel is one cycle; only a genuinely sequential dependency splits into two.
 
 ## What counts as a cycle here
 
