@@ -186,13 +186,57 @@ exists, P5 is how we find out.
 
 | Prediction | Outcome | Evidence |
 |---|---|---|
-| **P1** all four accepted (total < 10) | **CONFIRMED** | all four passed the gate and were ordered |
-| **P2** both P2A constructs score exactly 0.0 | **UNRESOLVED** | needs the itemised score |
-| **P3** both IRES constructs keep exactly one 4.0 C-flag | **UNRESOLVED** | needs the itemised score |
-| **P4** no repeat flag on any construct | **UNRESOLVED** | needs the itemised score |
-| **P5** no third scoring rule appears | **CONFIRMED** | a third rule would have added points; all four stayed under 10 |
+| **P1** all four accepted (total < 10) | **CONFIRMED** | observed 0, 1, 4, 4 — all below the threshold of 7 |
+| **P2** both P2A constructs score exactly 0.0 | **FALSIFIED** | `mEGFP_P2A` scored 0; `His_PENK_P2A` scored 1.0 on a hairpin flag |
+| **P3** both IRES constructs keep exactly one 4.0 C-flag | **CONFIRMED** | exactly one 12-base composition flag each, 4.0 pts, as predicted |
+| **P4** no repeat flag on any construct | **CONFIRMED** | the repeat-coverage rule fired on none of the four |
+| **P5** no third scoring rule appears | **FALSIFIED** | a hairpin / secondary-structure rule exists, 1.0 pt |
 
-**Scored: 2 of 5 confirmed, 0 falsified, 3 unresolved.**
+**Rescored on the itemised v6 reports (2026-09-19): 3 confirmed, 2 falsified, 0 unresolved.**
+Previously recorded as 2 confirmed, 0 falsified, 3 unresolved.
+
+### P5 was scored CONFIRMED and was wrong
+
+The original justification read: *"a third rule would have added points; all four stayed under 10."*
+That infers the **absence** of a rule from an aggregate verdict that looks identical whether or not
+the rule exists — a construct scoring 1.0 and a construct scoring 0.0 both read as "accepted". The
+itemised report falsifies it outright.
+
+This is the same error this cycle's own Learn section warns against: *a prediction must name a
+read-out the experiment produces under both outcomes.* It was violated while scoring the cycle that
+established it. The correction stands as the record; the original claim is left visible above rather
+than quietly amended.
+
+### What the itemised scores establish
+
+**Prediction accuracy: 3 of 4 exact, mean absolute error 0.25 points.**
+
+| Construct | Predicted | Observed | Flag |
+|---|---|---|---|
+| `mEGFP_P2A_His_PENK_GC40` | 0.0 | **0** | passes initial screening |
+| `His_PENK_P2A_mEGFP_GC40` | 0.0 | **1.0** | hairpin, stem `GGACCTGGATT` at 65 / 956 |
+| `His_PENK_IRES_mEGFP_GC45` | 4.0 | **4.0** | 12 bases, 83.3% C at 925 |
+| `mEGFP_IRES_His_PENK_GC45` | 4.0 | **4.0** | 12 bases, 83.3% C at 751 |
+
+**Rule 2 (local composition) reproduced exactly.** Same 12-base window, same >80% single-base
+threshold, correct 4.0 points on both IRES constructs. Two refinements the reports add: the flag is
+worth a **flat 4.0** whether the window is 83.3% or 91.7% (my detector found 91.7% C; the vendor
+reports 83.3%), and the reported position sits **+4 bp from mine in both constructs** — a constant
+offset across two independent sequences, so a reporting convention rather than a detection failure.
+
+**Rule 1 (repeat coverage) fired on nothing**, as predicted.
+
+**Rule 3 is a hairpin term, and the motif is not new.** The stem `GGACCTGGATT` occurs forward at
+position 65 and as its **reverse complement** at 956 — an inverted repeat, structurally the same
+defect class that caused the v4 denial. What differs is severity: **1.0 point here against 10.0 per
+flag in v4**, where the repeat sat at positions 1 and 1691, i.e. at both termini. The most economical
+reading is that the vendor penalises inverted repeats far more harshly when terminal, which matches
+the biology — terminal repeats disrupt assembly, internal ones only slow synthesis. The v4 rule and
+the v6 rule are plausibly one rule with a position-dependent weight.
+
+**Status of the model: incomplete, not wrong.** Every encoded rule fired correctly where it applied;
+the gap is a secondary-structure term. That is a better position than rules that misfire, and it
+names exactly what a v7 predictor would need.
 
 The three unresolved predictions are unresolved for a structural reason worth recording:
 **the vendor's acceptance path returns a verdict, not a breakdown.** Only denials itemise.

@@ -1,0 +1,18 @@
+{
+ "round": "v6",
+ "all_accepted": true,
+ "vendor_threshold": 7,
+ "exact_score_matches": "3/4",
+ "mean_abs_error_pts": 0.25,
+ "rules_validated": {
+  "composition_window": "reproduced exactly: 12-base window, >80% single base, flat 4.0 pts whether the window is 83.3% or 91.7%. My detector reported 91.7% C; the vendor reports 83.3% C at a position +4 bp away in BOTH constructs - a constant offset, i.e. a reporting convention rather than a detection failure.",
+  "repeat_coverage": "did not fire on any v6 construct, as predicted"
+ },
+ "rule_discovered": {
+  "name": "hairpin / secondary structure",
+  "points": 1.0,
+  "detail": "stem GGACCTGGATT, 11 bp, forward at position 65 and reverse-complement at 956",
+  "note": "structurally an inverted repeat - the same motif class that caused the v4 denial. Scored 1.0 here versus 10.0 per flag in v4, which suggests v4's severity came from the repeat being TERMINAL, not from the motif itself."
+ },
+ "P5_correction": "P5 was previously scored CONFIRMED by inferring rule-absence from the aggregate verdict. The itemised report falsifies it: a third rule does exist. A prediction cannot be confirmed by an observation that would look identical under both outcomes."
+}

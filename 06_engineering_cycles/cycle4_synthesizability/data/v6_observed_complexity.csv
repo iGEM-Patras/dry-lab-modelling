@@ -1,0 +1,5 @@
+construct,bp,observed_total,flag_type,flag_detail,flag_pts
+mEGFP_P2A_His_PENK_GC40,1700,0.0,none,passes initial screening,0.0
+His_PENK_P2A_mEGFP_GC40,1699,1.0,hairpin,stem GGACCTGGATT (11 bp) at 65 and 956; the 956 copy is the reverse complement,1.0
+His_PENK_IRES_mEGFP_GC45,2222,4.0,composition,"12 bases, 83.3% C, starting base 925",4.0
+mEGFP_IRES_His_PENK_GC45,2223,4.0,composition,"12 bases, 83.3% C, starting base 751",4.0
