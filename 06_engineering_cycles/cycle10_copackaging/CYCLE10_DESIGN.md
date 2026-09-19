@@ -42,6 +42,28 @@ What that surrogate can and cannot answer:
 This sits on top of the parameter caveat already disclosed for the lipid topologies, which
 are MARTINI-2 analogy models. Conclusions are comparative, never absolute affinities.
 
+> **Amendment 2 — phosphate count derived from the topology, not from base-pair arithmetic.**
+> Amendment 1 corrected 60 bp to 30 bp but still computed charge as 2 phosphates per base
+> pair. That over-counts: a **free 5′ terminus carries no phosphate**, which is visible in
+> the bead counts (`DA5` has 6 beads where `DA` has 7 — the missing bead *is* the phosphate).
+> Summing the charge column of each topology gives **construct −58, surrogate −40, total 98**,
+> not 102. `genion` independently confirmed it by requesting exactly 22 counter-ions for a
+> +120/−98 system, matching the derivation. Corrected values, used in the gates below:
+>
+> | | amendment 1 | **correct** |
+> |---|---|---|
+> | construct phosphates | 60 | **58** |
+> | surrogate phosphates | 42 | **40** |
+> | condition B N/P | 1.18 | **1.22** |
+> | surrogate share of cargo charge | 41.2 % | **40.8 %** |
+> | per-phosphate parity ratio | 0.700 | **0.690** |
+>
+> The shifts are ~1 % and change no gate outcome (P2 allows ±10 pp), but the pre-registration
+> should describe the system that is actually simulated. Standing lesson: **derive gate
+> parameters from the built topology, not from the design description.** Both amendments were
+> arithmetic *about* the system rather than measurement *of* it, and both were caught only
+> because the numbers were written down in advance.
+
 ## Design
 
 Both conditions reuse the equilibrated `MC3P` (protonated, endosomal-pH) systems, which is
@@ -50,9 +72,9 @@ existing protocol.
 
 | | cationic lipids | phosphates | N/P | question |
 |---|---|---|---|---|
-| current, DNA only | 120 | 60 | 2.00 | *(reference, already run)* |
-| **A — sufficient lipid** | **204** | 102 | **2.00** | do both bind when carrier is not scarce? |
-| **B — limiting lipid** | **120** | 102 | **1.18** | who wins when it is? |
+| current, DNA only | 120 | 58 | 2.07 | *(reference, already run)* |
+| **A — sufficient lipid** | **203** | 98 | **2.07** | do both bind when carrier is not scarce? |
+| **B — limiting lipid** | **120** | 98 | **1.22** | who wins when it is? |
 
 Condition B is the one that matters. Holding the lipid fixed while adding cargo forces the
 competition that a real formulation faces.
@@ -77,8 +99,8 @@ phosphate count, so the surrogate takes **41.2 %** of contacts and the per-phosp
 | | Prediction | Gate (pass condition) |
 |---|---|---|
 | **P1** | Under sufficient lipid (A), **both** cargoes bind | both min-dist < 0.60 nm, mean over 3 seeds |
-| **P2** | Under sufficient lipid, binding is near charge-proportional | surrogate share of contacts within **41.2 ± 10 pp** |
-| **P3** | Under limiting lipid (B), the **larger** cargo is favoured per phosphate | per-phosphate ratio < **0.700** |
+| **P2** | Under sufficient lipid, binding is near charge-proportional | surrogate share of contacts within **40.8 ± 10 pp** |
+| **P3** | Under limiting lipid (B), the **larger** cargo is favoured per phosphate | per-phosphate ratio < **0.690** |
 | **P4** | The surrogate is **not** fully excluded even when lipid is limiting | surrogate min-dist < 0.80 nm |
 | **P5** | Adding a second cargo does not detach the first | DNA min-dist in B within 0.10 nm of the DNA-only reference (0.469 nm) |
 
@@ -122,3 +144,40 @@ decision. It is recorded now so it cannot be presented later as the plan all alo
 This is the first lipoplex-arm work to be pre-registered. The existing 200 ns results are
 sound but predate the convention, and that is noted on the Model wiki page rather than
 glossed over.
+
+
+---
+
+## Build log — what it took to assemble condition B
+
+Recorded because the failures are informative and because a later reader repeating this will
+hit the same walls.
+
+**Insertion into the equilibrated system is impossible.** The reference box is volumetrically
+full: the lipid aggregate spans z 0.81–9.68 nm of a 14.82 nm box and the construct spans
+5.78–16.91 nm (wrapping the boundary). The largest void anywhere offers **0.31 nm** clearance;
+a 7 nm duplex needs far more. `gmx insert-molecules` reported `Added 0 molecules` while
+`Replaced 398 residues` — a *destructive no-op* that deletes solvent and inserts nothing, and
+exits 0. Caught by counting nucleotide beads (388, not the required 659) rather than trusting
+the exit status.
+
+**Both cargoes place cleanly into an empty box**, confirming the duplex was never too large —
+the order of assembly is what matters. Condition B is therefore rebuilt from scratch with the
+reference's box and lipid content, both cargoes placed before lipids and solvent.
+
+**Names must be read, not assumed.** The cationic lipid's residue is `MC3T`; `MC3P` is only the
+replicate *directory* name. Ion moleculetypes are `NA`/`CL`, not `NA+`/`CL-`. No coarse-grained
+water template exists on the cluster, so one was built from the reference's own 23,934
+equilibrated waters — a better template anyway, since it carries the right density for this
+temperature and salt.
+
+**`polyply gen_coords` returns bead-correct, geometry-wrong output.** It produced 271 beads for
+the surrogate — the right number — but with base-pair bonds spanning a **median 7.16 nm** where
+they should be 0.445 nm: the two strands were placed unpaired. The count assertion passed and
+the structure was carried through four further steps before a geometric check caught it.
+**Bead count is not geometry.** The remedy is what the original build already did for its own
+duplex (`dna/em.mdp`, `dna/check.tpr`): minimise the bare duplex until the base-pair restraints
+zip the strands together, and verify bond lengths before use.
+
+A corollary worth stating: an intermediate check that can pass for the wrong reason is worse
+than no check, because it licenses everything downstream. The count check did exactly that.
