@@ -181,3 +181,60 @@ zip the strands together, and verify bond lengths before use.
 
 A corollary worth stating: an intermediate check that can pass for the wrong reason is worse
 than no check, because it licenses everything downstream. The count check did exactly that.
+
+
+---
+
+## Status 2026-09-20: build PARKED before production
+
+**The systems were not completed. No production run was started, and no result exists.**
+This section records where the build stopped and what remains, so the work is resumable
+rather than lost.
+
+### What is done and verified
+
+| | |
+|---|---|
+| 21-bp surrogate topology | built via the same polyply route as the construct; base-pair bond rule **derived from `dna_extra_bonds.itp` and verified to reproduce it exactly** (30/30 bonds) |
+| surrogate geometry | **folded**: 1 ns vacuum MD took base-pair bonds from a median 7.16 nm to **0.50 nm** (restraint 0.445), backbone max 0.40 nm |
+| charge accounting | derived from the topologies and **confirmed independently by `genion`** (predicted +22 net, genion requested 22) |
+| composition | both cargoes placed (659 nucleotide beads), MC3T 120/120, DOPE 80/80, CHOL 40/40, 20,640 waters, 294 Na / 316 Cl |
+| pre-registration | committed with gates fixed in advance, amended twice **before** any run |
+
+### Where it stops
+
+Energy minimisation of the assembled condition-B system will not converge:
+`Fmax = 5.4 × 10⁷` — identical before and after 100,000 steps, i.e. stalled immediately —
+followed by 1,498 LINCS warnings when a short MD relaxation was attempted. The stall is on a
+**lipid** bead (index 2925, in the DOPE block), not on either cargo.
+
+The close-contact scan in that run listed pairs at 0.160 nm that are all **intra-residue**
+(e.g. beads 521 and 524, both `DG3`), i.e. bonded neighbours my exclusion rule missed — so
+that scan did *not* locate the real overlap. The genuine clash has not been identified.
+
+### What a resumption should do differently
+
+Randomly packing 240 lipids around two pre-placed cargoes produces overlaps too severe for
+steepest descent to resolve. The reference systems were not built that way — `asm/` contains
+`ion_MC3_declash.gro` and a `rescue_DOTAP.sh` whose schedule is EM → NVT → gentle NPT with
+`dt = 1 fs`, a `c-rescale` barostat at `tau-p = 20`, and `-DFLEXIBLE` throughout, wrapped in a
+200-attempt restart loop. **That pipeline should be reused directly rather than re-derived**;
+the present attempt failed by improvising a shorter one.
+
+An alternative worth costing first: build the lipid phase *without* cargo, equilibrate it, then
+place both cargoes into a pre-formed aggregate — closer to how the reference systems came to
+exist, and it avoids packing lipids around a rigid 7 nm rod.
+
+### Why it was parked
+
+Ten build iterations, every failure in setup rather than in the science: an output path that
+moved with `cd`, a topology parser that read angle lines as atoms, an assumed residue name
+(`MC3P` for `MC3T`), a missing water template, an `mdp` option invalid with Verlet lists, a
+bead-count check that passed on unfolded coordinates, and a bond-length threshold calibrated
+on one molecule and applied to another. Each was caught before it could contaminate a result,
+which is the system working — but the cost was the time budget for the production runs.
+
+The deliverables that stand without the simulation: this pre-registration with its verified
+charge accounting, the build log above, and the PI briefing that asks whether a DNA charge
+surrogate is an acceptable model for this question at all. If the answer to that is no, the
+remaining build work should not be done.
