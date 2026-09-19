@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+title: "Epione dry-lab modelling: computational design and validation of a multi-cassette proenkephalin therapeutic"
+message: "If you use this repository, please cite it as below."
+type: software
+authors:
+  - name: "iGEM Patras 2026"
+    website: "https://github.com/kei-zan/dry-lab-modelling"
+  # TODO before publication: replace with individual contributors, e.g.
+  # - family-names: <surname>
+  #   given-names: <given name>
+  #   affiliation: "Department of Pharmacy, University of Patras, Greece"
+  #   orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: "Lagoumintzis"
+    given-names: "Georgios"
+    affiliation: "Department of Pharmacy, University of Patras, Greece"
+  - family-names: "Patrinos"
+    given-names: "Georgios"
+    affiliation: "Department of Pharmacy, University of Patras, Greece; Hellenic Pasteur Institute"
+repository-code: "https://github.com/kei-zan/dry-lab-modelling"
+abstract: >-
+  Computational design, audit and validation supporting an enkephalin-based analgesic
+  strategy: a synthetic proenkephalin carrying seven tandem engineered opioid-peptide
+  cassettes, released in vitro by reconstituted human prohormone convertases. The
+  repository documents nine pre-registered design-build-test-learn cycles in which
+  predictions and pass/fail gates were committed to version control before each test,
+  including four methods that failed their own gates and are retained as negative results.
+keywords:
+  - synthetic biology
+  - iGEM
+  - enkephalin
+  - proenkephalin
+  - opioid receptor selectivity
+  - free energy perturbation
+  - molecular dynamics
+  - pre-registration
+license: CC-BY-4.0
+license-url: "https://github.com/kei-zan/dry-lab-modelling/blob/main/LICENSE"

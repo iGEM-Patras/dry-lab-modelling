@@ -72,6 +72,14 @@ them. Amendments 1–5 in `11_wetlab_protocols/` state each of these as a bench-
 
 `07_invitro_penk/` is the first of those wet-lab questions worked up into a benchtop design. It is a **design, not a result**: no experimental data exists yet.
 
+## Licence and citation
+
+Documentation, data, figures and protocols are released under **[CC BY 4.0](LICENSE)**;
+source code under the **[MIT Licence](LICENSE-CODE)**. Cite this repository using
+[`CITATION.cff`](CITATION.cff). Contribution conventions — in particular the requirement
+that predictions are committed before the tests that could falsify them — are in
+[`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 ## Reproducibility
 
 Coarse-grained MD used **GROMACS 2024.5** with the **MARTINI 2** force field. All-atom membrane MD and MM-GBSA rescoring (cycle 3b) used **GROMACS 2024.5** + **AmberTools**. Sequence work used **Biopython**; siRNA off-target screening used **NCBI BLAST+ (blastn-short)** against human `refseq_rna`. See `methods_references.md` for the complete list with citations. MD input files (`.mdp`, topology) and analysis scripts are under `04_lipoplex_md/` and `06_engineering_cycles/`.

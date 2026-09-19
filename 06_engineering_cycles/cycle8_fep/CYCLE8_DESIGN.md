@@ -360,10 +360,18 @@ failing, not a script fault. Window 0 had already produced the throughput measur
 ### engPENK system build — proceeding on CPU during the outage
 
 `build_system.sh` has a `MIN_NB=cpu` code path; minimisation is the only GPU step, so the
-build runs entirely on `pshort_el8` and the outage does not block it. *(Correction: an
-earlier note in this session credited a `MIN_ON_CPU.md` document for sanctioning this. The
-`cat` returned nothing — the support is the code path itself, which was read directly, not
-a note file.)*
+build runs entirely on `pshort_el8` and the outage does not block it.
+
+*(Correction, twice over. An earlier note credited [`MIN_ON_CPU.md`](../cycle3b_physics_rescoring/MIN_ON_CPU.md)
+for sanctioning this. A `cat`/`find` on the cluster working directory returned nothing, so
+that credit was retracted as unverified — but the search looked under
+`$D/boltz_dock/cycle3b`, not the repository. **The document does exist**, at
+`06_engineering_cycles/cycle3b_physics_rescoring/MIN_ON_CPU.md`, dated 2026-08-12, and it
+states precisely what was originally claimed: minimisation is steepest descent to a
+convergence criterion on 119,476 atoms, the GPU buys nothing that justifies the queue wait,
+and `build_system.sh` now honours `MIN_NB=cpu` with `gpu` as the default. The original claim
+was correct; the retraction was the error, caused by searching one filesystem and concluding
+about another.)*
 
 **Chemistry declared from the design table's own convention, not a default.**
 `prod_all.txt` records all four designed peptides as `amide=yes` and met-enkephalin — the
