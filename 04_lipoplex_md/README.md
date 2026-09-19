@@ -3,9 +3,21 @@
 MARTINI 2 CG-MD asking whether the ionizable lipid's protonation state controls DNA binding as the delivery design assumes: **weak binding at physiological pH** (neutral, for circulation) vs **strong binding at endosomal pH** (protonated, for cargo condensation).
 
 ## System
-A 60-bp CG B-DNA duplex + lipid membrane, cationic-lipid 120 : DOPE 80 : cholesterol 40, ~24k CG waters, 150 mM NaCl. Three formulations:
+
+> **Correction (2026-09-19):** this section previously described the cargo as a "60-bp
+> duplex". It is a **30-bp duplex of 60 nucleotides** — base pairs and nucleotides were
+> conflated. `dna/frag.fasta` is 30 nt and `polyply --dsdna` pairs it; `dna_cg.gro` has 388
+> beads, i.e. 6.47 per nucleotide over 60 nucleotides, which is MARTINI 2's DNA resolution.
+> The system's N/P ratio is therefore **2.0**, not 1.0. No result in this directory depends
+> on the count — all metrics are per-system comparisons across formulations — but the
+> charge ratio does, and Cycle 10's gates were initially derived from the wrong figure.
+
+A **30-bp** CG B-DNA duplex (60 nucleotides, 388 CG beads) + lipid membrane, cationic-lipid 120 : DOPE 80 : cholesterol 40, ~24k CG waters, 150 mM NaCl. Three formulations:
 
 - **DOTAP** — permanent +1 (control for constitutive binding)
+
+The duplex sequence `AAGCGTTACGGTGGTTTCGAGGTCGTCGGT` translates to `KR-YGGFEVVG`: the dibasic
+processing site plus the engineered octapeptide, i.e. one cassette of the real construct.
 - **MC3-H⁺** (`MC3T`) — ionizable MC3 surrogate, protonated (endosomal-pH state)
 - **MC3⁰** (`MC3N`) — same lipid, neutral (physiological-pH state)
 

@@ -1,7 +1,16 @@
 # Cycle 10 — Do the two cargoes compete for the carrier?
 
-**Status:** PRE-REGISTERED. Written and pushed before any simulation is run.
+**Status:** PRE-REGISTERED, **amended 2026-09-19 before any simulation was run**.
 **Date:** 2026-09-19
+
+> **Amendment 1 — corrected charge accounting.** The first version of this document computed
+> every gate from a 60-**bp** duplex. The system's DNA is a **30-bp** duplex (60 *nucleotides*);
+> `04_lipoplex_md/README.md` conflated the two and that error was inherited here. The bead
+> count settles it independently: `dna_cg.gro` has 388 beads over 60 nucleotides = 6.47
+> beads/nt, MARTINI 2's DNA resolution. Consequently the existing N/P is **2.00, not 1.00**,
+> and the charge-proportional null is **41.2 %, not 25.9 %**, with a per-phosphate parity
+> ratio of **0.700, not 0.350**. All gates below are the corrected values. Nothing had run
+> when this was found — which is the reason the numbers were written down in advance.
 
 ## Why this cycle exists
 
@@ -41,28 +50,35 @@ existing protocol.
 
 | | cationic lipids | phosphates | N/P | question |
 |---|---|---|---|---|
-| current, DNA only | 120 | 120 | 1.00 | *(reference, already run)* |
-| **A — sufficient lipid** | **162** | 162 | **1.00** | do both bind when carrier is not scarce? |
-| **B — limiting lipid** | **120** | 162 | **0.74** | who wins when it is? |
+| current, DNA only | 120 | 60 | 2.00 | *(reference, already run)* |
+| **A — sufficient lipid** | **204** | 102 | **2.00** | do both bind when carrier is not scarce? |
+| **B — limiting lipid** | **120** | 102 | **1.18** | who wins when it is? |
 
 Condition B is the one that matters. Holding the lipid fixed while adding cargo forces the
 competition that a real formulation faces.
 
-**Charge accounting.** 60-bp duplex = 120 phosphates; 21-bp duplex = 42 phosphates; total
-162. The siRNA surrogate therefore carries **25.9 %** of the total cargo charge.
+**Charge accounting.** 30-bp construct duplex = 60 phosphates; 21-bp surrogate = 42
+phosphates; total **102**. The surrogate therefore carries **41.2 %** of total cargo charge —
+the two cargoes are far closer in charge than the raw base-pair counts suggest, which makes
+the competition question sharper rather than weaker.
+
+**What the construct fragment actually is.** `frag.fasta` reads
+`AAGCGTTACGGTGGTTTCGAGGTCGTCGGT`, which translates to **`KR-YGGFEVVG`** — the dibasic
+processing site followed by the engineered octapeptide. The DNA in these simulations is one
+cassette of the real construct, not a generic duplex.
 
 ## Pre-registered predictions and gates
 
 Every threshold below is fixed now. The null throughout is **charge-proportional binding**:
 if the lipid does not discriminate, each cargo takes contacts in proportion to its
-phosphate count, so the surrogate takes 25.9 % of contacts and the per-phosphate ratio
-`contacts_siRNA / contacts_DNA` equals **0.350**.
+phosphate count, so the surrogate takes **41.2 %** of contacts and the per-phosphate ratio
+`contacts_surrogate / contacts_construct` equals **0.700**.
 
 | | Prediction | Gate (pass condition) |
 |---|---|---|
 | **P1** | Under sufficient lipid (A), **both** cargoes bind | both min-dist < 0.60 nm, mean over 3 seeds |
-| **P2** | Under sufficient lipid, binding is near charge-proportional | surrogate share of contacts within 25.9 ± 10 pp |
-| **P3** | Under limiting lipid (B), the **larger** cargo is favoured per phosphate | per-phosphate ratio < 0.350 |
+| **P2** | Under sufficient lipid, binding is near charge-proportional | surrogate share of contacts within **41.2 ± 10 pp** |
+| **P3** | Under limiting lipid (B), the **larger** cargo is favoured per phosphate | per-phosphate ratio < **0.700** |
 | **P4** | The surrogate is **not** fully excluded even when lipid is limiting | surrogate min-dist < 0.80 nm |
 | **P5** | Adding a second cargo does not detach the first | DNA min-dist in B within 0.10 nm of the DNA-only reference (0.469 nm) |
 
@@ -95,9 +111,11 @@ binding nucleates stochastically and a short window catches seeds in different s
 Cycle 10 therefore targets 200 ns and **will not report a verdict from a 50 ns snapshot**,
 whatever it appears to show.
 
-`pibu_el8` is currently heavily degraded (10 nodes `down~`). If capacity does not allow six
-200 ns runs, the fallback is condition **B only** at three seeds, since B carries the
-decision. That choice is recorded now so it cannot be presented later as the plan all along.
+`pibu_el8` has **495 idle cores** at the time of writing, so all six 200 ns runs are
+affordable. (An earlier reading of this document claimed the partition was heavily degraded;
+that was a misreading of `sinfo` — 10 nodes are `down~` but 17 others are `mix`/`idle`.) The
+fallback, should capacity change, is condition **B only** at three seeds, since B carries the
+decision. It is recorded now so it cannot be presented later as the plan all along.
 
 ## Relationship to the rest of the project
 
