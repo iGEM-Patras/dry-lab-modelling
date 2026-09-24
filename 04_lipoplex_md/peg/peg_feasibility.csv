@@ -1,0 +1,3 @@
+source,peg_mol_pct,lipid,anchor,peg_molecules,total_lipids,eo_beads_each,extra_beads
+repo bench spec B1/B2,1.5,DMG-PEG2000,C14 diacyl glycerol,3.7,243.7,45,164.0
+attached document,5.0,PEG2000-CerC8,C8 ceramide,12.6,252.6,45,568.0
