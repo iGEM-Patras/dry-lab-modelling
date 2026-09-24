@@ -238,3 +238,65 @@ The deliverables that stand without the simulation: this pre-registration with i
 charge accounting, the build log above, and the PI briefing that asks whether a DNA charge
 surrogate is an acceptable model for this question at all. If the answer to that is no, the
 remaining build work should not be done.
+
+---
+
+## Amendment 3 — the PI's answers, and what they change (2026-09-24)
+
+Two answers came back on the [lipoplex briefing](../../04_lipoplex_md/). They are recorded
+here because one of them revises this pre-registration's null hypothesis and the other
+retires a limitation.
+
+### Briefing question 3 — answered: surrogates are acceptable
+
+> *"Is DNA-as-siRNA acceptable for a competition question? ... If you regard the surrogate
+> as uninformative we will drop the claim rather than qualify it."*
+
+**The PI's answer is that surrogates are used for this purpose.** The claim therefore
+stands, qualified as it already was. The surrogate framing is **not** removed from this
+document or from the briefing — it is endorsed, and the disclosure stays exactly as
+written.
+
+### Separately: the NEP-inhibition arm becomes circular DNA
+
+The PI confirmed that delivering the neprilysin knockdown as **circular DNA** (a plasmid
+expressing the silencing construct) is the correct approach, rather than a synthetic siRNA
+duplex. This is an arm-design decision, not an answer to question 3, and the two should not
+be conflated.
+
+Its consequence for this cycle is that **both cargoes are now plasmids**, which moves the
+null.
+
+### What the null becomes
+
+| | phosphates | ratio |
+|---|---|---|
+| **simulated pair** (30-bp construct vs 21-bp surrogate) | 58 vs 40 | **1.45×** |
+| biological pair *as originally conceived* (2,223-bp plasmid vs 21-nt siRNA) | ~4,442 vs 40 | **~111×** |
+| biological pair *after the circular-DNA decision* (plasmid vs plasmid) | depends on lengths | **1.0–2.7×** |
+
+**This is a correction to an earlier read of ours, in the favourable direction.** It was
+initially recorded that the completed runs had become a poor analogue because the
+biological cargo pair is now symmetric. The opposite is true: at 1.45× the simulated pair
+was never a model of a ~111× asymmetry, and it now sits **inside** the 1.0–2.7× range the
+plasmid-vs-plasmid pair spans. The existing systems became *more* representative, not less.
+
+**Gate restatement.** P2's charge-proportional null of 40.8 % and P3's per-phosphate ratio
+were derived from the simulated 58:40 split and remain the correct nulls **for the systems
+that were run** — those gates are unchanged and still scoreable. What changes is the
+design-relevant null for the *biological* pair, which is set by the two plasmid lengths:
+
+- equal lengths → 50.0 %
+- NEP plasmid 3.0 kb vs engPENK 2.2 kb → 57.4 %
+- NEP plasmid 4.5 kb → 66.9 %
+
+**Blocking datum: the NEP plasmid's length is not in this repository.** Until the wet lab
+supplies it the biological null cannot be stated numerically, so no gate is rewritten on a
+guessed size. Requested from the wet lab; `data/cycle10_revised_gates.csv` holds the
+parameterisation so the number drops in when it arrives.
+
+**Interpretation that does not depend on the missing number.** The direction of interest
+inverts. With a ~111× asymmetry the expected finding was *the plasmid monopolises the
+carrier*, and P4 (surrogate not fully excluded) was the failure mode that would force
+separate particles. With two comparable plasmids, near-even partitioning is the *expected*
+outcome and **uneven** partitioning becomes the surprising, actionable result.
