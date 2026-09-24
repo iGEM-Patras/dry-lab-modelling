@@ -36,7 +36,10 @@ rule used in the computational work, so the methods section is fully traceable.
 - **MARTINI 2** force field (v2.1 for DNA, v2.0 for lipids/cholesterol).
   - Marrink SJ et al. (2007) *J Phys Chem B* 111:7812–24 (MARTINI 2.0 lipids).
     doi:10.1021/jp071097f
-  - Monticelli L et al. (2008) *J Chem Theory Comput* 4:819–34 (MARTINI proteins).
+  - Monticelli L et al. (2008) *J Chem Theory Comput* 4:819–34 (MARTINI proteins) —
+    cited for provenance of the shared bead-type table only. **No protein is present in
+    any coarse-grained system here**; `martini_v2.2.itp` is not included by any topology.
+    See [`04_lipoplex_md/FORCE_FIELD_AUDIT.md`](04_lipoplex_md/FORCE_FIELD_AUDIT.md).
   - **martini_v2.1-dna**: Uusitalo JJ et al. (2015) *J Chem Theory Comput*
     11:3932–45 — MARTINI DNA. doi:10.1021/acs.jctc.5b00286
 - **Lipid models (analogy parameters, this project):**
