@@ -1,0 +1,5 @@
+peptide,published_ddG,mmgbsa_delta_minus_mu,mmgbsa_direction,published_direction,sign_correct
+Deltorphin I,5.7,-9.19,delta,delta,True
+Deltorphin II,5.39,-10.27,delta,delta,True
+Endomorphin-1,-2.99,0.4,mu,mu,True
+Met-enkephalin,0.81,-27.63,delta,delta,True
