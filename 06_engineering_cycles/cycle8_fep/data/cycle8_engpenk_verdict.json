@@ -1,0 +1,27 @@
+{
+ "ddG_kcal": -8.75,
+ "err_kcal": 3.19,
+ "ci95": [
+  -15.13,
+  -2.38
+ ],
+ "direction": "mu-preferring",
+ "controls": {
+  "Deltorphin II": [
+   29.04,
+   3.44,
+   5.39
+  ],
+  "Endomorphin-1": [
+   1.37,
+   5.14,
+   -2.99
+  ]
+ },
+ "cycle7": [
+  1.23,
+  1.76
+ ],
+ "inside_control_span": false,
+ "gate": "G1 fail (controls) -> sign not established; G2/G3 pass but engPENK is outside the control span"
+}
