@@ -67,7 +67,21 @@ contradictory predictions is right."*
 Window inputs were literal copies of `c3b_dtII_DOR_rep1/w00.mdp`–`w26.mdp`, the files that
 produced the gated control result, so the λ schedule, soft-core settings and coupling
 directives are identical to the comparators by construction. `couple-moltype = system2`
-(110 atoms = the peptide) was verified from the tpr, not assumed.
+(110 atoms = the peptide) was verified from the **mdp**, not assumed.
+
+**Correction (2026-09-27).** An earlier version of this line said the directive was "verified
+from the tpr". That is not achievable: `gmx dump -s` does **not** emit a `couple-moltype`
+field at all. Checked directly — `gmx dump` on this very tpr, the one that produced the
+−8.75 result, returns **zero** matches for `couple-moltype`, as does the tpr for the
+met-enkephalin control. The absence is a property of the dump tool, not of the files. The
+verification behind the result was real but came from reading the mdp; the provenance
+sentence overstated where it came from.
+
+*Generalisable lesson, and the fifth instance of this class today:* a grep that matches
+nothing looks identical to a grep whose subject is absent. What resolved it here was
+running the same query against a **known-good artifact** — if the pattern also returns
+nothing on a file that demonstrably worked, the pattern is wrong rather than the file.
+Comparing against a working reference beats comparing against an expectation.
 
 ## Method note
 
@@ -158,3 +172,68 @@ Analgesia operates through both receptors; δ-selectivity reduces μ-mediated re
 dependence risk. The former is the mechanism, the latter the differentiation. Today's result
 bears on the differentiation claim, not on whether the construct can produce analgesic
 peptides.
+
+---
+
+## The met-enkephalin control is running (launched 2026-09-27)
+
+The decisive control identified above is no longer deferred. Both systems were equilibrated
+on `pibu_el8` — the same CPU partition the gated control campaign ran on, chosen so the
+control shares hardware as well as protocol with its comparators.
+
+### Peptide identity settled three independent ways
+
+Window generation **aborted on the first attempt**, correctly: an atom-count range of
+40–200 matched two moleculetypes. Both were then identified by computed molecular formula:
+
+| moleculetype | atoms | identity | formula | copies |
+|---|---|---|---|---|
+| `system2` | **75** | met-enkephalin `YGGFM` | C₂₇H₃₅N₅O₇S | **1** |
+| `system3` | 134 | POPC | C₄₂H₈₂NO₈P | 339 (δ) / 219 (μ) |
+
+Atom count, molecular formula and copy number all agree that `system2` is the peptide. The
+guard's criterion was too loose, but it **failed safe** — refusing rather than taking the
+first match, which would have decoupled a lipid and returned an ordinary-looking number
+after days of compute. The retry asserts exactly 75.
+
+### Coupling directive confirmed
+
+```
+free-energy      = yes
+couple-moltype   = system2
+couple-lambda0   = vdw-q
+couple-lambda1   = none
+couple-intramol  = yes
+```
+
+Identical on every free-energy line to `c3b_dtII_DOR_rep1/w00.mdp`, the leg that produced
+the gated result. 108/108 window inputs built.
+
+### Production
+
+8 workers, atomic `mkdir` lock claiming, 3 ns per window, 324 ns total (~4–6 days). Leg
+order is `DOR_rep1, MOR_rep1, DOR_rep2, MOR_rep2` — one replicate of **each** receptor
+first, since a ΔΔG needs both, so a usable estimate exists at roughly half the sampling
+rather than only at the end.
+
+Each worker carries a **progress gate**: simulated time is recorded before and after every
+attempt and the worker aborts if a window advances nothing. This is a direct fix for the
+earlier defect where a retry loop treated a deterministic failure as transient and reported
+success on a run that made zero progress.
+
+### What the result will and will not settle
+
+Stated before the data exists. Met-enkephalin's published ΔΔG(μ−δ) is **+0.81 kcal/mol** —
+a small effect. This protocol already failed on endomorphin-1 at **−2.99**, an effect 3.7×
+larger, so it probably cannot resolve +0.81 correctly either. This is a **magnitude-scale
+test, not a sign test**:
+
+- **near zero (−2 to +2)** → the protocol behaves sanely on an enkephalin-family peptide, so
+  the engPENK −8.75 is anomalous rather than systematic;
+- **−6 or worse** → systematic bias against δ for `YGGF`-motif peptides, and the engPENK
+  value can be set aside as a protocol artefact;
+- **mildly δ-preferring** → the protocol is better than its endomorphin-1 failure suggested,
+  and −8.75 becomes harder to dismiss. This is the outcome that would matter.
+
+Two of three outcomes support setting the engPENK value aside; the third is the one worth
+knowing about.
