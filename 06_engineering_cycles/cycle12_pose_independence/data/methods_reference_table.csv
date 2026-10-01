@@ -1,0 +1,15 @@
+method,tier,ddG_error_kcal,delivers,doi,verdict
+AutoDock CrankPep (ADCP),A - pose,,"peptide pose (structure), not affinity",10.1093/bioinformatics/btz459,RECOMMENDED - independent pose for engPENK; tests whether -8.75 is a pose artifact
+Rosetta FlexPepDock,A - pose,,peptide pose,10.1371/journal.pone.0269759,third opinion only if ADCP and co-folding disagree
+HADDOCK + dMM-PBSA,A - pose,,pose + endpoint affinity attempt,10.3389/fmolb.2016.00046,same family as the MM-GBSA that already failed its magnitude gate
+exact high-throughput ABFE (2025),B - affinity,1.41,"absolute binding free energy, AUE <1 kcal/mol, hysteresis <0.5, handles flexible peptides",10.1038/s43588-025-00821-w,best new candidate; sqrt(2) is pessimistic because errors cancel across homologous receptors
+relative FEP anchored on a reference ligand,B - affinity,,"ddG directly, cancelling ligand self-energy",10.1021/acs.jcim.9b00106,precedent at 50% site identity; FEP+ is commercial but the anchoring idea is free
+more replicates of current TI,B - affinity,2.58,"same protocol, more sampling",,"computed: n=6 per receptor still leaves ~3x the effect, for ~11 extra days"
+AutoDock Vina / AD4 scoring (for affinity),C - excluded,2.37,docking score,,best modern scoring functions reach 1.23 pKd RMSE; MM-GBSA is more rigorous and already failed
+TrGPCR,C - excluded,3.48,affinity from sequence + pocket,10.1109/JBHI.2023.3307928,"RMSE 1.804 pKd, its own best figure; opioid receptors never named"
+Cycle 11 fingerprint QSAR (ours),C - excluded,1.06,ddG directly,,payload prediction is a nearest-neighbour lookup; sign flips without its 36 neighbours
+BindPred,C - excluded,,affinity from sequence,10.1093/bioinformatics/btag309,ESM2 cannot represent D-residues; only 5 encodable references spanning 1.11 kcal/mol
+GPCRVS,C - excluded,,GPCR activity class + affinity,10.3390/ijms26052160,opioid receptors absent; validated on class B and chemokine CC/CXC
+radioligand displacement,D - experimental,,binding Ki at each receptor -> experimental ddG,,accessible; previously set aside in favour of cAMP
+cAMP (planned),D - experimental,,"functional potency EC50, not binding",,the arbiter for the therapeutic claim; measures an adjacent quantity to every dry-lab number
+FLOWER / SPR / BLI,D - experimental,,label-free Kd,10.1038/s44386-026-00046-5,FLOWER not accessible; SPR/BLI needs receptor in nanodiscs or VLPs

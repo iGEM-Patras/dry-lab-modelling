@@ -1,0 +1,282 @@
+{
+ "ADCP_peptide_docking": [
+  {
+   "y": "2019",
+   "pmid": "31505931",
+   "doi": "10.1021/acs.jctc.9b00557",
+   "cit": 51,
+   "j": "Journal of chemical theory and computation",
+   "t": "Docking Flexible Cyclic Peptides with <i>AutoDock CrankPep</i>."
+  },
+  {
+   "y": "2019",
+   "pmid": "31161213",
+   "doi": "10.1093/bioinformatics/btz459",
+   "cit": 160,
+   "j": "Bioinformatics (Oxford, England)",
+   "t": "AutoDock CrankPep: combining folding and docking to predict protein-peptide complexes."
+  },
+  {
+   "y": "2019",
+   "pmid": null,
+   "doi": "10.26434/chemrxiv.8428904.v1",
+   "cit": 0,
+   "j": null,
+   "t": "Docking Flexible Cyclic Peptides with AutoDock CrankPep"
+  }
+ ],
+ "vina_scoring_accuracy": [
+  {
+   "y": "2025",
+   "pmid": "41394085",
+   "doi": "10.1093/bioadv/vbaf267",
+   "cit": 2,
+   "j": "Bioinformatics advances",
+   "t": "Unveiling novel drug-target couples: an empowered automated pipeline for enhanced virtual screening using AutoDock Vina."
+  },
+  {
+   "y": "2024",
+   "pmid": "39320991",
+   "doi": "10.1109/tcbb.2024.3467127",
+   "cit": 25,
+   "j": "IEEE/ACM transactions on computational biology and bioinformatics",
+   "t": "Vina-GPU 2.1: Towards Further Optimizing Docking Speed and Precision of AutoDock Vina and Its Derivatives."
+  },
+  {
+   "y": "2024",
+   "pmid": null,
+   "doi": "10.1101/2024.03.22.586129",
+   "cit": 0,
+   "j": null,
+   "t": "Characterizing the Binding Mechanism of Sparsentan to the Type-2 Angiotensin II Receptor Using AutoDock Vina"
+  },
+  {
+   "y": "2022",
+   "pmid": "35566391",
+   "doi": "10.3390/molecules27093041",
+   "cit": 76,
+   "j": "Molecules (Basel, Switzerland)",
+   "t": "Accelerating AutoDock Vina with GPUs."
+  },
+  {
+   "y": "2023",
+   "pmid": "37831573",
+   "doi": "10.1109/tcbb.2023.3323552",
+   "cit": 6,
+   "j": "IEEE/ACM transactions on computational biology and bioinformatics",
+   "t": "Effectiveness Analysis of Multiple Initial States Simulated Annealing Algorithm, a Case Study on the Molecular Docking Tool AutoDock Vina."
+  }
+ ],
+ "flexpepdock": [
+  {
+   "y": "2021",
+   "pmid": null,
+   "doi": "10.1101/2021.05.06.441297",
+   "cit": 0,
+   "j": null,
+   "t": "Covalent Flexible Peptide Docking in Rosetta"
+  },
+  {
+   "y": "2022",
+   "pmid": null,
+   "doi": "10.1101/2022.12.19.521113",
+   "cit": 2,
+   "j": null,
+   "t": "CMA-ES-Rosetta: Blackbox optimization algorithm traverses rugged peptide docking energy landscapes"
+  },
+  {
+   "y": "2021",
+   "pmid": "34476063",
+   "doi": "10.1039/d1sc02322e",
+   "cit": 20,
+   "j": "Chemical science",
+   "t": "Covalent flexible peptide docking in Rosetta."
+  },
+  {
+   "y": "2022",
+   "pmid": "36512534",
+   "doi": "10.1371/journal.pone.0275759",
+   "cit": 20,
+   "j": "PloS one",
+   "t": "Rosetta FlexPepDock to predict peptide-MHC binding: An approach for non-canonical amino acids."
+  },
+  {
+   "y": "2022",
+   "pmid": "35575349",
+   "doi": "10.1093/bioinformatics/btac325",
+   "cit": 3,
+   "j": "Bioinformatics (Oxford, England)",
+   "t": "InterPepScore: a deep learning score for improving the FlexPepDock refinement protocol."
+  }
+ ],
+ "haddock_peptide": [
+  {
+   "y": "2025",
+   "pmid": "39897056",
+   "doi": "10.1016/j.csbj.2025.01.001",
+   "cit": 3,
+   "j": "Computational and structural biotechnology journal",
+   "t": "Plasticity of BioPhi-driven humanness optimization in ScFv-CD99 binding affinity validated through AlphaFold, HADDOCK, and MD simulations."
+  },
+  {
+   "y": "2020",
+   "pmid": "33659447",
+   "doi": "10.21769/bioprotoc.3793",
+   "cit": 14,
+   "j": "Bio-protocol",
+   "t": "Understanding Docking Complexes of Macromolecules Using HADDOCK: The Synergy between Experimental Data and Computations."
+  },
+  {
+   "y": "2017",
+   "pmid": "28236236",
+   "doi": "10.1007/978-1-4939-6798-8_8",
+   "cit": 30,
+   "j": "Methods in molecular biology (Clifton, N.J.)",
+   "t": "Information-Driven, Ensemble Flexible Peptide Docking Using HADDOCK."
+  },
+  {
+   "y": "2020",
+   "pmid": "33156296",
+   "doi": "10.5177/ntvt.2020.10.19094",
+   "cit": 1,
+   "j": "Nederlands tijdschrift voor tandheelkunde",
+   "t": "[The importance of saliva to oral health; from Haddock to histatin]."
+  },
+  {
+   "y": "2016",
+   "pmid": "27630991",
+   "doi": "10.3389/fmolb.2016.00046",
+   "cit": 60,
+   "j": "Frontiers in molecular biosciences",
+   "t": "dMM-PBSA: A New HADDOCK Scoring Function for Protein-Peptide Docking."
+  }
+ ],
+ "abs_binding_FE_peptide": [
+  {
+   "y": "2025",
+   "pmid": "40533510",
+   "doi": "10.1038/s43588-025-00821-w",
+   "cit": 8,
+   "j": "Nature computational science",
+   "t": "A formally exact method for high-throughput absolute binding-free-energy calculations."
+  },
+  {
+   "y": "2024",
+   "pmid": "39466712",
+   "doi": "10.1021/acs.jctc.4c00942",
+   "cit": 10,
+   "j": "Journal of chemical theory and computation",
+   "t": "Comparison of Methodologies for Absolute Binding Free Energy Calculations of Ligands to Intrinsically Disordered Proteins."
+  },
+  {
+   "y": "2024",
+   "pmid": null,
+   "doi": "10.1101/2024.07.19.604182",
+   "cit": 0,
+   "j": null,
+   "t": "Comparison of Methodologies for Absolute Binding Free Energy Calculations of Ligands to Intrinsically Disordered Proteins"
+  },
+  {
+   "y": "2014",
+   "pmid": "24941018",
+   "doi": "10.1021/jp5015934",
+   "cit": 17,
+   "j": "The journal of physical chemistry. B",
+   "t": "Evaluation of Generalized Born Model Accuracy for Absolute Binding Free Energy Calculations."
+  }
+ ],
+ "noneq_switching": [
+  {
+   "y": "2025",
+   "pmid": null,
+   "doi": "10.64898/2025.12.09.692605",
+   "cit": 0,
+   "j": null,
+   "t": "NEMAT: An Automated Non-Equilibrium Free-Energy Framework for Predicting Ligand Affinity in Membrane Proteins"
+  },
+  {
+   "y": "2025",
+   "pmid": "41369056",
+   "doi": "10.1063/5.0290883",
+   "cit": 0,
+   "j": "The Journal of chemical physics",
+   "t": "Non-equilibrium Trajectory Sampling (NETS) method for generating free-energy landscapes and steady-state distributions."
+  },
+  {
+   "y": "2021",
+   "pmid": null,
+   "doi": "10.26434/chemrxiv.13225181.v2",
+   "cit": 0,
+   "j": null,
+   "t": "Challenges Encountered Applying Equilibrium and Non-Equilibrium Binding Free Energy Calculations"
+  },
+  {
+   "y": "2021",
+   "pmid": "33905257",
+   "doi": "10.1021/acs.jpcb.0c10263",
+   "cit": 50,
+   "j": "The journal of physical chemistry. B",
+   "t": "Challenges Encountered Applying Equilibrium and Nonequilibrium Binding Free Energy Calculations."
+  },
+  {
+   "y": "2020",
+   "pmid": "32653524",
+   "doi": "10.1016/j.jmgm.2020.107648",
+   "cit": 8,
+   "j": "Journal of molecular graphics & modelling",
+   "t": "Estimation of the ligand-binding free energy of checkpoint kinase 1 via non-equilibrium MD simulations."
+  }
+ ],
+ "selectivity_FEP": [
+  {
+   "y": "2026",
+   "pmid": "42305208",
+   "doi": "10.1021/acsmedchemlett.6c00158",
+   "cit": 0,
+   "j": "ACS medicinal chemistry letters",
+   "t": "Discovery of 2H-Pyrrolo[3,4\u2011&lt;i&gt;c&lt;/i&gt;]pyridin-3-one Derivatives as Type-III c\u2011MET Inhibitors Enabled by Free-Energy Perturbation Calculations."
+  },
+  {
+   "y": "2019",
+   "pmid": "31144815",
+   "doi": "10.1021/acs.jcim.9b00106",
+   "cit": 24,
+   "j": "Journal of chemical information and modeling",
+   "t": "Application of Free Energy Perturbation (FEP+) to Understanding Ligand Selectivity: A Case Study to Assess Selectivity Between Pairs of Phosphodiesterases (PDE's)."
+  },
+  {
+   "y": "2020",
+   "pmid": "33105987",
+   "doi": "10.1021/acs.jmedchem.0c01272",
+   "cit": 19,
+   "j": "Journal of medicinal chemistry",
+   "t": "[1,2,4]Triazolo[1,5-<i>a</i>]pyrimidine Phosphodiesterase 2A Inhibitors: Structure and Free-Energy Perturbation-Guided Exploration."
+  },
+  {
+   "y": "2019",
+   "pmid": "30763080",
+   "doi": "10.1021/acs.jcim.8b00959",
+   "cit": 34,
+   "j": "Journal of chemical information and modeling",
+   "t": "Ranking Reversible Covalent Drugs: From Free Energy Perturbation to Fragment Docking."
+  },
+  {
+   "y": "2019",
+   "pmid": null,
+   "doi": "10.1101/510487",
+   "cit": 0,
+   "j": null,
+   "t": "Discovery of New Classes of Glycine transporter 2 (GlyT2) Inhibitors and Study of GlyT2 Selectivity by Combination of Novel Structural Based Virtual Screening Approach and Free Energy Perturbation (FEP+) Calculations"
+  }
+ ],
+ "docking_selectivity_homolog": [
+  {
+   "y": "2026",
+   "pmid": "42442500",
+   "doi": "10.1016/j.jbc.2026.113327",
+   "cit": 0,
+   "j": "The Journal of biological chemistry",
+   "t": "Decoding of amidated aromatic C-terminus and sulfation by cholecystokinin receptors reveals conserved and divergent evolutionary mechanisms."
+  }
+ ]
+}
