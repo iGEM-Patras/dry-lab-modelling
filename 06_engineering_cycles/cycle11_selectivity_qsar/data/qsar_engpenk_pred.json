@@ -1,0 +1,6 @@
+{
+ "pred_full": 0.8227553287538377,
+ "pred_neighbours_held_out": -0.24297367520614663,
+ "n_held_out": 36,
+ "max_tanimoto": 0.6617647058823529
+}

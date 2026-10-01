@@ -1,0 +1,20 @@
+{
+ "cycle": 11,
+ "written": "2026-10-01, before any SMILES were fetched or any model fitted",
+ "question": "Can a selectivity QSAR trained DIRECTLY on ddG beat the difference-of-two-predictions approaches (co-folding, MM-GBSA, free energy) for YGGFEVVG?",
+ "target": "ddG = RT*ln(Ki_mu / Ki_delta); POSITIVE = delta-preferring (repo convention)",
+ "training_set": "ChEMBL compounds with Ki at BOTH OPRD1 (CHEMBL236) and OPRM1 (CHEMBL233); primary tier requires >=2 measurements per receptor (n=227), secondary tier >=1 (n=3584). Single-source by rule: ChEMBL only.",
+ "features": "Morgan fingerprint r=2, 2048 bits + MW, cLogP, TPSA, HBD, HBA, rotatable bonds",
+ "model": "gradient-boosted trees, default hyperparameters, no tuning on the test folds",
+ "validation": "Bemis-Murcko scaffold-grouped 5-fold CV. Scaffold split is the honest one and is what the gates are judged on; random split reported for contrast only.",
+ "gates": {
+  "G1_correlation": "AMENDED before any data was fetched: the p=0.05 critical r is 0.13 at n=227 and 0.033 at n=3584, so a significance-based gate passes automatically and tests nothing. Replaced with a USEFULNESS threshold: |Pearson r| >= 0.50 on pooled scaffold-split held-out predictions.",
+  "G2_sign": "sign accuracy on held-out predictions must exceed 50% by a binomial test at p<0.05",
+  "G3_applicability": "max Tanimoto similarity of YGGFEVVG to any training compound must be >= 0.30",
+  "G1b_resolution": "RMSE on scaffold-split held-out predictions must be <= 1.0 kcal/mol. Rationale: the effect to resolve is ~1 kcal/mol (met-enkephalin +0.81, our calibrated engPENK estimate +1.23). A model with RMSE above that cannot distinguish our peptide from no preference, however well it correlates across a 10 kcal/mol range."
+ },
+ "decision_rule": "If G1 OR G2 fails -> NO prediction for YGGFEVVG is reported, consistent with Cycle 7. If G3 fails -> any prediction is reported as OUT OF DOMAIN and is not usable evidence, even if G1 and G2 pass.",
+ "stated_prior": "Likely to fail G3. The training set is dominated by small molecules; YGGFEVVG is an 8-residue peptide. This is the same applicability-domain problem the earlier fingerprint screen hit. Predicting failure in advance so a pass is informative.",
+ "what_would_make_this_better_than_prior_methods": "Selectivity is the direct regression target, so it does not pay the sqrt(2) error inflation that every difference-of-two-predictions method pays.",
+ "amendment_note": "G1 was amended and G1b added at pre-registration time, before fetching SMILES or fitting. The original significance-based G1 is recorded above so the change is visible."
+}

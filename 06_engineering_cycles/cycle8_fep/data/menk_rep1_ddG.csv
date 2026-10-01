@@ -1,0 +1,2 @@
+quantity,value_kcal,within_replicate_err_kcal,published_kcal,deviation_from_published_kcal,sign_correct,replicates_done,replicate_spread_prior_campaign_kcal,hardware,caveat
+"met-enkephalin ddG(DOR-MOR), rep1 only",0.97,1.0,0.81,0.16,True,1,6.32,mixed CPU+GPU (20 of 54 windows on GPU),within-replicate BAR error only; between-replicate spread dominates and is unmeasured here

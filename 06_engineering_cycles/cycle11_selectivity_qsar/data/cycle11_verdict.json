@@ -1,0 +1,37 @@
+{
+ "cycle": 11,
+ "scored": "2026-10-01",
+ "split_judged_on": "Bemis-Murcko scaffold-grouped 5-fold CV",
+ "gates": {
+  "G1_correlation_r_ge_0.50": {
+   "all_n3579": 0.769,
+   "tier2_n227": 0.318,
+   "verdict": "PASS on all-compound tier (0.769); FAIL on the pre-registered PRIMARY tier (0.318)"
+  },
+  "G1b_rmse_le_1.0": {
+   "all_n3579": 1.06,
+   "tier2_n227": 1.67,
+   "verdict": "FAIL on both tiers (1.06 and 1.67 kcal/mol)"
+  },
+  "G2_sign_accuracy": {
+   "all_n3579": 0.821,
+   "tier2_n227": 0.819,
+   "verdict": "PASS on both (82%)"
+  },
+  "G3_applicability_tanimoto_ge_0.30": {
+   "observed": 0.662,
+   "nearest": "Leu-enkephalin",
+   "verdict": "PASS \u2014 and contrary to my stated prior"
+  }
+ },
+ "unregistered_robustness_test": {
+  "description": "Refit excluding the 36 compounds at Tanimoto >= 0.50 plus the enkephalin scaffold family",
+  "pred_with_neighbours": 0.82,
+  "pred_without": -0.24,
+  "verdict": "SIGN FLIPS (+0.82 -> -0.24). The prediction is carried entirely by near neighbours."
+ },
+ "decision": "NO ddG value is reported for YGGFEVVG. The pre-registered PRIMARY tier failed G1, the resolution gate failed on both tiers, and the prediction is not robust to removing its nearest neighbours.",
+ "drafting_gap_in_my_own_prereg": "The decision rule named G1 and G2 but not G1b, which I added during pre-registration. I am treating a G1b failure as disqualifying for MAGNITUDE rather than exploiting the omission, because G1b's stated rationale was precisely that RMSE above 1.0 cannot resolve this effect.",
+ "diagnostic_finding": "Compounds at Tanimoto >= 0.30 to the payload (n=200) span -7.01 to +5.17 kcal/mol with sd 2.44, HIGHER than the full set's 1.66. Chemical similarity at Morgan r=2 resolution carries no selectivity signal in this region, which is why the prediction collapses once near-identical enkephalins are removed.",
+ "what_the_model_IS_good_for": "r = 0.769, 82% sign accuracy, RMSE 1.06 on a scaffold split across 3,579 compounds is the best-performing selectivity method in this project in aggregate. It is usable for ranking structurally diverse SMALL MOLECULES; it is not usable for this peptide."
+}
