@@ -84,3 +84,70 @@ the best aggregate performance of any selectivity method in this project. It is 
 
 `data/cycle11_dataset.csv` — 3,579 compounds with ddG, SMILES, Murcko scaffold and Tanimoto to
 the payload — is reusable for any future selectivity work.
+
+---
+
+## Amendment, same day — the chirality objection, tested and answered
+
+**The objection.** The features above used Morgan fingerprints with `useChirality=False`
+(the RDKit default). Opioid peptide selectivity is carried substantially by D- vs L-
+stereochemistry — it is why DAMGO and dermorphin are mu-selective. A chirality-blind
+fingerprint encodes DAMGO identically to its all-L analogue despite a ~4 kcal/mol
+difference, which would **manufacture** the "similar compounds span the whole range"
+pattern reported above as a property of chemical space.
+
+This was raised after the result was already committed (`1f7266a`), so the possibly-wrong
+conclusion was public before being checked.
+
+**The descriptor was validated against a known answer first**, because "no change" is
+meaningless if the flag did nothing:
+
+```
+enantiomeric tripeptide pair   achiral Tanimoto = 1.0000   (must be 1.0, and is)
+                               chiral  Tanimoto = 0.8718   (must be < 1.0, and is)
+Tyr-L-Ala-Gly vs Tyr-D-Ala-Gly achiral = 1.0000, chiral = 0.8095
+DAMGO (3 chiral centres)       chiral vs achiral encoding Tanimoto 0.618
+```
+
+The chiral encoding is a genuinely different vector, and it does separate enantiomers.
+
+**The refit, same scaffold-grouped 5-fold CV, n = 3,579:**
+
+| features | r | RMSE | sign | max Tanimoto to payload | n in domain | sd ddG in domain |
+|---|---|---|---|---|---|---|
+| achiral | +0.769 | 1.06 | 82.1% | 0.662 | 200 | 2.44 |
+| **chirality-aware** | +0.764 | 1.07 | 81.9% | 0.687 | 203 | 2.47 |
+
+Indistinguishable. **The conclusion stands and was not an artifact of the descriptor.**
+
+### But the claim above was stated too broadly, and is narrowed here
+
+The original text said any method that interpolates from chemically similar compounds will
+fail here, covering "fingerprint QSAR, language-model embeddings, and similarity-based
+screening generally". That is **not** what was demonstrated.
+
+What was demonstrated: **fingerprint-based** interpolation carries no selectivity signal in
+this region, with or without stereochemistry in the descriptor.
+
+What was **not** demonstrated: that a representation encoding stereochemistry more
+prominently would also fail. Note that even the chiral fingerprint rates an enantiomeric
+pair at 0.81-0.87 similarity — the stereochemical signal is a small fraction of 2,048 bits.
+Two explanations remain open and this test cannot separate them:
+
+1. stereochemistry is not the dominant driver of selectivity in this region, or
+2. the signal is too dilute in a sparse bit vector for gradient boosting to find at n = 3,579.
+
+A learned or 3D representation, where stereochemistry is not a handful of bits among
+thousands, is therefore **not excluded** by this result.
+
+### Consequence for methods assessed the same day
+
+- **BindPred** remains rejected, for an unrelated and stronger reason: ESM2 cannot *represent*
+  D-residues at all, so the question of dilution never arises.
+- **TrGPCR** (doi:10.1109/JBHI.2023.3307928) is **not** excluded by this finding. It uses a
+  learned representation via transfer learning plus binding-pocket features, and GLASS
+  includes opioid receptors. Its limitation is different: it predicts affinity, not
+  selectivity, so a ddG inherits sqrt(2) x its per-prediction error. To resolve a 1.0 kcal/mol
+  effect it needs per-prediction RMSE <= **0.52 log10 units**; for met-enkephalin's +0.81,
+  <= 0.42. The paper reports only a relative improvement over DeepDTA (5.2% on RMSE), so the
+  absolute value must be read from the paper before it is worth setting up.
