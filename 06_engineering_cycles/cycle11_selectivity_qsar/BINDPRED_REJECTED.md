@@ -120,3 +120,78 @@ effect itself.
 from published values, and on 2026-10-01 its met-enkephalin control reproduced the published
 value at +0.97 +/- 1.00 against +0.81 (replicate 1 of 2). It is the method that will settle
 this, and the wet-lab cAMP assay is the arbiter.
+
+---
+
+# Fifth assessment: the npj Drug Discovery perspective (no new computational route)
+
+Su, Liggett, Kim, Kim & Goddard, *npj Drug Discovery* 2026;3:13, doi:10.1038/s44386-026-00046-5.
+An integrated GPCR discovery workflow: computational modelling, functional cell assays, and
+**FLOWER** (Frequency Locked Optical Whispering Evanescent Resonator) for label-free direct
+binding measurement. Case studies are bitter (TAS2R) and sweet (T1R2/T1R3) taste receptors —
+not opioid receptors, though the authors state the approach is generalizable.
+
+## It contains no computational method that passes our resolution filter
+
+Named: GEnSeMBLE, DarwinDock, NAMD/CHARMM36m, and Allosite / PASSer for allosteric pockets.
+These are structure-generation, docking and MD tools. The paper reports **no selectivity
+benchmark for any of them** — no RMSE, no correlation against measured ddG. They do not fail
+our 0.52 log-unit requirement so much as never state a number against which it could be
+applied. Allosite and PASSer target hidden allosteric pockets, which does not apply to an
+orthosteric peptide. NAMD/CHARMM36m is MD, which this project already runs.
+
+## Its actual thesis agrees with our conclusion, reached independently
+
+*"FLOWER provides direct, label-free quantification of receptor-ligand binding affinity under
+near-physiological conditions, enabling computational predictions of binding strength and
+selectivity to be tested against experimentally determined equilibrium constants (Kd) without
+the use of tags."*
+
+The paper's answer to computational ambiguity is not a better model — it is direct experimental
+binding measurement. That is the same place the four assessments above arrived from the
+opposite direction.
+
+## WET-LAB PLANNING NOTE: potency is not affinity
+
+This is the transferable point, and it is a note for planning rather than a recommendation.
+The decision is the wet lab's.
+
+The paper's Fig. 1 workflow turns on *"when rank order of potencies and affinities agree"*, and
+flags that *"atypical FLOWER- or cell-based data require investigation with advanced molecular
+dynamics or other approaches"*. It treats functional potency (cell-based) and binding affinity
+(Kd) as **two different measurements** whose agreement is a checkpoint.
+
+**Every dry-lab selectivity number in this project is a ddG of BINDING:** Cycle 7's +1.23 +/-
+1.76, Cycle 8's -8.75 +/- 3.19, the met-enkephalin control's +0.97 +/- 1.00, the MM-GBSA
+directions, and all five published methods assessed.
+
+**The planned arbiter, cAMP, measures functional POTENCY.**
+
+Consequence: if the cAMP delta/mu ratio disagrees with the predicted binding ddG, that may be
+**ligand bias** rather than a wrong prediction — and without a binding measurement there is no
+way to tell which. cAMP is the right assay for "does it work" and for the therapeutic claim,
+but it cannot strictly validate or refute the dry-lab selectivity predictions; it answers an
+adjacent question. Worth knowing before a judge asks.
+
+## Access
+
+FLOWER is the Su lab's instrument (Wyant College of Optical Sciences, Arizona) and is not
+accessible to this project. The generic requirement is any direct binding measurement:
+
+- **Radioligand displacement** — previously considered and set aside in favour of cAMP. Yields
+  Ki at each receptor, hence an experimental ddG directly comparable to every dry-lab number.
+  This paper is an argument for revisiting it IF the delta/mu question specifically matters.
+- **SPR / BLI** at a core facility — label-free Kd on standard instruments, but GPCRs are
+  membrane proteins requiring nanodiscs or virus-like particles to immobilise, which is
+  precisely why FLOWER is notable. Likely out of scope for this timeline.
+
+## Running total: five published approaches, none able to resolve the effect
+
+Three fail for lack of the right data or receptors (BindPred, GPCRVS, this perspective), one
+on its own reported error (TrGPCR, 3.48 kcal/mol on a ddG against a ~1 kcal/mol effect), and
+one of ours reduces to a nearest-neighbour lookup (Cycle 11). The fifth paper's own
+recommendation is to stop computing it and measure binding directly.
+
+This is a documented position, not a run of failures: we do not claim delta-selectivity, we
+have recorded why five computational routes cannot settle it, and we have named the
+measurement that can.

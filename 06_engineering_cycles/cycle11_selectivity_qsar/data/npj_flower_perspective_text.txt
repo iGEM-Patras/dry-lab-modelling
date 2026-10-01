@@ -1,0 +1,625 @@
+
+===== PAGE 1 =====
+npj | drug discovery Perspective
+https://doi.org/10.1038/s44386-026-00046-5
+Accelerating GPCR drug discovery
+through computation and experiment
+integrated with direct detection of ligand
+binding events
+Check for updates
+Judith Su1 , Stephen B. Liggett2, Soo-Kyung Kim3, Donghwa Kim2 & William A. Goddard III3
+We present a perspective on an integrated workflow for GPCR drug discovery that combines
+computational modeling, functional cellular assays, and FLOWER, a label-free ultra-sensitive optical
+biosensing system for quantitating direct ligand receptor binding. We use bitter and sweet taste
+receptors (TAS2Rs and T1R2/T1R3) as examples of how FLOWER resolves receptor activation
+mechanisms left ambiguous after in silico screening and cell assays. This workflow offers a
+generalizable strategy for accelerating the discovery of selective and mechanism informed GPCR
+targeting therapeutics.
+G protein–coupled receptors (GPCRs) are the largest and most functionally
+diverse family of membrane proteins in the human genome, targeted by
+over 30% of FDA-approved drugs1
+. Despite their importance, drug discovery for many GPCRs, particularly those outside of class A, remains
+challenging due to conformational complexity, limited structural
+information2
+, and the difficulty of experimentally measuring ligand binding
+kinetics and mechanisms under near-native conditions3
+.
+Over the past several years, major methodological advances have
+begun to reshape early-stage GPCR drug discovery. These include improved
+structure prediction tools such asAlphaFold24 and GPCR-specificmodeling
+frameworks, the rapid expansion of high-resolution cryo-electron microscopy (cryo-EM) structures5 for active and inactive GPCR states6
+, and
+enhanced computational docking7 and molecular dynamics approaches8 for
+predicting binding energetics and conformational transitions. On the
+experimental side, cell-based assays incorporating mini-G proteins9
+, conformational biosensors10, and engineered signaling reporters11 provide
+mechanistically informative functional readouts relevant to efficacy, bias,
+and selectivity. Finally, sensitive biophysical methods including biolayer
+interferometry (BLI)12, and emerging optical biosensing platforms13 now
+allow direct measurement of ligand-protein binding interactions with
+increasing precision. In parallel, these developments enable earlier and more
+informed decision-making in GPCR ligand optimization.
+In this Perspective, we describe an integrated workflow that combines in
+silico computational modeling of huge data bases ( > 100 million), functional
+cellular assays on thousands of ligands, followed by direct ligand-protein
+kinetic binding measurements via the FLOWER (Frequency Locked Optical
+Whispering Evanescent Resonator) technique14–16, which together accelerate
+and refine discovery efforts (Fig. 1). Unlike conventional workflows in which
+computational predictions are validated only indirectly through cell-based
+outcomes, the strategy described here directly links in silico modeling with in
+vitro measurements obtained from FLOWER. In our current implementation, FLOWER provides direct, label-free quantification of receptor–ligand
+binding affinity under near-physiological conditions, enabling computational
+predictions of binding strength and selectivity to be tested against experimentally determined equilibrium constants (Kd) without the use of tags.
+We highlight the workflow using case studies of two structurally and
+functionally distinct GPCR families: the bitter taste receptors (TAS2Rs), a
+class of orphan-like receptors with atypical activation features, and the sweet
+taste receptor (T1R2/T1R3), a class C GPCR heterodimer with multiple
+allosteric and orthosteric binding sites. These systems illustrate how the
+workflow can resolve mechanistic ambiguities, characterize ligand bias, and
+guide rational lead optimization, building on methodologies we have previously established in separate studies. While focused on chemosensory
+GPCRs, the approach is generalizable across the broader GPCR landscape.
+The goal of this Perspective is to outline how these complementary methodologies can be integrated into a cohesive, iterative workflow to accelerate
+early-stage GPCR ligand discovery.
+Computational Predictions
+Activation and G Protein Coupling Features in Predicted ActiveState Bitter Taste Receptor (TAS2R)
+We recently used the GEnSeMBLE method to predict the active-state
+structures of three bitter taste receptors: TAS2R417, TAS2R518,19, and
+TAS2R1420. GEnSeMBLE offers advantages over approaches that generate a
+1
+Wyant College of Optical Sciences and Department of Biomedical Engineering, The University of Arizona, Arizona, USA. 2Department of Medicine, University of
+South Florida, Florida, USA. 3
+Materials and Process Simulation Center, California Institute of Technology, Pasadena, CA, USA. e-mail: judy@optics.arizona.edu
+npj Drug Discovery | (2026) 3:13 1
+1234567890():,;1234567890():,;
+===== PAGE 2 =====
+single predicted structure, such as traditional homology modeling,
+AlphaFold-based predictions, or RosettaCM, because it systematically
+samples transmembrane helix orientations and produces ensembles of
+active-state conformations. GEnSeMBLE may be particularly useful for this
+application because TAS2Rs have limited structural templates and atypical
+sequence motifs, making extensive conformational sampling specifically
+important for identifying plausible activation states.
+TASRs exhibit distinct conserved sequence motifs that differ from
+canonical class A GPCRs. Our predicted models revealed a unique hydrogenbonding network involving the conserved residues N1.50, R2.50, and S7.50
+(Ballesteros–Weinstein numbering). This triad replaces the typical N1.50,
+D2.50, N7.49 motif found in class A receptors, which usually coordinates
+either a sodium ion or protonated water molecule within transmembrane
+domain 2 (TMD2). Additionally, in most class A GPCRs, the inactive state is
+stabilized by an“ioniclock”—a salt bridge typicallyformed between R3.50 and
+E6.30. TAS2Rs lack this conserved salt bridge, suggesting these receptors may
+exist in a pre-activated conformation even in the absence of ligand. Another
+hallmark of activation in class A GPCRs is the conformational switch of
+Fig. 1 | Overview Workflow Diagram. Iterative GPCR ligand discovery workflow
+integrating computational modeling programs (such as GEnSeMBLE, DarwinDock,
+NAMD/CHARMM36m or for“hidden pockets”for allosteric modulators, AI-based
+programs such as Allosite and PASSer) followed by high-throughput screening
+(HTS) and other assays in cell-based systems. To obtain binding affinity, FLOWER is
+utilized for the promising high throughput screening candidates. Atypical
+FLOWER- or cell-based data require investigation with advanced molecular
+dynamics or other approaches to further understand mechanism of action. When
+rank order of potencies and affinities agree, additional modifications of the scaffold
+may reveal more potent or efficacious compounds. To prioritize candidates for
+experimental validation, candidates from modeling showing both stable predicted
+binding poses and favorable ΔG* values are advanced for experimental testing
+(FLOWER, followed by cell-based studies if the affinity meets criteria), while those
+with unfavorable energy profiles are deprioritized. The choice of the library, and the
+number of potential candidates from a virtual screening that are further studied, is
+highly dependent on the ligand-protein pairing that is being considered, the desired
+pharmacologic uniqueness, the computational method, and resource availability.
+Curated libraries of ~20 billion compounds can be parsed based on multiple factors
+leading to higher hit rates. Generative AI-based methods can find hidden pockets
+and design compounds that would be amenable to binding, opening additional
+avenues for generating libraries41. Color coding reflects workflow modules: blue
+(computational), peach (FLOWER), green (cell studies), gray (outcome states:
+inputs, decisions, and milestones).
+https://doi.org/10.1038/s44386-026-00046-5 Perspective
+npj Drug Discovery | (2026) 3:13 2
+===== PAGE 3 =====
+W6.48, which toggles between gauche+ and trans rotamers to toggle between
+inactive and active states. In TAS2Rs, W6.48 is replaced by a conserved tyrosine (Y6.48), whose functional role in activation remains unclear.
+These differences may explain the propensity for most TAS2Rs to
+display low potency for tastants (agonists) and to be broadly tuned to
+activation by apparently structurally diverse ligands. To elucidate the
+mechanistic basis of agonist potency at TAS2R5, we employed a multipronged approach that combined live cell–based functional assays, direct
+ligand-binding measurements using FLOWER, and atomistic molecular
+dynamics (MD) simulations following DarwinDock binding site predictions. DarwinDock was selected because it performs exhaustive side-chain
+optimization and scoring within the predicted binding pocket, enabling
+identification of energeticallyfavorable ligand poses in GPCR systems where
+binding site geometry is uncertain20. In live cell studies, the functional
+outcome (increased [Ca2+]i
+) provides for the potency (i.e., EC50) and
+minimal and maximal responses. However, agonist potency will vary with
+receptor expression (sigmoid curves shifting to the left with increased
+expression) as can the maximal response (efficacy). We considered that a
+true measurement of affinity would be a necessary component for characterizing new agonists, and thus turned to FLOWER to obtain direct
+measurements. So called “hidden pockets” for allosteric modulators may
+require different computational methods since they may be distant from the
+presumed binding pocket for the orthosteric site. Bioptic ligands, which
+bind to both the orthosteric and allosteric sites may require yet another
+docking and screening approach. Careful consideration of the kinetics,
+dose-responses, and other classic pharmacologic studies in cell-based assays
+can reveal atypical properties suggesting certain mechanisms. Importantly,
+unlike orthosteric radiolabels which bind to (or are displaced from) the
+orthosteric binding pocket, FLOWER will detect and quantitate compound
+binding regardless of location on the target protein. This has been particularly helpful under atypical binding behavior.
+Mechanism of detecting ligand-receptor interactions
+using FLOWER
+Direct and quantitative characterization of protein–ligand interactions is
+essential for verifying computational predictions, identifying unusual
+binding actions, and confirming promising lead compounds targeting
+GPCRs from cell-based systems. One method that enables such measurements with high sensitivity and specificity is FLOWER13–16,21–31. FLOWER is
+a label-free optical biosensing platform that tracks refractive index changes
+induced by molecular binding on the surface of ultra-high-Q whispering
+gallery mode (WGM) optical resonators (Fig. 2a).
+WGM resonators confine light by circulating it along a curved
+dielectric surface32–34, where it repeatedly interacts with the surrounding
+medium through a tightly confined evanescent field. This architecture
+allows FLOWER to detect minute refractive index changes in real time35
+Fig. 2 | Representative characterization of a
+microtoroid optical resonator and its use in
+measuring molecular binding kinetics using
+FLOWER. a Scanning electron microscope (SEM)
+image of a silica microtoroid resonator. The inset
+shows a finite-element simulation of the whispering
+gallery mode electric field distribution, which is
+highly confined at the periphery of the resonator,
+enabling sensitive evanescent detection. Reproduced with permission from14. b Real-time binding
+curves of Rubusoside to T1R2/T1R3, as measured by
+FLOWER, showing concentration dependent
+binding. Reproduced with permission from39.
+https://doi.org/10.1038/s44386-026-00046-5 Perspective
+npj Drug Discovery | (2026) 3:13 3
+===== PAGE 4 =====
+without the need for fluorescent or radioactive labels making it well-suited
+for studying weak or transient interactions under near-native conditions.
+Although FLOWER can be implemented using various cavity geometries,
+including microspheres, microdisks, and integrated photonic ring resonators, we typically employ ultra-high-Q silica microtoroid resonators due to
+their exceptional quality factors ( > 108
+), small mode volumes that enhance
+light–matter interactions, strong and accessible evanescent fields for
+surface-sensitive detection, and compact on-chip format. These attributes
+enhance detection sensitivity and allow robust, reproducible measurements
+of ligand binding events. In a typical experiment, laser light is evanescently
+coupled into the microtoroid36,37, where it circulates hundreds of thousands
+of times—akin to a whisper echoing within a circular gallery. The system
+actively locks the laser frequency to the resonant frequency of the microtoroid using a feedback control loop. When a molecule binds to the resonator surface, the local refractive index changes slightly, shifting the
+resonant frequency. The feedback system continuously tracks this shift in
+real time, allowing precise and dynamic quantification of molecular interactions. From the magnitude and kinetics of these frequency shifts,
+FLOWER can extract key binding parameters. As shown in Fig. 2b, the
+concentration-dependent peak resonance shifts can be used to estimate
+apparent binding constants by plotting the maximal response versus ligand
+concentration and fitting to a sigmoidal (Hill-type) binding model.
+Compared to conventional techniques such as surface plasmon resonance (SPR) and biolayer interferometry (BLI)12, FLOWER offers several
+distinct advantages for GPCR drug discovery:
+• Label-free detection, avoiding the need for bulky or perturbative tags38;
+• Ultra-high sensitivity, capable of detecting interactions at zeptomolar
+concentrations15 or even single molecules16;
+• Compatibility with complex biological samples, including detergentsolubilized receptors and crude membrane preparations15;
+• Preservation of receptor conformation, supporting analysis of GPCRs
+embedded in reconstituted lipid bilayers, nanodiscs, or other nativelike environments39.
+These features are particularly advantageous in early-stage drug discovery, where receptor materials are often limited, interactions can be lowaffinity or transient. Here, maintaining membrane protein integrity is
+crucial for biologically meaningful measurements. In the FLOWER assay,
+the receptors are maintained in a membrane-like lipid environment
+throughout the measurement. Purified GPCRs are first solubilized in mild
+detergents that preserve transmembrane structure and then reconstituted
+into supported lipid bilayers on the microtoroid surface through gradual
+detergent removal. This appears to mimic the physiological cell membrane,
+ensuring that the hydrophobic transmembrane regions of the receptor are
+exposed to a lipid environment rather than the solid interface. In previous
+studies, we have also successfully incorporated GPCRs into nanodiscs39,
+which further confirmed that receptor folding and ligand-binding activity
+are preserved in both membrane-mimetic formats. As shown in previous
+work with other GPCRs (e.g., κ-opioid receptor15), receptors reconstituted
+by this approach maintain ligand-specific binding and kinetic behavior,
+confirmingfunctional integrity. The FLOWER platform measures label-free
+binding via resonance shifts, and its ultra-high sensitivity (zeptomolar-level)
+allows reliable measurement of receptor–ligand interactions even at very
+low surface densities. Because detection depends on refractive-index perturbation near the resonator rather than on optical labels or ensemble
+averaging, the assay is compatible with monomeric or multimeric receptor
+complexes, including GPCR dimers or receptor–G-protein assemblies,
+provided they are incorporated within the SLB.
+Application to agonist discovery at bitter taste receptors (TAS2Rs)
+For studies with TAS2R5, we studied multiple potential agonists and noted a
+significant variance from the computationally derived predicted binding
+energy and the potency of the agonists. As shown in Fig. 3a, the compounds
+denoted T5-1, T5-8, and T5-14 have different EC50 values for stimulating
+Ca2+ in human airway smooth muscle (HASM) cells. The signal transduction coefficients (log [Rmax/EC50]) differed by over 2-orders of magnitude between T5-8 and T5-14. When plotted as the computationally
+derived binding energy vs signal transduction coefficient (Fig. 3b), most
+compounds displayed a consistent relationship between the two (black
+symbols). However, a few (blue symbols, particularly T5-14) had greater
+computationally derived binding energies than would be predicted based on
+signaling in cells. In FLOWER studies, the results followed that of the
+computationally derived energies. This indicated that the compound, such
+as T5-14 indeed bound to the receptor with high affinity, but some portion
+of that binding did not contribute to activation. This might be because of the
+energy of binding at the orthosteric sites plus the energy from “null” binding
+(or even a pose consistent with surmountable antagonism). This discrepancy is appreciated by plotting the effects of the agonist on the outputs
+from FLOWER and Ca2+ from live cells (Fig. 3c). Binding measured by
+FLOWER with different cell signaling results can occur with antagonists,
+inverse agonists, partial agonists, and allosteric modulators. We had
+Fig. 3 | Characterization of TAS2R5 agonists. aConcentration–response curves for
+selected TAS2R5 agonists (T5-1, T5-8, and T5-14) measured in human airway
+smooth muscle (HASM) cells, showing differences in potency (EC50) and maximal
+response. b Relationship between computationally predicted binding energies and
+signal transduction coefficients. Most compounds exhibit a consistent correlation
+(black symbols), whereas others (blue symbols), particularly T5-14, display stronger
+predicted binding than would be expected based on cellular signaling. Reproduced
+with permission from18. c Comparison of FLOWER binding measurements with
+cellular Ca2+ responses for representative agonists. FLOWER results follow the
+computationally derived binding energies, confirming high-affinity binding of T5-
+14 despite its low functional potency in cells. This incongruity highlights cases where
+receptor binding and downstream signaling are discrepant and indicate an atypical
+binding pose for this agonist which was found using more advanced molecular
+dynamics.
+https://doi.org/10.1038/s44386-026-00046-5 Perspective
+npj Drug Discovery | (2026) 3:13 4
+===== PAGE 5 =====
+eliminated these as possibilities in cell-based experiments. We also considered that TAS2Rs may have a cryptic transition state representing the
+correct energy “baseline” from which to calculate the net change in energy.
+To assess this possibility, we utilized metadynamics (MetaD) simulations.
+We identified a key transition underlying TAS2R5 activation which involves
+ligand-induced opening of the Gα subunit, at the interface between the αhelical (AH) and Ras-like domains. This conformational change drives the
+transition from a pre-coupled TAS2R5–G protein complex to the fully
+active state leading to functional signaling. Crucially, the magnitude of the
+energetic barrier associated with this domain opening varies dramatically
+between the agonists, correlating with their functional potency. For the most
+efficacious agonist, T5-8, Gα opening occurred with a stronglyfavorablefree
+energy change (ΔG= −11.1 kcal/mol) and a low activation barrier, ΔG* =
+3.4 kcal/mol. For the moderately active T5-1, the AH–Ras cleft expanded
+from 22 Å to 31 Å with a more modest energy gain of −4.8 kcal/mol and a
+higher barrier, ΔG* = 4.8 kcal/mol. For the least potent agonist, T5-14, the
+cleft still opened, but the associated energy gain was minimal
+(ΔG= −1.4 kcal/mol and ΔG* = 6.2 kcal/mol), showing very inefficient
+activation despite stable binding in the pre-coupled complex (Fig. 4).
+Not only do these findings reveal the well-recognized axiom that
+agonist potency is not governed solely by binding affinity, but indicates its
+dependence on the energetics of G protein activation, particularly the ability
+to drive domain separation within Gα to promote GDP exposure to solvent
+and subsequent signaling. Importantly, the pursuit of this mechanism was
+made possible by obtaining a direct measurement of agonist-receptor
+binding energy by FLOWER which prompted the additional computational
+studies. This has led to a much more predictive method of deriving agonist
+action that will promote discovery of novel TAS2R5 agonists. MetaD could
+be used to further analyze the top hits from docking prior to cell based
+assays, potentially decreasing the number of compounds to be studied.
+Application to agonist discovery at the sweet taste
+receptor (T1R2/T1R3)
+Detection of sweet tastants has been particularly challenging because it
+involves binding to a heterodimer of two seven-transmembrane proteins,
+T1R2 and T1R3 (Fig. 5).
+To investigate the structural basis of ligand recognition, we employed
+DarwinDock molecular docking to characterize the interactions between
+Fig. 4 | Ligand-dependent Gα opening in TAS2R5 revealed by metadynamics
+(metaD) simulations. Precoupled and fully activated TAS2R5 structures from
+metaD simulations are shown for (a) the apo form and (b) the T5-8–bound form,
+illustrating the closed and open conformations of the Gα subunit. The metaD freeenergy profiles for Gα opening are plotted as a function of the distance between the
+AH domain (center of mass of Cα atoms of residues 62–182) and the Ras-like
+domain (center of mass of Cα atoms of residues 42–58, 272–280, and 326–335) for
+the TAS2R5–Gi complex with different ligands: (c–f) Free energies of the three
+agonists and the unliganded (Apo) state. Reproduced with permission from20.
+Fig. 5 | Illustration of the human sweet taste receptor (T1R2/T1R3) highlighting
+multiple ligand binding sites. The heterodimeric sweet taste receptor comprises
+T1R2 and T1R3 subunits, each containing extracellular Venus flytrap domains
+(VFD2 and VFD3), cysteine-rich domains (CRD2 and CRD3), and transmembrane
+domains (TMD2 and TMD3). Steviol glycosides, including RebM, RebD, RebC,
+RebB, and Rubu, engage different binding pockets. Additional sweeteners and
+allosteric modulators, such as aspartame, neotame, NHDC, cyclamate, and S819,
+show site-selective engagement across VFDs and TMDs. In addition to small
+molecules, several sweet-tasting proteins (e.g., thaumatin, brazzein, monellin) also
+activate T1R2/T1R3 through protein–protein interactions, further highlighting the
+structural diversity and complexity of ligand recognition by this receptor. This
+multi-site binding model provides a structural framework for understanding the
+complex pharmacological responses elicited by diverse sweet compounds. Reproduced with permission from39.
+https://doi.org/10.1038/s44386-026-00046-5 Perspective
+npj Drug Discovery | (2026) 3:13 5
+===== PAGE 6 =====
+steviol glycosides (“artificial sweeteners”) and the T1R2/T1R3
+heterodimer39. These simulations identified four distinct binding sites: two
+in the Venus flytrap domain of T1R2, one in T1R3, and one in the transmembrane domain. This multi-site binding architecture suggested that
+receptor activation is driven by interactions, which may act in a cumulative
+fashion, across several receptor domains. Because computational docking
+can predict low-affinity or transient binding interactions that may be
+challenging to detect with conventional methods, their experimental validation necessitated techniques that offer high sensitivity and specificity.
+FLOWER provides such a platform by enabling direct, real-time measurement of ligand binding to purified receptors in near-native
+environments.
+In these experiments, FLOWER enabled high-sensitivity quantification of ligand binding kinetics across a concentration range spanning several
+orders of magnitude. We observed that the equilibrium dissociation constant (Kd) for RebM, Rubu, RebC, and RebD inversely correlated with their
+sweetness potency as drawn from the literature, with RebD deviating from
+this trend, as it binds more strongly than would be expected based on its
+reported sweetness. This suggests that binding affinity alone is inadequate to
+explain the complex interactions that ultimately lead tofunctional signaling.
+As in dynamic mass redistribution (DMR) assays40, we chose to analyze the
+peak binding response from the FLOWER resonance shift as it most
+robustly captures the maximal ligand–receptor engagement while avoiding
+variability introduced by slower conformational changes or surface
+rebinding. This peak-based metric provides a reproducible and physiologically relevant readout of binding affinity. Analysis of Hill slopes showed
+values consistently below unity for all ligands, indicative of multiple, nonequivalent binding sites on the receptor heterodimer (Fig. 6). Depletion of G
+protein compared to receptor can also cause shallow curves, but this was not
+the case in these studies. Indeed, by comparing binding with and without the
+C-terminal 20-residue peptide (C20) of the Gα protein, we found, as
+expected, that this surrogate G protein binding significantly enhanced
+binding affinity. However the shift was in a domain-specific manner. For
+example, C20 coupling to TMD2 enhanced RebM and RebC binding at
+VFD2, while coupling to TMD3 enhanced Rubusoside binding at VFD3,
+consistent with the binding energy calculation. These trends are further
+visualized in the normalized binding curves (Fig. 6) which reveal C20-
+induced shifts in binding affinity and Hill slope that depend on specific
+ligand–domain configurations. For example, in the TMD2 open case, C20
+coupling shifted the RebM curve leftward and increased its steepness, while
+Rubusoside displayed a leftward shift accompanied by a steeper Hill slope
+when C20 was bound in the TMD3 open case. Here, “TMD2 open”
+Fig. 6 | Normalized binding response curves obtained via FLOWER of sweet
+ligands binding to the human sweet taste receptor T1R2/T1R3 under different G
+protein coupling and domain-opening conditions. a RebC binding curves in the
+presence or absence of the last 20 amino acids of the C-terminal tail of Gas (C20
+peptide) and TMD2 or TMD3 domain opening. b Rubusoside binding with or
+without C20 peptide for TMD2 or TMD3 open configurations. c RebM binding
+under similar varied conditions. d RebD binding with and without C20 peptide
+under TMD3 open configuration. Reproduced with permission from39.
+https://doi.org/10.1038/s44386-026-00046-5 Perspective
+npj Drug Discovery | (2026) 3:13 6
+===== PAGE 7 =====
+describes a receptor conformation that increases accessibility to the VFD2-
+linked binding site, making it easier for certain ligands (e.g., RebM and
+RebC) to bind tightly, whereas“TMD3 open”reflects increased accessibility
+to the VFD3-linked binding site, which preferentially affects ligands such as
+Rubusoside. In the FLOWER assay, the orientation of the T1R2/T1R3 sweet
+receptor on the microtoroid surface is controlled by the antibody used for
+immobilization. Each subunit of the heterodimer carries an epitope tag near
+one of the transmembrane domains: a FLAG tag adjacent to TMD2 and a
+Rho tag adjacent to TMD3. When the microtoroid surface is functionalized
+with anti-FLAG antibody, the receptor binds through the FLAG tag near
+TMD2, anchoring that side of the receptor to the surface. This configuration
+leaves the TMD3 side exposed to the solution and accessible for interactions
+with C20 or other binding partners. Conversely, when anti-Rho antibody is
+used instead, the receptor attaches through the Rho tag near TMD3,
+anchoring the TMD3 side and leaving the TMD2 region exposed. By
+switching the immobilization antibody, the experiment selectively “opens”
+either the TMD2 or TMD3 interface, allowing domain-specific effects of
+G-protein coupling or ligand binding to be measured.
+This domain-specific modulation supports the hypothesis that receptor activation and ligand specificity are governed by allosteric interactions
+and conformational stabilization through G protein engagement—
+mechanistic insights uniquely enabled by FLOWER.
+Integration into the Expanded Workflow
+As part of the expanded GPCR drug discovery workflow, FLOWER acts as
+a final assessment of the binding predicted by in silico prediction and the
+assessment of cellular functional assays. FLOWER’s ability to monitor
+binding in real time provides access to association and dissociation rates, as
+well as equilibrium binding constants, enabling detailed characterization of
+ligand binding kinetics. Any atypical features of the fit data indicate the
+need for further exploration of the mechanism of action even when cellbased assays appear consistent with the desired pharmacologic properties.
+This level of resolution supports structure–activity relationship (SAR)
+analysis by revealing how specific chemical modifications influence both
+binding affinity and interaction dynamics. Such kinetic insights are critical
+for rational lead optimization, particularly in guiding R-group modifications to enhance potency, residence time, and target selectivity. Optimization is envisioned as an iterative design–test cycle guided by both
+computational modeling and experimental data, in which structural analogs are generated by modifying R-groups on the ligand scaffold to systematically explore chemical features that influence receptor binding.
+Computational prediction and cell-based assays prioritize these R-group
+variants, which can be refined by cellular assays with the final best cases
+measured with FLOWER, all together providing quantitative binding
+affinities and kinetic information that identify modifications that improve
+target engagement. Compounds showing improved activation in cellbasedfunctional assays would then be evaluated by FLOWER to determine
+whether the R-group changes enhance activity and receptor selectivity,
+thereby guiding further refinement. Based on our published work to date,
+an initial round of cell-based assays on the top computationally ranked
+ligands has been sufficient to identify candidates with good activity which
+can then be followed by FLOWER measurements to confirm measurable
+binding and suitable affinity. FLOWER can be incorporated at several steps
+in the workflow.We show it after the cell-based high-throughput screening
+because the latter rapidly eliminates candidates from large libraries and is
+currently less labor intensive. In addition to screening existing ligand
+libraries, this workflow can also incorporate generative AI models to
+propose de novo ligand structures based on the predicted receptor binding
+pocket(s). Together, these capabilities position FLOWER to support both
+early validation and future iterative optimization as more ligands are
+explored.
+While FLOWER offers a uniquely sensitive, label-free means of
+monitoring receptor–ligand interactions in real time, several limitations
+should be acknowledged. FLOWER quantifies physical binding events
+rather than downstream signaling and therefore does not directly report
+functional outcomes such as G-protein activation, second-messenger
+production, or β-arrestin recruitment. Nevertheless, functional correlations can be inferred through experimental design. For example,
+incorporation of mini-G proteins allows assessment of couplingdependent conformational changes that alter ligand-binding kinetics
+and affinities, while competition assays on the same toroid enable discrimination between agonists and antagonists based on their relative
+binding behaviors. The method also currently requires purified receptor
+proteins reconstituted into stabilizing lipid environments such as
+nanodiscs or supported bilayers, which may limit its applicability to
+receptors that are difficult to express or purify. While the lipid environment of a cell cannot be perfectly matched with the FLOWER method,
+we note that the lipid content of the cell membrane can differ by cell type
+anyway so the absolute values may be shifted compared to the affinity
+measured using a specific cell expressing the receptor (if it could be
+measured). Furthermore, if known low affinity and high affinity ligands
+are utilized as controls with each experiment, a rank-order of affinity (or
+other outputs) can be established which places into perspective the
+properties of tested ligands. Ultimately, signaling assays in cells and
+physiologic studies in the relevant tissues or intact organisms remain
+essential to establish whether ligand-induced receptor engagement
+produces the desired therapeutic outcomes.
+Future Directions
+GPCR drug discovery is entering a transformative phase, enabled by
+advances in structural biology, computational modeling, and highsensitivity experimental platforms. As our understanding of GPCR conformational dynamics and signaling bias expands, there is a growing need
+for integrated workflows that iteratively combine prediction, measurement, and validation. Technologies like FLOWER will play a central role in
+this evolution. Its ability to provide real-time, label-free, and ultra-sensitive
+kinetic measurements makes it particularly well-suited for early studies
+especially when receptor quantities are limiting or interactions are weak
+and transient. On the other hand, cell-based studies are essential to distinguish cases that may have high activation barriers or multimodal
+binding. Future development of FLOWER may include miniaturization,
+parallelization, and integration with microfluidic platforms, enabling highthroughput assays at unprecedented resolution. Coupling FLOWER with
+AI-driven compound design and automated feedback loops can further
+accelerate discovery. The integration of computational prediction, kinetic
+validation via FLOWER, and downstream functional assays forms a
+closed-loop pipeline that optimizes both ligand potency and specificity in
+real time. Overall, FLOWER exemplifies a new class of biophysical tools
+that bridge traditional divides between computation and experiment, as
+well as early discovery and preclinical validation. As workflows become
+more integrated, scalable, and physiologically relevant, we anticipate a
+substantial acceleration in the development of GPCR-targeted therapeutics
+across diverse disease areas.
+Data availability
+This Perspective does not report any new data. All previously published data
+referenced in this work are cited appropriately and available from the corresponding publications. No custom code was generated or used for
+this work.
+Received: 12 September 2025; Accepted: 17 February 2026;
+References
+1. Sriram, K. & Insel, P. A. G Protein-Coupled Receptors as Targets for
+Approved Drugs: How Many Targets and How Many Drugs? Mol.
+Pharm. 93, 251–258 (2018).
+2. Zhang, M. et al. G protein-coupled receptors (GPCRs): advances in
+structures, mechanisms and drug discovery. Sig Transduct. Target
+Ther. 9, 88 (2024).
+https://doi.org/10.1038/s44386-026-00046-5 Perspective
+npj Drug Discovery | (2026) 3:13 7
+===== PAGE 8 =====
+3. Sykes, D. A., Stoddart, L. A., Kilpatrick, L. E. & Hill, S. J. Binding
+kinetics of ligands acting at GPCRs. Mol. Cell Endocrinol. 485,9–19
+(2019).
+4. Jumper, J. et al. Highly accurate protein structure prediction with
+AlphaFold. Nature 596, 583–589 (2021).
+5. Danev, R. et al. Routine sub-2.5 Å cryo-EM structure determination of
+GPCRs. Nat. Commun. 12, 4333 (2021).
+6. Robertson, M. J. et al. Structure determination of inactive-state
+GPCRs with a universal nanobody. Nat. Struct. Mol. Biol. 29,
+1188–1195 (2022).
+7. Lee, S. et al. Evaluating GPCR modeling and docking strategies in the
+era of deep learning-based protein structure prediction.
+Computational Struct. Biotechnol. J. 21, 158–167 (2023).
+8. López-Correa, J. M., König, C. & Vellido, A. GPCR molecular
+dynamics forecasting using recurrent neural networks. Sci. Rep. 13,
+20995 (2023).
+9. Wan, Q. et al. Mini G protein probes for active G protein–coupled
+receptors (GPCRs) in live cells. J. Biol. Chem. 293, 7466–7473
+(2018).
+10. Olson, K. M., Campbell, A., Alt, A. & Traynor, J. R. Finding the Perfect
+Fit: Conformational Biosensors to Determine the Efficacy of GPCR
+Ligands. ACS Pharmacol. Transl. Sci. 5, 694–709 (2022).
+11. Kwon, Y., Mehta, S. & Zhang, J. Probing spatiotemporally organized
+GPCR signaling using genetically encoded molecular tools. Exp. Mol.
+Med. 57, 1432–1442 (2025).
+12. Jug, A., Bratkovič, T. & Ilaš, J. Biolayer interferometry and its
+applications in drug discovery and development. TrAC Trends Anal.
+Chem. 176, 117741 (2024).
+13. Duy Mac, K. & Su, J. Optical biosensors for diagnosing
+neurodegenerative diseases. npj Biosensing 2, 20 (2025).
+14. Suebka, S., Gin, A. & Su, J. Frequency locked whispering
+evanescent resonator (FLOWER) for biochemical sensing
+applications. Nat. Protoc. 1–35. https://doi.org/10.1038/s41596-
+024-01096-7 (2025).
+15. Gin, A. et al. Label-free, real-time monitoring of membrane binding
+events at zeptomolar concentrations using frequency-locked optical
+microresonators. Nat. Commun. 15, 7445 (2024).
+16. Su, J., Goldberg, A. F. & Stoltz, B. M. Label-free detection of single
+nanoparticles and biological molecules using microtoroid optical
+resonators. Light Sci. Appl. 5, e16001 (2016).
+17. Peri, L. et al. A bitter anti-inflammatory drug binds at two distinct sites
+of a human bitter taste GPCR. Nat. Commun. 15, 9991 (2024).
+18. Yang, M. Y., Mafi, A., Kim, S.-K., Goddard, W. A. & Guthrie, B. Predicted
+structure of fully activated human bitter taste receptor TAS2R4
+complexed with G protein and agonists. QRB Discov. 2, e3 (2021).
+19. Yang, M. Y., Kim, S.-K., Kim, D., Liggett, S. B. & Goddard, W. A.
+Structures and Agonist Binding Sites of Bitter Taste Receptor TAS2R5
+Complexed with Gi Protein and Validated against Experiment. J. Phys.
+Chem. Lett. 12, 9293–9300 (2021).
+20. Young Yang, M. et al. Agonist activation to open the Gα subunit of the
+GPCR–G protein precoupled complex defines functional agonist
+activation of TAS2R5. Proc. Natl. Acad. Sci. 121, e2409987121 (2024).
+21. Su, J. Label-Free Single Exosome Detection Using FrequencyLocked Microtoroid Optical Resonators. ACS Photonics 2,
+1241–1245 (2015).
+22. Su, J. Label-Free Biological and Chemical Sensing Using Whispering
+Gallery Mode Optical Resonators: Past, Present, and Future. Sensors
+17, 540 (2017).
+23. Ozgur, E. et al. Ultrasensitive Detection of Human Chorionic
+Gonadotropin Using Frequency Locked Microtoroid Optical
+Resonators. Anal. Chem. 91, 11872–11878 (2019).
+24. Su, J. Label-free Single Molecule Detection Using Microtoroid
+Optical Resonators. Journal. Vis. Exp. JoVE 53180. https://doi.org/
+10.3791/53180.
+25. Hao, S. & Su, J. Noise-Induced Limits of Detection in Frequency
+Locked Optical Microcavities. J. Lightwave Technol. 38, 6393–6401
+(2020).
+26. Li, C. et al. Part-per-Trillion Trace Selective Gas Detection Using
+Frequency Locked Whispering-Gallery Mode Microtoroids. ACS
+Appl. Mater. Interfaces 14, 42430–42440 (2022).
+27. Xu, Y. et al. Low Part-Per-Trillion, Humidity Resistant Detection of
+Nitric Oxide Using Microtoroid Optical Resonators. ACS Appl. Mater.
+Interfaces 16, 5120–5128 (2024).
+28. Hao, S., Suebka, S. & Su, J. Single 5-nm quantum dot detection via
+microtoroid optical resonator photothermal microscopy. Light Sci.
+Appl. 13, 195 (2024).
+29. Luu, G. T. et al. An Integrated Approach to Protein Discovery and
+Detection From Complex Biofluids. Mol. Cell. Proteomics 22, 100590
+(2023).
+30. Hao, S. & Su, J. Whispering gallery mode optical resonators for
+biological and chemical detection: current practices, future
+perspectives, and challenges. Rep. Prog. Phys. 88, 016402 (2024).
+31. Gin, A., Nguyen, P.-D., Serrano, G., Alexander, G. E. & Su, J. Towards
+early diagnosis and screening of Alzheimer’s disease using frequency
+locked whispering gallery mode microtoroids. npj Biosensing 1,1–9
+(2024).
+32. Lu, T., Su, T.-T. J., Vahala, K. J. & Fraser, S. E. Split frequency sensing
+methods and systems (2013).
+33. Chen, L., Li, C., Liu, Y., Su, J. & McLeod, E. Three-Dimensional
+Simulation of Particle-Induced Mode Splitting in Large Toroidal
+Microresonators. Sensors. 20, 5420 (2020).
+34. Zhang, Y. & Su, J. FLOWER: a frequency-locked optical whispering
+evanescent resonator for label-free molecular detection. Chem.
+Commun. 61, 13561–13570 (2025).
+35. Suebka, S., Nguyen, P.-D., Gin, A. & Su, J. How Fast It Can Stick:
+Visualizing Flow Delivery to Microtoroid Biosensors. ACS Sens. 6,
+2700–2708 (2021).
+36. Suebka, S., McLeod, E. & Su, J. Ultra-high-Q free-space coupling to
+microtoroid resonators. Light Sci. Appl. 13, 75 (2024).
+37. Chen, L., Li, C., Liu, Y.-M., Su, J. & McLeod, E. Simulating robust farfield coupling to traveling waves in large three-dimensional
+nanostructured high-Q microresonators. Photon. Res. PRJ. 7,
+967–976 (2019).
+38. Su, T.-T. J. Label-free detection of single biological molecules using
+microtoroid optical resonators. (California Institute of Technology,
+2014).
+39. Hao, S. et al. Steviol rebaudiosides bind to four different sites of the
+human sweet taste receptor (T1R2/T1R3) complex explaining
+confusing experiments. Commun. Chem. 7,1–17 (2024).
+40. Servant, N. B. et al. A Dynamic Mass Redistribution Assay for the
+Human Sweet Taste Receptor Uncovers G-Protein Dependent Biased
+Ligands. Front Pharm. 13, 832529 (2022).
+41. Niazi, S. K. Artificial Intelligence in Small-Molecule Drug Discovery: A
+Critical Review of Methods, Applications, and Real-World Outcomes.
+Pharm. (Basel) 18, 1271 (2025).
+Acknowledgements
+We acknowledge funding from the National Institutes of Health
+(R01HL155532 and P01HL114471 to S.B.L.; R01HL155532 to W.A.G.;
+R35GM137988 to J.S.) and from the National Science Foundation (CBET
+2311117 to W.A.G.; CAREER 2237077 to J.S.)
+Author contributions
+All authors jointly conceived the Perspective. J.S. wrote the sections related
+to the FLOWER sensing platform; S.L. and D.K. contributed the content on
+cell-based assays; S.-K.K. and W.A.G. authored the sections on computational modeling. All authors contributed to the Introduction and Future
+Directions sections, and critically revised and approved the final manuscript.
+https://doi.org/10.1038/s44386-026-00046-5 Perspective
+npj Drug Discovery | (2026) 3:13 8
+===== PAGE 9 =====
+Competing interests
+J.S. owns a financial stake in Femtorays Technologies, which develops
+label-free molecular sensors. The other authors declare no competing
+interests.
+Additional information
+Correspondence and requests for materials should be addressed to
+Judith Su.
+Reprints and permissions information is available at
+http://www.nature.com/reprints
+Publisher’s noteSpringer Nature remains neutral with regard to jurisdictional
+claims in published maps and institutional affiliations.
+Open Access This article is licensed under a Creative Commons
+Attribution-NonCommercial-NoDerivatives 4.0 International License,
+which permits any non-commercial use, sharing, distribution and
+reproduction in any medium or format, as long as you give appropriate
+credit to the original author(s) and the source, provide a link to the Creative
+Commons licence, and indicate if you modified the licensed material. You
+do not have permission under this licence to share adapted material
+derived from this article or parts of it. The images or other third party
+material in this article are included in the article’s Creative Commons
+licence, unless indicated otherwise in a credit line to the material. If material
+is not included in the article’s Creative Commons licence and your intended
+use is not permitted by statutory regulation or exceeds the permitted use,
+you will need to obtain permission directly from the copyright holder. To
+view a copy of this licence, visit http://creativecommons.org/licenses/bync-nd/4.0/.
+© The Author(s) 2026
+https://doi.org/10.1038/s44386-026-00046-5 Perspective
+npj Drug Discovery | (2026) 3:13 9
