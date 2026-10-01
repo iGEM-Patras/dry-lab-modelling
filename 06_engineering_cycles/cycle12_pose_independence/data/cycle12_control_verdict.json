@@ -1,0 +1,36 @@
+{
+ "cycle": 12,
+ "section": "matched control, run after the first verdict",
+ "control": "met-enkephalin -- the peptide whose free-energy control PASSED (+0.97 +/- 1.00 vs +0.81 published), docked into the same equilibrated receptors by the identical protocol",
+ "result_2x2": {
+  "met-enkephalin (control) / DOR": {
+   "min_bb_rmsd_A": 1.63,
+   "gate_2.5A": "PASS",
+   "message_YGGF_mean_A": 1.48,
+   "closest_anchor_A": 2.33
+  },
+  "met-enkephalin (control) / MOR": {
+   "min_bb_rmsd_A": 0.93,
+   "gate_2.5A": "PASS",
+   "message_YGGF_mean_A": 0.9,
+   "closest_anchor_A": 2.24
+  },
+  "engPENK / DOR": {
+   "min_bb_rmsd_A": 3.11,
+   "gate_2.5A": "FAIL",
+   "message_YGGF_mean_A": 1.77,
+   "closest_anchor_A": 2.35
+  },
+  "engPENK / MOR": {
+   "min_bb_rmsd_A": 3.1,
+   "gate_2.5A": "FAIL",
+   "message_YGGF_mean_A": 3.08,
+   "closest_anchor_A": 2.36
+  }
+ },
+ "kills_the_alternative_explanation": "The first verdict inferred that the MOR engPENK leg was the suspect one, because ADCP reproduced the DOR pose better. That inference had an untested alternative: ADCP might simply perform worse on MOR. It does not. On met-enkephalin ADCP reaches 0.93 A in MOR -- its BEST result of the four. So the engPENK MOR failure is specific to engPENK, not a property of the method on that receptor.",
+ "REVISES_the_earlier_conclusion": "This morning I reported that the DOR engPENK pose was 'corroborated' because its message tetrapeptide superimposed at 1.77 A. The control shows that was too generous a reading. With a correct pose this protocol reaches 0.93-1.63 A overall and 0.90-1.48 A on the message. Against that benchmark engPENK's 3.11 A (DOR) and 3.10 A (MOR) are BOTH failures, and the DOR pose is not corroborated either. The asymmetry is real and still points at MOR being worse, but the corrected conclusion is that BOTH engPENK poses are suspect, not just one.",
+ "consequence_for_the_free_energy": "This strengthens the pose hypothesis as the explanation for the implausible -8.91 +/- 3.34 kcal/mol. An independent method reproduces the control peptide's poses to ~1 A in both receptors and fails to reproduce either engPENK pose. The engPENK co-folded poses are the leading suspect for the whole result.",
+ "what_this_still_does_not_show": "ADCP predicts geometry, not affinity; its scores are not free energies. And a pose this method cannot reproduce is not thereby proven wrong -- engPENK is a different peptide and may genuinely be harder to dock. The clean statement is that the evidence which corroborated the control's poses does not corroborate engPENK's.",
+ "recommended_next_step": "Re-run one engPENK TI leg from an ADCP pose rather than the co-folded one. The pre-registration named DOR rep1; the control now shows both legs are equally affected, so DOR rep1 as originally written is the right choice after all and the earlier deviation note is withdrawn."
+}

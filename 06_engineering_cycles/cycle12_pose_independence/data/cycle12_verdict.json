@@ -1,0 +1,53 @@
+{
+ "cycle": 12,
+ "scored": "2026-10-01",
+ "gates_from": "cycle12_prereg.json, written before ADCP was installed or any pose generated",
+ "method": "AutoDock CrankPep (doi:10.1093/bioinformatics/btz459), 50 replicas x 300,000 steps per receptor, docked into the EQUILIBRATED receptor conformers the TI sampled from. Box defined from receptor pocket residues, never from the pose under test.",
+ "poses_sampled": {
+  "DOR": 4881,
+  "MOR": 4580
+ },
+ "G1_pose_agreement": {
+  "threshold": "backbone RMSD <= 2.5 A",
+  "DOR_min_over_all_poses_A": 3.11,
+  "MOR_min_over_all_poses_A": 3.1,
+  "frac_within_2.5A": {
+   "DOR": 0.0,
+   "MOR": 0.0
+  },
+  "verdict": "DISAGREE in both receptors -- not one of 9,461 sampled poses met the gate",
+  "but_decomposed": {
+   "DOR_message_YGGF_mean_A": 1.77,
+   "DOR_address_EVVG_mean_A": 3.42,
+   "DOR_Phe4_A": 0.74,
+   "MOR_message_YGGF_mean_A": 3.08,
+   "MOR_address_EVVG_mean_A": 2.83,
+   "MOR_Tyr1_A": 5.09,
+   "reading": "In DOR the disagreement is confined to the flexible C-terminal Gly (6.57 A) while the pharmacophore superimposes (Phe4 0.74 A) -- the same binding mode. In MOR the deviation is global and includes the anchor residue Tyr1."
+  }
+ },
+ "G2_anchor_contact": {
+  "threshold": "N-terminal amine within 4.0 A of Asp3.32 carboxylate",
+  "reference_pose_itself_A": {
+   "DOR": 2.71,
+   "MOR": 2.74
+  },
+  "closest_ADCP_approach_A": {
+   "DOR": 2.35,
+   "MOR": 2.36
+  },
+  "frac_making_contact_among_near_poses": {
+   "DOR": 0.2917,
+   "MOR": 0.2509
+  },
+  "verdict": "PASS in both -- ADCP independently reproduces the canonical salt bridge, so its poses are interpretable rather than noise"
+ },
+ "G3_same_pocket": {
+  "verdict": "PASS",
+  "basis": "anchor contact reproduced in both receptors"
+ },
+ "stated_prior_outcome": "I predicted G1 would DISAGREE. It did. I also predicted the rigid-receptor limitation might make ADCP unreliable; G2 refutes that -- it found the anchor.",
+ "conclusion": "The pose hypothesis is WEAKENED for DOR and SURVIVES for MOR. An independent method, given only receptor pocket residues, places the payload in the same pocket with the same Asp3.32 anchor and reproduces the DOR pharmacophore to 1.77 A. That corroborates the DOR pose. It does NOT corroborate the MOR pose: there the deviation is global, the anchor residue is displaced by 5.09 A, and the closest-RMSD pose fails the salt bridge entirely (7.30 A). Since the reported quantity is dG(DOR) - dG(MOR), an unreliable MOR pose biases the difference directly.",
+ "deviation_from_prereg": "The pre-registration named DOR rep1 for the confirmatory TI re-run. The evidence now points at MOR instead: DOR is the corroborated leg. Re-running DOR would test the pose we have most confidence in. Recording this as a deviation rather than silently switching -- the asymmetry was not known when the gates were written.",
+ "what_this_does_NOT_show": "ADCP predicts structure, not affinity. Its scores (-16.8 DOR, -11.0 MOR best) are NOT free energies and must never be compared with any ddG in this project. A 3.1 A backbone deviation with the same anchor is the same binding mode, so this does not by itself explain a 9 kcal/mol error."
+}

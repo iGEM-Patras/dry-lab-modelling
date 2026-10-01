@@ -1,0 +1,20 @@
+{
+ "DOR": {
+  "reference_pose_anchor_dist_A": 2.71,
+  "n_poses": 4881,
+  "min_anchor_dist_A": 2.35,
+  "frac_anchor_within_4A": 0.0469,
+  "frac_anchor_within_4A_among_near_poses": 0.2917,
+  "n_near_poses_5A": 216,
+  "anchor_dist_of_best_rmsd_pose_A": 2.94
+ },
+ "MOR": {
+  "reference_pose_anchor_dist_A": 2.74,
+  "n_poses": 4580,
+  "min_anchor_dist_A": 2.36,
+  "frac_anchor_within_4A": 0.0474,
+  "frac_anchor_within_4A_among_near_poses": 0.2509,
+  "n_near_poses_5A": 291,
+  "anchor_dist_of_best_rmsd_pose_A": 7.3
+ }
+}

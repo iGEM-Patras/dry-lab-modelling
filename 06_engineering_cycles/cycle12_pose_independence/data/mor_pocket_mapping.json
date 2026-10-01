@@ -1,0 +1,50 @@
+{
+ "alignment_identity_pct": 59.9,
+ "dor_to_mor_pocket": [
+  {
+   "DOR_num": 128,
+   "DOR_res": "D",
+   "MOR_num": 149,
+   "MOR_res": "D",
+   "conserved": true
+  },
+  {
+   "DOR_num": 129,
+   "DOR_res": "Y",
+   "MOR_num": 150,
+   "MOR_res": "Y",
+   "conserved": true
+  },
+  {
+   "DOR_num": 132,
+   "DOR_res": "M",
+   "MOR_num": 153,
+   "MOR_res": "M",
+   "conserved": true
+  },
+  {
+   "DOR_num": 274,
+   "DOR_res": "W",
+   "MOR_num": 295,
+   "MOR_res": "W",
+   "conserved": true
+  },
+  {
+   "DOR_num": 277,
+   "DOR_res": "I",
+   "MOR_num": 298,
+   "MOR_res": "I",
+   "conserved": true
+  },
+  {
+   "DOR_num": 308,
+   "DOR_res": "Y",
+   "MOR_num": 328,
+   "MOR_res": "Y",
+   "conserved": true
+  }
+ ],
+ "mor_selection": "A:ASP149,TYR150,MET153,TRP295,ILE298,TYR328",
+ "mor_asp332": 149,
+ "note": "canonical UniProt numbering puts MOR Asp3.32 at 147; this construct is offset to 149. Mapped by global pairwise alignment to DOR, where Asp128 is confirmed."
+}

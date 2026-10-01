@@ -1,0 +1,5 @@
+peptide,receptor,poses,min_bb_rmsd,median,frac_2.5A,anchor_min,msg_YGGF
+met-enkephalin (control),DOR,4496,1.63,17.56,0.0076,2.33,1.48
+met-enkephalin (control),MOR,5023,0.93,18.64,0.0372,2.24,0.9
+engPENK,DOR,4881,3.11,23.18,0.0,2.35,1.77
+engPENK,MOR,4580,3.1,18.0,0.0,2.36,3.08

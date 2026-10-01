@@ -1,0 +1,6 @@
+system,receptor,peptide,poses,min_bb_rmsd,median_rmsd,anchor_min,anchor_frac,msg_YGGF
+met-enkephalin control,DOR,YGGFM,4496,1.63,17.56,2.33,0.0843,1.48
+extended c7RF,DOR,YGGFEVVGRF,1780,3.51,21.78,2.22,0.0404,2.97
+extended c4RGL,DOR,YGGFEVVGRGL,1793,4.7,25.29,2.56,0.0402,4.04
+extended c7RF,MOR,YGGFEVVGRF,2080,3.12,12.15,2.49,0.0428,2.64
+extended c4RGL,MOR,YGGFEVVGRGL,1521,2.66,12.96,2.31,0.0796,2.68

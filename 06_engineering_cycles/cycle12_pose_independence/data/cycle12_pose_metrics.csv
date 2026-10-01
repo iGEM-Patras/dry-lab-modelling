@@ -1,0 +1,3 @@
+receptor,poses,min_bb_rmsd_A,median_bb_rmsd_A,frac_within_5A,ref_anchor_A,closest_adcp_anchor_A,anchor_frac_near_poses,message_YGGF_mean_A,address_EVVG_mean_A
+DOR,4881,3.11,23.18,0.0443,2.71,2.35,0.2917,1.77,3.42
+MOR,4580,3.1,18.0,0.0635,2.74,2.36,0.2509,3.08,2.83

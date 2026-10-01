@@ -1,0 +1,20 @@
+{
+ "DOR": {
+  "n_models": 4881,
+  "n_bb_matched": 32,
+  "min_rmsd_any_pose": 3.11,
+  "min_rmsd_model": 22,
+  "median_rmsd": 23.18,
+  "frac_within_2.5A": 0.0,
+  "frac_within_5A": 0.0443
+ },
+ "MOR": {
+  "n_models": 4580,
+  "n_bb_matched": 32,
+  "min_rmsd_any_pose": 3.1,
+  "min_rmsd_model": 91,
+  "median_rmsd": 18.0,
+  "frac_within_2.5A": 0.0,
+  "frac_within_5A": 0.0635
+ }
+}
