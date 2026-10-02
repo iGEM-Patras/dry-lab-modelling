@@ -121,6 +121,20 @@ from published values, and on 2026-10-01 its met-enkephalin control reproduced t
 value at +0.97 +/- 1.00 against +0.81 (replicate 1 of 2). It is the method that will settle
 this, and the wet-lab cAMP assay is the arbiter.
 
+> **CORRECTION, 2026-10-02.** The control value above is withdrawn -- it was computed on an
+> incomplete leg (two windows ~1 ns short, on a status report that said the leg was complete).
+> Verified-complete sampling gives **-3.12 +/- 2.29 kcal/mol, the wrong sign** against +0.81.
+>
+> The first clause stands: alchemical free energy is still the only route here that does not
+> interpolate from published values, which is why the reference-data noise floor documented
+> above does not bound it. The second clause does not: it is **not** the method that will
+> settle this, because it currently gets the sign wrong on a known peptide. So the correct
+> reading of this document is stronger than when it was written -- **five** methods have now
+> failed to establish the direction of delta/mu preference for YGGFEVVG, four of them bounded
+> by published-data resolution and the fifth by its own sign gate. The wet-lab cAMP assay is
+> not the arbiter between computational predictions; it is the only measurement available.
+
+
 ---
 
 # Fifth assessment: the npj Drug Discovery perspective (no new computational route)

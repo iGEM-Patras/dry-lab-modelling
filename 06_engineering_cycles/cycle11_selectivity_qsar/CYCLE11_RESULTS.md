@@ -76,6 +76,21 @@ stereochemistry.
 method in the project that does not interpolate from neighbours, and on 2026-10-01 its
 met-enkephalin control reproduced the published value (+0.97 +/- 1.00 vs +0.81, replicate 1).
 
+> **CORRECTION, 2026-10-02.** That control value is withdrawn. It was computed while two
+> windows of `c3b_menk_MOR_rep1` were ~1 ns short, on a status report that wrongly said the
+> leg was complete. Verified-complete sampling gives **-3.12 +/- 2.29 kcal/mol -- the wrong
+> sign** against +0.81, failing the sign test.
+>
+> The sentence above therefore overstates the case. What survives is narrower and still true:
+> alchemical free energy is the only method here that does not interpolate from published
+> values, so it is the only one not bounded by the reference-data noise floor that defeats the
+> other four. But it is **not** currently a validated method -- it gets the sign wrong on a
+> peptide whose answer is known, with a pose that Cycle 12 independently corroborated at
+> 0.93-1.63 A. The honest state is that **no method in this project can presently establish
+> the direction of delta/mu preference for YGGFEVVG**, which makes the wet-lab cAMP assay the
+> arbiter rather than a confirmation. See `../cycle12_pose_independence/data/control_correction.json`.
+
+
 ## What the model IS good for
 
 r = 0.769, 82% sign accuracy, RMSE 1.06 kcal/mol on a scaffold split across 3,579 compounds is

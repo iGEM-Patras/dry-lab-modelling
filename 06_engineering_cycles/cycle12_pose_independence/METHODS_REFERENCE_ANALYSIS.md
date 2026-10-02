@@ -54,6 +54,19 @@ ever measured for any opioid ligand.
 the protocol in general — it is **the engPENK legs specifically**. The three candidate causes,
 in order of prior likelihood:
 
+> **CORRECTION, 2026-10-02 — the first of those two facts is false.** The met-enkephalin
+> control did **not** pass. The value it rested on (+0.97 ± 1.00) was computed while
+> `c3b_menk_MOR_rep1` windows 21 and 23 were ~1 ns short each, despite the status query
+> reporting the leg 27/27 complete. On verified-complete sampling the control is
+> **−3.12 ± 2.29 kcal/mol — the wrong sign** against a published +0.81, and it fails the sign
+> test. So the fault is **not** localised to the engPENK legs: the protocol gets the sign
+> wrong on a peptide whose answer is known and whose pose Cycle 12 independently corroborated
+> at 0.93–1.63 Å. The heading above is left in place because the reasoning that followed from
+> it shaped this document, and the correction is more useful next to it than in place of it.
+> Causes 1–3 below remain candidates for the engPENK legs, but a fourth now outranks them:
+> the free-energy protocol itself. See `data/control_correction.json`.
+
+
 1. **the starting pose is wrong** — a free-energy calculation converges to the free energy of
    the basin you put it in, and reports a tight error bar while doing so;
 2. **those legs have not converged** — the earlier campaign showed 6.32 kcal/mol spread between

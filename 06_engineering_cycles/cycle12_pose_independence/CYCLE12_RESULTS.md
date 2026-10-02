@@ -2,9 +2,31 @@
 
 **Question.** Cycle 8 returned ddG = -8.91 +/- 3.34 kcal/mol for engPENK (met-enkephalin-
 anchored), implying ~3.4 million-fold mu-preference against ~7,700-fold for the most
-mu-preferring of 3,579 measured opioid ligands. The met-enkephalin control PASSED
-(+0.97 +/- 1.00 vs +0.81 published), which localises the fault to the engPENK legs
-rather than to the method. The starting pose is the leading suspect.
+mu-preferring of 3,579 measured opioid ligands.
+
+> **CORRECTION, 2026-10-02.** This section originally read "The met-enkephalin control
+> PASSED (+0.97 +/- 1.00 vs +0.81 published), which localises the fault to the engPENK legs
+> rather than to the method." **That control value was wrong and the inference it supported
+> does not hold.** The status query reported `c3b_menk_MOR_rep1` as 27/27 complete at 81.0 ns
+> and BAR was run on that basis, but the worker logs show windows 21 and 23 of that leg were
+> at 2077.8 and 1982.2 ps and only reached 3000.0 ps afterwards. On verified-complete
+> sampling (27 windows, min union 2998.8 ps, 15001 points each, 81.0 ns per leg) the control
+> is **-3.12 +/- 2.29 kcal/mol -- mu-preferring, the wrong sign** against a published +0.81.
+> It fails the sign test; the published value is excluded at 1 sigma and covered at 2 sigma.
+> See `data/control_correction.json`.
+>
+> The consequence runs opposite to the original claim. Cycle 12's own matched control (below)
+> shows the met-enkephalin pose is the best-corroborated in the project -- reproduced by
+> independent docking at 0.93 A in MOR and 1.63 A in DOR. **A good pose still gives the wrong
+> sign**, so the free-energy protocol is suspect independently of the pose problem, and
+> repairing the engPENK pose may not repair the sign. Note that Cycle 8's own gate verdict
+> already recorded G1 (sign) as FAIL on its two bracketing controls; this correction brings
+> the met-enkephalin control into line with that, rather than contradicting it.
+
+The starting pose remains a suspect for the engPENK legs, which is what this cycle tests --
+but it is no longer the *sole* suspect, and the geometric result below stands on its own
+because it uses no free-energy number.
+
 
 **Test.** Dock YGGFEVVG into both receptors with AutoDock CrankPep — a method independent
 of the co-folding predictor that produced the TI pose — and ask whether it reproduces that

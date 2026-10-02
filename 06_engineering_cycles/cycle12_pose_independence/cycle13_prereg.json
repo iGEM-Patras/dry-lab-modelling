@@ -1,0 +1,19 @@
+{
+ "cycle": 13,
+ "written": "before any structure was downloaded or superposed",
+ "question": "Do the co-folded engPENK poses agree with EXPERIMENTAL structures of peptides sharing the relevant half of the chimera?",
+ "comparators": {
+  "delta": "8F7S, deltorphin (YAFEVVG-NH2) bound to DOR + Gi, cryo-EM 3.0 A -- shares the Glu-Val-Val-Gly ADDRESS with our payload",
+  "mu": "8F7Q, beta-endorphin bound to MOR + Gi, cryo-EM 3.22 A -- its N-terminus is YGGFM, sharing the Tyr-Gly-Gly-Phe MESSAGE with our payload"
+ },
+ "procedure": "Superpose our co-fold receptor onto the experimental receptor using CA atoms of structurally aligned residues (global sequence alignment, no reference to the peptide), apply that transform to our peptide, then measure peptide-peptide deviation in the experimental frame. The superposition never uses peptide atoms, so agreement cannot be built in.",
+ "gates": {
+  "G1_address_delta": "backbone RMSD of our E-V-V-G vs deltorphin's E-V-V-G in DOR <= 2.5 A (same threshold as Cycle 12)",
+  "G2_message_mu": "backbone RMSD of our Y-G-G-F vs beta-endorphin's Y-G-G-F in MOR <= 2.5 A",
+  "G3_anchor": "in both, the peptide N-terminal amine within 4.0 A of the Asp3.32 carboxylate, matching the experimental structure",
+  "G4_receptor_superposition_quality": "CA RMSD of the superposed receptors <= 3.0 A over the aligned core; if this fails the peptide comparison is not interpretable and no peptide number will be reported"
+ },
+ "stated_prior": "I expect disagreement, because Cycle 12 already showed an independent method fails to reproduce either pose and the free-energy result is physically impossible. A PASS here would be the surprise and would force me to look elsewhere for the -8.91.",
+ "what_a_disagreement_would_and_would_not_show": "WOULD show: the co-folded pose differs from the experimentally observed binding mode of a peptide sharing that half of the sequence. WOULD NOT show: that our peptide must adopt the experimental pose -- it is a different molecule, and the deltorphin message (Tyr-D-Ala-Phe) differs from ours. The address comparison is the stronger of the two because the sequence there is identical.",
+ "prohibited": "No free-energy claim may be derived from this. It is a geometric comparison only."
+}

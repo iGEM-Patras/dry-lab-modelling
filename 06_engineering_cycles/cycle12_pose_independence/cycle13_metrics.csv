@@ -1,0 +1,3 @@
+comparison,gate_A,observed_A,verdict,pocket_superpos_A,anchor_exp_A,anchor_ours_A
+δ address EVVG vs deltorphin (8F7S),2.5,5.2,FAIL,1.68,3.08,3.63
+μ message YGGF vs β-endorphin (8F7Q),2.5,2.83,FAIL,1.93,4.55,1.89

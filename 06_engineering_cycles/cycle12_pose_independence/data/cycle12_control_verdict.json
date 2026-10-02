@@ -1,7 +1,7 @@
 {
  "cycle": 12,
  "section": "matched control, run after the first verdict",
- "control": "met-enkephalin -- the peptide whose free-energy control PASSED (+0.97 +/- 1.00 vs +0.81 published), docked into the same equilibrated receptors by the identical protocol",
+ "control": "met-enkephalin -- the peptide used as the free-energy control. NOTE: that control FAILED its sign test (-3.12 +/- 2.29 vs published +0.81); see CORRECTION_2026_10_02 in this file. Docked into the same equilibrated receptors by the identical protocol as engPENK, which is what makes the geometric comparison below valid regardless of the free-energy outcome.",
  "result_2x2": {
   "met-enkephalin (control) / DOR": {
    "min_bb_rmsd_A": 1.63,
@@ -32,5 +32,16 @@
  "REVISES_the_earlier_conclusion": "This morning I reported that the DOR engPENK pose was 'corroborated' because its message tetrapeptide superimposed at 1.77 A. The control shows that was too generous a reading. With a correct pose this protocol reaches 0.93-1.63 A overall and 0.90-1.48 A on the message. Against that benchmark engPENK's 3.11 A (DOR) and 3.10 A (MOR) are BOTH failures, and the DOR pose is not corroborated either. The asymmetry is real and still points at MOR being worse, but the corrected conclusion is that BOTH engPENK poses are suspect, not just one.",
  "consequence_for_the_free_energy": "This strengthens the pose hypothesis as the explanation for the implausible -8.91 +/- 3.34 kcal/mol. An independent method reproduces the control peptide's poses to ~1 A in both receptors and fails to reproduce either engPENK pose. The engPENK co-folded poses are the leading suspect for the whole result.",
  "what_this_still_does_not_show": "ADCP predicts geometry, not affinity; its scores are not free energies. And a pose this method cannot reproduce is not thereby proven wrong -- engPENK is a different peptide and may genuinely be harder to dock. The clean statement is that the evidence which corroborated the control's poses does not corroborate engPENK's.",
- "recommended_next_step": "Re-run one engPENK TI leg from an ADCP pose rather than the co-folded one. The pre-registration named DOR rep1; the control now shows both legs are equally affected, so DOR rep1 as originally written is the right choice after all and the earlier deviation note is withdrawn."
+ "recommended_next_step": "Re-run one engPENK TI leg from an ADCP pose rather than the co-folded one. The pre-registration named DOR rep1; the control now shows both legs are equally affected, so DOR rep1 as originally written is the right choice after all and the earlier deviation note is withdrawn.",
+ "CORRECTION_2026_10_02": {
+  "withdrawn": "the parenthetical '(+0.97 +/- 1.00 vs +0.81 published)' describing the met-enkephalin free-energy control as passing",
+  "corrected_value_kcal": -3.12,
+  "corrected_err_kcal": 2.29,
+  "published_kcal": 0.81,
+  "sign_test": "FAIL -- mu-preferring where the published value is delta-preferring",
+  "cause": "BAR was run on c3b_menk_MOR_rep1 while windows 21 and 23 were at 2077.8 and 1982.2 ps; the status query reported the leg 27/27 complete at 81.0 ns. Verified afterwards: 27 windows, min union 2998.8 ps, 15001 points per window, 81.0 ns.",
+  "refuted_alternative": "overlapping restart parts double-counted by gmx bar -- measured at 0/27 overlapping in DOR and 1/27 at 40 ps in MOR, so not the cause",
+  "note_on_this_file": "the ADCP geometry in this file is unaffected; it uses no free-energy number. Only the framing sentence that cited the control is corrected.",
+  "consequence": "Cycle 12's own matched control shows the met-enkephalin pose is reproduced at 0.93-1.63 A, so a GOOD pose still gives the wrong sign. The free-energy protocol is suspect independently of the pose problem."
+ }
 }

@@ -1,0 +1,11 @@
+{
+ "what_changed": "The met-enkephalin control value is corrected from +0.97 +/- 1.00 to -3.12 +/- 2.29 kcal/mol. The sign flips: mu-preferring, not delta-preferring.",
+ "why_the_earlier_number_was_wrong": "The status query reported c3b_menk_MOR_rep1 as 27/27 complete at 81.0 ns, and I ran BAR on that basis. The worker logs show windows 21 and 23 of that leg were at 2077.8 and 1982.2 ps and were only driven to 3000.0 ps at 08:51 and 09:32 -- AFTER that BAR run. So the MOR leg was about 2 ns short across two windows. DOR_rep1 was genuinely complete, which is exactly why the two runs agree on DOR (+0.67 kJ/mol) and disagree on MOR (+17.79 kJ/mol). This is the same failure mode as the earlier incident in this project where the progress counter over-reported finished windows.",
+ "verification_that_todays_data_is_complete": {
+  "DOR_rep1": "27 windows, min union 2999.0 ps, min 15001 points, 0 overlapping parts",
+  "MOR_rep1": "27 windows, min union 2998.8 ps, min 15001 points, 1 window with 40 ps overlap out of 2999 (1.3%, negligible)",
+  "union_sampling": "81.0 ns per leg, exactly as designed"
+ },
+ "hypothesis_refuted": "I suspected passing all restart parts to gmx bar double-counted overlapping samples. Measured: 0 of 27 overlapping in DOR, 1 of 27 in MOR at 40 ps. Not the cause.",
+ "my_own_error": "I additionally reported +3.12 by computing MOR - DOR. The project convention, confirmed from cycle7_scored.csv (ENKEPHALIN +0.810, ENDOMORPHIN_1 -4.824), is DOR - MOR. Retracted and corrected to -3.12."
+}

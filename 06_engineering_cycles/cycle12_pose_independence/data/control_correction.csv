@@ -1,0 +1,2 @@
+quantity,superseded_value,superseded_err,corrected_value,corrected_err,published,cause
+"met-enkephalin ddG, rep1",0.97,1.0,-3.12,2.29,0.81,MOR_rep1 windows 21 and 23 incomplete (~2 ns short) when the first BAR ran

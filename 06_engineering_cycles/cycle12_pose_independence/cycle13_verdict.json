@@ -1,0 +1,78 @@
+{
+ "cycle": 13,
+ "scored": "2026-10-02",
+ "gates_from": "cycle13_prereg.json, written before any structure was downloaded",
+ "comparators": {
+  "delta": "8F7S deltorphin-DOR-Gi, 3.0 A",
+  "mu": "8F7Q beta-endorphin-MOR-Gi, 3.22 A"
+ },
+ "G4_deviation": {
+  "as_written": "all-residue receptor CA RMSD <= 3.0 A",
+  "observed": {
+   "DOR": 3.576,
+   "MOR": 1.954
+  },
+  "DOR_FAILED_as_written": true,
+  "diagnosis": "the outliers are ICL3 (DOR 247-253, MOR 266-272) and the C-terminal region. Median per-residue deviation was 2.47 A (DOR) and 1.31 A (MOR); 10.5% of DOR residues above 5 A dominated the statistic. Our structures were equilibrated in membrane WITHOUT the G protein, so ICL3 moves; it is remote from the pocket.",
+  "deviation_taken": "superposed instead on CA within 15 A of the EXPERIMENTAL peptide centroid (74 DOR, 39 MOR residues), giving 1.68 A and 1.93 A. The region is defined entirely by the experimental structure, so this is non-circular with respect to our pose. This is a fix to a badly designed quality gate, not a moved goalpost, and the failing original number is reported above."
+ },
+ "G1_address_delta": {
+  "threshold": "<= 2.5 A",
+  "observed_A": 5.2,
+  "verdict": "FAIL",
+  "per_residue_A": {
+   "E": 2.77,
+   "V": 4.56,
+   "G": 8.11
+  },
+  "reading": "the address does not merely sit slightly off; it splays progressively, anchored at the Glu end and 8.1 A adrift at the C-terminal Gly"
+ },
+ "G2_message_mu": {
+  "threshold": "<= 2.5 A",
+  "observed_A": 2.83,
+  "verdict": "FAIL (marginal)",
+  "per_residue_A": {
+   "Y": 3.23,
+   "G": 2.81,
+   "F": 2.19
+  },
+  "reading": "roughly uniform ~2.8 A, tightening toward Phe. A near miss rather than a different binding mode."
+ },
+ "G3_anchor": {
+  "DOR": {
+   "experimental_A": 3.08,
+   "ours_A": 3.63,
+   "verdict": "PASS"
+  },
+  "MOR": {
+   "experimental_A": 4.55,
+   "ours_A": 1.89,
+   "note": "ours is TIGHTER than experiment and at 1.89 A is shorter than a normal N-O salt-bridge distance (2.7-3.0 A)"
+  }
+ },
+ "THE_SPECIFIC_FINDING": {
+  "experimental": "in 8F7S the deltorphin address Glu carboxylate is held by a salt bridge to DOR Lys214 (3.06 A) and an H-bond to Tyr129 (3.00 A)",
+  "ours": "our Glu5 carboxylate is 5.49 A from Lys214 and 4.56 A from Tyr129 -- neither contact is made; no receptor atom lies within 5 A except Leu125 and Tyr129 at >4.2 A",
+  "why_it_matters": "This names the missing interaction rather than only showing disagreement. A delta complex missing the address salt bridge has its dG(delta) underestimated, which drives ddG = dG(delta) - dG(mu) toward mu -- the direction of the Cycle 8 anomaly."
+ },
+ "HYPOTHESIS_REFUTED": {
+  "proposed": "delta-selectivity of the acidic address is explained by DOR having the basic salt-bridge partner and MOR lacking it",
+  "test": "aligned 8F7S DOR with 8F7Q MOR (70.7% identity) and mapped the contact residues",
+  "result": "DOR K214 -> MOR K235 CONSERVED; Y129 -> Y150 CONSERVED; L200 -> L221 CONSERVED; only D210 -> E231 differs, and conservatively",
+  "conclusion": "the explanation fails. The partner is present in both receptors, so selectivity is not presence/absence of the Lys."
+ },
+ "untested_observation": {
+  "measurement": {
+   "DOR_Asp3.32_to_Lys214_NZ_A": 10.75,
+   "MOR_Asp3.32_to_Lys235_NZ_A": 15.2,
+   "difference_A": 4.45
+  },
+  "status": "HYPOTHESIS, NOT A RESULT. A peptide bridging both the anchor and the Lys must span this distance, and it differs by 4.45 A between receptors, which would be a geometric selectivity mechanism. One measurement on two structures carrying different peptides, with a flexible Lys side chain, does not establish it."
+ },
+ "literature_context": {
+  "Sagan_1992_PMID_1329732": "the acidic address side chain confers delta-selectivity by preventing mu-site recognition, and is NOT a binding contact at the delta site. 8F7S shows it IS a contact (salt bridge to K214), so the structure refines that 1992 inference.",
+  "Ciszewska_2011_PMID_21584287": "C-terminal extension of an enkephalin by a deltorphin fragment shifts selectivity toward delta"
+ },
+ "recommended_action": "Rebuild the engPENK-DOR complex using 8F7S as the template for the address, enforcing the Glu-Lys214 salt bridge, and re-run that TI leg. This supersedes the ADCP-pose suggestion from Cycle 12: an experimental template with a named interaction is a better starting point than a docked pose.",
+ "prohibited_and_observed": "No free-energy claim is derived here. This is geometry only."
+}
