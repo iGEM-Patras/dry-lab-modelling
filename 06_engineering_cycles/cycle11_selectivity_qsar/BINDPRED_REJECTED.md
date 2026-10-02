@@ -176,8 +176,9 @@ dynamics or other approaches"*. It treats functional potency (cell-based) and bi
 (Kd) as **two different measurements** whose agreement is a checkpoint.
 
 **Every dry-lab selectivity number in this project is a ddG of BINDING:** Cycle 7's +1.23 +/-
-1.76, Cycle 8's -8.75 +/- 3.19, the met-enkephalin control's +0.97 +/- 1.00, the MM-GBSA
-directions, and all five published methods assessed.
+1.76, Cycle 8's -8.75 +/- 3.19, the met-enkephalin control (-3.12 and +5.41 across its two
+replicates -- see the correction above; this paragraph originally cited the withdrawn
++0.97 +/- 1.00), the MM-GBSA directions, and all five published methods assessed.
 
 **The planned arbiter, cAMP, measures functional POTENCY.**
 
