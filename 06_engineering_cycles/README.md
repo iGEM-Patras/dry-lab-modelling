@@ -29,8 +29,13 @@ reducing the μ-mediated adverse-effect profile that makes conventional opioids 
 | **4** | **Can the cassette be manufactured?** Iteratively reverse-engineer the vendor's synthesis-complexity rules from its rejection reports | 4 constructs × 3 rounds (v4→v5→v6) | ✅ complete | v4 **denied 23.8** (inverted-repeat flanks, inherited from wet-lab files); v5 fixed 3 of 4; **v6 accepted — all four constructs ordered** |
 | **5** | What should the first transfection actually produce? | *no new sequences* | 📋 pre-registered | Five falsifiable predictions committed before the bench runs; awaiting wet-lab data |
 | **7** | Does the co-folding **affinity head** predict δ/μ selectivity, tested against published drugs? | *no new sequences* | ✅ **gate PASSED** | n=13, r = 0.805, p = 0.0009, signs correct 12/13. First calibrated number: `YGGFEVVG` **+1.23 ± 1.76 kcal/mol** (~7× δ), not separable from native |
-| **8** | Rigorous **free-energy (TI)** ΔΔG for δ vs μ | controls + target | 🔄 **running** | 13 CPU workers; graft shortcut **rejected by measurement** (`GRAFT_ROUTE_REJECTED.md`) |
+| **8** | Rigorous **free-energy (TI)** ΔΔG for δ vs μ | controls + target | ✅ complete · **gate FAILED** | Control on native Met-enkephalin gives **−3.12 and +5.41 kcal/mol** across replicates — opposite signs from a seed change, so **no value is quoted for `YGGFEVVG`**. Diagnosed: 20–21 of 25 λ-intervals poorly overlapping. Graft shortcut **rejected by measurement** (`GRAFT_ROUTE_REJECTED.md`) |
 | **9** | Re-test **pose convergence**, this time calibrated against experiment | *no new sequences* | ✅ **gate PASSED** | ρ = 1.000 — ranks 4 reference peptides in exact agreement with published selectivity. Rehabilitates the metric Cycle 3a retired |
+| **10** | Does the lipoplex **co-package** the plasmid and the siRNA, or do they compete? | *no new sequences* | 🔄 in progress | Coarse-grained build; a 21-bp surrogate duplex derived and verified against the reference build's own base-pair rule. Replicate-2 build failure documented (`REPLICATE2_FAILURE.md`) |
+| **11** | Can a **QSAR** learn δ/μ selectivity from published affinities? | *no new sequences* | ✅ complete · **gates FAILED** | r = 0.77 in aggregate, but the prediction is a nearest-neighbour lookup and flips sign when neighbours are removed. Chirality objection tested and answered in an amendment — refit indistinguishable, so the conclusion stands but was **narrowed** to fingerprint methods |
+| **12** | Is the co-folded pose that fed Cycle 8 **independently reproducible**? | *no new sequences* | ✅ complete · **gate FAILED** | Peptide-specific docking reproduces the met-enkephalin control at **1.63 Å** (inside the 2.5 Å gate) but reaches only 3.11 Å for `YGGFEVVG` — so the threshold is achievable and the payload pose is **not corroborated** in either receptor |
+| **12b** | Does the pose disagree with **experimental** structures? *(was labelled Cycle 13)* | *no new sequences* | ✅ complete · **gates FAILED** | Against deltorphin–DOR (8F7S) and β-endorphin–MOR (8F7Q): 5.20 Å and 2.83 Å. Names a **specific missing interaction** — the address Glu makes a salt bridge to Lys214 (3.06 Å) in the experimental δ complex and **none** in ours |
+| **8b** | Re-run the free-energy ladder **spaced for uniform overlap**, replicates from separate equilibrations *(was labelled Cycle 14)* | *no new sequences* | 🔄 in progress · pre-registered | 27 → **57 windows** by equal thermodynamic length; predicted relative entropy ~1.0 kT uniformly against a previous maximum of 10.56. Gates committed before any window ran |
 
 - [`cycle1_deltorphin_chimera/CYCLE1.md`](cycle1_deltorphin_chimera/CYCLE1.md) — retrospective writeup **+ correction notice**
 - [`cycle2_delta_selectivity/CYCLE2_DESIGN.md`](cycle2_delta_selectivity/CYCLE2_DESIGN.md) — pre-registration (committed before the runs)
@@ -43,6 +48,13 @@ reducing the μ-mediated adverse-effect profile that makes conventional opioids 
 - [`cycle8_fep/CYCLE8_DESIGN.md`](cycle8_fep/CYCLE8_DESIGN.md) — protocol, measured throughput budget, gate dry-run
 - [`cycle8_fep/GRAFT_ROUTE_REJECTED.md`](cycle8_fep/GRAFT_ROUTE_REJECTED.md) — a negative result, including two invalid attempts of our own
 - [`cycle9_convergence_metric/`](cycle9_convergence_metric/) — the recalibrated metric that passed
+- [`cycle8_fep/CYCLE8_ENGPENK_RESULT.md`](cycle8_fep/CYCLE8_ENGPENK_RESULT.md) — the payload legs, and why no value is quoted
+- [`cycle10_copackaging/CYCLE10_DESIGN.md`](cycle10_copackaging/CYCLE10_DESIGN.md) — pre-registration; `REPLICATE2_FAILURE.md` is the documented build failure
+- [`cycle11_selectivity_qsar/CYCLE11_RESULTS.md`](cycle11_selectivity_qsar/CYCLE11_RESULTS.md) — gates, the diagnostic, **and the chirality amendment that narrowed our own conclusion**
+- [`cycle11_selectivity_qsar/BINDPRED_REJECTED.md`](cycle11_selectivity_qsar/BINDPRED_REJECTED.md) — four published methods assessed and rejected, each with the number that rejects it
+- [`cycle12_pose_independence/CYCLE12_RESULTS.md`](cycle12_pose_independence/CYCLE12_RESULTS.md) — the docking control that makes the payload's failure interpretable
+- [`cycle12_pose_independence/`](cycle12_pose_independence/) — also holds **12b**: `cycle13_verdict.json`, `cycle13_metrics.csv`, `cycle13_experimental.png`
+- [`cycle14_respaced_ladder/`](cycle14_respaced_ladder/) — **8b**: the 57-window ladder, its pre-registration, and the cost measured before committing
 
 ### Reading this index
 
@@ -57,6 +69,19 @@ anchored to experimental values before being relied on.
 
 **Cycles are counted by their Learn→Design edge**, not by construct count: a parallel
 multi-arm panel is one cycle, and only a genuinely sequential dependency splits into two.
+
+**Two cycles were relabelled, and the directory names still carry the old numbers.**
+Applying the rules stated below to the later cycles gives:
+
+| index label | directory | why |
+|---|---|---|
+| **8b** | `cycle14_respaced_ladder/` | Same hypothesis and the same oracle as Cycle 8, with its design determined by Cycle 8's overlap diagnostic — the Cycle 4 rule makes that *rounds within one cycle*, not a new one |
+| **12b** | files in `cycle12_pose_independence/` | Cycle 12's result determines what 12b tests against experiment — the same sequential dependency that splits Cycle 3 into 3a/3b |
+
+Directory names were deliberately **not** renamed: they are cited in commit messages and
+in the pre-registration history, and renaming them would break the audit trail that makes
+the track record checkable. Where this document says 8b or 12b, look in `cycle14_…` and
+`cycle12_…` respectively.
 
 ## What counts as a cycle here
 
@@ -91,9 +116,34 @@ the falsification record is auditable in the git history.
 | 3a | 5 | 3 | **2** (both decisive) | `ec7123d` (before job `1391bb2a`) |
 | 4 (v4) | 1 | 0 | **1** | — (not pre-registered; see below) |
 | 4 (v5) | 4 | 3 | **1** | — (not pre-registered; see below) |
-| 4 (v6) | 5 | *pending* | *pending* | this commit (before vendor submission) |
+| 4 (v6) | 5 | 3 | **2** | `cycle4_predictions.csv`, committed before vendor submission |
 
-**Cumulative: 15 predictions scored, 7 confirmed, 8 falsified** (+5 pending).
+**Cumulative: 20 predictions scored, 10 confirmed, 10 falsified** — nothing pending.
+
+v6's two falsifications are both informative. One construct scored 1.0 instead of the
+predicted 0.0, from a **hairpin rule** our two-rule model of the vendor never encoded — and
+that motif is structurally an inverted repeat, the same class that caused the v4 denial,
+scored far more leniently when internal than when terminal. The other is P5, which we had
+**initially scored as confirmed and then retracted**: it had been confirmed by inferring a
+rule's absence from an aggregate verdict that would look identical under either outcome,
+which violates this cycle's own rule that a prediction must name a read-out the experiment
+produces either way. The original scoring is left visible beneath its correction in
+`data/v6_scoring_verdict.json`.
+
+**Scope of this table.** It counts *individual pre-registered predictions*, and those exist
+for Cycles 2, 3a and 4. Cycles 7 onward were pre-registered as **pass/fail gates** rather
+than itemised predictions — a different unit that cannot be summed into the rows above.
+Each of those outcomes lives in its own verdict file, and the index above states each
+gate's result:
+
+| cycle | gate record |
+|---|---|
+| 7 | [`cycle7_calibration/data/cycle7_verdict.json`](cycle7_calibration/data/cycle7_verdict.json) |
+| 8 | [`cycle8_fep/CYCLE8_GATE_VERDICT.md`](cycle8_fep/CYCLE8_GATE_VERDICT.md) |
+| 11 | [`cycle11_selectivity_qsar/data/cycle11_verdict.json`](cycle11_selectivity_qsar/data/cycle11_verdict.json) |
+| 12 | [`cycle12_pose_independence/data/cycle12_verdict.json`](cycle12_pose_independence/data/cycle12_verdict.json) and `cycle12_control_verdict.json` |
+| 12b | [`cycle12_pose_independence/cycle13_verdict.json`](cycle12_pose_independence/cycle13_verdict.json) |
+| 8b | [`cycle14_respaced_ladder/data/cycle14_prereg.json`](cycle14_respaced_ladder/data/cycle14_prereg.json) — gates committed, outcome pending |
 
 Cycle 4's first two rounds were **not** pre-registered — the v4 and v5 predictions were
 made informally in conversation and only written down after the vendor had answered. They

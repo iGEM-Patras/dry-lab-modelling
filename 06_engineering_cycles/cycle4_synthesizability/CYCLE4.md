@@ -269,11 +269,23 @@ documented cut-off.
 |---|---|---|---|---|
 | v4 | 1 | 0 | **1** | 0 |
 | v5 | 4 | 3 | **1** | 0 |
-| v6 | 5 | 2 | 0 | **3** |
+| v6 | 5 | 3 | **2** | 0 |
 
-Both falsifications were informative rather than merely wrong: v4's revealed a defect
-sitting in the wet lab's own files that nobody had detected, and v5's revealed an entire
-scoring rule missing from the dry lab's model of the oracle.
+> **Correction.** This row previously read `5 | 2 | 0 | 3`. It was written before the
+> itemised vendor report arrived, which resolved all three unresolved predictions. The
+> per-prediction record in [`data/prediction_scorecard.csv`](data/prediction_scorecard.csv)
+> is authoritative: three exact score matches, one construct off by +1.0, and P5 falsified.
+
+**All four falsifications were informative rather than merely wrong.** v4's revealed a
+defect sitting in the wet lab's own files that nobody had detected. v5's revealed an entire
+scoring rule missing from the dry lab's model of the oracle. v6's two: one construct scored
+1.0 against a predicted 0.0 from a **hairpin rule** the two-rule model never encoded — and
+that motif is structurally an inverted repeat, the same class that caused the v4 denial,
+scored far more leniently when internal than when terminal. And P5, which we had scored
+CONFIRMED and then **retracted**, because it had been confirmed by inferring a rule's
+absence from an aggregate verdict that looks identical under either outcome. That violates
+this cycle's own rule that a prediction must name a read-out the experiment produces either
+way; the retraction is recorded in [`data/v6_scoring_verdict.json`](data/v6_scoring_verdict.json).
 
 ## Wet-lab handoff
 

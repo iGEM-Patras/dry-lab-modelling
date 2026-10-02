@@ -212,8 +212,8 @@ cAMP assay is the experiment that decides it** — not a confirmation of a compu
 result, but the only measurement that can settle it.
 
 **Four of the five approaches in that table are our own, and we report all four as failed.**
-At the level of individual predictions the repository's ledger currently stands at **15
-scored, 7 confirmed, 8 falsified**, each with the commit that registered it before its test.
+At the level of individual predictions the repository's ledger stands at **20 scored, 10
+confirmed, 10 falsified**, each with the commit that registered it before its test.
 
 We think that is a stronger position than one unchallenged number, and it is the reason we
 trust the three cycles above.
