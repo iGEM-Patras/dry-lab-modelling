@@ -1,0 +1,33 @@
+start=Sat Oct  3 00:48:34 CEST 2026
+### Verified before this job ran: protocol source is per-receptor with no fallback,
+### and couple-moltype=system2 is 75 atoms = met-enkephalin YGGFM in both receptors
+### (receptor system1 ~5.8-6.3k, lipid system3 134 atoms -- both excluded).
+
+### ===== c3b_menk_DOR  (ref c3b_menk_DOR_rep1/w00.mdp, moltype system2) =====
+      w00: init-lambda-state = 0
+      w26: init-lambda-state = 26
+      w56: init-lambda-state = 56
+   prod_c3b_menk_DOR_r1: 57/57 READY
+      w00: init-lambda-state = 0
+      w26: init-lambda-state = 26
+      w56: init-lambda-state = 56
+   prod_c3b_menk_DOR_r2: 57/57 READY
+
+### ===== c3b_menk_MOR  (ref c3b_menk_MOR_rep1/w00.mdp, moltype system2) =====
+      w00: init-lambda-state = 0
+      w26: init-lambda-state = 26
+      w56: init-lambda-state = 56
+   prod_c3b_menk_MOR_r1: 57/57 READY
+      w00: init-lambda-state = 0
+      w26: init-lambda-state = 26
+      w56: init-lambda-state = 56
+   prod_c3b_menk_MOR_r2: 57/57 READY
+
+### summary
+   prod_c3b_menk_DOR_r1: 57/57
+   prod_c3b_menk_DOR_r2: 57/57
+   prod_c3b_menk_MOR_r1: 57/57
+   prod_c3b_menk_MOR_r2: 57/57
+   TOTAL 228 / 228 windows
+   sampling if launched: 57 windows x 3 ns x 4 legs = 684 ns
+done=Sat Oct  3 00:52:57 CEST 2026

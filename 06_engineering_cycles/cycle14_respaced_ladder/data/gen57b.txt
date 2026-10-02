@@ -1,0 +1,58 @@
+start=Sat Oct  3 00:47:09 CEST 2026
+### The previous generation inherited its protocol from c3b_em1_DOR_rep1 -- the
+### ENDOMORPHIN-1 leg -- for all four met-enkephalin legs. My path candidates used
+### _r1 while the completed campaign's directories are named _rep1, both missed, and
+### a find fallback took the first w00.mdp on disk. Discarding those tprs.
+### Also: my gmx dump check printed nsttcouple/nstpcouple but NOT couple-moltype,
+### because dump does not emit that directive. It verified nothing.
+
+### what production directories actually exist
+   c3b_dtII_DOR_rep1
+   c3b_dtII_DOR_rep2
+   c3b_dtII_MOR_rep1
+   c3b_dtII_MOR_rep2
+   c3b_em1_DOR_rep1
+   c3b_em1_DOR_rep2
+   c3b_em1_MOR_rep1
+   c3b_em1_MOR_rep2
+   c3b_menk_DOR_rep1
+   c3b_menk_DOR_rep2
+   c3b_menk_MOR_rep1
+   c3b_menk_MOR_rep2
+   c8_engPENK_DOR_rep1
+   c8_engPENK_DOR_rep2
+   c8_engPENK_MOR_rep1
+   c8_engPENK_MOR_rep2
+   cofold
+   locks
+   locks_eng
+   locks_menk
+
+### discarded the 228 tprs built from the wrong system
+
+### ===== c3b_menk_DOR : inheriting from /data/users/kzanaj/cycle8_prod/c3b_menk_DOR_rep1/w00.mdp =====
+   couple-moltype declared: system2
+   moleculetypes and atom counts:
+      system1          5755 atoms
+      system2            75 atoms   <== couple-moltype
+      system3           134 atoms
+      Na+                 1 atoms
+      Cl-                 1 atoms
+      WAT                 3 atoms
+
+   VERDICT: system2 has 75 atoms, consistent with met-enkephalin YGGFM (Tyr+Gly+Gly+Phe+Met, ~75 atoms with hydrogens)
+
+### ===== c3b_menk_MOR : inheriting from /data/users/kzanaj/cycle8_prod/c3b_menk_MOR_rep1/w00.mdp =====
+   couple-moltype declared: system2
+   moleculetypes and atom counts:
+      system1          6309 atoms
+      system2            75 atoms   <== couple-moltype
+      system3           134 atoms
+      Na+                 1 atoms
+      Cl-                 1 atoms
+      WAT                 3 atoms
+
+   VERDICT: system2 has 75 atoms, consistent with met-enkephalin YGGFM (Tyr+Gly+Gly+Phe+Met, ~75 atoms with hydrogens)
+
+### identity settled above; tpr generation only proceeds in the next job
+done=Sat Oct  3 00:47:12 CEST 2026
