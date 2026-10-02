@@ -1,0 +1,192 @@
+{
+ "mme_sirna": [
+  {
+   "pmid": "41699135",
+   "year": "2026",
+   "cited": 0,
+   "title": "Dopamine neuron specific RNA-sequencing reveals Neprilysin 1 acts downstream of the cohesin complex to suppress learning",
+   "journal": "Communications biology"
+  },
+  {
+   "pmid": "40026808",
+   "year": "2025",
+   "cited": 2,
+   "title": "IGF2BP1 Enhances Neprilysin mRNA Stability to Promote Proliferation, Invasion, and Angiogenesis in Placental Trophoblast",
+   "journal": "International journal of general medicine"
+  },
+  {
+   "pmid": null,
+   "year": "2026",
+   "cited": 0,
+   "title": "Neprilysin inhibition reduces microtubule detyrosination in cardiomyocytes through a cGMP-PRKG1-VASH1 axis",
+   "journal": null
+  },
+  {
+   "pmid": "41389930",
+   "year": "2026",
+   "cited": 0,
+   "title": "Cloning, tissue distribution, and stimulus-responsive mRNA expression of CD10 (neprilysin) in Lethenteron reissneri.",
+   "journal": "Fish & shellfish immunology"
+  },
+  {
+   "pmid": "40304042",
+   "year": "2025",
+   "cited": 4,
+   "title": "Excess Neprilysin in Placental EVs Impairs CNP-NPRB-Mediated Vasodilation to Trigger Preeclamptic Hypertension.",
+   "journal": "Circulation research"
+  },
+  {
+   "pmid": "40032156",
+   "year": "2025",
+   "cited": 1,
+   "title": "Astrocytic GluN2A alleviates sleep deprivation-induced elevation of A\u03b2 through regulating neprilysin and AQP4 via the ca",
+   "journal": "Progress in neurobiology"
+  },
+  {
+   "pmid": "39338303",
+   "year": "2024",
+   "cited": 7,
+   "title": "Maltol Improves Peripheral Nerve Function by Inhibiting Schwann Cell Apoptosis via the PERK/eIF2\u03b1/CHOP Pathway and MME U",
+   "journal": "Pharmaceuticals (Basel, Switzerland)"
+  },
+  {
+   "pmid": "37457659",
+   "year": "2023",
+   "cited": 22,
+   "title": "Novel aspect of neprilysin in kidney fibrosis via ACSL4-mediated ferroptosis of tubular epithelial cells.",
+   "journal": "MedComm"
+  }
+ ],
+ "nep_knockdown": [
+  {
+   "pmid": "41455057",
+   "year": "2026",
+   "cited": 0,
+   "title": "A New Avenue for the Long-Term Upstream Inhibition of the Renin-Angiotensin-Aldosterone System by Inhibiting Angiotensin",
+   "journal": "High blood pressure & cardiovascular prevention : the official journal of the Italian Society of Hypertension"
+  },
+  {
+   "pmid": "40026808",
+   "year": "2025",
+   "cited": 2,
+   "title": "IGF2BP1 Enhances Neprilysin mRNA Stability to Promote Proliferation, Invasion, and Angiogenesis in Placental Trophoblast",
+   "journal": "International journal of general medicine"
+  },
+  {
+   "pmid": "37704750",
+   "year": "2023",
+   "cited": 49,
+   "title": "Lactobacillus-derived extracellular vesicles counteract A\u03b242-induced abnormal transcriptional changes through the upregu",
+   "journal": "Experimental & molecular medicine"
+  },
+  {
+   "pmid": "36615293",
+   "year": "2022",
+   "cited": 3,
+   "title": "Alpha Ketoglutarate Downregulates the Neutral Endopeptidase and Enhances the Growth Inhibitory Activity of Thiorphan in ",
+   "journal": "Molecules (Basel, Switzerland)"
+  },
+  {
+   "pmid": "27203684",
+   "year": "2016",
+   "cited": 155,
+   "title": "Mitofusin-2 knockdown increases ER-mitochondria contact and decreases amyloid \u03b2-peptide production.",
+   "journal": "Journal of cellular and molecular medicine"
+  },
+  {
+   "pmid": "22634014",
+   "year": "2012",
+   "cited": 37,
+   "title": "Elevated amyloid \u03b2 production in senescent retinal pigment epithelium, a possible mechanism of subretinal deposition of ",
+   "journal": "Biochemical and biophysical research communications"
+  },
+  {
+   "pmid": "22015609",
+   "year": "2012",
+   "cited": 153,
+   "title": "Soluble intracellular adhesion molecule-1 secreted by human umbilical cord blood-derived mesenchymal stem cell reduces a",
+   "journal": "Cell death and differentiation"
+  },
+  {
+   "pmid": "21382117",
+   "year": "2011",
+   "cited": 36,
+   "title": "Neprilysin protects against cerebral amyloid angiopathy and A\u03b2-induced degeneration of cerebrovascular smooth muscle cel",
+   "journal": "Brain pathology (Zurich, Switzerland)"
+  }
+ ],
+ "cd10_sirna": [
+  {
+   "pmid": "30446717",
+   "year": "2019",
+   "cited": 11,
+   "title": "MEF2B is a member of the BCL6 gene transcriptional complex and induces its expression in diffuse large B-cell lymphoma o",
+   "journal": "Laboratory investigation; a journal of technical methods and pathology"
+  },
+  {
+   "pmid": "31327185",
+   "year": "2019",
+   "cited": 5,
+   "title": "Stress-Induced Premature Senescence Promotes Proliferation by Activating the <i>SENEX</i> and p16<sup>INK4a</sup>/Retino",
+   "journal": "Turkish journal of haematology : official journal of Turkish Society of Haematology"
+  },
+  {
+   "pmid": "27459100",
+   "year": "2017",
+   "cited": 35,
+   "title": "Overexpression of KIF11 in Gastric Cancer with Intestinal Mucin Phenotype.",
+   "journal": "Pathobiology : journal of immunopathology, molecular and cellular biology"
+  },
+  {
+   "pmid": "28279038",
+   "year": "2017",
+   "cited": 2,
+   "title": "[Expression of Septin2 in Hodgkin lymphoma cell line L428 and its role in promoting H/RS cells' redifferentiation to B l",
+   "journal": "Zhonghua xue ye xue za zhi = Zhonghua xueyexue zazhi"
+  },
+  {
+   "pmid": "29462326",
+   "year": "2018",
+   "cited": 25,
+   "title": "Secreted frizzled-related protein 2 (SFRP2) expression promotes lesion proliferation via canonical WNT signaling and ind",
+   "journal": "Human reproduction (Oxford, England)"
+  },
+  {
+   "pmid": "20874839",
+   "year": "2010",
+   "cited": 11,
+   "title": "CD10-bearing fibroblast inhibits matrigel invasive potency of interleukin-1\u03b1-producing squamous cell carcinoma by dimini",
+   "journal": "Cancer science"
+  },
+  {
+   "pmid": "28056297",
+   "year": "2016",
+   "cited": 1,
+   "title": "[Potential mechanism and prognostic value of promoter methylation of PRDM1 gene in diffuse large B cell lymphoma].",
+   "journal": "Zhonghua bing li xue za zhi = Chinese journal of pathology"
+  }
+ ],
+ "nep_shrna": [
+  {
+   "pmid": "30249887",
+   "year": "2018",
+   "cited": 7,
+   "title": "Cigarette smoke condensate could promote human bronchial epithelial BEAS-2B cell migration through shifting neprilysin t",
+   "journal": "Journal of cancer research and therapeutics"
+  },
+  {
+   "pmid": "29191928",
+   "year": "2018",
+   "cited": 14,
+   "title": "Sustained Activation of Rho GTPases Promotes a Synthetic Pulmonary Artery Smooth Muscle Cell Phenotype in Neprilysin Nul",
+   "journal": "Arteriosclerosis, thrombosis, and vascular biology"
+  },
+  {
+   "pmid": "16541122",
+   "year": "2006",
+   "cited": 74,
+   "title": "Herpes simplex virus RNAi and neprilysin gene transfer vectors reduce accumulation of Alzheimer's disease-related amyloi",
+   "journal": "Gene therapy"
+  }
+ ]
+}

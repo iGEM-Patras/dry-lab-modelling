@@ -1,0 +1,1545 @@
+{
+ "per_site": {
+  "365": [
+   {
+    "id": "rs1191825027",
+    "start": 155115068,
+    "end": 155115068,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1427426772",
+    "start": 155115071,
+    "end": 155115071,
+    "alleles": [
+     "T",
+     "A",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs184108383",
+    "start": 155115077,
+    "end": 155115077,
+    "alleles": [
+     "C",
+     "A",
+     "G",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs201870091",
+    "start": 155115078,
+    "end": 155115078,
+    "alleles": [
+     "G",
+     "A",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1343164856",
+    "start": 155115082,
+    "end": 155115082,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "synonymous_variant"
+   },
+   {
+    "id": "rs199575224",
+    "start": 155115084,
+    "end": 155115084,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs775882447",
+    "start": 155115085,
+    "end": 155115085,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "synonymous_variant"
+   }
+  ],
+  "366": [
+   {
+    "id": "rs1191825027",
+    "start": 155115068,
+    "end": 155115068,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1427426772",
+    "start": 155115071,
+    "end": 155115071,
+    "alleles": [
+     "T",
+     "A",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs184108383",
+    "start": 155115077,
+    "end": 155115077,
+    "alleles": [
+     "C",
+     "A",
+     "G",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs201870091",
+    "start": 155115078,
+    "end": 155115078,
+    "alleles": [
+     "G",
+     "A",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1343164856",
+    "start": 155115082,
+    "end": 155115082,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "synonymous_variant"
+   },
+   {
+    "id": "rs199575224",
+    "start": 155115084,
+    "end": 155115084,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs775882447",
+    "start": 155115085,
+    "end": 155115085,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "synonymous_variant"
+   }
+  ],
+  "506": [
+   {
+    "id": "rs199805977",
+    "start": 155116531,
+    "end": 155116531,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "synonymous_variant"
+   },
+   {
+    "id": "rs2108255486",
+    "start": 155116532,
+    "end": 155116532,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1189361171",
+    "start": 155116534,
+    "end": 155116534,
+    "alleles": [
+     "A",
+     "C"
+    ],
+    "consequence": "synonymous_variant"
+   },
+   {
+    "id": "rs2472973058",
+    "start": 155116538,
+    "end": 155116538,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs770360603",
+    "start": 155116543,
+    "end": 155116543,
+    "alleles": [
+     "G",
+     "A",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs763138062",
+    "start": 155116544,
+    "end": 155116544,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1559927955",
+    "start": 155116547,
+    "end": 155116547,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs879255651",
+    "start": 155116548,
+    "end": 155116548,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "CM1612276",
+    "start": 155116548,
+    "end": 155116548,
+    "alleles": [
+     "HGMD_MUTATION"
+    ],
+    "consequence": "coding_sequence_variant"
+   },
+   {
+    "id": "rs1181787882",
+    "start": 155116549,
+    "end": 155116549,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "synonymous_variant"
+   },
+   {
+    "id": "rs1166335980",
+    "start": 155116551,
+    "end": 155116551,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   }
+  ],
+  "652": [
+   {
+    "id": "rs2472975586",
+    "start": 155116890,
+    "end": 155116890,
+    "alleles": [
+     "A",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs778236963",
+    "start": 155116891,
+    "end": 155116891,
+    "alleles": [
+     "G",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1203573702",
+    "start": 155116894,
+    "end": 155116894,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1718664043",
+    "start": 155116896,
+    "end": 155116896,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1718664283",
+    "start": 155116898,
+    "end": 155116898,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1718664539",
+    "start": 155116900,
+    "end": 155116900,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "stop_gained"
+   },
+   {
+    "id": "rs202191484",
+    "start": 155116903,
+    "end": 155116903,
+    "alleles": [
+     "C",
+     "A",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs575160886",
+    "start": 155116904,
+    "end": 155116904,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs984925438",
+    "start": 155116905,
+    "end": 155116905,
+    "alleles": [
+     "G",
+     "A",
+     "C"
+    ],
+    "consequence": "synonymous_variant"
+   },
+   {
+    "id": "rs1718665852",
+    "start": 155116907,
+    "end": 155116907,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1256021451",
+    "start": 155116908,
+    "end": 155116908,
+    "alleles": [
+     "T",
+     "A",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   }
+  ],
+  "954": [
+   {
+    "id": "rs1720950896",
+    "start": 155140194,
+    "end": 155140194,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs202094946",
+    "start": 155140195,
+    "end": 155140195,
+    "alleles": [
+     "C",
+     "G",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs3213879",
+    "start": 155140196,
+    "end": 155140196,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "synonymous_variant"
+   },
+   {
+    "id": "rs772484156",
+    "start": 155140203,
+    "end": 155140203,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs149431215",
+    "start": 155140209,
+    "end": 155140209,
+    "alleles": [
+     "G",
+     "A",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs764060752",
+    "start": 155140212,
+    "end": 155140212,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "stop_gained"
+   },
+   {
+    "id": "rs1157455203",
+    "start": 155140213,
+    "end": 155140213,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1349782617",
+    "start": 155140214,
+    "end": 155140214,
+    "alleles": [
+     "A",
+     "C"
+    ],
+    "consequence": "synonymous_variant"
+   }
+  ],
+  "2066": [
+   {
+    "id": "rs1559963660",
+    "start": 155168789,
+    "end": 155168789,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1711595806",
+    "start": 155168790,
+    "end": 155168790,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs2473163632",
+    "start": 155168791,
+    "end": 155168791,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "synonymous_variant"
+   },
+   {
+    "id": "rs772109678",
+    "start": 155168792,
+    "end": 155168792,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1274938276",
+    "start": 155168794,
+    "end": 155168794,
+    "alleles": [
+     "C",
+     "G"
+    ],
+    "consequence": "stop_gained"
+   },
+   {
+    "id": "rs772130741",
+    "start": 155172117,
+    "end": 155172117,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs775716317",
+    "start": 155172124,
+    "end": 155172124,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1464764779",
+    "start": 155172126,
+    "end": 155172126,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   }
+  ],
+  "2300": [
+   {
+    "id": "rs762705074",
+    "start": 155180411,
+    "end": 155180411,
+    "alleles": [
+     "C",
+     "A"
+    ],
+    "consequence": "stop_gained"
+   },
+   {
+    "id": "rs766811497",
+    "start": 155180412,
+    "end": 155180412,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs201935217",
+    "start": 155180413,
+    "end": 155180413,
+    "alleles": [
+     "G",
+     "A",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs2108392647",
+    "start": 155180419,
+    "end": 155180419,
+    "alleles": [
+     "A",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs371030508",
+    "start": 155180423,
+    "end": 155180423,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "synonymous_variant"
+   },
+   {
+    "id": "rs2473207106",
+    "start": 155180424,
+    "end": 155180424,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1397959837",
+    "start": 155180425,
+    "end": 155180425,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs753313789",
+    "start": 155180427,
+    "end": 155180427,
+    "alleles": [
+     "A",
+     "G",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs199855961",
+    "start": 155180428,
+    "end": 155180428,
+    "alleles": [
+     "T",
+     "A",
+     "C"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs777923848",
+    "start": 155180429,
+    "end": 155180429,
+    "alleles": [
+     "G",
+     "T"
+    ],
+    "consequence": "missense_variant"
+   },
+   {
+    "id": "rs1559971012",
+    "start": 155180430,
+    "end": 155180431,
+    "alleles": [
+     "AA",
+     "AAA"
+    ],
+    "consequence": "frameshift_variant"
+   },
+   {
+    "id": "rs753942377",
+    "start": 155180431,
+    "end": 155180431,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "missense_variant"
+   }
+  ],
+  "2403": [
+   {
+    "id": "rs928628370",
+    "start": 155180514,
+    "end": 155180514,
+    "alleles": [
+     "G",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1392465018",
+    "start": 155180517,
+    "end": 155180517,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1712989011",
+    "start": 155180518,
+    "end": 155180518,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1041454798",
+    "start": 155180520,
+    "end": 155180520,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1434065636",
+    "start": 155180523,
+    "end": 155180523,
+    "alleles": [
+     "C",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1210699330",
+    "start": 155180525,
+    "end": 155180525,
+    "alleles": [
+     "A",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1712990128",
+    "start": 155180527,
+    "end": 155180527,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs901542244",
+    "start": 155180528,
+    "end": 155180528,
+    "alleles": [
+     "C",
+     "A",
+     "G",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1292680678",
+    "start": 155180529,
+    "end": 155180529,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs199847187",
+    "start": 155180531,
+    "end": 155180531,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs997136569",
+    "start": 155180532,
+    "end": 155180532,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1368274736",
+    "start": 155180534,
+    "end": 155180537,
+    "alleles": [
+     "AAAA",
+     "AAA"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ],
+  "2541": [
+   {
+    "id": "rs900874436",
+    "start": 155180653,
+    "end": 155180653,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713004658",
+    "start": 155180654,
+    "end": 155180654,
+    "alleles": [
+     "G",
+     "A",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1202566219",
+    "start": 155180659,
+    "end": 155180659,
+    "alleles": [
+     "T",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1361025067",
+    "start": 155180660,
+    "end": 155180660,
+    "alleles": [
+     "C",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs373943993",
+    "start": 155180663,
+    "end": 155180663,
+    "alleles": [
+     "G",
+     "-"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1227200270",
+    "start": 155180664,
+    "end": 155180664,
+    "alleles": [
+     "T",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713005927",
+    "start": 155180667,
+    "end": 155180667,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs937217837",
+    "start": 155180670,
+    "end": 155180670,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs2108393368",
+    "start": 155180671,
+    "end": 155180671,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ],
+  "3178": [
+   {
+    "id": "rs201256574",
+    "start": 155181290,
+    "end": 155181290,
+    "alleles": [
+     "A",
+     "C",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs186516013",
+    "start": 155181291,
+    "end": 155181291,
+    "alleles": [
+     "G",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs61760457",
+    "start": 155181292,
+    "end": 155181291,
+    "alleles": [
+     "-",
+     "ATC",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1394131055",
+    "start": 155181296,
+    "end": 155181296,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs200323525",
+    "start": 155181303,
+    "end": 155181303,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713064759",
+    "start": 155181304,
+    "end": 155181304,
+    "alleles": [
+     "A",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1446569371",
+    "start": 155181306,
+    "end": 155181306,
+    "alleles": [
+     "C",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs906627968",
+    "start": 155181307,
+    "end": 155181307,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1002317565",
+    "start": 155181308,
+    "end": 155181308,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713066210",
+    "start": 155181309,
+    "end": 155181309,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ],
+  "3600": [
+   {
+    "id": "rs1713107312",
+    "start": 155181712,
+    "end": 155181712,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs199651435",
+    "start": 155181717,
+    "end": 155181717,
+    "alleles": [
+     "G",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713107789",
+    "start": 155181718,
+    "end": 155181718,
+    "alleles": [
+     "A",
+     "-"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1011327926",
+    "start": 155181719,
+    "end": 155181719,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713108299",
+    "start": 155181720,
+    "end": 155181720,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs961610475",
+    "start": 155181722,
+    "end": 155181722,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs977007899",
+    "start": 155181724,
+    "end": 155181724,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1441617025",
+    "start": 155181726,
+    "end": 155181726,
+    "alleles": [
+     "T",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713109407",
+    "start": 155181730,
+    "end": 155181730,
+    "alleles": [
+     "C",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713109636",
+    "start": 155181730,
+    "end": 155181730,
+    "alleles": [
+     "C",
+     "-"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ],
+  "3601": [
+   {
+    "id": "rs1713107312",
+    "start": 155181712,
+    "end": 155181712,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs199651435",
+    "start": 155181717,
+    "end": 155181717,
+    "alleles": [
+     "G",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713107789",
+    "start": 155181718,
+    "end": 155181718,
+    "alleles": [
+     "A",
+     "-"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1011327926",
+    "start": 155181719,
+    "end": 155181719,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713108299",
+    "start": 155181720,
+    "end": 155181720,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs961610475",
+    "start": 155181722,
+    "end": 155181722,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs977007899",
+    "start": 155181724,
+    "end": 155181724,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1441617025",
+    "start": 155181726,
+    "end": 155181726,
+    "alleles": [
+     "T",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713109407",
+    "start": 155181730,
+    "end": 155181730,
+    "alleles": [
+     "C",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713109636",
+    "start": 155181730,
+    "end": 155181730,
+    "alleles": [
+     "C",
+     "-"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ],
+  "4398": [
+   {
+    "id": "rs890384310",
+    "start": 155182509,
+    "end": 155182509,
+    "alleles": [
+     "C",
+     "G",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1469828253",
+    "start": 155182511,
+    "end": 155182511,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1007458814",
+    "start": 155182512,
+    "end": 155182512,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs182972525",
+    "start": 155182513,
+    "end": 155182513,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1201178321",
+    "start": 155182518,
+    "end": 155182519,
+    "alleles": [
+     "AA",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713195800",
+    "start": 155182519,
+    "end": 155182519,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs200052367",
+    "start": 155182520,
+    "end": 155182520,
+    "alleles": [
+     "G",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs200971827",
+    "start": 155182525,
+    "end": 155182525,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs2108397582",
+    "start": 155182529,
+    "end": 155182529,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ],
+  "4867": [
+   {
+    "id": "rs1198299912",
+    "start": 155182990,
+    "end": 155182990,
+    "alleles": [
+     "A",
+     "C",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1576686475",
+    "start": 155182991,
+    "end": 155182991,
+    "alleles": [
+     "G",
+     "A",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ],
+  "4868": [
+   {
+    "id": "rs1198299912",
+    "start": 155182990,
+    "end": 155182990,
+    "alleles": [
+     "A",
+     "C",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1576686475",
+    "start": 155182991,
+    "end": 155182991,
+    "alleles": [
+     "G",
+     "A",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ],
+  "5132": [
+   {
+    "id": "rs1191869872",
+    "start": 155183244,
+    "end": 155183244,
+    "alleles": [
+     "T",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1713270343",
+    "start": 155183245,
+    "end": 155183245,
+    "alleles": [
+     "G",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs201420161",
+    "start": 155183249,
+    "end": 155183249,
+    "alleles": [
+     "A",
+     "G",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1559974070",
+    "start": 155183250,
+    "end": 155183261,
+    "alleles": [
+     "TTTGCAATATTC",
+     "-"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1487830641",
+    "start": 155183253,
+    "end": 155183253,
+    "alleles": [
+     "G",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs199576474",
+    "start": 155183254,
+    "end": 155183254,
+    "alleles": [
+     "C",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1258470402",
+    "start": 155183256,
+    "end": 155183256,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs961937384",
+    "start": 155183259,
+    "end": 155183259,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs865810429",
+    "start": 155183261,
+    "end": 155183261,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1559974097",
+    "start": 155183262,
+    "end": 155183262,
+    "alleles": [
+     "C",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ],
+  "5134": [
+   {
+    "id": "rs1713270343",
+    "start": 155183245,
+    "end": 155183245,
+    "alleles": [
+     "G",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs201420161",
+    "start": 155183249,
+    "end": 155183249,
+    "alleles": [
+     "A",
+     "G",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1559974070",
+    "start": 155183250,
+    "end": 155183261,
+    "alleles": [
+     "TTTGCAATATTC",
+     "-"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1487830641",
+    "start": 155183253,
+    "end": 155183253,
+    "alleles": [
+     "G",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs199576474",
+    "start": 155183254,
+    "end": 155183254,
+    "alleles": [
+     "C",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1258470402",
+    "start": 155183256,
+    "end": 155183256,
+    "alleles": [
+     "A",
+     "G"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs961937384",
+    "start": 155183259,
+    "end": 155183259,
+    "alleles": [
+     "T",
+     "C"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs865810429",
+    "start": 155183261,
+    "end": 155183261,
+    "alleles": [
+     "C",
+     "T"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   },
+   {
+    "id": "rs1559974097",
+    "start": 155183262,
+    "end": 155183262,
+    "alleles": [
+     "C",
+     "A"
+    ],
+    "consequence": "3_prime_UTR_variant"
+   }
+  ]
+ },
+ "maf_known": {
+  "rs186516013": 0.000588697,
+  "rs61760457": 0.000588697,
+  "rs575160886": 0.000196232,
+  "rs202191484": 0.000196232,
+  "rs202094946": 0.000196232,
+  "rs182972525": 0.000784929
+ },
+ "n_unique": 119
+}

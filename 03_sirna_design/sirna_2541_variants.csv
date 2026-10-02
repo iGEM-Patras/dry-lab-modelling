@@ -1,0 +1,10 @@
+id,ref,alt_allele,max_alt_freq,population,n_alt_records
+rs900874436,G,A,8.4e-05,gnomADe:afr,5
+rs1713004658,G,A,1.5e-05,gnomADg:nfe,2
+rs1202566219,T,A,1.5e-05,gnomADg:nfe,2
+rs1361025067,C,G,2.4e-05,gnomADg:afr,2
+rs373943993,G,-,8.7e-05,gnomADe:afr,5
+rs1227200270,T,,,,0
+rs1713005927,A,,,,0
+rs937217837,A,G,4.3e-05,gnomADe:remaining,2
+rs2108393368,T,,,,0

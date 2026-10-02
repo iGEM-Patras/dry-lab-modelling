@@ -1,0 +1,5 @@
+pos,n_variants,n_with_freq,max_alt_freq,worst_variant,common_MAF_ge_1pct,acc_W240,rank_worst_case
+2541,9,6,8.7e-05,rs373943993,False,0.6578,1
+2066,8,4,7.6e-05,rs772109678,False,0.584,3
+954,8,8,0.019231,rs149431215,True,0.5839,3
+2403,12,12,0.000566,rs1392465018,False,0.537,8
