@@ -1,0 +1,3 @@
+quantity,rep1,rep2,mean,sd_n2,sem,ci95_half_width,signs_agree,dist_from_pub
+met-enkephalin ddG (control),-3.12,5.41,1.15,6.03,4.26,54.2,False,0.33
+engPENK ddG,-6.96,-11.99,-9.47,3.56,2.51,32.0,True,

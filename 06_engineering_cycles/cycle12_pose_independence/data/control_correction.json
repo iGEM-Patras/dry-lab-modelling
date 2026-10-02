@@ -7,5 +7,20 @@
   "union_sampling": "81.0 ns per leg, exactly as designed"
  },
  "hypothesis_refuted": "I suspected passing all restart parts to gmx bar double-counted overlapping samples. Measured: 0 of 27 overlapping in DOR, 1 of 27 in MOR at 40 ps. Not the cause.",
- "my_own_error": "I additionally reported +3.12 by computing MOR - DOR. The project convention, confirmed from cycle7_scored.csv (ENKEPHALIN +0.810, ENDOMORPHIN_1 -4.824), is DOR - MOR. Retracted and corrected to -3.12."
+ "my_own_error": "I additionally reported +3.12 by computing MOR - DOR. The project convention, confirmed from cycle7_scored.csv (ENKEPHALIN +0.810, ENDOMORPHIN_1 -4.824), is DOR - MOR. Retracted and corrected to -3.12.",
+ "SUPERSEDED_2026_10_02_by_replicate_2": {
+  "status": "The 'sign test FAIL' verdict recorded in this file was based on replicate 1 ALONE and is RETRACTED.",
+  "both_replicates": {
+   "rep1_kcal": -3.12,
+   "rep2_kcal": 5.41,
+   "mean_kcal": 1.15,
+   "replicate_spread_kcal": 8.53,
+   "published_kcal": 0.81,
+   "mean_minus_published_kcal": 0.33
+  },
+  "corrected_diagnosis": "The two replicates fall on OPPOSITE sides of no-preference and the 2-replicate mean is within 0.33 kcal/mol of the published value. The old ladder is NOISE-DOMINATED, not biased. The sign is not reproducible across a thermostat seed change, which is a precision failure rather than a systematic one.",
+  "what_this_does_not_establish": "The mean landing 0.33 from published is NOT evidence of accuracy. At n=2 the t-critical value is 12.7, so the 95% interval is about +/-54 kcal/mol. With a spread of 8.53 kcal/mol, that closeness is within luck. And because these replicates differ only by thermostat seed from one shared equilibrated structure, 8.53 UNDERSTATES the real uncertainty.",
+  "unaffected": "The overlap diagnostic stands as measured: 9-15 of 25 intervals above 2 kT for met-enkephalin and 20-21 of 25 for engPENK, with s up to 10.56. A high-variance estimator is exactly what poor overlap predicts, so that finding and this one agree.",
+  "my_error": "Both retracted control values came from reading a single replicate as a result. The first time the cause was a status counter reporting an incomplete leg as complete; this time the counter was correct and the inference was the fault."
+ }
 }

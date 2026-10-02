@@ -1,0 +1,5 @@
+scope,systems,windows_per_leg,total_ns,equil_h,ti_days,wall_days
+"control only (met-enk DOR+MOR, 2 separate-equilibration reps)",4,57,684,2.5,4.41,4.52
+"engPENK only (DOR+MOR, 2 reps) -- no control",4,57,684,2.5,4.41,4.52
+"full: control + engPENK, 2 reps each",8,57,1368,5.0,8.83,9.03
+"full, greedy ladder instead of optimal",8,71,1704,5.0,10.99,11.2
