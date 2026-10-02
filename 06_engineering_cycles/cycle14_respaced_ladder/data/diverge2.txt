@@ -1,0 +1,26 @@
+start=Sat Oct  3 00:24:34 CEST 2026
+Python 3.9.12
+
+CYCLE 14 GATE G4 -- did the replicate pairs actually diverge?
+Each pair: independent velocity generation AND independent NVT+NPT.
+Cycle 8's replicates shared one equilibrated structure and differed only by
+thermostat seed, which is why their 8.53 kcal/mol spread measured thermal
+noise inside one basin rather than genuine uncertainty.
+Threshold: mean atom displacement > 0.05 nm.
+
+c3b_menk_DOR:  135831 atoms
+   mean atom displacement   5.6503 nm
+   median                   5.8446 nm
+   90th percentile          10.9834 nm
+   max                      18.0457 nm
+   -> DIVERGED: replicates genuinely independent, G4 testable
+
+c3b_menk_MOR:  101267 atoms
+   mean atom displacement   5.4724 nm
+   median                   5.4769 nm
+   90th percentile          10.6592 nm
+   max                      16.5537 nm
+   -> DIVERGED: replicates genuinely independent, G4 testable
+
+VERDICT: both pairs diverged -- proceed to stage 2 (57-window ladder)
+done=Sat Oct  3 00:24:35 CEST 2026

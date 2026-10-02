@@ -1,0 +1,36 @@
+start=Sat Oct  3 00:27:33 CEST 2026
+### The index file has only 4 groups: System, Protein, MEMB, SOLV.
+### Backbone/C-alpha do not exist here, which is why the last attempt produced
+### nothing. Selecting group 1 (Protein) by NUMBER: receptor + peptide, the solute.
+
+### ================= c3b_menk_DOR =================
+--- Protein (group 1) RMSD: r2 vs r1, fit rot+trans on the same group ---
+Group     0 (         System) has 135831 elements
+Group     1 (        Protein) has  5830 elements
+Group     2 (           MEMB) has 45426 elements
+Group     3 (           SOLV) has 84575 elements
+Group     0 (         System) has 135831 elements
+    ==> SOLUTE RMSD = 0.3190722 nm
+
+--- identifying the peptide: last 14 residues of the Protein group ---
+   Protein group spans 5830 atoms / 377 residues
+   first 6: MET1 GLU2 PRO3 ALA4 PRO5 SER6
+   LAST 14: ASP364 GLY365 PRO366 GLY367 GLY368 GLY369 ALA370 ALA371 ALA372 TYR1 GLY2 GLY3 PHE4 MET5
+   last 5 residues as one-letter code: YGGFM   (met-enkephalin = YGGFM)
+
+### ================= c3b_menk_MOR =================
+--- Protein (group 1) RMSD: r2 vs r1, fit rot+trans on the same group ---
+Group     0 (         System) has 101267 elements
+Group     1 (        Protein) has  6384 elements
+Group     2 (           MEMB) has 29346 elements
+Group     3 (           SOLV) has 65537 elements
+Group     0 (         System) has 101267 elements
+    ==> SOLUTE RMSD = 0.3311378 nm
+
+--- identifying the peptide: last 14 residues of the Protein group ---
+   Protein group spans 6384 atoms / 405 residues
+   first 6: MET1 ASP2 SER3 SER4 ALA5 ALA6
+   LAST 14: LEU392 GLU393 ALA394 GLU395 THR396 ALA397 PRO398 LEU399 PRO400 TYR1 GLY2 GLY3 PHE4 MET5
+   last 5 residues as one-letter code: YGGFM   (met-enkephalin = YGGFM)
+
+done=Sat Oct  3 00:27:34 CEST 2026

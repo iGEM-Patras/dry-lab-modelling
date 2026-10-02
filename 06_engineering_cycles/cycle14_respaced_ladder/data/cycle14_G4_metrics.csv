@@ -1,0 +1,3 @@
+receptor,protein_atoms,residues,solute_rmsd_nm,all_atom_mean_disp_nm,peptide_tail,verdict
+DOR,5830,377,0.3191,5.6503,YGGFM,diverged
+MOR,6384,405,0.3311,5.4724,YGGFM,diverged
