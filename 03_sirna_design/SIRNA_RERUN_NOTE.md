@@ -124,3 +124,43 @@ transcripts. That is a real risk, and it was checked when the 206 candidates wer
 
 **This is a separate issue from the actual error in that run**, which is that the sequence
 in the box was vimentin rather than MME. Fixing the input sequence is the real correction.
+
+---
+
+# "Paste the mRNA, not the cDNA"
+
+**They are the same sequence.** Sequence databases distribute mRNA in DNA letters. NCBI's
+own canonical record for this gene reads:
+
+```
+>NM_000902.5 Homo sapiens membrane metalloendopeptidase (MME), transcript variant 1, mRNA
+```
+
+and the sequence under that header contains **A, C, G and T only — no U**. There is no
+separate "mRNA file" to download, from NCBI or Ensembl. The Ensembl `cDNA (transcripts)`
+checkbox and an NCBI record labelled `mRNA` give the same molecule in the same alphabet.
+
+siDirect uses both conventions in one table, which makes the point without argument: its
+`target sequence` column is DNA (`cagaagaatggt…`) while its `RNA oligo sequences` column
+is RNA (`UGGAUUUGUACC…`). You submit DNA; it returns RNA oligos.
+
+## Positions in both transcripts, so the choice of input cannot cause another round
+
+| | guide, antisense 5'→3' | sense target 21 nt | on MME-213 | on `NM_000902.5` |
+|---|---|---|---|---|
+| **primary** | `AAUGAUUGACUUGAUAGACCU` | `AGGTCTATCAAGTCAATCATT` | **2700–2722** | **2541–2563** |
+| **hedge** | `UUCUGAUAGGCUCUGUAUGCU` | `AGCATACAGAGCCTATCAGAA` | **2225–2247** | **2066–2088** |
+| **do NOT order** | `UCGAUCUUCAGGUUUAGCCGU` | — | 1023–1045 | 954–976 |
+
+Both guides are present in both transcripts. `NM_000902.5` is the canonical RefSeq choice
+if an accession is wanted; note that **MME-213 has no RefSeq cross-reference** — it is an
+Ensembl-only transcript model. Three of the 206 candidates are absent from `NM_000902.5`,
+and all three had already been disqualified for failing to cover all four variants, so
+nothing is lost by switching.
+
+## No re-run is required
+
+The 206-candidate list, the specificity and accessibility scoring, the four-variant
+isoform check, the folding-window robustness test and the population-variant screen are
+all complete. A re-run only lets the wet lab watch the result appear; it corrects nothing
+and the ordering decision does not depend on it.
