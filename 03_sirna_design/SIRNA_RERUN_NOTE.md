@@ -39,22 +39,35 @@ real MME transcript it would run to `5801-5818` — 58 lines, not 6.
 
 ## Re-run
 
-Paste **`NM_007288.3`** (5,818 nt) — the variant used for the 206-candidate run, and the
-only one of the four MME variants that contains all 206 target sites. Expect ~206
-candidates.
+Paste **`ENST00000615825.3` (MME-213) cDNA, 5,861 nt** — the Ensembl transcript the
+206-candidate run actually used. All 206 siDirect targets sit in it at **offset 0**:
+its reported positions match that sequence exactly. Expect ~206 candidates.
+
+> **Correction.** An earlier version of this note said to paste `NM_007288.3`. That was
+> wrong. `NM_007288.3` *contains* all 206 target sequences but at shifted positions
+> (+41 for most rows, +131 for the rest, the variants differing by an internal indel), so
+> it reproduces the same guides under different numbers. The original identification was
+> made on containment rather than position, which is the weaker test.
 
 ## Coordinate warning — this is how a wrong oligo gets ordered
 
 The recommended guides were reported in **`NM_000902.5`** coordinates. siDirect will
 report them in **input** coordinates, which differ by 159:
 
-| guide | `NM_000902.5` | position siDirect will show on `NM_007288.3` | sequence (5'→3') |
+| guide | siDirect range on MME-213 | guide, antisense 5'→3' | 23-nt target region |
 |---|---|---|---|
-| primary | 2541 | **2700–2722** | `AAUGAUUGACUUGAUAGACCU` |
-| hedge | 2066 | **2225–2247** | `UUCUGAUAGGCUCUGUAUGCU` |
+| primary | **2700–2722** | `AAUGAUUGACUUGAUAGACCU` | `AGGTCTATCAAGTCAATCATTTC` |
+| hedge | **2225–2247** | `UUCUGAUAGGCUCUGUAUGCU` | `AGCATACAGAGCCTATCAGAATT` |
 
-**Match on the sequence, not the number.** Position 954 (`NM_000902.5`) / 1023–1045
-(input) scored well on accessibility and specificity but is **disqualified** by a common
+Both verified against the stored siDirect rows: reported position equals found position.
+The earlier figures 2541 and 2066 are `NM_000902.5` coordinates — correct for the variant
+and SNP analysis, but **not** what siDirect displays. Do not look for them in the output.
+
+siDirect lists a 23-nt region as "21nt target + 2nt overhang". The **guide** is the reverse
+complement of the **first 21**; the **passenger** is the **last 21**. That 2-nt shift is a
+third coordinate convention in play, which is why the rule below matters.
+
+**Match on the sequence, not the number.** Position 954 (`NM_000902.5`) / **1023–1045** on MME-213 scored well on accessibility and specificity but is **disqualified** by a common
 population variant at 1.92% — do not order it.
 
 ---
