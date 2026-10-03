@@ -164,3 +164,36 @@ The 206-candidate list, the specificity and accessibility scoring, the four-vari
 isoform check, the folding-window robustness test and the population-variant screen are
 all complete. A re-run only lets the wet lab watch the result appear; it corrects nothing
 and the ordering decision does not depend on it.
+
+---
+
+# The clinching evidence: both Ensembl links are the same transcript
+
+The wet lab supplied two URLs, labelled "mRNA NEPRILYSIN" and "cDNA":
+
+```
+mRNA NEPRILYSIN  ->  /Homo_sapiens/Transcript/Exons?        g=ENSG00000196549; … ;t=ENST00000615825
+cDNA             ->  /Homo_sapiens/Transcript/Sequence_cDNA? g=ENSG00000196549; … ;t=ENST00000615825
+```
+
+**`t=ENST00000615825` in both.** Same gene, same region, same transcript — and the same
+transcript the 206-candidate run used. These are two *display pages for one molecule*:
+
+- `/Transcript/Exons` breaks it into 24 exons with introns and flanking sequence
+  interleaved for reference. A view, not a sequence record.
+- `/Transcript/Sequence_cDNA` shows those exons joined — the mature transcript.
+
+Measured on this transcript: 24 exon lengths sum to **5,861 nt**; the cDNA is **5,861 nt**.
+
+**Copy from the cDNA page, never the Exons page.** The Exons page carries a
+`5' upstream sequence` row, an active `Flanking sequence` toggle, and rows reading
+`Intron 1-2  4,156` and `Intron 2-3  731` between the exons. Copying that region picks up
+upstream and intronic sequence, which exists only in nuclear pre-mRNA. That is the one
+route by which a genuinely wrong input could be produced here.
+
+## Recommended way to close this out
+
+Send the wet lab the **FASTA file itself** rather than a page link, and ask them to run
+that exact file. Three rounds of this disagreement have been about naming — Exons vs cDNA,
+mRNA vs cDNA, and before that a sequence that proved to be vimentin. A file has no name to
+argue about.
