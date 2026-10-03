@@ -113,7 +113,7 @@ vendor synthesis failures and promote recombination between the repeats. The doc
 ask the vendor to introduce synonymous-codon variation across the seven cores (changes DNA only, not
 protein) — is the standard fix and is well-placed.
 
-![GC content and core-repeat map]({{!artifact:art_28bd220f-1523-46a2-875c-d8c1c79acd2a}})
+> *Figure “GC content and core-repeat map” is no longer available; the surrounding text records what it showed.*
 
 *Figure 1. Sliding-window (30-nt) GC profile of the insert. Dashed line = mean 68.9%; orange bands mark
 the seven identical `YGGFEVVG` core repeats — the recombination/synthesis-risk hotspots.*
@@ -139,7 +139,7 @@ essentially the same anionic profile as the deltorphin address. This is the quan
 "pushes away from µ, toward δ" rationale. It supports the *direction* of the shift; it does **not** predict
 the *magnitude* of δ/µ selectivity, which must come from a functional assay. Data: `peptide_properties.csv`.
 
-![Peptide physicochemical comparison]({{!artifact:art_b13cfea2-390f-440d-89c8-64cf2f5809ee}})
+> *Figure “Peptide physicochemical comparison” is no longer available; the surrounding text records what it showed.*
 
 *Figure 2. The Glu-address makes the engineered core markedly more anionic (lower net charge, lower pI)
 than native enkephalins, mirroring the deltorphin address chemistry.*

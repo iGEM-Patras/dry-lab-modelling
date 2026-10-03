@@ -8,4 +8,4 @@ The publisher PDF is **deliberately not included in this repository** — it is 
 this repository feeds a public wiki. Access it through your institutional subscription or the
 DOI above. What the paper contributes to the design is summarised, with the parameters actually
 used, in [`INVITRO_PENK_README.md`](INVITRO_PENK_README.md) and
-[`PENK_INVITRO_PROTOCOL.md`](../PENK_INVITRO_PROTOCOL.md).
+[`PENK_INVITRO_PROTOCOL.md`](PENK_INVITRO_PROTOCOL.md).

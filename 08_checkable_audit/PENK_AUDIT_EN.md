@@ -32,7 +32,7 @@ Three consequences, two of which are in your favour:
 
 One arm is invalidated: *MME* (0.7 nTPM) and *ANPEP* (0.1 nTPM) are both absent, so the Cycle 5 knockdown has no endogenous target here (§4, finding ¶49).
 
-![Audit overview]({{!artifact:art_707f0011-8d77-4de1-8caa-81b82deb2a31}})
+![Audit overview](figures/fig_audit_overview.png)
 
 **Figure 1.** (a) Processing machinery in HEK293, cell-line RNA in nTPM; open circles are genes with no detected transcript. Fibroblast values are in the accompanying table but are not plotted alongside, as GTEx tissue TPM and cell-line nTPM are not directly comparable units. (b) Architecture and defects of the four plasmids. (c) The 17 guide findings by protocol stage and severity.
 
@@ -64,7 +64,7 @@ Detail on each defect:
 
 MHCflurry 2.1 [5] was run on 612 peptides — 8–11-mers spanning the engineered `YGGFEVVG` cassettes, the native `YGGFM`/`YGGFL` cassettes as a matched comparator, and the P2A remnant junction — against 10 HLA supertype representatives (6,120 allele–peptide pairs).
 
-![MHC immunogenicity]({{!artifact:art_7246e33c-63b3-4160-9215-cf26d6b7afd7}})
+![MHC immunogenicity](figures/fig_mhc_immunogenicity.png)
 
 **Figure 2.** (a) Fraction of allele–peptide pairs at or below the 2nd presentation percentile, by group. (b) Overlap of strong-binding peptides between the native and engineered precursors. (c) The strongest neoepitopes requiring the engineered EVVG address, labelled peptide·allele.
 
