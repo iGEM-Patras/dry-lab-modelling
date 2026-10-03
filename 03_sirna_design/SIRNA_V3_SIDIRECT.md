@@ -1,3 +1,9 @@
+> **SUPERSEDED IN PART — see [`ORDER.md`](ORDER.md) for the current order sheet.**
+> The primary guide is unchanged (this document's position 2541 in `NM_000902.5` is
+> 2700-2722 on MME-213). The **second guide has changed**: DSIR efficacy scoring and a
+> direct count of seed sites across 20,094 human 3' UTRs, neither available when this was
+> written, moved it to **2562-2584**. Everything else below stands.
+
 # Anti-neprilysin siRNA — v3, siDirect candidates screened and placed on the v2 scale
 
 **Input.** 206 siDirect candidates (21-nt guide + 21-nt passenger), supplied by the wet lab.

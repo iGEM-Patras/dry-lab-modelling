@@ -1,3 +1,7 @@
+> **Current order sheet is [`ORDER.md`](ORDER.md).** The second guide in the middle
+> sections of this document (2225-2247) was superseded by **2562-2584**; the final
+> section carries the reasoning. The primary, 2700-2722, is unchanged throughout.
+
 # Why the siDirect run shows 8 candidates instead of 206
 
 **The sequence in that run is not neprilysin. It is vimentin.**
@@ -57,7 +61,8 @@ report them in **input** coordinates, which differ by 159:
 | guide | siDirect range on MME-213 | guide, antisense 5'→3' | 23-nt target region |
 |---|---|---|---|
 | primary | **2700–2722** | `AAUGAUUGACUUGAUAGACCU` | `AGGTCTATCAAGTCAATCATTTC` |
-| hedge | **2225–2247** | `UUCUGAUAGGCUCUGUAUGCU` | `AGCATACAGAGCCTATCAGAATT` |
+| second guide | **2562–2584** | `UCUUUCGAUUAGAGAAUUCCC` | `GGGAATTCTCTAATCGAAAGAAA` |
+| ~~hedge, superseded~~ | ~~2225–2247~~ | ~~`UUCUGAUAGGCUCUGUAUGCU`~~ | ~~`AGCATACAGAGCCTATCAGAATT`~~ |
 
 Both verified against the stored siDirect rows: reported position equals found position.
 The earlier figures 2541 and 2066 are `NM_000902.5` coordinates — correct for the variant
@@ -94,7 +99,7 @@ exons** of MME-213.
 
 ## Designing on separate exons would lose a good guide
 
-Position **2066** (hedge candidate) spans **exons 21/22**. That junction exists only in
+Position **2066** (the hedge candidate *at the time*; now superseded by 2562-2584) spans **exons 21/22**. That junction exists only in
 the spliced mRNA. Paste exons individually and the guide vanishes — and it is the one
 candidate in the set that physically cannot target pre-mRNA or genomic DNA, which is a
 property worth keeping.
@@ -113,7 +118,7 @@ transcripts. That is a real risk, and it was checked when the 206 candidates wer
 
 - **203 / 206** hit all four MME RefSeq variants
 - **3** hit only one variant and were disqualified for precisely that reason
-- both recommendations (2541 and 2066) are among the 203
+- both guides recommended at the time (2541 and 2066) are among the 203
 
 ## One-line summary for the wet lab
 
@@ -149,7 +154,8 @@ is RNA (`UGGAUUUGUACC…`). You submit DNA; it returns RNA oligos.
 | | guide, antisense 5'→3' | sense target 21 nt | on MME-213 | on `NM_000902.5` |
 |---|---|---|---|---|
 | **primary** | `AAUGAUUGACUUGAUAGACCU` | `AGGTCTATCAAGTCAATCATT` | **2700–2722** | **2541–2563** |
-| **hedge** | `UUCUGAUAGGCUCUGUAUGCU` | `AGCATACAGAGCCTATCAGAA` | **2225–2247** | **2066–2088** |
+| **second guide** | `UCUUUCGAUUAGAGAAUUCCC` | `GGGAATTCTCTAATCGAAAGAAA` | **2562–2584** | *absent from NM_000902.5* |
+| ~~hedge, superseded~~ | ~~`UUCUGAUAGGCUCUGUAUGCU`~~ | ~~`AGCATACAGAGCCTATCAGAA`~~ | ~~2225–2247~~ | ~~2066–2088~~ |
 | **do NOT order** | `UCGAUCUUCAGGUUUAGCCGU` | — | 1023–1045 | 954–976 |
 
 Both guides are present in both transcripts. `NM_000902.5` is the canonical RefSeq choice
@@ -219,7 +225,8 @@ mechanism and one that full-length sequence search cannot see.
 **Why not `4557-4579`, which has a lower seed Tm (6.3 °C)?** Three times the off-targets
 (6 vs 2) and a structurally closed target (0.42 vs 0.66). Lowest Tm alone does not win.
 
-`2225-2247` is the hedge on different grounds — **second-highest accessibility (0.58)**
+**Superseded — `2562-2584` is now the second guide; see [`ORDER.md`](ORDER.md).** The
+argument made at the time was that `2225-2247` is the hedge on different grounds — **second-highest accessibility (0.58)**
 and it spans the exon 21/22 junction, so it cannot act on pre-mRNA or genomic DNA. It
 does not match the primary on seed Tm or off-target count and is not claimed to.
 

@@ -1,3 +1,9 @@
+> **SUPERSEDED IN PART — see [`ORDER.md`](ORDER.md) for the current order sheet.**
+> The primary guide is unchanged (this document's position 2541 in `NM_000902.5` is
+> 2700-2722 on MME-213). The **second guide has changed**: DSIR efficacy scoring and a
+> direct count of seed sites across 20,094 human 3' UTRs, neither available when this was
+> written, moved it to **2562-2584**. Everything else below stands.
+
 # Anti-neprilysin siRNA — validation record
 
 **Target:** human *MME* (neprilysin / CD10), the enzyme that degrades enkephalins.
@@ -5,7 +11,11 @@ Knocking it down extends the payload's half-life; it does not change receptor pr
 The pharmacology of inhibiting neprilysin is established — sacubitril is an approved
 neprilysin inhibitor.
 
-**Recommendation: position 2541, with position 2066 as the hedge.**
+**Recommendation: position 2541** (= 2700-2722 on MME-213) — **still current**.
+
+~~with position 2066 as the hedge~~ — **superseded.** The second guide is now
+**2562-2584**, after DSIR efficacy scoring and a direct seed-site count across human
+3' UTRs. See [`ORDER.md`](ORDER.md).
 
 ```
 2541   guide      5'-AAUGAUUGACUUGAUAGACCU-3'
