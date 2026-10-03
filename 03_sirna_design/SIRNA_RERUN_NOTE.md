@@ -274,3 +274,78 @@ reported here only to show the check returns non-zero when a liability exists.
 
 Between siDirect's transcriptome search and the plasmid scan, every mRNA these guides can
 encounter in a transfected cell has been checked.
+
+---
+
+# Two independent tools run: DSIR efficacy, and seed burden across all human 3' UTRs
+
+## What was reachable
+
+| tool requested | status | what was done instead |
+|---|---|---|
+| DSIR / s-Biopredsi | **run on the server** | all 5,841 candidates scored |
+| Sfold | blocked at the proxy | its core metric (target accessibility from the structure ensemble) was already computed with ViennaRNA RNAplfold, W=240 L=160 u=21 |
+| TargetScan / miRanda | blocked at the proxy | seed sites counted directly against 20,094 canonical human 3' UTRs (34.9 Mb) pulled from Ensembl BioMart |
+
+The DSIR read was validated before use: its score for `GCAUAAGUAUACAGUUCAAUA` is 106.8,
+identical to the `Dsir-Score` Eurofins printed for the same sequence.
+
+The BioMart query was validated before the bulk download: MME-213's own 3' UTR came back at
+**3,354 nt**, matching the length derived independently from the ORF (165-2507 of 5,861).
+
+## DSIR predicted efficacy
+
+Three of the seventeen shortlisted guides clear DSIR's `>90` efficient threshold
+(371 of 5,841 candidates do):
+
+| position | DSIR | rank / 5841 |
+|---|---|---|
+| **2700-2722** | **92.6** | 223 |
+| 721-743 | 91.6 | 271 |
+| 2562-2584 | 91.5 | 278 |
+| 4557-4579 | 89.4 | 415 |
+| 435-457 | 76.7 | 2287 |
+| 2225-2247 | 71.8 | 3158 |
+
+DSIR's "Corrected Score" ranks `435-457` highest. Per DSIR's own documentation that column
+is efficacy minus penalties from intrinsic target features (Filhol 2012) - still efficacy,
+not specificity.
+
+## Seed-mediated off-target burden, measured rather than proxied
+
+For each guide, the 7mer-m8 site (complement of guide positions 2-8), the 8mer
+(7mer-m8 + A opposing position 1) and the 7mer-A1 were counted across every canonical
+human 3' UTR. The background occurrence of an arbitrary 7-mer in this set is **1,966**
+(10th-90th percentile 256-4,159), measured from 400 random 7-mers.
+
+| position | 8mer sites | 7mer-m8 sites | 3' UTRs hit |
+|---|---|---|---|
+| 1023-1045 *(disqualified, 1.9% variant)* | 82 | 489 | 463 |
+| **2562-2584** | **91** | **319** | **311** |
+| 5026-5048 | 405 | 1,129 | 1,052 |
+| **2700-2722** | **423** | **1,827** | **1,605** |
+| 435-457 | 695 | 3,257 | 2,580 |
+| 2225-2247 | 915 | 2,365 | 1,992 |
+| 4557-4579 | 945 | 2,679 | 2,177 |
+
+**This is a genuinely new axis.** It is uncorrelated with predicted efficacy across the
+seventeen (Spearman rho = -0.21, p = 0.43), so it cannot be inferred from DSIR, and it is
+not the same thing as siDirect's seed-duplex Tm: Tm measures how *strongly* a seed binds,
+this counts how *many* sites exist. `2562-2584` has a high Tm (21.0) but six-fold fewer
+sites than background; `2700-2722` has a low Tm (13.6) with a near-background site count.
+
+## Consequence for the order
+
+`2700-2722` remains the primary. It is the only candidate that is simultaneously top of the
+shortlist on DSIR efficacy (92.6), lowest on full-length off-targets (2 at 3 mismatches),
+highest on target accessibility (0.658) and below background on seed sites.
+
+**`2562-2584` replaces `435-457` as the recommended second guide.** It clears the DSIR
+efficacy threshold where `435` does not (91.5 vs 76.7), and carries the lowest seed burden
+of any non-disqualified guide - 4.6x fewer 8mer sites than the primary. Its costs are a
+higher seed-duplex Tm (21.0 vs 13.6), more full-length off-targets (9 vs 2) and lower
+accessibility (0.537 vs 0.658). It is plasmid-safe at 7 mismatches, present in all four MME
+RefSeq variants, and carries no common population variant.
+
+Pairing the two gives a panel whose members fail by different mechanisms: the primary is
+protected by weak seed binding, the second by having almost no seed sites to bind.
