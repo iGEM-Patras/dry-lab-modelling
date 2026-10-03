@@ -197,3 +197,80 @@ Send the wet lab the **FASTA file itself** rather than a page link, and ask them
 that exact file. Three rounds of this disagreement have been about naming — Exons vs cDNA,
 mRNA vs cDNA, and before that a sequence that proved to be vimentin. A file has no name to
 argue about.
+
+---
+
+# Why these two guides, and the co-delivery check no design tool performs
+
+## Why `2700-2722` is the primary
+
+It is the only guide strong on **all three** selection axes at once:
+
+| | `2700-2722` | range across the 17 |
+|---|---|---|
+| seed-duplex Tm (guide) | **13.6 °C** | 6.3 – 21.5 |
+| near-matches in the human transcriptome (3 mm) | **2** | 2 – 38 |
+| target accessibility (mean unpaired prob.) | **0.66** | 0.32 – 0.66 (highest) |
+
+Seed Tm is the most informative single column siDirect prints: a weak seed duplex
+suppresses microRNA-like off-target silencing, which is the dominant off-target
+mechanism and one that full-length sequence search cannot see.
+
+**Why not `4557-4579`, which has a lower seed Tm (6.3 °C)?** Three times the off-targets
+(6 vs 2) and a structurally closed target (0.42 vs 0.66). Lowest Tm alone does not win.
+
+`2225-2247` is the hedge on different grounds — **second-highest accessibility (0.58)**
+and it spans the exon 21/22 junction, so it cannot act on pre-mRNA or genomic DNA. It
+does not match the primary on seed Tm or off-target count and is not claimed to.
+
+## Co-delivery safety: do the guides silence our own plasmid?
+
+The lipoplex carries the plasmid and the siRNA in one particle, so both reach the same
+cytoplasm. siDirect's specificity search covers the human transcriptome only — it has no
+knowledge of the engPENK construct. This check was run separately against the four
+SnapGene plasmid maps (6,950–7,539 bp), **both strands, treated as circular**.
+
+Each plasmid carries **two mammalian transcripts**, both checked:
+
+- CMV -> cassette -> bGH polyA (1,956–2,545 nt) — the payload
+- SV40 -> NeoR/KanR -> SV40 polyA (1,156 nt) — the selection marker
+
+| | result |
+|---|---|
+| guides with <= 3 mismatches anywhere in any plasmid | **0** |
+| minimum mismatch, 17 guides x 4 plasmids | **6** |
+| `2700-2722` seed sites in any 3' UTR | **0** |
+| `2225-2247` seed sites in any 3' UTR | **0** |
+
+**No cleavage risk and no 3'-UTR seed site for either pick.** `2225-2247` carries one
+7mer-m8 site in coding sequence, where translating ribosomes displace RISC — a weak
+context. One non-selected guide, `3759-3781`, has 4 seed sites in the NeoR mRNA; it is
+reported here only to show the check returns non-zero when a liability exists.
+
+### Two corrections made while running this
+
+1. An earlier pass counted **3** seed sites for `2225-2247`. That used the raw insert
+   FASTAs with no transcript boundaries, so sites outside the transcribed region were
+   counted. Against the real transcripts it is **1**, in coding sequence.
+2. The two `mEGFP…His_PENK` plasmids carry **no PENK CDS feature**, so taking the 3' UTR
+   from the feature table gave 1,114 nt — it had swallowed the entire PENK coding
+   sequence. ORF ends were re-derived by translation, giving 301–304 nt. Uncaught, this
+   would have reported coding-sequence seed sites as 3'-UTR hits, which is precisely the
+   distinction the analysis turns on.
+
+## Is a BLAST needed? No, and running one casually is worse than not looking
+
+- **Human transcriptome:** already done, and done better. siDirect performs an exhaustive
+  mismatch-resolved search against RefSeq (release 230), enumerating hits at 0, 1, 2 and 3
+  mismatches on both strands. That is complete counting; BLAST is a heuristic seeded
+  aligner and would be a downgrade.
+- **The trap:** for a 21-mer, `megablast` uses word size 28 — longer than the query — and
+  finds essentially nothing. Default `blastn` (word size 11) misses near-matches whose
+  mismatches break every 11-mer. Correct invocation is
+  `-task blastn-short -word_size 7 -evalue 1000`. A megablast run returning no hits is
+  routinely reported as "no off-targets" when the search could not have found any.
+- **The plasmid:** covered above by exhaustive sliding-window matching, which is more
+  sensitive than BLAST at this length and complete rather than heuristic.
+
+Between siDirect's transcriptome search and the plasmid scan, every mRNA these guides can
+encounter in a transfected cell has been checked.
