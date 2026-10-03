@@ -302,17 +302,21 @@ The BioMart query was validated before the bulk download: MME-213's own 3' UTR c
 
 ## DSIR predicted efficacy
 
-Three of the seventeen shortlisted guides clear DSIR's `>90` efficient threshold
-(371 of 5,841 candidates do):
+> **THIS TABLE WAS WRONG — corrected values on the right.** Guides were matched to the
+> DSIR output on the sense 19-mer; DSIR's window is offset 2 nt from siDirect's, so every
+> score below belonged to a neighbouring siRNA. The correct join is on the guide sequence.
 
-| position | DSIR | rank / 5841 |
-|---|---|---|
-| **2700-2722** | ~~92.6~~ **85.4** | ~~223~~ 839 |
-| 721-743 | 91.6 | 271 |
-| 2562-2584 | 91.5 | 278 |
-| 4557-4579 | 89.4 | 415 |
-| 435-457 | 76.7 | 2287 |
-| 2225-2247 | 71.8 | 3158 |
+| position | DSIR as first reported | **correct** | correct rank / 5841 |
+|---|---|---|---|
+| 2700-2722 | ~~92.6~~ | **85.4** | 839 |
+| 721-743 | ~~91.6~~ | **87.1** | 641 |
+| 2562-2584 | ~~91.5~~ | **77.8** | 2076 |
+| 4557-4579 | ~~89.4~~ | **94.0** | 150 |
+| 435-457 | ~~76.7~~ | **83.7** | 1099 |
+| 2225-2247 | ~~71.8~~ | **87.4** | 605 |
+
+Of the seventeen, those clearing `>90` are **2459, 1023, 5027, 4557 and 434** — not the
+three named here. See [`ORDER.md`](ORDER.md).
 
 DSIR's "Corrected Score" ranks `435-457` highest. Per DSIR's own documentation that column
 is efficacy minus penalties from intrinsic target features (Filhol 2012) - still efficacy,
@@ -343,17 +347,23 @@ sites than background; `2700-2722` has a low Tm (13.6) with a near-background si
 
 ## Consequence for the order
 
-`2700-2722` remains the primary. It is the only candidate that is simultaneously top of the
-shortlist on DSIR efficacy (92.6), lowest on full-length off-targets (2 at 3 mismatches),
-highest on target accessibility (0.658) and below background on seed sites.
+~~`2700-2722` remains the primary. It is the only candidate that is simultaneously top of
+the shortlist on DSIR efficacy (92.6), lowest on full-length off-targets...~~
+
+**Corrected.** `2700-2722` is **not** top of the shortlist on DSIR — it scores 85.4, rank
+839, below the >90 threshold. It remains lowest on full-length off-targets (2), highest on
+accessibility (0.658) and below background on seed sites; those were never DSIR-derived.
+It is now recommended as the **specificity-optimal** member of a two-guide panel, paired
+with `2459-2481` as the efficacy-optimal member.
 
 > **WITHDRAWN 2026-10-03.** The DSIR figures this paragraph rests on were read from the
 > wrong window — matched on the sense 19-mer, where DSIR's frame is offset 2 nt from
 > siDirect's. Corrected: 2562-2584 scores **77.8**, not 91.5, and 435-457 scores **83.7**,
 > not 76.7, so 435 is the *better* of the two on efficacy. See [`ORDER.md`](ORDER.md).
 
-~~**`2562-2584` replaces `435-457` as the recommended second guide.**~~ It clears the DSIR
-efficacy threshold where `435` does not (91.5 vs 76.7), and carries the lowest seed burden
+~~**`2562-2584` replaces `435-457` as the recommended second guide.**~~ ~~It clears the DSIR
+efficacy threshold where `435` does not (91.5 vs 76.7)~~ — **false; the reverse holds, 435
+scores 83.7 against 2562's 77.8.** It does carry the lowest seed burden
 of any non-disqualified guide - 4.6x fewer 8mer sites than the primary. Its costs are a
 higher seed-duplex Tm (21.0 vs 13.6), more full-length off-targets (9 vs 2) and lower
 accessibility (0.537 vs 0.658). It is plasmid-safe at 7 mismatches, present in all four MME
