@@ -307,7 +307,7 @@ Three of the seventeen shortlisted guides clear DSIR's `>90` efficient threshold
 
 | position | DSIR | rank / 5841 |
 |---|---|---|
-| **2700-2722** | **92.6** | 223 |
+| **2700-2722** | ~~92.6~~ **85.4** | ~~223~~ 839 |
 | 721-743 | 91.6 | 271 |
 | 2562-2584 | 91.5 | 278 |
 | 4557-4579 | 89.4 | 415 |
@@ -347,7 +347,12 @@ sites than background; `2700-2722` has a low Tm (13.6) with a near-background si
 shortlist on DSIR efficacy (92.6), lowest on full-length off-targets (2 at 3 mismatches),
 highest on target accessibility (0.658) and below background on seed sites.
 
-**`2562-2584` replaces `435-457` as the recommended second guide.** It clears the DSIR
+> **WITHDRAWN 2026-10-03.** The DSIR figures this paragraph rests on were read from the
+> wrong window — matched on the sense 19-mer, where DSIR's frame is offset 2 nt from
+> siDirect's. Corrected: 2562-2584 scores **77.8**, not 91.5, and 435-457 scores **83.7**,
+> not 76.7, so 435 is the *better* of the two on efficacy. See [`ORDER.md`](ORDER.md).
+
+~~**`2562-2584` replaces `435-457` as the recommended second guide.**~~ It clears the DSIR
 efficacy threshold where `435` does not (91.5 vs 76.7), and carries the lowest seed burden
 of any non-disqualified guide - 4.6x fewer 8mer sites than the primary. Its costs are a
 higher seed-duplex Tm (21.0 vs 13.6), more full-length off-targets (9 vs 2) and lower
