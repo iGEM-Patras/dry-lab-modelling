@@ -202,7 +202,8 @@ the numbers, for the document's fallback to **dual enkephalinase inhibitors** (P
 single-enzyme knockdown [Roques 1985; Benoist 2002; Southerland 2021]. The occupancy model shows the
 δ-vs-µ discrimination window is widest at ~23 nM free enkephalin (δ occupancy 0.86 vs µ 0.14).
 
-![Selectivity landscape, PK/PD and occupancy]({{artifact:art_0ea0aedd-3170-48bc-990c-1fe8157bf5c0}})
+> *Figure 3 image is no longer available; the caption below records what it showed, and the
+> underlying values are in `tables/residency_vs_selectivity.csv`.*
 
 *Figure 3. (left) The 426-ligand δ/µ selectivity ladder with anchors — native enkephalin sits at ~0.028;
 D-amino-acid/amidated δ-agonists reach 0.001. (centre) Enkephalin half-life under each degradation
@@ -229,7 +230,8 @@ expected — the orthosteric pockets of DOR and MOR are highly similar, and ipTM
 geometry, not binding thermodynamics. Structures: `boltz_selectivity_scores.csv`, PDBs in
 `boltz_structures.tar.gz`.
 
-![Boltz-2 ipTM across receptors and peptides]({{artifact:art_ceef66c6-e759-41f7-bc4e-5e66c76ad393}})
+> *Figure 4 image is no longer available; the caption below records what it showed, and the
+> values are in `boltz_selectivity_scores.csv` as cited above.*
 
 *Figure 4. Boltz-2 interface ipTM for all 8 co-folded complexes. High and flat across both receptors — a
 clean negative result: static co-folding cannot discriminate δ from µ for these peptides.*
@@ -272,7 +274,7 @@ Three conclusions, in order of confidence:
    single-trajectory MM-GBSA on ΔΔG [Genheden & Ryde 2015]. It is a genuine tilt, not a strong
    selectivity.
 
-![MM-GBSA δ/µ binding free energies]({{artifact:art_603511d7-9ea5-4288-8b0d-6ae8c268fb1a}})
+> *Figure 5 image is no longer available; the caption below records what it showed.*
 
 *Figure 5. (left) MM-GBSA ΔG_bind for all four complexes — the engineered peptide binds ~14 kcal/mol
 tighter at both receptors. (centre) ΔΔG(δ−µ): engineering flips a marginal µ-preference into a modest

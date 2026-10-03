@@ -412,7 +412,7 @@ Gly is the recognition signal for **peptidylglycine α-amidating monooxygenase (
 `...VVG` payload can be amidated to `...VV-NH₂` *in vivo*; the terminal Gly in every design
 is load-bearing.
 
-![δ vs μ co-folds]({{artifact:art_d018e931-b760-46c6-b065-1c5c3dd83047}})
+![δ vs μ co-folds](figures/cycle2_selectivity.png)
 
 ### Cycle 3b — physics rescoring (COMPLETE — negative result, 2026-08-31)
 

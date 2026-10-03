@@ -5,7 +5,7 @@
 significant result points the **wrong way**; and Cycle 1's headline number does not
 survive proper statistics.
 
-![Cycle 2 results]({{artifact:art_43f4c143-96a1-4cab-b8a9-b9c79e2c56fd}})
+![Cycle 2 results](figures/cycle2_selectivity.png)
 
 ---
 

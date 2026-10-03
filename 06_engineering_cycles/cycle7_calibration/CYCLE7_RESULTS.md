@@ -51,7 +51,7 @@ unknown. Gates were scored on the 13 references that returned.
 
 ## Sub-result A — ligand QSAR screen of the DNA-encodable space
 
-![QSAR screen]({{artifact:art_d8d63c13-6644-43bf-9462-467d4a47f42c}})
+![QSAR screen](figures/qsar_screen.png)
 
 Random forest on Morgan fingerprints, trained on **2873 ChEMBL ligands with Ki at both**
 receptors. Honest validation by **scaffold-grouped** 5-fold CV: **r = 0.768, RMSE 1.07
@@ -82,7 +82,7 @@ position, and any mutation there forfeits the amidation route entirely.
 
 ## Sub-result B — pose convergence, already in the Cycle 2 data and never analysed
 
-![Convergence re-analysis]({{artifact:art_1d7d190d-64d8-4b41-b44b-a6e79c1e5b1b}})
+![Convergence re-analysis](cycle2_convergence_reanalysis.png)
 
 Cycle 2 recorded `pose_conv_DOR_A` and `pose_conv_MOR_A` and then judged selectivity on
 ipTM. Their **ratio** separates the panel **8.9-fold**, while ipTM Δ_sel spans 0.031 against

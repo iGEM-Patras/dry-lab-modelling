@@ -73,14 +73,14 @@ than no cleavage.
 coloured by tier. Cassette positions are shaded; numbers above the bar index the seven
 enkephalin cassettes.
 
-![Junction map]({{artifact:art_3a3062ff-6390-447c-b318-88741487ac46}})
+![Junction map](figures/fig_junction_map.png)
 
 **Figure 2 — Design summary.** (a) The cassette swap leaves the convertase scissile
 context unchanged at all seven sites but removes the preferred cathepsin L P2 residue at
 all seven. (b) Gly-extended, PAM-competent cassettes exist only in engPENK. (c) The 24
 junction peptides split into 7 mass-conflict-free pools.
 
-![Design summary]({{artifact:art_46fc6e16-d883-44d6-92c6-fd98b91c6760}})
+![Design summary](figures/fig_design_summary.png)
 
 ## 2. Enzymes, buffers, and cofactors
 
@@ -265,7 +265,7 @@ and PAM cannot act until CPE has exposed the Gly.
 **Figure 3 — Staged cascade.** Order of addition for both stages. Red annotations mark
 steps that fail if the preceding buffer is carried over.
 
-![Cascade]({{artifact:art_0265b6f9-6789-40db-bf38-c943cacb20e1}})
+![Cascade](figures/fig_cascade.png)
 
 ## 5. Controls
 
@@ -316,7 +316,7 @@ at matched enzyme activity units and matched time.
 **Figure 4 — Decision tree.** Gate the run on the native arm first; only then interpret
 engPENK against the three independent questions.
 
-![Decision tree]({{artifact:art_e912786b-b03c-4201-b492-b680cb148918}})
+![Decision tree](figures/fig_decision_tree.png)
 
 ## 8. Known limitations
 

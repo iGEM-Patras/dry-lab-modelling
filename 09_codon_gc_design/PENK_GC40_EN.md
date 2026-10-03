@@ -38,7 +38,7 @@ And when the recoding is done **while preserving codon quality**, the fragments 
 So: the two IRES constructs **cannot** reach 40% without abandoning codon quality. The two P2A
 constructs can just about touch it.
 
-![Feasibility and cost of the 40% target]({{artifact:art_c7f716b7-4947-4d18-9d19-1651d27237f8}})
+![Feasibility and cost of the 40% target](figures/fig_gc40_feasibility.png)
 
 ---
 
@@ -93,7 +93,7 @@ attributing each to the element it falls in:
 experiment: `His-PENK-P2A-mEGFP` carries a lower-GC EGFP variant (41.0% GC) and has **zero** GC-rich
 windows in the reporter, versus 47 for the 53.5% mEGFP in `mEGFP-P2A-His-PENK`.
 
-![Where the GC-rich windows are, and the targeted alternative]({{artifact:art_56e08173-7001-4822-865a-f622774454b2}})
+![Where the GC-rich windows are, and the targeted alternative](figures/fig_gc_where_and_fix.png)
 
 ---
 
