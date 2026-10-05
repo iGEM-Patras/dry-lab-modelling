@@ -1,4 +1,22 @@
-# PENK Dry-Lab Modelling
+# PENK Dry-Lab Modelling — iGEM Patras 2026, project *Epione*
+
+> Dry-lab repository for **Epione**, an intranasal DNA-encoded enkephalin therapy for chronic
+> cancer pain. This repository holds the computational work only; it is linked from the team
+> wiki, which carries the project narrative.
+>
+> | | |
+> |---|---|
+> | Engineering Success | [`05_presentation/WIKI_ENGINEERING.md`](05_presentation/WIKI_ENGINEERING.md) — four Design–Build–Test–Learn cycles |
+> | Registry parts | basic and composite part pages (see the wiki for accession numbers) |
+> | **Safety — δ-agonist seizure liability** | [`DELTA_SEIZURE_SAFETY.md`](DELTA_SEIZURE_SAFETY.md) — 12 references, assessed both directions |
+> | How the methods work | [`METHODS_GUIDE.md`](METHODS_GUIDE.md) · [`GLOSSARY.md`](GLOSSARY.md) |
+> | Every tool, version and citation | [`methods_references.md`](methods_references.md) |
+> | Who did what | [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md) |
+>
+> **Predictions in this repository were committed before the tests that judged them.** The
+> ledger stands at **20 scored, 10 confirmed, 10 falsified**, and the falsifications are left
+> visible beside their corrections rather than deleted. That is the point of the repository,
+> not a disclaimer on it.
 
 Computational audit and design work supporting an enkephalin-based analgesic strategy: **proenkephalin (PENK)** expression combined with a **neprilysin (NEP / MME)** knockdown arm, delivered by cationic / ionizable **lipoplexes**.
 
@@ -29,11 +47,11 @@ The full narrative — rationale, results, and honest limitations — is in **[`
 ## Key results at a glance
 
 - **Plasmid 3 (PENK-IRES-mEGFP) is the cleanest construct** — PENK cap-driven, intact signal peptide, byte-identical to UniProt P01210. **Plasmid 1 has a genuine defect** (truncated 7th enkephalin core) invisible on a gel — Sanger-verify or discard.
-- **Two human-exclusive anti-MME siRNAs** (CDS303, CDS2101) target the CDS shared by all MME transcript variants. The **original four-duplex panel was withdrawn**: it is cross-reactive with mouse *Mme* (one guide a perfect 19/19 match). The corollary is that the exclusive guides cannot be validated in a mouse model — a separate rodent surrogate is needed for in-vivo work.
+- **Anti-MME siRNA: order `2700–2722` and `2459–2481` on MME-213 (`ENST00000615825.3`), by sequence.** [`03_sirna_design/ORDER.md`](03_sirna_design/ORDER.md) is the single source of truth and carries its own correction log; earlier documents in that directory name superseded guides in a different coordinate system. The guides were screened on efficacy (five independent models), seed-duplex Tm, genome-wide specificity, target accessibility, all four MME transcript variants, population variants, and — a check no design tool performs — against the four engPENK plasmids, since the lipoplex co-packages both cargoes into the same cell. ~~Previously recommended: two human-exclusive guides (CDS303, CDS2101)~~ target the CDS shared by all MME transcript variants. The **original four-duplex panel was withdrawn**: it is cross-reactive with mouse *Mme* (one guide a perfect 19/19 match). The corollary is that the exclusive guides cannot be validated in a mouse model — a separate rodent surrogate is needed for in-vivo work.
 - **No commercial antibody detects the engineered product.** The construct recodes every enkephalin core to `YGGFEVVG`; registry anti-enkephalin antibodies are raised against native `YGGFM`. A custom anti-`YGGFEVVG` polyclonal must be raised and is on the critical path.
 - **Lipoplex MD reproduces the ionizable-lipid pH switch** (200 ns × 3 seeds, mean ± SEM): protonated MC3-H⁺ binds DNA as tightly as permanent-cation DOTAP (~0.47 nm closest approach); neutral MC3⁰ holds DNA ~1.3 nm away with an RDF peak at the bulk value. Contacts plateau by ~100 ns, so the 100–200 ns analysis window is equilibrated.
 - **The two processing routes are affected unequally by the cassette swap.** PC1/3 and PC2 cut C-terminal to the dibasic; cathepsin L/V cut N-terminal to it. The swap leaves the convertase scissile context identical at all 7 cassettes but moves the cathepsin P2 residue from Phe (7/7 within the preferred Leu/Trp/Phe/Tyr set) to Val (0/7). Separately, 5 of 7 engineered cassettes are Gly-extended PAM substrates where no native cassette is. Both are directly testable in the cell-free assay in `07_invitro_penk/`.
-- **Payload δ-selectivity: three methods failed, two later passed calibration.** Cycles 1–3b returned negatives — 3b's MM-GBSA rescoring got the *direction* right but failed its magnitude gate at n=5. Cycles 7 and 9 then succeeded by calibrating against published reference opioids first: the co-folding affinity head cleared a pre-set correlation gate at n=13 (r = 0.805, p = 0.0009, signs correct 12/13), and the pose-convergence metric that Cycle 3a retired was rehabilitated in Cycle 9 (ρ = 1.000 against four peptides with published selectivity). **Current calibrated estimate for `YGGFEVVG`: +1.23 ± 1.76 kcal/mol δ-over-μ (~7×) — nominally δ-preferring but not statistically separable from native Met-enkephalin.** A rigorous free-energy (TI) campaign is running to settle the magnitude. Radioligand competition binding remains the recommended wet-lab arbiter.
+- **Payload δ-selectivity: three methods failed, two later passed calibration.** Cycles 1–3b returned negatives — 3b's MM-GBSA rescoring got the *direction* right but failed its magnitude gate at n=5. Cycles 7 and 9 then succeeded by calibrating against published reference opioids first: the co-folding affinity head cleared a pre-set correlation gate at n=13 (r = 0.805, p = 0.0009, signs correct 12/13), and the pose-convergence metric that Cycle 3a retired was rehabilitated in Cycle 9 (ρ = 1.000 against four peptides with published selectivity). **Current calibrated estimate for `YGGFEVVG`: +1.23 ± 1.76 kcal/mol δ-over-μ (~7×) — nominally δ-preferring but not statistically separable from native Met-enkephalin.** A rigorous free-energy campaign then **failed its own control**: native Met-enkephalin, whose selectivity is published, returned **−3.12 and +5.41 kcal/mol** across two replicates — opposite signs from a seed change. The cause was diagnosed as λ-spacing rather than sampling time, and a re-spaced 57-window campaign is running with gates committed in advance. **No free-energy value for `YGGFEVVG` may be quoted until that control passes.** **The wet lab's chosen arbiter is the cAMP assay.** One difference to carry into its interpretation: every dry-lab number here is a *binding* difference, while cAMP measures functional *potency* — so a disagreement could be ligand bias, and nothing computational here can distinguish the two.
 
 - **The four ordered constructs now sit at synthesis-friendly GC** (40 % for the P2A pair, 45 % for the IRES pair) with **every cistron's protein byte-identical** to before. The cost is codon adaptation (CAI 0.65–0.74) — a real trade, not a free lunch, and one a transfection settles faster than more modelling. Order sheet: [`09_codon_gc_design/PENK_order_sheet.csv`](09_codon_gc_design/PENK_order_sheet.csv).
 - **The engineered epitope is not more immunogenic than the native one it replaces** (1.86 % vs 1.77 % strong MHC-I binders across 6,120 allele-peptide pairs). The **P2A remnant junction ranks highest of the three groups** (2.07 %) — an argument for the IRES cassettes if immunogenicity of a persistently expressed product matters. See [`10_immunogenicity_antibody/`](10_immunogenicity_antibody/).
@@ -42,28 +60,42 @@ The full narrative — rationale, results, and honest limitations — is in **[`
 
 ## Status
 
-*Last reviewed 2026-09-19. Individual cycle documents are the authority on their own status —
+*Last reviewed 2026-10-06. Individual cycle documents are the authority on their own status —
 check `git log -1 --format=%ad -- <file>` before trusting any date here.*
 
 Workstreams `01`–`05` and `08`–`11` are **complete**. Cycle 3b terminated on 2026-08-31 per its
 pre-registration; see [`06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md`](06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md)
 for the terminal verdict.
 
-**Work has continued since, in five further cycles:**
+**Work has continued since. The full index is in
+[`06_engineering_cycles/README.md`](06_engineering_cycles/README.md); the summary is:**
 
 | Cycle | Status |
 |---|---|
-| **4** — synthesis manufacturability | ✅ **closed.** v4 rejected by the vendor (inverted-repeat flanks inherited from wet-lab files); diagnosed and repaired; **v6 accepted, all four constructs ordered** |
+| **4** — synthesis manufacturability | ✅ **closed.** v4 vendor-rejected (inverted-repeat flanks inherited from wet-lab files); diagnosed, repaired, **v6 accepted and all four constructs ordered** |
 | **5** — expression & processing | 📋 pre-registered, awaiting the wet lab's first transfection |
 | **7** — affinity-head calibration | ✅ **gate passed** at n=13 (r = 0.805). First calibrated δ/μ number for `YGGFEVVG` |
-| **8** — free-energy (TI) campaign | 🔄 **running.** 13 CPU workers; the graft shortcut was rejected by measurement and is written up |
-| **9** — convergence metric, recalibrated | ✅ **gate passed** (ρ = 1.000). The metric Cycle 3a retired, rehabilitated with proper calibration |
+| **8** — free-energy, first attempt | ❌ **control failed.** Replicates at −3.12 and +5.41 kcal/mol. No value quoted |
+| **9** — convergence metric, recalibrated | ✅ **gate passed** (ρ = 1.000) |
+| **10** — lipoplex co-packaging | 📋 pre-registered |
+| **11** — selectivity QSAR | ❌ **closed negative.** Aggregate r = 0.77, but the prediction is a nearest-neighbour lookup and flips sign under scaffold-grouped CV |
+| **12/13** — pose independence | ✅ **closed.** Independent peptide docking reproduced the matched control inside 2.5 Å but not our payload; compared against experimental cryo-EM structures |
+| **14** — re-spaced free-energy ladder | 🔄 **running.** 57 windows by equal thermodynamic length, replicates from independent equilibrations, gates committed before launch |
+
+**Four published selectivity methods were assessed and rejected**, each for a documented and
+different reason, in [`06_engineering_cycles/cycle11_selectivity_qsar/BINDPRED_REJECTED.md`](06_engineering_cycles/cycle11_selectivity_qsar/BINDPRED_REJECTED.md).
+The common cause is not the algorithms: published affinities for these receptors disagree with
+each other by more than the effect being measured.
+
+**Prediction ledger: 20 scored, 10 confirmed, 10 falsified.** Every prediction was committed to
+this repository before the test that judged it, so the record is checkable against `git log`
+rather than taken on trust.
 
 The open questions are now **mostly** wet-lab questions — the exception being Cycle 8, whose
 free-energy result is the one remaining computational deliverable.
 
-**What the wet lab should do next**, in order of what unblocks the most: (1) order the four
-recoded constructs from `09_codon_gc_design/PENK_order_sheet.csv`; (2) commission the custom
+**What the wet lab should do next**, in order of what unblocks the most: (1) ~~order the four
+recoded constructs~~ — **done, all four v6 constructs accepted by the vendor and ordered**; order the two anti-MME siRNA duplexes named in [`03_sirna_design/ORDER.md`](03_sirna_design/ORDER.md) by sequence; (2) commission the custom
 anti-`YGGFEVVG` polyclonal — nothing downstream can be detected without it; (3) run the
 cell-free processing assay in `07_invitro_penk/`, which is where HEK293T's missing convertases
 stop being a modelling caveat and start being a measurement; (4) radioligand competition
