@@ -1,0 +1,50 @@
+### rep1 completeness gate: DOR 57/57, MOR 57/57
+### Both legs complete. Computing BAR from EVERY trajectory segment per window.
+
+================ prod_c3b_menk_DOR_r1
+  xvg files passed to gmx bar: 124   (57 windows, multiple segments each)
+  --- gmx bar output, final lines, verbatim ---
+point     41 -     42,   DG  5.37 +/-  0.37
+point     42 -     43,   DG  5.77 +/-  0.08
+point     43 -     44,   DG  4.10 +/-  0.25
+point     44 -     45,   DG  3.96 +/-  0.26
+point     45 -     46,   DG  4.64 +/-  0.15
+point     46 -     47,   DG  4.38 +/-  0.09
+point     47 -     48,   DG  4.05 +/-  0.13
+point     48 -     49,   DG  3.81 +/-  0.52
+point     49 -     50,   DG  3.66 +/-  0.35
+point     50 -     51,   DG  3.16 +/-  0.20
+point     51 -     52,   DG  3.27 +/-  0.25
+point     52 -     53,   DG  3.08 +/-  0.15
+point     53 -     54,   DG  1.16 +/-  0.69
+point     54 -     55,   DG -1.55 +/-  0.68
+point     55 -     56,   DG  0.44 +/-  0.09
+
+total      0 -     56,   DG 2349.53 +/- 10.84
+
+
+================ prod_c3b_menk_MOR_r1
+  xvg files passed to gmx bar: 87   (57 windows, multiple segments each)
+  --- gmx bar output, final lines, verbatim ---
+point     41 -     42,   DG  3.47 +/-  0.18
+point     42 -     43,   DG  3.28 +/-  0.35
+point     43 -     44,   DG  2.36 +/-  0.22
+point     44 -     45,   DG  1.80 +/-  0.23
+point     45 -     46,   DG  0.86 +/-  0.23
+point     46 -     47,   DG  0.03 +/-  0.21
+point     47 -     48,   DG -0.75 +/-  0.31
+point     48 -     49,   DG -2.05 +/-  0.72
+point     49 -     50,   DG -3.00 +/-  0.26
+point     50 -     51,   DG -2.97 +/-  0.51
+point     51 -     52,   DG -2.60 +/-  0.14
+point     52 -     53,   DG -1.90 +/-  0.10
+point     53 -     54,   DG -2.63 +/-  0.20
+point     54 -     55,   DG -3.17 +/-  0.30
+point     55 -     56,   DG -0.24 +/-  0.19
+
+total      0 -     56,   DG 2346.53 +/-  7.35
+
+
+### Raw output only. The sign convention is applied once, on review, against the
+### project's own reference compounds -- inverting it is an error I have made before.
+done=Wed Oct  7 14:24:03 CEST 2026

@@ -1,0 +1,17 @@
+{
+ "dG_dec_DOR_kJ": [
+  2349.53,
+  10.84
+ ],
+ "dG_dec_MOR_kJ": [
+  2346.53,
+  7.35
+ ],
+ "ddG_kcal": 0.717,
+ "ddG_err_kcal": 3.13,
+ "published_kcal": 0.81,
+ "G1_sign_pass": true,
+ "G2_covers_published": true,
+ "replicates": 1,
+ "note": "single replicate; G4 replicate agreement not yet testable"
+}
