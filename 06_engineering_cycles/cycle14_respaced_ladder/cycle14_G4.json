@@ -1,0 +1,33 @@
+{
+ "rep1_kcal": [
+  0.717,
+  3.13
+ ],
+ "rep2_kcal": [
+  14.472,
+  3.281
+ ],
+ "published_kcal": 0.81,
+ "spread_kcal": 13.755,
+ "combined_err_kcal": 4.535,
+ "G1_sign": "pass (both positive)",
+ "G2_rep1_covers": true,
+ "G2_rep2_covers": false,
+ "G4_replicate_agreement": "FAIL",
+ "leg_shift_kJ": {
+  "DOR": 29.55,
+  "MOR": -28.0
+ },
+ "per_interval": {
+  "max_abs_kJ": 3.49,
+  "mean_abs_kJ": 1.0,
+  "n_over_5kJ": 0,
+  "frac_sharing_total_sign": {
+   "DOR": "40/55",
+   "MOR": "40/56"
+  }
+ },
+ "old_ladder_spread_kcal": 8.53,
+ "new_ladder_spread_kcal": 13.755,
+ "verdict": "No value for YGGFEVVG may be quoted. Campaign stops per pre-registration."
+}
