@@ -1,0 +1,46 @@
+{
+ "G1_overlap": {
+  "per_leg": {
+   "c3b_menk_DOR_r1": {
+    "median_s": 0.35,
+    "n_over_2kT": 0,
+    "pass": true
+   },
+   "c3b_menk_MOR_r1": {
+    "median_s": 0.365,
+    "n_over_2kT": 0,
+    "pass": true
+   },
+   "c3b_menk_DOR_r2": {
+    "median_s": 0.305,
+    "n_over_2kT": 0,
+    "pass": true
+   },
+   "c3b_menk_MOR_r2": {
+    "median_s": 0.435,
+    "n_over_2kT": 0,
+    "pass": true
+   }
+  },
+  "pass": true
+ },
+ "G2_sign": {
+  "rep1": 0.717,
+  "rep2": 14.472,
+  "pass": true
+ },
+ "G3_accuracy": {
+  "mean": 7.595,
+  "published": 0.81,
+  "deviation": 6.784,
+  "threshold": 1.5,
+  "pass": false
+ },
+ "G4_reproducibility": {
+  "spread": 13.755,
+  "threshold": 2.0,
+  "pass": false
+ },
+ "all_pass": false,
+ "note": "gate names and thresholds taken verbatim from data/cycle14_prereg.json; an earlier write-up of mine used a different numbering"
+}

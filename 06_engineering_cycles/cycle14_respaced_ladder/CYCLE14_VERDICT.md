@@ -12,14 +12,27 @@ window ran. 684 ns across 228 windows, all four legs complete.**
 | published met-enkephalin | +0.81 |
 | **spread** | **13.75**, against a combined error of 4.53 |
 
-## Gates
+## Gates, scored against `data/cycle14_prereg.json` verbatim
 
-| Gate | Criterion | Result |
+> **Correction.** The first version of this file used my own ad-hoc gate numbering and
+> described G3 as the overlap gate and G1 as the sign gate. The pre-registration numbers
+> them differently, and I had also asserted the overlap gate "passes by construction" from
+> the value *predicted* when the ladder was designed rather than measuring it. Both are
+> corrected below; the measured scores are in `data/cycle14_gates_scored.json`.
+
+| Gate (as pre-registered) | Criterion | Result |
 |---|---|---|
-| G1 | sign correct | pass — both positive |
-| G2 | interval covers published | rep1 pass, **rep2 fail** |
-| G3 | λ-interval overlap | pass — ~1.0 kT, vs the old ladder's max 10.56 |
-| G4 | **replicate agreement** | **FAIL** — 13.75 apart, 3× the combined error |
+| **G1_overlap** | median s < 1.5 kT and ≤ 3 of 56 intervals > 2 kT, every leg | **PASS** — measured: median 0.30–0.43 kT, **0 of 56** above 2 kT in all four legs |
+| **G2_sign** | ΔΔG > 0 | **PASS** — both replicates positive |
+| **G3_accuracy** | two-replicate mean within 1.5 kcal/mol of +0.81 | **FAIL** — mean **+7.59**, off by **6.78** |
+| **G4_reproducibility** | replicates agree within 2.0 kcal/mol | **FAIL** — **13.75** apart |
+
+**Decision rule, as written: engPENK runs only if G1–G4 all pass. Two fail, so it does not run.**
+
+G1 deserves emphasis because it is the gate the whole rebuild existed to fix, and the
+measurement is unambiguous: **zero intervals above 2 kT in any leg**, against the old
+ladder where 20–21 of 25 intervals exceeded that in the engPENK legs. The re-spacing did
+exactly what it was designed to do. It simply was not sufficient.
 
 ## Replicate 1 was luck, and the gate is what caught it
 
