@@ -254,9 +254,44 @@ decoupled, so a ladder validated on a 5-residue peptide is too coarse for an 8-r
 More computer time would have tightened the error bar around a biased number, which is worse
 than a visibly noisy one.
 
-**Design, again.** A 57-window ladder spaced for uniform overlap, with replicates generated
-from independent equilibrations rather than a shared one. That campaign is running now, and
-its gates were committed before it started.
+**Design, again.** A 57-window ladder spaced for uniform overlap — placing windows where the
+measurement said they were needed rather than doubling them everywhere — with replicates
+generated from independent equilibrations rather than from a shared one. Four gates were
+committed to version control before a single window ran.
+
+### Round 4 · the fix worked, and it was not enough
+
+684 ns across 228 windows. Scored against the gates as written:
+
+| gate | criterion | result |
+|---|---|---|
+| overlap | median s < 1.5 kT, ≤3 of 56 intervals > 2 kT, every leg | **pass** — median 0.30–0.43 kT, **0 of 56** above threshold |
+| sign | δ-preferring | **pass** — both replicates positive |
+| accuracy | two-replicate mean within 1.5 kcal/mol of published | **fail** — mean +7.59 against +0.81 |
+| reproducibility | replicates agree within 2.0 kcal/mol | **fail** — **13.75** apart |
+
+**The diagnosis was right.** Zero intervals exceed the overlap threshold, against 20–21 of 25
+on the old ladder. The spacing problem identified in round 3 is solved.
+
+**The measurement still fails.** The two replicates give **+0.72** and **+14.47** kcal/mol.
+The first sits 0.09 from the published value and, reported alone, would have read as a
+complete success — which is precisely what the reproducibility gate existed to prevent us
+from claiming.
+
+**Learn, again — and this is the part that generalises.** We decomposed the disagreement per
+window rather than calling the method noisy. No single window is responsible: the largest
+replicate difference in any interval is 3.5 kJ/mol and none exceeds 5. But **40 of 55 and 40
+of 56 intervals share the sign of their leg's total**, where random noise would give half. The
+small biases are correlated, so they accumulate along the path instead of cancelling —
+reaching ≈30 kJ/mol per leg, about **7 kcal/mol of replicate variation in each absolute free
+energy**, when the quantity we want is a *difference* of two of them and the effect is 0.81.
+
+Doubling the windows to fix overlap also doubled the number of terms whose biases accumulate.
+The fix was necessary, correct, and self-defeating.
+
+**Consequence, as pre-registered:** the engineered-peptide stage does not run, and no
+selectivity value is quoted from this method. A wet-lab cAMP assay measures the quantity
+directly and is not subject to any of this.
 
 ### Where that leaves the question
 
@@ -269,7 +304,7 @@ documented reason.**
 | MM-GBSA rescoring | failed its own pre-registered gate |
 | Fingerprint QSAR (ours) | aggregate correlation looks good, but the prediction is a nearest-neighbour lookup and flips sign when neighbours are removed |
 | Published sequence- and transfer-learning predictors | their reported error, converted to a selectivity difference, is several times larger than the effect we need to resolve |
-| Alchemical free energy | its own control's **sign flips between replicates** |
+| Alchemical free energy | its own control's replicates disagree by **17× the effect** — and after re-spacing fixed the overlap problem, by more |
 
 That last one is the most informative. We ran native Met-enkephalin — whose selectivity is
 published — through the identical protocol as a control. Its two replicates came back at

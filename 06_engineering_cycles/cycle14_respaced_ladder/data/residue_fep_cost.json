@@ -1,0 +1,23 @@
+[
+ {
+  "scope": "all 11 divergent pocket residues",
+  "mutations": 11,
+  "windows": 1056,
+  "ns": 3168.0,
+  "days": 20.44
+ },
+ {
+  "scope": "the 4 chemically most distinct (W284K, D293T, S204H, Q201T)",
+  "mutations": 4,
+  "windows": 384,
+  "ns": 1152.0,
+  "days": 7.43
+ },
+ {
+  "scope": "single-residue pilot (W284K \u2014 charge reversal, largest change)",
+  "mutations": 1,
+  "windows": 96,
+  "ns": 288.0,
+  "days": 1.86
+ }
+]
