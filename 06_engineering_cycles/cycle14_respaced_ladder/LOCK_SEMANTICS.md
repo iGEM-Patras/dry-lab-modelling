@@ -1,4 +1,4 @@
-# Lock semantics in the Cycle 14 worker — read this before touching `locks14/`
+# Lock semantics in the Cycle 14 worker: read this before touching `locks14/`
 
 Written after I corrupted the campaign's bookkeeping by assuming what the locks meant
 instead of reading the worker. Nothing was lost, but only because the arithmetic that
@@ -60,7 +60,7 @@ returned nothing at all.
 
 1. Dry-run first and print the classification. Do not delete in the same pass.
 2. Assert the leg directory exists. A wrong path makes every window look empty, which
-   presents as "everything is orphaned" — that is exactly what happened: the lock names
+   presents as "everything is orphaned": that is exactly what happened, the lock names
    already contain the `prod_` prefix, and building `$W/prod_$LEG` gave
    `$W/prod_prod_...`, so all 82 entries reported `step0` and age `999999s`.
 3. Treat an impossible-looking unanimous result as a bug in the query, not a finding.
@@ -68,6 +68,6 @@ returned nothing at all.
 ## Known real defect, not yet fixed
 
 The worker has **no `trap`**, so a worker killed at its SLURM walltime leaks a genuine
-claim lock. That window then needs manual release — distinguishable from a completion
+claim lock. That window then needs manual release, distinguishable from a completion
 marker by the dH/dλ test above. Worth fixing when the campaign is idle; not worth a
 disruptive change mid-run.

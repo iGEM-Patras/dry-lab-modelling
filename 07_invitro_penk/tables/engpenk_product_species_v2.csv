@@ -1,12 +1,12 @@
 species,sequence,c_term,mh,n_met,origin,cassettes,in_prior_table
-YGGFEVVG (free acid),YGGFEVVG,free acid,827.3934,0,"cassettes 1,2,3,6 — dibasic flanks, pre-PAM / non-amidated fraction","1,2,3,6",yes
-YGGFEVV-NH2,YGGFEVV,amide,769.3879,0,"cassettes 1,2,3,6 — after granule PAM (option A product)","1,2,3,6",yes
-YGGFEVVG-NH2,YGGFEVVG,amide,826.4094,0,OPTION B ONLY — requires cassette changed to YGGFEVVGG,"1,2,3,6 (option B)",yes
-YGGFEVVGRGL,YGGFEVVGRGL,free acid,1153.6,0,cassette 4 — monobasic RGL flank (native architecture),4,yes
-YGGFEVVGRF,YGGFEVVGRF,free acid,1130.5629,0,cassette 7 — precursor C-terminus (native architecture),7,yes
-YGGFEVVGRRV-NH2,YGGFEVVGRRV,amide,1237.68,0,"cassette 5 — adrenorphin-analogue, PAM product of ...RRVG",5,no
-YGGFEVVGRRVG (free acid),YGGFEVVGRRVG,free acid,1295.6855,0,cassette 5 — pre-PAM intermediate,5,no
-engBAM-22,YGGFEVVGRRVGRPEWWMDYQKRYG,free acid,3091.5107,1,cassette 5 — BAM intermediate,5,no
-engBAM-20,YGGFEVVGRRVGRPEWWMDYQKR,free acid,2871.426,1,cassette 5 — BAM intermediate,5,no
-BAM-8-22 (shared),VGRPEWWMDYQKRYG,free acid,1970.933,1,cassette 5 N-trimmed — SEQUENCE-IDENTICAL to endogenous BAM-8-22,5,no
+YGGFEVVG (free acid),YGGFEVVG,free acid,827.3934,0,"cassettes 1,2,3,6, dibasic flanks, pre-PAM / non-amidated fraction","1,2,3,6",yes
+YGGFEVV-NH2,YGGFEVV,amide,769.3879,0,"cassettes 1,2,3,6, after granule PAM (option A product)","1,2,3,6",yes
+YGGFEVVG-NH2,YGGFEVVG,amide,826.4094,0,OPTION B ONLY, requires cassette changed to YGGFEVVGG,"1,2,3,6 (option B)",yes
+YGGFEVVGRGL,YGGFEVVGRGL,free acid,1153.6,0,cassette 4, monobasic RGL flank (native architecture),4,yes
+YGGFEVVGRF,YGGFEVVGRF,free acid,1130.5629,0,cassette 7, precursor C-terminus (native architecture),7,yes
+YGGFEVVGRRV-NH2,YGGFEVVGRRV,amide,1237.68,0,"cassette 5, adrenorphin-analogue, PAM product of ...RRVG",5,no
+YGGFEVVGRRVG (free acid),YGGFEVVGRRVG,free acid,1295.6855,0,cassette 5, pre-PAM intermediate,5,no
+engBAM-22,YGGFEVVGRRVGRPEWWMDYQKRYG,free acid,3091.5107,1,cassette 5, BAM intermediate,5,no
+engBAM-20,YGGFEVVGRRVGRPEWWMDYQKR,free acid,2871.426,1,cassette 5, BAM intermediate,5,no
+BAM-8-22 (shared),VGRPEWWMDYQKRYG,free acid,1970.933,1,cassette 5 N-trimmed, SEQUENCE-IDENTICAL to endogenous BAM-8-22,5,no
 engPeptide F,YGGFEVVGKRYGGFEVVGKK,free acid,2176.1549,0,cassettes 1+2 unseparated intermediate,1+2,yes

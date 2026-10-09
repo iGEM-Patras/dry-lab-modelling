@@ -1,4 +1,4 @@
-# 99 — Provenance
+# 99: Provenance
 
 Session plans, resume briefs, and the input bundles the analyses were run from. Kept so a
 result can be traced back to the request that produced it.

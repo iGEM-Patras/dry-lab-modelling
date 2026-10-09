@@ -1,4 +1,4 @@
-# Cycle 12 — is the engPENK binding pose independently reproducible?
+# Cycle 12: is the engPENK binding pose independently reproducible?
 
 **Question.** Cycle 8 returned ddG = -8.91 +/- 3.34 kcal/mol for engPENK (met-enkephalin-
 anchored), implying ~3.4 million-fold mu-preference against ~7,700-fold for the most
@@ -28,8 +28,8 @@ but it is no longer the *sole* suspect, and the geometric result below stands on
 because it uses no free-energy number.
 
 
-**Test.** Dock YGGFEVVG into both receptors with AutoDock CrankPep — a method independent
-of the co-folding predictor that produced the TI pose — and ask whether it reproduces that
+**Test.** Dock YGGFEVVG into both receptors with AutoDock CrankPep, a method independent
+of the co-folding predictor that produced the TI pose, and ask whether it reproduces that
 pose. Gates were fixed in `cycle12_prereg.json` before ADCP was installed.
 
 Protocol: 50 replicas x 300,000 steps per receptor, into the **equilibrated** receptor
@@ -60,7 +60,7 @@ because the DOR message tetrapeptide superimposed at 1.77 A while MOR's deviatio
 global and displaced the anchor residue by 5.09 A. That inference had an untested
 alternative: ADCP might simply perform worse on MOR.
 
-It does not. On met-enkephalin ADCP reaches **0.93 A in MOR — its best result of the
+It does not. On met-enkephalin ADCP reaches **0.93 A in MOR, its best result of the
 four**. The engPENK MOR failure is specific to engPENK.
 
 **The control also corrects the first reading.** With a correct pose this protocol reaches
@@ -89,12 +89,12 @@ original choice stands and **that deviation is withdrawn**.
   peptide and may genuinely be harder to dock. The defensible claim is that the evidence
   which corroborates the control's poses does not corroborate engPENK's.
 
-## Side result — the extended cassette species
+## Side result: the extended cassette species
 
 Cassettes 4 and 7 release `YGGFEVVGRGL` and `YGGFEVVGRF` rather than free octapeptide.
 Docked into the same receptors and scored on their shared YGGFEVVG core, all four make the
 Asp3.32 anchor (2.2-2.6 A) but deviate further from the octapeptide pose than engPENK does
-— worst for the 11-mer in DOR at 4.70 A. The C-terminal extension perturbs the binding
+Worst for the 11-mer in DOR at 4.70 A. The C-terminal extension perturbs the binding
 mode, which is relevant to interpreting the in vitro digest, where these species are
 present.
 

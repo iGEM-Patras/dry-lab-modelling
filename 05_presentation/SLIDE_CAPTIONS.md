@@ -8,11 +8,11 @@ show. Below is wording that is both presentable and defensible.
 
 ## Suggested order
 
-1. **Native enkephalins** — what the natural gene makes: 6 Met-, 1 Leu-enkephalin
-2. **Domain architecture** — what the engineered molecule is, where the cargo sits
-3. **AlphaFold confidence** — folded anchor vs disordered cargo tail
-4. **Processing** — the KR cuts releasing the octapeptide
-5. **Receptor complex** — the released peptide bound, with the 12.05 Å callout
+1. **Native enkephalins**, what the natural gene makes: 6 Met-, 1 Leu-enkephalin
+2. **Domain architecture**, what the engineered molecule is, where the cargo sits
+3. **AlphaFold confidence**, folded anchor vs disordered cargo tail
+4. **Processing**, the KR cuts releasing the octapeptide
+5. **Receptor complex**, the released peptide bound, with the 12.05 Å callout
 
 The narrative runs: floppy carrier → proteolytic release → bound conformation
 that only exists after excision. That sequence is why the disorder in shot 2 is a
@@ -22,7 +22,7 @@ feature of the story rather than a weakness to explain away.
 
 ## Slide: the native enkephalins (`enkephalin_met_leu_overview.png`)
 
-The opening shot — what the natural gene makes, before the engineered construct
+The opening shot, what the natural gene makes, before the engineered construct
 is introduced.
 
 **Say this:**
@@ -48,7 +48,7 @@ between the two peptides because the first four residues are the same; every
 y-ion differs. So the y-series, not the b-series, tells them apart.
 
 **Do not say:** *"the engineered construct makes Met- and Leu-enkephalin."* It
-does not — it replaces all seven cores with `YGGFEVVG` and contains neither
+does not, it replaces all seven cores with `YGGFEVVG` and contains neither
 native core (verified: 0 copies of YGGFM, 0 of YGGFL). The native peptides are
 context for the design, not its product.
 
@@ -56,7 +56,7 @@ context for the design, not its product.
 Leu-enkephalin in this project. A co-fold of both peptides against both the
 delta- and mu-opioid receptors is queued on the cluster (job 17958370, `pgpu`,
 estimated start 2026-08-15). Until it lands, do not show a Leu-enkephalin
-structure — the only way to produce one now would be to mutate the Met model's
+structure, the only way to produce one now would be to mutate the Met model's
 side chain, which is not an independent prediction and must not be presented as
 one.
 ---
@@ -66,12 +66,12 @@ one.
 16:9, 2666 × 1500 px, drops straight onto a slide.
 
 **Talk track:** "One folded domain, held by seven cysteines. Everything after it
-is deliberately floppy — and that is where the seven copies of the therapeutic
+is deliberately floppy, and that is where the seven copies of the therapeutic
 peptide live, each one preceded by the KR site the cell's proteases cut."
 
 > Wording note: say **preceded by KR**, not "flanked by KR or KK." All seven
 > cores have KR immediately upstream, but the downstream pair varies (KR, KK,
-> RG, RR, RF). "Flanked by KR or KK" overstates what the sequence shows — and
+> RG, RR, RF). "Flanked by KR or KK" overstates what the sequence shows, and
 > the same correction applies to the native gene.
 
 This slide carries the argument the AlphaFold render cannot: *where* the cargo is
@@ -87,8 +87,8 @@ chain disordered, 98.2 % of the 56 core residues disordered.
 ## Slide: the AlphaFold proprotein render
 
 **Status: the corrected run is complete.** Values below are read from its own
-output files and are cleared for use on screen. The earlier run — in which the
-885-nt DNA cloning sequence was submitted in the protein field — is **superseded
+output files and are cleared for use on screen. The earlier run, in which the
+885-nt DNA cloning sequence was submitted in the protein field, is **superseded
 and must not be shown**; A, C, G and T are all valid amino-acid letters, so it
 returned a confident-looking model of a molecule that does not exist.
 
@@ -96,20 +96,20 @@ returned a confident-looking model of a molecule that does not exist.
 
 > AlphaFold model of the engineered PENK proprotein (288 aa). A folded,
 > cysteine-rich anchor at residues 1–77 carries a long disordered tail holding
-> the seven enkephalin copies — which is how the carrier presents them to
+> the seven enkephalin copies, which is how the carrier presents them to
 > processing proteases.
 
 **Do not say:**
 
-- *"AlphaFold structure of the engineered enkephalin"* — the render is the
+- *"AlphaFold structure of the engineered enkephalin"*: the render is the
   **carrier**, 288 residues. The enkephalin is 8 of them, ×7. Calling the whole
   thing "the enkephalin" is the mistake the audience will catch.
-- *"predicted binding conformation"* — there is no receptor in this model.
-- *"the model is low confidence, so it failed"* — a low global pTM is the
+- *"predicted binding conformation"*: there is no receptor in this model.
+- *"the model is low confidence, so it failed"*: a low global pTM is the
   expected signature of a mostly-disordered carrier, not a bad prediction. The
   anchor is confidently folded; say so.
 
-**On-screen numbers — verified, safe to display:**
+**On-screen numbers, verified, safe to display:**
 
 | quantity | value | source |
 |---|---|---|
@@ -124,7 +124,7 @@ returned a confident-looking model of a molecule that does not exist.
 
 Keep the two disorder methods distinct. AlphaFold's own figure is
 `fraction_disordered` = **0.83**. The FoldIndex figure is **70.5 %** of the chain
-— a different calculation. Cite whichever you use by name; never present one as
+A different calculation. Cite whichever you use by name; never present one as
 the other.
 
 Assets: `slide_engPENK_alphafold_confidence.png` (16:9 domain bar over the pLDDT
@@ -140,7 +140,7 @@ Assets: `DOR_engPENK_complex_annotated.pdb`, plus the ChimeraX / PyMOL scripts.
 **Say this:**
 
 > The processed octapeptide bound in the δ-opioid receptor. Boltz-2 co-folded
-> model — a different predictor from AlphaFold.
+> model: a different predictor from AlphaFold.
 
 **Do not say:** *"AlphaFold confidence"* over this render. The colours are
 Boltz-2 pLDDT, and they describe a **receptor-bound** peptide, not a free one.
@@ -148,5 +148,5 @@ The palette matches AlphaFold's so the shots cut together visually; the caption
 must still name the right method.
 
 The number worth putting on screen: the Tyr1-OH → Phe4-ring pharmacophore
-distance, **12.05 Å engineered vs 8.05 Å native** — measured from the
+distance, **12.05 Å engineered vs 8.05 Å native** (measured from the
 coordinates, and a real visual difference between the two molecules.

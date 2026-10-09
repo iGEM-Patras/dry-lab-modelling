@@ -1,10 +1,10 @@
-# Cycle 8: first free-energy result — control passes on sign, magnitude unresolved
+# Cycle 8: first free-energy result, control passes on sign, magnitude unresolved
 
 **Date:** 2026-09-20 · **Status:** campaign continuing, target peptide not yet run
 
 > **File history.** Committed first as `CYCLE8_CONTROL_FAILURE.md` asserting the protocol
 > had failed. That assertion was wrong, and so were two of the three reasons given for it.
-> §5 records what was claimed, what was actually true, and why. Nothing has been deleted —
+> §5 records what was claimed, what was actually true, and why. Nothing has been deleted:
 > commits `9abab47` and `3fd0a04` hold the superseded versions.
 
 ## 1. Result
@@ -28,7 +28,7 @@ acceptance, not a fallback), first 1 ns of each window discarded:
 |---|---|
 | **ΔΔG(μ−δ), deltorphin II** | **+26.21 kcal/mol** (rep1 +29.19, rep2 +23.24) |
 | published | +5.39 kcal/mol |
-| sign | **CORRECT — δ-selective** |
+| sign | **CORRECT, δ-selective** |
 | over-estimation | ≈ 4.9× |
 | δ replicate spread | **5.95 kcal/mol** |
 
@@ -44,7 +44,7 @@ couple-intramol = yes
 calc-lambda-neighbors = -1
 ```
 
-- **system2 = 110 atoms** — deltorphin II (YaFEVVG-NH₂ with hydrogens). Independently,
+- **system2 = 110 atoms** (deltorphin II, YaFEVVG-NH₂ with hydrogens). Independently,
   exactly 110 atoms carry differing A/B-state parameters, so the perturbed set is the
   peptide and nothing else.
 - system1 = 5,755 atoms (receptor); system3 = 134 atoms × 274 (lipid).
@@ -83,11 +83,11 @@ Three claims in the first version of this file were wrong. All three were errors
 
 | claim | reality | cause |
 |---|---|---|
-| "3 legs incomplete — windows 0–9 missing" | all 27 present | shell glob `w0_dhdl*` against files named `w00_dhdl`; `w1*` also matched `w10` |
+| "3 legs incomplete, windows 0–9 missing" | all 27 present | shell glob `w0_dhdl*` against files named `w00_dhdl`; `w1*` also matched `w10` |
 | "sign wrong, ΔΔG = −26.72" | **+26.21, sign correct** | computed μ−δ; for annihilation free energies tighter binding costs *more*, so it is δ−μ |
 | "no foreign-lambda ΔH columns, BAR invalid" | **27 ΔH columns, 32 data columns** | piped the legend grep through `head -3`, then read the truncation as absence |
 
-A fourth claim — "the replicate spread is an independent problem" — was true but was
+A fourth claim, "the replicate spread is an independent problem", was true but was
 presented as independent evidence alongside two claims that were downstream of my own
 arithmetic. It is the only limitation that survives.
 

@@ -42,13 +42,13 @@ systems load**:
 
 | table | `EO` atomtype |
 |---|---|
-| `martini_v2.1-dna.itp` (loaded by every system) | **0 — absent** |
-| `martini_v2.2.itp` (loaded by nothing) | 0 — absent |
+| `martini_v2.1-dna.itp` (loaded by every system) | **0, absent** |
+| `martini_v2.2.itp` (loaded by nothing) | 0, absent |
 
 So `grompp` would reject a PEG-containing topology until the `EO` atomtype **and its full
 `nonbond_params` row against all 111 existing types** are added. That is a force-field
 extension, not a build step, and it must come from the published Grunewald/Rossi PEO
-parameterisation rather than be invented — the paper polyply itself cites
+parameterisation rather than be invented, the paper polyply itself cites
 (doi:10.1021/acs.jpcb.8b04760).
 
 ## Anchor chemistry
@@ -64,7 +64,7 @@ and C20 anchors hinder membrane engagement.
 
 So the lipid the note argues for has *more* topology precedent here than the one our own
 spec lists. Neither is parameterised as a PEG-lipid; both would need the anchor joined to
-the PEO chain, in the same analogy-model class as the existing MC3 and DOTAP topologies —
+the PEO chain, in the same analogy-model class as the existing MC3 and DOTAP topologies:
 and carrying the same disclosure.
 
 ## Cost, if built
@@ -89,11 +89,11 @@ identical but for anchor length, with desorption as the pre-registered read-out.
 **the anchor recommendation is a bench decision with no dry-lab backing**, and should be
 described that way in the PI briefing rather than as a modelled result.
 
-## Method note — this check was wrong the first time
+## Method note: this check was wrong the first time
 
 The first attempt searched `*peg*` across the filesystem and "found" `libnvjpeg.so`,
 `jpegtran` and `America/Winnipeg`. It also queried polyply with `-list-lib` and
-`-list-blocks`, neither of which exists, so polyply errored asking for `-seq` — leaving the
+`-list-blocks`, neither of which exists, so polyply errored asking for `-seq`, leaving the
 capability question **unanswered** while the output looked like a negative result. A third
 search for a `library/` directory failed because polyply ships `data/`.
 

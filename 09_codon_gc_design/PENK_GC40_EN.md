@@ -1,4 +1,4 @@
-# The 40% GC request — evidence, and what to do about it
+# The 40% GC request, evidence, and what to do about it
 
 **Bottom line.** 40% whole-fragment GC is arithmetically reachable but not advisable, and it does not
 solve the problem it is probably meant to solve. The GC-rich stretches in these constructs are
@@ -11,11 +11,11 @@ there before.
 
 ## 1. Is 40% achievable?
 
-Yes, arithmetically. The absolute synonymous floor for the engineered proprotein is **30.9% GC** — the
+Yes, arithmetically. The absolute synonymous floor for the engineered proprotein is **30.9% GC**, the
 value obtained by choosing the most AT-rich codon at every position. 40% sits above that floor, so no
 law of the genetic code forbids it.
 
-But the fragments contain a fixed element. The **IRES is not recodable** — it is a structured RNA
+But the fragments contain a fixed element. The **IRES is not recodable**, it is a structured RNA
 element whose function depends on its actual sequence, not on the protein it encodes (it encodes
 nothing). At 53% GC across 574–584 nt, it drags the required GC of everything else downward:
 
@@ -70,7 +70,7 @@ therapeutic transcript to satisfy a GC number is a poor trade. Long homopolymers
 among the sequence features that raise synthesis difficulty and error rates [R11].
 
 **The general caution.** Codon optimization in human therapeutics has a documented history of
-unintended consequences — altered folding, changed mRNA structure, loss of regulatory elements — and
+unintended consequences (altered folding, changed mRNA structure, loss of regulatory elements) and
 is not a free operation [R2]. mRNA structure independently regulates protein output through functional
 half-life [R10].
 
@@ -86,7 +86,7 @@ attributing each to the element it falls in:
 |---|---|---|
 | mEGFP | **361** | yes |
 | engineered PENK | 61 | yes |
-| IRES | 53 | **no — fixed sequence** |
+| IRES | 53 | **no: fixed sequence** |
 | P2A | 14 | yes |
 
 **The reporter accounts for 80% of the problem.** Your own construct set already contains the natural
@@ -97,7 +97,7 @@ windows in the reporter, versus 47 for the 53.5% mEGFP in `mEGFP-P2A-His-PENK`.
 
 ---
 
-## 4. Recommended alternative — targeted recoding
+## 4. Recommended alternative: targeted recoding
 
 Recode the **reporter to 50% GC** and the **PENK insert to 52% GC**, leaving the IRES untouched:
 
@@ -117,7 +117,7 @@ against 0.769 if forced toward 35%. Cassette codon diversity is retained at 7/7 
 ## 5. If the wet lab insists on 40% anyway
 
 This is a judgement call that belongs to whoever owns the experiment, and there are defensible reasons
-to comply — a vendor quote conditioned on it, a synthesis platform with a hard specification, or simply
+to comply: a vendor quote conditioned on it, a synthesis platform with a hard specification, or simply
 not wanting to renegotiate. If the decision is to comply:
 
 1. **Ask what the 40% is for, once.** If it came from a vendor rejection, ask for the actual flagged
@@ -135,12 +135,12 @@ not wanting to renegotiate. If the decision is to comply:
    codon usage, and the signal peptide is unaltered.
 5. **Treat expression as an empirical question.** None of this predicts protein yield. If the group
    wants to know whether a 40% version expresses as well as a 52% version, that is a transfection and a
-   western blot, not a calculation — and given [R1], it is a result worth having before committing the
+   western blot, not a calculation; and given [R1], it is a result worth having before committing the
    whole construct set.
 
 ---
 
-## 6. Separate and more urgent — the His tag placement
+## 6. Separate and more urgent: the His tag placement
 
 Independent of GC, the audit found a design issue in all four fragments that outranks the GC question:
 **the 6×His tag sits N-terminal to the signal peptide.** Residues upstream of the signal peptide start:
@@ -154,7 +154,7 @@ Independent of GC, the audit found a design issue in all four fragments that out
 
 A signal peptide is recognised co-translationally at the extreme N-terminus of the nascent chain;
 placing residues in front of it interferes with recognition and cleavage [R13]. For the P2A construct
-the displacement is the entire upstream reporter plus the 2A peptide — and a gene downstream of a 2A
+the displacement is the entire upstream reporter plus the 2A peptide, and a gene downstream of a 2A
 element requires its own signal sequence to be secreted, because 2A "self-cleavage" leaves the
 downstream product with an N-terminal proline rather than a free signal peptide [R12]. Moving the tag
 to the C-terminus, or placing it immediately after the signal peptide cleavage site, resolves this. It

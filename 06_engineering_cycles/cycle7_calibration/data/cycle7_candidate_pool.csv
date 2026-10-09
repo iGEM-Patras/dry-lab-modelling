@@ -1,45 +1,45 @@
 chembl_id,name,type,nat,heavy,n_amide,smiles,n_d,n_m,Ki_OPRD1,Ki_OPRM1,ddG_exp,sd_d,sd_m,is_peptide,fits_affinity_cap
 CHEMBL316446,ENDOMORPHIN-1,Protein,1,45,4,NC(=O)[C@H](Cc1ccccc1)NC(=O)[C@H](Cc1c[nH]c2ccccc12)NC(=O)[C@@H]1CCCN1C(=O)[C@@H](N)Cc1ccc(O)cc1,5,8,5100.0,2.025,-4.824,0.158,0.357,True,True
 CHEMBL333357,ENDOMORPHIN 2,Protein,1,42,4,NC(=O)[C@H](Cc1ccccc1)NC(=O)[C@H](Cc1ccccc1)NC(=O)[C@@H]1CCCN1C(=O)[C@@H](N)Cc1ccc(O)cc1,4,6,6252.5,3.075,-4.692,0.137,0.359,True,True
-CHEMBL56695,—,Small molecule,0,27,1,NC(=O)c1ccc2c3c1O[C@H]1C(=O)CC[C@@]4(O)[C@@H](C2)N(CC2CC2)CC[C@]314,5,3,550.0,0.71,-4.098,0.342,0.0,False,True
+CHEMBL56695,, ,Small molecule,0,27,1,NC(=O)c1ccc2c3c1O[C@H]1C(=O)CC[C@@]4(O)[C@@H](C2)N(CC2CC2)CC[C@]314,5,3,550.0,0.71,-4.098,0.342,0.0,False,True
 CHEMBL38874,DAMGO,Small molecule,1,37,4,C[C@@H](NC(=O)[C@@H](N)Cc1ccc(O)cc1)C(=O)NCC(=O)N(C)[C@@H](Cc1ccccc1)C(=O)NCCO,12,45,773.5,1.49,-3.851,0.898,0.724,True,True
 CHEMBL596,FENTANYL,Small molecule,1,25,1,CCC(=O)N(c1ccccc1)C1CCN(CCc2ccccc2)CC1,3,12,679.0,2.15,-3.545,0.109,0.652,False,True
 CHEMBL895,NALBUPHINE,Small molecule,1,26,0,Oc1ccc2c3c1O[C@H]1[C@@H](O)CC[C@@]4(O)[C@@H](C2)N(CC2CCC2)CC[C@]314,5,9,319.0,1.3,-3.39,0.169,0.508,False,True
-CHEMBL1766021,—,Small molecule,0,22,0,CN1CC[C@]23CCCC[C@H]2[C@H]1Cc1cc2sc(N)nc2cc13,3,3,190.0,1.1,-3.173,0.36,0.977,False,True
-CHEMBL299220,—,Small molecule,0,22,0,Nc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CC1)CC3,4,3,150.0,1.3,-2.925,0.0,0.0,False,True
+CHEMBL1766021,, ,Small molecule,0,22,0,CN1CC[C@]23CCCC[C@H]2[C@H]1Cc1cc2sc(N)nc2cc13,3,3,190.0,1.1,-3.173,0.36,0.977,False,True
+CHEMBL299220,, ,Small molecule,0,22,0,Nc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CC1)CC3,4,3,150.0,1.3,-2.925,0.0,0.0,False,True
 CHEMBL70,MORPHINE,Small molecule,1,21,0,CN1CC[C@]23c4c5ccc(O)c4O[C@H]2[C@@H](O)C=C[C@H]3[C@H]1C5,33,37,280.0,2.6,-2.882,0.323,0.495,False,True
 CHEMBL363324,HERKINORIN,Small molecule,0,36,0,COC(=O)[C@@H]1C[C@H](OC(=O)c2ccccc2)C(=O)[C@H]2[C@@]1(C)CC[C@H]1C(=O)O[C@H](c3ccoc3)C[C@]21C,3,3,1170.0,12.0,-2.821,0.0,0.0,False,True
 CHEMBL19019,NALTREXONE,Small molecule,1,25,0,O=C1CC[C@@]2(O)[C@H]3Cc4ccc(O)c5c4[C@@]2(CCN3CC2CC2)[C@H]1O5,45,40,19.3,0.3,-2.565,0.409,0.405,False,True
 CHEMBL33986,BUTORPHANOL,Small molecule,1,24,0,Oc1ccc2c(c1)[C@@]13CCCC[C@@]1(O)[C@@H](C2)N(CC1CCC1)CC3,3,7,12.0,0.19,-2.554,0.0,0.082,False,True
-CHEMBL426523,—,Small molecule,0,25,0,C[C@H]1CN2C[C@H](c3ccccc3)CC[C@H]2C[C@@]1(C)c1cccc(O)c1,3,3,31.0,0.62,-2.41,0.007,0.017,False,True
-CHEMBL49143,—,Small molecule,0,23,0,Nc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3,4,3,180.0,3.7,-2.393,0.0,0.0,False,True
-CHEMBL146756,—,Small molecule,0,52,0,O=C(/C=C/C(=O)Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3)Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3,3,4,9.4,0.2,-2.372,0.0,0.0,False,True
-CHEMBL147511,—,Small molecule,0,58,0,O=C(CCCCCCCCC(=O)Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3)Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3,4,5,4.2,0.09,-2.367,0.0,0.0,False,True
-CHEMBL300662,—,Small molecule,0,25,0,C[C@H]1CN(CC[C@H](O)C2CCCCC2)CC[C@@]1(C)c1cccc(O)c1,6,4,4.81,0.125,-2.248,0.854,0.222,False,True
-CHEMBL390866,—,Small molecule,0,26,0,Nc1nc2cc3c(cc2s1)C[C@@H]1[C@@H]2CCCC[C@]32CCN1CC1CCC1,3,3,230.0,7.1,-2.142,0.0,0.0,False,True
+CHEMBL426523,, ,Small molecule,0,25,0,C[C@H]1CN2C[C@H](c3ccccc3)CC[C@H]2C[C@@]1(C)c1cccc(O)c1,3,3,31.0,0.62,-2.41,0.007,0.017,False,True
+CHEMBL49143,, ,Small molecule,0,23,0,Nc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3,4,3,180.0,3.7,-2.393,0.0,0.0,False,True
+CHEMBL146756,, ,Small molecule,0,52,0,O=C(/C=C/C(=O)Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3)Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3,3,4,9.4,0.2,-2.372,0.0,0.0,False,True
+CHEMBL147511,, ,Small molecule,0,58,0,O=C(CCCCCCCCC(=O)Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3)Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3,4,5,4.2,0.09,-2.367,0.0,0.0,False,True
+CHEMBL300662,, ,Small molecule,0,25,0,C[C@H]1CN(CC[C@H](O)C2CCCCC2)CC[C@@]1(C)c1cccc(O)c1,6,4,4.81,0.125,-2.248,0.854,0.222,False,True
+CHEMBL390866,, ,Small molecule,0,26,0,Nc1nc2cc3c(cc2s1)C[C@@H]1[C@@H]2CCCC[C@]32CCN1CC1CCC1,3,3,230.0,7.1,-2.142,0.0,0.0,False,True
 CHEMBL49269,CYCLORPHAN,Small molecule,0,22,0,Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CC1)CC3,11,12,1.9,0.062,-2.108,0.361,0.003,False,True
 CHEMBL982,NALMEFENE,Small molecule,1,25,0,C=C1CC[C@@]2(O)[C@H]3Cc4ccc(O)c5c4[C@@]2(CCN3CC2CC2)[C@H]1O5,4,5,13.26,0.44,-2.098,0.085,0.24,False,True
 CHEMBL301160,BUTORPHAN,Small molecule,0,23,0,Oc1ccc2c(c1)[C@@]13CCCC[C@H]1[C@@H](C2)N(CC1CCC1)CC3,17,15,5.9,0.23,-1.999,0.25,0.07,False,True
-CHEMBL391487,—,Small molecule,0,37,1,CNC(=O)Cn1c(=O)n(C2CCN(CCC(Oc3cc(OC)ccc3C)C(C)C)CC2)c2ccccc21,3,4,3654.0,164.98,-1.908,0.053,0.325,False,True
+CHEMBL391487,, ,Small molecule,0,37,1,CNC(=O)Cn1c(=O)n(C2CCN(CCC(Oc3cc(OC)ccc3C)C(C)C)CC2)c2ccccc21,3,4,3654.0,164.98,-1.908,0.053,0.325,False,True
 CHEMBL592,LEVORPHANOL,Small molecule,1,19,0,CN1CC[C@]23CCCC[C@H]2[C@H]1Cc1ccc(O)cc13,9,7,4.2,0.21,-1.845,0.0,0.0,False,True
-CHEMBL242756,—,Small molecule,0,25,0,Nc1nc2cc3c(cc2s1)C[C@@H]1[C@@H]2CCCC[C@]32CCN1CC1CC1,4,4,29.0,1.5,-1.824,0.0,0.0,False,True
+CHEMBL242756,, ,Small molecule,0,25,0,Nc1nc2cc3c(cc2s1)C[C@@H]1[C@@H]2CCCC[C@]32CCN1CC1CC1,4,4,29.0,1.5,-1.824,0.0,0.0,False,True
 CHEMBL80,NALOXONE,Small molecule,1,24,0,C=CCN1CC[C@]23c4c5ccc(O)c4O[C@H]2C(=O)CC[C@@]3(O)[C@H]1C5,23,26,42.6,2.3,-1.798,0.441,0.748,False,True
-CHEMBL319536,—,Small molecule,0,23,0,C[C@H]1CN(CCc2ccccc2)CC[C@@]1(C)c1cccc(O)c1,4,5,33.0,1.8,-1.792,0.0,0.038,False,True
-CHEMBL58646,—,Small molecule,0,22,1,C[C@H]1C2Cc3ccc(C(N)=O)cc3[C@@]1(C)CCN2CC1CC1,5,4,5.2,0.31,-1.737,0.099,0.113,False,True
+CHEMBL319536,, ,Small molecule,0,23,0,C[C@H]1CN(CCc2ccccc2)CC[C@@]1(C)c1cccc(O)c1,4,5,33.0,1.8,-1.792,0.0,0.038,False,True
+CHEMBL58646,, ,Small molecule,0,22,1,C[C@H]1C2Cc3ccc(C(N)=O)cc3[C@@]1(C)CCN2CC1CC1,5,4,5.2,0.31,-1.737,0.099,0.113,False,True
 CHEMBL427683,ORGANON,Small molecule,0,32,0,COc1ccc(C)c(OC(CCN2CCC(n3c(=O)[nH]c4ccccc43)CC2)C(C)C)c1,3,4,764.0,59.0,-1.578,0.313,0.179,False,True
-CHEMBL3647963,—,Small molecule,0,34,0,O=C(O)c1nc2ccccc2n([C@H]2C[C@H]3CC[C@@H](C2)N3C2CCCCCCCCCCC2)c1=O,3,4,18180.0,1436.0,-1.564,0.0,0.0,False,True
+CHEMBL3647963,, ,Small molecule,0,34,0,O=C(O)c1nc2ccccc2n([C@H]2C[C@H]3CC[C@@H](C2)N3C2CCCCCCCCCCC2)c1=O,3,4,18180.0,1436.0,-1.564,0.0,0.0,False,True
 CHEMBL511142,BUPRENORPHINE,Small molecule,1,34,0,CO[C@@]12CC[C@@]3(C[C@@H]1[C@](C)(O)C(C)(C)C)[C@H]1Cc4ccc(O)c5c4[C@@]3(CCN1CC1CC1)[C@H]2O5,7,13,4.5,0.41,-1.476,0.265,0.384,False,True
-CHEMBL237066,—,Small molecule,0,26,1,NC(=O)c1ccc(Oc2ccc(CCNCc3ccccc3)cc2)nc1,3,3,70.21,7.44,-1.383,0.227,0.245,False,True
+CHEMBL237066,, ,Small molecule,0,26,1,NC(=O)c1ccc(Oc2ccc(CCNCc3ccccc3)cc2)nc1,3,3,70.21,7.44,-1.383,0.227,0.245,False,True
 CHEMBL415247,JDTIC,Small molecule,0,34,1,CC(C)[C@@H](CN1CC[C@@](C)(c2cccc(O)c2)[C@@H](C)C1)NC(=O)[C@H]1Cc2ccc(O)cc2CN1,3,3,36.11,4.0,-1.355,0.36,0.442,False,True
 CHEMBL56585,CYCLAZOCINE,Small molecule,0,20,0,C[C@H]1[C@H]2Cc3ccc(O)cc3[C@]1(C)CCN2CC1CC1,9,6,0.58,0.08,-1.22,0.22,0.142,False,True
-CHEMBL228690,—,Small molecule,0,26,0,OC1(c2ccccc2)CCN(C(c2ccccc2)c2ccccc2)CC1,3,3,1666.0,233.0,-1.212,0.0,0.024,False,True
+CHEMBL228690,, ,Small molecule,0,26,0,OC1(c2ccccc2)CCN(C(c2ccccc2)c2ccccc2)CC1,3,3,1666.0,233.0,-1.212,0.0,0.024,False,True
 CHEMBL440765,U-69593,Small molecule,1,26,1,CN(C(=O)Cc1ccccc1)[C@H]1CC[C@@]2(CCCO2)C[C@@H]1N1CCCC1,3,4,12540.0,1757.5,-1.21,0.455,0.158,False,True
-CHEMBL238361,—,Small molecule,0,26,1,NC(=O)c1ccc(Oc2ccc(CNCCc3ccccc3)cc2)nc1,3,3,1.16,0.17,-1.183,0.037,0.182,False,True
-CHEMBL290543,—,Small molecule,0,24,1,CN(C(=O)Cc1ccc(Cl)c(Cl)c1)C1CCCCC1N1CCCC1,3,3,2500.0,370.0,-1.177,0.436,0.194,False,True
-CHEMBL377789,—,Small molecule,0,36,1,C[C@H]1C2Cc3ccc(C(=O)NCCc4ccc(-c5ccccc5)cc4)cc3[C@@]1(C)CCN2CC1CC1,4,5,0.74,0.3,-0.556,0.0,0.025,False,True
-CHEMBL386272,—,Small molecule,0,37,1,COc1ccc2c3c1O[C@H]1C(=O)CC[C@@]4(NC(=O)/C=C/c5ccc(Cl)cc5)[C@@H](C2)N(CC2CC2)CC[C@]314,5,5,4.79,4.78,-0.001,0.011,0.407,False,True
+CHEMBL238361,, ,Small molecule,0,26,1,NC(=O)c1ccc(Oc2ccc(CNCCc3ccccc3)cc2)nc1,3,3,1.16,0.17,-1.183,0.037,0.182,False,True
+CHEMBL290543,, ,Small molecule,0,24,1,CN(C(=O)Cc1ccc(Cl)c(Cl)c1)C1CCCCC1N1CCCC1,3,3,2500.0,370.0,-1.177,0.436,0.194,False,True
+CHEMBL377789,, ,Small molecule,0,36,1,C[C@H]1C2Cc3ccc(C(=O)NCCc4ccc(-c5ccccc5)cc4)cc3[C@@]1(C)CCN2CC1CC1,4,5,0.74,0.3,-0.556,0.0,0.025,False,True
+CHEMBL386272,, ,Small molecule,0,37,1,COc1ccc2c3c1O[C@H]1C(=O)CC[C@@]4(NC(=O)/C=C/c5ccc(Cl)cc5)[C@@H](C2)N(CC2CC2)CC[C@]314,5,5,4.79,4.78,-0.001,0.011,0.407,False,True
 CHEMBL386492,CLOCINNAMOX,Small molecule,0,36,1,O=C(/C=C/c1ccc(Cl)cc1)N[C@@]12CCC(=O)[C@@H]3Oc4c(O)ccc5c4[C@@]31CCN(CC1CC1)[C@@H]2C5,5,5,2.69,2.98,0.063,0.091,0.431,False,True
-CHEMBL216640,—,Protein,0,97,11,CC[C@H](C)[C@H](NC(=O)[C@H](CCCN=C(N)N)NC(=O)[C@H](CCCN=C(N)N)NC(=O)[C@H](CC(C)C)NC(=O)[C@H](Cc1ccccc1)NC(=O)CNC(=O)CNC(=O)[C@@H](N)Cc1ccc(O)cc1)C(=O)N[C@@H](CCCN=C(N)N)C(=O)N1CCC[C@H]1C(=O)N[C@@H](CCCCN)C(N)=O,3,3,3.2,5.62,0.347,0.022,0.062,True,True
+CHEMBL216640,, ,Protein,0,97,11,CC[C@H](C)[C@H](NC(=O)[C@H](CCCN=C(N)N)NC(=O)[C@H](CCCN=C(N)N)NC(=O)[C@H](CC(C)C)NC(=O)[C@H](Cc1ccccc1)NC(=O)CNC(=O)CNC(=O)[C@@H](N)Cc1ccc(O)cc1)C(=O)N[C@@H](CCCN=C(N)N)C(=O)N1CCC[C@H]1C(=O)N[C@@H](CCCCN)C(N)=O,3,3,3.2,5.62,0.347,0.022,0.062,True,True
 CHEMBL573214,NORBINALTORPHIMINE,Small molecule,0,49,0,Oc1ccc2c3c1O[C@H]1c4[nH]c5c(c4C[C@@]4(O)[C@@H](C2)N(CC2CC2)CC[C@]314)C[C@@]1(O)[C@H]2Cc3ccc(O)c4c3[C@@]1(CCN2CC1CC1)[C@H]5O4,23,15,10.14,21.0,0.448,0.537,0.502,False,True
 CHEMBL252172,BNTX,Small molecule,0,32,0,O=C1/C(=C/c2ccccc2)C[C@@]2(O)[C@H]3Cc4ccc(O)c5c4[C@@]2(CCN3CC2CC2)[C@H]1O5,4,3,4.865,11.0,0.503,0.215,0.044,False,True
 CHEMBL8234,ENKEPHALIN,Protein,1,40,4,CC(C)C[C@H](NC(=O)[C@H](Cc1ccccc1)NC(=O)CNC(=O)CNC(=O)[C@@H](N)Cc1ccc(O)cc1)C(=O)O,11,5,2.53,9.43,0.81,0.471,1.254,True,True

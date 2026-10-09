@@ -1,4 +1,4 @@
-# Cycle 3b — pipeline validation on CPU, and a disarmed-gate defect
+# Cycle 3b: pipeline validation on CPU, and a disarmed-gate defect
 
 **Date:** 14 August 2026 · **CPU job:** 17985511 (`pibu_el8`, node binfservas28, RUNNING)
 **GPU twin:** 17974162 (`pgpu`, PENDING, reserved 15 Aug)
@@ -6,7 +6,7 @@
 ## Why a CPU job
 
 `pgpu` has 2 GPUs and one was free, but the partition is reserved for
-`afreiberg`'s array `17963664_[3-30]` — 28 tasks × 5-day walltime, **CPU-only**
+`afreiberg`'s array `17963664_[3-30]` (28 tasks × 5-day walltime, **CPU-only**)
 (`gres=N/A`). Higher priority, so Slurm holds the node. Our `Reason=Priority`
 was that reservation, not a GPU shortage.
 
@@ -20,17 +20,17 @@ there instead of waiting two days.
 
 All three `mdrun` calls in `scripts/run_prod.sh` hardcode `-nb gpu`, and `$GMX`
 is a CUDA build (`envs/gmxcuda`, GPU support: CUDA). A CUDA-compiled GROMACS runs
-fine on CPU, but only if `-nb cpu` is passed — env vars alone would have failed at
+fine on CPU, but only if `-nb cpu` is passed: env vars alone would have failed at
 the first `mdrun`. There is no override hook, so:
 
-- `scripts/run_prod_cpu.sh` — derived by `sed` from `run_prod.sh`. **Exactly 3 lines
+- `scripts/run_prod_cpu.sh`, derived by `sed` from `run_prod.sh`. **Exactly 3 lines
   differ** (`diff` verified); `-nb gpu -ntmpi 1 -ntomp 8` → `-nb cpu -ntmpi ${GMX_NTMPI:-4}
   -ntomp ${GMX_NTOMP:-8}`. Original untouched, backed up at `scripts/.run_prod.sh.bak`.
 - Runs as **rep99**, so it does not collide with the GPU twin's rep1. Both can run
   concurrently; the seed derives from the replicate number, giving an independent
   equilibration.
 - **24 h walltime**, not 90 min: only *production* is truncated by `PROD_NSTEPS`.
-  NVT (200 ps) and NPT (1 ns) run full length — 1.4 ns of 155,234-atom all-atom MD
+  NVT (200 ps) and NPT (1 ns) run full length, 1.4 ns of 155,234-atom all-atom MD
   on CPU. A `pshort_el8` submission would have been killed mid-NPT.
 
 ## The defect worth keeping
@@ -50,7 +50,7 @@ stereochemical safety checks disarmed.
 
 This is the same defect class `scripts/peptide_spec.sh` documents costing a full
 build on 2026-07-30: the `c3b_dtII_DOR` pilot was built with `dres=none`, producing
-the **all-L analogue** of deltorphin II — and nothing flagged it, because the gate
+the **all-L analogue** of deltorphin II, and nothing flagged it, because the gate
 that would catch it is itself skipped when `DRES_REL=none`. Deltorphin II's
 δ-selectivity rests entirely on that D-Ala².
 
@@ -71,9 +71,9 @@ cross-checked, and `dres=none` is a hard failure. Log confirms:
 Patch `run_pipeline_validate.sh` to source `peptide_spec.sh` the way
 `run_prod_job.sh` does, so the GPU twin does not validate with skipped gates when
 it eventually starts. Until then, **the GPU job's result should not be read as a
-gate validation** — only the CPU run exercises them.
+gate validation**, only the CPU run exercises them.
 
-## Patch applied — 14 August 2026
+## Patch applied, 14 August 2026
 
 `run_pipeline_validate.sh` now reads chemistry from the design table instead of
 letting `run_prod.sh` default it. Two changes only (see `run_pipeline_validate.patch`):
@@ -95,7 +95,7 @@ Tested before installing: the block resolves `dres=2 amide=yes` and prints
 ### The patch alone was not enough
 
 **Slurm spools the batch script at submission.** Job 17974162 held the unpatched
-two-argument copy — verified with `scontrol write batch_script` — so editing the
+two-argument copy, verified with `scontrol write batch_script`, so editing the
 file on disk would not have reached it. It would still have run with all three
 gates skipped, and its log would have read as a pass.
 
@@ -106,14 +106,14 @@ start 15 Aug, behind the same CPU-only array.
 Anyone patching a script for an already-queued job must requeue it; the on-disk
 file governs only future submissions.
 
-## Both jobs COMPLETED — 14 August 2026
+## Both jobs COMPLETED, 14 August 2026
 
 | Job | Route | Node | Elapsed | Walltime | Exit |
 |---|---|---|---|---|---|
 | `17985540` | GPU, `pgpu` | binfservas30 | 00:21:37 | 3:00:00 | 0:0 |
 | `17985511` | CPU, `pibu_el8` | binfservas28 | 05:43:27 | 1-00:00:00 | 0:0 |
 
-The GPU job did not wait until 15 Aug — it started and finished the same morning,
+The GPU job did not wait until 15 Aug: it started and finished the same morning,
 so the requeue cost nothing.
 
 ### The patched gates fired, on both routes
@@ -139,7 +139,7 @@ Seeds differed as intended (rep1 20262587, rep99 20360587).
 
 ### Finding: the MM-GBSA scoring stage has never been executed
 
-`RESCORE_PATHTEST_EXIT=2` is not a flake — it is structural, and it means
+`RESCORE_PATHTEST_EXIT=2` is not a flake, it is structural, and it means
 `gmx_MMPBSA` has still never run in this pipeline. Confirmed by grep: no
 `gmx_MMPBSA`, `FINAL_RESULTS`, or `DELTA TOTAL` in either log, and no
 `*_FINAL.dat` / `*_perframe.csv` in either replicate directory.
@@ -147,7 +147,7 @@ Seeds differed as intended (rep1 20262587, rep99 20360587).
 Cause, from `scripts/prod.mdp` and `scripts/rescore.sh`:
 
 - `nstxout-compressed = 5000` at `dt = 0.002` → one frame per **10 ps**.
-- `rescore.sh` requires **≥90 frames** in its scoring window (correctly — it refuses
+- `rescore.sh` requires **≥90 frames** in its scoring window (correctly, it refuses
   to score a crashed run on thin sampling).
 - A 200 ps validation production can yield at most
   **21 frames**. It needs ≥0.9 ns just to clear the gate.
@@ -162,7 +162,7 @@ chirality checkpoints, `gmx_MMPBSA` itself, and `collect_dg.py`.
 `collect_dg.py` appends `control,receptor,rep,avg` to `results_stage1.csv` and records
 **nothing about run length or truncation**. If the guard were ever bypassed on a short
 run that did clear the frame gate, the resulting row would be indistinguishable from
-production. `results_stage1.csv` does not exist yet, so nothing is polluted today — but
+production. `results_stage1.csv` does not exist yet, so nothing is polluted today, but
 any MM-GBSA smoke test must be pointed at a scratch results file, not the real one.
 
 ### Runtime model (validated against measured elapsed)
@@ -178,7 +178,7 @@ Extrapolated to a full replicate (0.2 ns NVT + 1 ns NPT + 20 ns production):
 serial CPU time.** The campaign is GPU-bound; the CPU route is a correctness twin, not
 a production path.
 
-## Defect found while staging the smoke test — 14 August 2026
+## Defect found while staging the smoke test: 14 August 2026
 
 `run_pipeline_validate.sh` line 60 (and the CPU variant's line 62) does:
 
@@ -187,11 +187,11 @@ rm -f systems/c3b_dtII_DOR/rep1/TRUNCATED_NOT_FOR_ANALYSIS
 bash scripts/rescore.sh c3b_dtII_DOR 1
 ```
 
-**`rep1` is a production slot** — `prod_all.txt` plans reps 1, 2, 3 for every system.
+**`rep1` is a production slot** (`prod_all.txt` plans reps 1, 2, 3 for every system.
 The path test therefore stripped the truncation guard from a real replicate directory
 and left it that way. Verified after the runs: `rep1` held a 21-frame (200 ps)
 trajectory with the marker **ABSENT**. The only thing that stopped it being scored as
-production was the ≥90-frame gate downstream — a second line of defence, not the one
+production was the ≥90-frame gate downstream, a second line of defence, not the one
 that was supposed to catch this.
 
 Re-armed by hand:
@@ -200,13 +200,13 @@ Re-armed by hand:
 PROD_NSTEPS=100000  truncated=yes  re-armed by audit 2026-08-14T17:26:13+02:00 -- path test
 ```
 
-Before rep1/rep2/rep3 are run for real, that directory must be deleted, not reused —
+Before rep1/rep2/rep3 are run for real, that directory must be deleted, not reused:
 its NVT/NPT/prod files came from a truncated run with a different seed.
 
 **Fix for the validation scripts:** point the path test at a scratch rep number, never
 a planned one. The smoke test below uses `rep777` for exactly this reason.
 
-## MM-GBSA reachability smoke test — job 18005610 (staged)
+## MM-GBSA reachability smoke test: job 18005610 (staged)
 
 The cheapest run that reaches `gmx_MMPBSA`: **1 ns production = 500000 steps**, giving
 ~101 frames against the ≥90 gate (`prod.mdp` emits one frame per 10 ps).
@@ -216,16 +216,16 @@ Staged as `run_smoke_mmgbsa.sh`, SBATCH header inherited from the validated
 and output path changed. Sequence:
 
 1. Chemistry resolved from `prod_all.txt` and cross-checked against `chem.txt` (same
-   block as the patch) — gates ARMED on D-residue 2.
+   block as the patch), gates ARMED on D-residue 2.
 2. 1 ns production into **scratch `rep777`** (cannot collide with planned reps 1-3).
 3. Frame count read back from `prod.xtc`.
-4. `rescore_smoke.sh` called with the marker in place — must exit 3 (guard still works).
-5. Marker cleared **on the scratch rep only**, then rescored for real — expect exit 0,
+4. `rescore_smoke.sh` called with the marker in place, must exit 3 (guard still works).
+5. Marker cleared **on the scratch rep only**, then rescored for real: expect exit 0,
    `gmx_MMPBSA` reached, `make_mmgbsa_groups.py` + the five mid-window chirality
    checkpoints + `collect_dg.py` all exercised for the first time.
 
 `scripts/rescore_smoke.sh` differs from `rescore.sh` in **two lines only**, both the
-results target (`results_smoke_rep777.csv` instead of `results_stage1.csv`) — see
+results target (`results_smoke_rep777.csv` instead of `results_stage1.csv`), see
 `rescore_smoke.diff`. This matters because `collect_dg.py` records no run-length field,
 so a smoke row in the real results file would be indistinguishable from production.
 

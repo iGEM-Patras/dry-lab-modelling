@@ -1,7 +1,7 @@
-# siRNA order sheet — anti-neprilysin (MME)
+# siRNA order sheet: anti-neprilysin (MME)
 
 **Single source of truth. Where any other document in this directory disagrees, this one
-is current.** Revised after an error was found in the first DSIR lookup — see the
+is current.** Revised after an error was found in the first DSIR lookup, see the
 correction log at the end.
 
 Coordinates are **MME-213 (`ENST00000615825.3`, 5,861 nt)**. **Order by sequence, never by
@@ -22,7 +22,7 @@ deserves much weight. Specificity, by contrast, is counted rather than predicted
 
 ---
 
-## 1 — specificity-optimal  (recommended primary)
+## 1: specificity-optimal  (recommended primary)
 ```
 position (MME-213)  2700-2722
 guide     (antisense, 5'->3')   AAUGAUUGACUUGAUAGACCU
@@ -35,13 +35,13 @@ sites, seed-duplex Tm **13.7 °C**.
 Predicted efficacy is mid-pack: DSIR **85.4** (rank 839 of 5,841, below the >90
 'efficient' threshold), consensus efficacy rank 11.2 of 17.
 
-## 2 — efficacy-optimal  (recommended second)
+## 2: efficacy-optimal  (recommended second)
 ```
 position (MME-213)  2459-2481
 guide     (antisense, 5'->3')   UUCAUGUAUGAAUUCUUGCGG
 passenger (sense,     5'->3')   GCAAGAAUUCAUACAUGAAUC
 ```
-**Best predicted efficacy of the shortlist on four of five models** — DSIR **100.8**
+**Best predicted efficacy of the shortlist on four of five models**: DSIR **100.8**
 (rank 16 of 5,841), s-Biopredsi 0.881, iScore 81.9, Dharmacon 81.5;
 consensus efficacy rank **2.2**.
 
@@ -57,12 +57,12 @@ seed Tm 21.6 °C, accessibility 0.513.
 guide     (antisense, 5'->3')   UCGAUCUUCAGGUUUAGCCGU
 passenger (sense,     5'->3')   GGCUAAACCUGAAGAUCGAAA
 ```
-This is the only guide strong on **both** axes — efficacy rank 4.6, specificity rank 4.88,
+This is the only guide strong on **both** axes: efficacy rank 4.6, specificity rank 4.88,
 DSIR 96.4, only 82 8mer seed sites and 3 off-targets.
 
 It was excluded because a **common population variant (1.92% alternate-allele frequency)**
 sits under the target site. That is a liability for a therapeutic, where a patient carrying
-the variant would be a non-responder. **It is not a liability for a cell-line knockdown** —
+the variant would be a non-responder. **It is not a liability for a cell-line knockdown**:
 HEK293T has one genotype, checkable in one sequencing read.
 
 If the immediate goal is demonstrating knockdown, this guide is arguably the best choice
@@ -75,14 +75,14 @@ That is a project-strategy call, not a data call.
 
 | position | reason |
 |---|---|
-| 2225-2247 | consensus efficacy rank 9.3, specificity rank 12.5 — weak on both |
+| 2225-2247 | consensus efficacy rank 9.3, specificity rank 12.5: weak on both |
 | 2562-2584 | lowest seed burden of all (91 8mer sites) but consensus efficacy rank 11.6, DSIR 77.8 (rank 2,076) |
 
 ---
 
 ## Correction log
 
-**2026-10-03 — the first DSIR figures in this directory were wrong.** Guides were matched
+**2026-10-03: the first DSIR figures in this directory were wrong.** Guides were matched
 to the DSIR server output on the *sense 19-mer*, but DSIR's window is offset 2 nt from
 siDirect's, so the score read belonged to a neighbouring siRNA. Caught by re-scoring
 offline with the DSIR weights shipped in `nkvamaks/oligoshell_calc` and finding a
@@ -97,7 +97,7 @@ then match a DSIR row, and the offline re-score agrees with the server to 0.000.
 
 Two claims built on those numbers are withdrawn: that 2700-2722 clears DSIR's >90
 threshold (it does not), and that 2562-2584 should replace 435-457 because it clears the
-threshold (the reverse is true — 435 scores higher). The specificity and accessibility
+threshold (the reverse is true: 435 scores higher). The specificity and accessibility
 figures were never DSIR-derived and are unaffected.
 
 ## How each number was obtained

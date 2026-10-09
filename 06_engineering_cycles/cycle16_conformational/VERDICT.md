@@ -1,10 +1,10 @@
-# Cycle 16 — G1 FAILS. No claim is made, and engPENK was not run.
+# Cycle 16: G1 FAILS. No claim is made, and engPENK was not run.
 
 **9 Oct 2026. Gates were committed in `4b3bdb5` before any trajectory was opened.**
 
 ## Result
 
-β-turn occupancy of the message domain — fraction of frames with CA(i)–CA(i+3) < 7 Å,
+β-turn occupancy of the message domain: fraction of frames with CA(i)–CA(i+3) < 7 Å,
 the classic criterion, computed identically for all four peptides. 40 trajectories,
 5 replicates × 2 receptors × 4 peptides, 20 ns each, matched protocol.
 
@@ -15,22 +15,22 @@ the classic criterion, computed identically for all four peptides. 40 trajectori
 | deltorphin II | δ-selective | 1.000 ± 0.000 | 0.601 ± 0.440 | 0.554 nm |
 | met-enkephalin `YGGFM` | 3.7× δ | 0.999 ± 0.002 | 0.431 ± 0.415 | 0.521 nm |
 
-## G1 — control validity: **FAIL**
+## G1, control validity: **FAIL**
 
 Deltorphin (D-Ala², conformationally constrained) does **not** separate from met-enkephalin
-(flexible). On DOR they are 1.000 versus 0.999 — indistinguishable. On MOR the deltorphin II
+(flexible). On DOR they are 1.000 versus 0.999, indistinguishable. On MOR the deltorphin II
 and met-enkephalin distributions overlap almost completely (0.601 ± 0.440 vs 0.431 ± 0.415).
 
 Per the pre-registration: *"If it does not, these metrics do not capture backbone constraint
-in this system and the analysis is UNINFORMATIVE — report that and stop."*
+in this system and the analysis is UNINFORMATIVE: report that and stop."*
 
-## G2 — **not a pass**
+## G2, **not a pass**
 
 EM-1 separates from met-enkephalin strongly and reproducibly. But it is the **most extended**
-peptide in the set (0.78–0.89 nm, occupancy ~0), not the most turn-like — the **opposite** of
+peptide in the set (0.78–0.89 nm, occupancy ~0), not the most turn-like: the **opposite** of
 what the β-turn hypothesis predicted. And G1 established no direction for G2 to agree with.
 
-## G3 — **NOT SCORED. engPENK was not run.**
+## G3, **NOT SCORED. engPENK was not run.**
 
 The decision rule said G3 is scored only if G1 and G2 pass. They did not. **No conformational
 claim about `YGGFEVVG` is made, and the GPU time for its matched run was not spent.**
@@ -38,7 +38,7 @@ claim about `YGGFEVVG` is made, and the GPU time for its matched run was not spe
 ## Two faults in my own analysis, disclosed
 
 1. **The radius-of-gyration column is invalid.** I passed `gmx gyrate` group 0 of an
-   all-protein-CA index, so it measured the **receptor**, not the peptide — values of
+   all-protein-CA index, so it measured the **receptor**, not the peptide: values of
    2.34–2.77 nm, where a 5–8 residue peptide is 0.5–0.8 nm. Excluded from scoring.
    The column is left in `data/c16_metrics.csv` marked invalid rather than deleted.
 2. **Peptide lengths in the pre-registration were wrong.** Deltorphin carries an `NHE`
@@ -67,7 +67,7 @@ what the control gate exists to detect, and it detected it.
 
 Far longer sampling, or enhanced sampling of the peptide backbone (metadynamics / replica
 exchange on the φ/ψ space), started from multiple independent poses. That is a larger
-undertaking than this cycle, and it should not begin before the cAMP assay — which measures
+undertaking than this cycle, and it should not begin before the cAMP assay, which measures
 the quantity of interest directly and is subject to none of this.
 
 ## What stands
@@ -75,6 +75,6 @@ the quantity of interest directly and is subject to none of this.
 The literature finding is unaffected and remains the most useful thing from this round:
 Acta Pharm Sin B 2026 reports selectivity arising from conformational constraint beyond the
 message-address framework, and our payload was **forced** to drop both of deltorphin's
-constraining features — D-Ala² and the C-terminal amide — because a gene can encode neither.
+constraining features: D-Ala² and the C-terminal amide, because a gene can encode neither.
 That remains a plausible explanation for four cycles of null selectivity results. **We have
 not demonstrated it, and this cycle does not entitle us to claim it.**

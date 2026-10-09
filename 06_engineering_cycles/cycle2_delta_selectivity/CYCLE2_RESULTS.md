@@ -1,4 +1,4 @@
-# Cycle 2 — Results
+# Cycle 2: Results
 
 **Status:** complete · 10/10 co-folds succeeded · **Primary hypothesis falsified**
 **Headline:** no variant achieves meaningful δ-selectivity; the one statistically
@@ -34,9 +34,9 @@ Predicted ranking: `V4 ≳ V1 > V2 ≈ V3 > C1-BASE > V5`
 
 | # | Prediction | Outcome | Evidence |
 |---|---|---|---|
-| P1 | V1 > C1-BASE on Δ_sel | ❌ **FALSIFIED** | V1 −0.0162 vs C1 +0.0114 — V1 is μ-preferring |
+| P1 | V1 > C1-BASE on Δ_sel | ❌ **FALSIFIED** | V1 −0.0162 vs C1 +0.0114, V1 is μ-preferring |
 | P2 | V1 > V2 (β-branching helps) | ❌ **FALSIFIED** | V1 −0.0162 *worse* than V2 −0.0119 |
-| P3 | V1 converges better than C1-BASE | ❌ **FALSIFIED** | V1 5.89 Å vs C1 1.14 Å — 5× *worse* |
+| P3 | V1 converges better than C1-BASE | ❌ **FALSIFIED** | V1 5.89 Å vs C1 1.14 Å, 5× *worse* |
 | P4 | V5 loses δ-preference | ❌ **FALSIFIED** | V5 +0.0121 ≈ C1 +0.0114, and far better converged |
 | P5 | Effects small (\|Δ_sel\| < 0.05) | ✅ confirmed | max \|Δ_sel\| = 0.0162 |
 
@@ -59,7 +59,7 @@ C1's Δ_sel is **smaller than its own uncertainty** and statistically indistingu
 from zero (Welch p = 0.43) or from native (p = 0.60).
 
 **Why `model_0` was misleading:** the `MOR_eng` complex has an ipTM spread of 0.0280
-across samples — 3× any other complex, ranging 0.9201–0.9850. `model_0` happened to
+across samples, 3× any other complex, ranging 0.9201–0.9850. `model_0` happened to
 land at 0.9328, near the floor of that distribution. The apparent Cycle 1 selectivity
 was substantially an artifact of one unlucky μ sample.
 
@@ -73,26 +73,26 @@ native at μ) survive; **the "1.96×" figure does not** and should not be quoted
 
 **1. The `[Ile⁵,⁶]` result does not transfer to this scaffold.** V1 is the DNA-encodable
 analog of the literature's most δ-selective deltorphin modification, and on this chimera
-it produced the *only* statistically significant selectivity in the panel — **toward μ**
+it produced the *only* statistically significant selectivity in the panel, **toward μ**
 (Δ_sel = −0.0162, p = 0.021). Adding β-branched bulk to the address raised μ confidence
 (0.956 → 0.977) rather than δ. The published `[Ile⁵,⁶]` gains were measured on a
 **D-Ala²** backbone; on our Gly-Gly backbone the same substitution behaves differently.
-This is a real interaction between the chirality compromise and the address modification —
+This is a real interaction between the chirality compromise and the address modification,
 not a small quantitative shift.
 
 **2. β-branching is not the mechanism.** V1 (Ile, β-branched) and V2 (Leu, not β-branched)
 both went μ-ward, V1 slightly more so. H2 is falsified in the sense that β-branching gives
 no δ advantage here; both bulky substitutions hurt.
 
-**3. Asp vs Glu is not equivalent — and Asp is the productive lever.** V3 (`DVVG`, Asp
+**3. Asp vs Glu is not equivalent, and Asp is the productive lever.** V3 (`DVVG`, Asp
 alone) is flat (−0.0007), but V4 (`DIIG`, Asp + Ile) is the top-ranked variant (+0.0152)
 with the best δ-convergence in the panel (0.81 Å). The two substitutions are **not
-additive** — Ile alone is strongly μ-ward, Asp alone is neutral, together they are the
+additive**: Ile alone is strongly μ-ward, Asp alone is neutral, together they are the
 most δ-preferring. Non-additivity of this size implies the address residues are
 conformationally coupled rather than acting as independent contacts.
 
 **4. Pose convergence and selectivity are largely decoupled.** V5 has the best δ-convergence
-(0.71 Å) and the worst μ-convergence (6.62 Å) in the whole panel — the peptide is
+(0.71 Å) and the worst μ-convergence (6.62 Å) in the whole panel: the peptide is
 well-determined in the δ pocket and ill-determined in μ. Notably, **every δ-preferring
 variant (C1, V4, V5) has δ-convergence ≤ 1.15 Å while both μ-preferring variants (V1, V2)
 have δ-convergence ≥ 4.16 Å.** Convergence-in-pocket may be a better selectivity signal
@@ -103,13 +103,13 @@ gaps are 4–8×. **This should be tested directly in Cycle 3.**
 (it substitutes L-Ala where nature uses D-Ala). Instead it matches C1's Δ_sel with a third
 of the uncertainty (SEM 0.0055 vs 0.0131) and the second-best δ-convergence. Shortening
 `GG` → `A` evidently rigidifies the message domain enough to help, even with the wrong
-chirality. This partially rescues the idea behind Cycle 1's "floppy backbone" reading —
+chirality. This partially rescues the idea behind Cycle 1's "floppy backbone" reading:
 but the fix came from the **message**, not the address.
 
 **6. No variant is meaningfully δ-selective.** All ipTM values sit in 0.95–0.98 at both
 receptors. Every peptide in this panel is predicted to be a **dual μ/δ binder**. Δ_sel
 magnitudes (≤0.016) are an order of magnitude below what would constitute a selectivity
-claim, and only V1's — the wrong-direction one — reaches p < 0.05.
+claim, and only V1's (the wrong-direction one) reaches p < 0.05.
 
 ---
 
@@ -132,9 +132,9 @@ not that either is demonstrated to be δ-selective.
 it narrowed 5 candidates to 2 and eliminated a literature-motivated hypothesis cheaply.
 
 Cycle 3 should:
-1. **Test the convergence hypothesis directly** (finding #4) — it is the strongest signal
+1. **Test the convergence hypothesis directly** (finding #4): it is the strongest signal
    in this dataset and was found, not predicted. Pre-register it before testing.
-2. **Combine the two independent wins** — V4's address (`DIIG`) with V5's shortened
+2. **Combine the two independent wins**: V4's address (`DIIG`) with V5's shortened
    message register (`YA F`) → `YAFDIIG`.
 3. **Increase n.** With n = 5 the SEMs (0.005–0.013) are the same size as the effects.
    n = 20 would roughly halve them.

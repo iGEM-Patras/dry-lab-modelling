@@ -1,4 +1,4 @@
-# Cycle 3b — RESUME HERE
+# Cycle 3b: RESUME HERE
 
 Stopped deliberately at a checkpoint to let compute usage recover. Nothing is
 running that needs babysitting; the two build tasks still in the queue will fail
@@ -21,7 +21,7 @@ Repo: `90cd66f` + the `build_system.sh` fix in this commit.
 
 ## The species error, fixed
 
-The benchmark had simulated `YaFEVVG-OH`, the **free acid** — `packmol-memgen
+The benchmark had simulated `YaFEVVG-OH`, the **free acid** (`packmol-memgen
 --parametrize` runs tleap, which defaults a bare C-terminus to the charged
 carboxylate. That is the same wrong-species error this cycle exists to correct.
 `amidate.py` now installs an NHE cap (verified: net charge 0.000 vs −1 for the
@@ -29,12 +29,12 @@ acid, tleap Errors=0 Warnings=0, D-centre intact) and `build_system.sh` asserts
 NHE is in the final topology. All six rebuilt systems logged
 `C-terminus: primary amide (NHE)`. BENCHMARK.md carries a correction notice.
 
-Met-enkephalin is the one control that must stay a free acid — that is its native
-form — hence `--no-amidate` for those two.
+Met-enkephalin is the one control that must stay a free acid, that is its native
+form: hence `--no-amidate` for those two.
 
 ## Two open failures
 
-**1. `BUILD_EXIT=2` with no error message — diagnosed, fixed in this commit.**
+**1. `BUILD_EXIT=2` with no error message: diagnosed, fixed in this commit.**
 `packmol-memgen` actually *succeeded* (`DONE!`, `bilayer_complex_start_lipid.top`
 + `.crd` on disk). The script died on the very next line:
 
@@ -43,7 +43,7 @@ form — hence `--no-amidate` for those two.
 `ls` exits **2** when any operand does not exist, and `set -o pipefail` propagates
 that out of the command substitution, so `set -e` kills the script silently. I had
 previously misdiagnosed this as a wrong glob pattern and "fixed" it by adding
-`*_lipid.top` to the list — which could never work, because `*.prmtop` still fails
+`*_lipid.top` to the list, which could never work, because `*.prmtop` still fails
 to match. Now replaced with a nullglob helper. **Every one of the 6 builds hits
 this**, which is why no `system.top` exists yet.
 
@@ -53,33 +53,33 @@ straight past packing.
 
 **2. Met-enkephalin co-fold produced no structure.** Confirmed by inspection: the
 output tree contains `msa/`, `processed/` and `lightning_logs/` but **no
-`predictions/` directory whatsoever** — so this is not a filename or path-guessing
+`predictions/` directory whatsoever** (so this is not a filename or path-guessing
 problem, Boltz genuinely wrote no model. It nevertheless exited 0, which is why the
 job printed `MENK_FOLDS_OK` (the loop only tests the exit status). Investigate the
 `menk_17816705.log` prediction stage before resubmitting; a 5-residue peptide
 (`YGGFM`) is the shortest chain in the panel, so a minimum-length or MSA-depth
 condition is the first thing to check. Separately: I
 submitted the menk builds without `--dependency`, so they ran 3 s after submit,
-before any pose could exist (`FAIL: no pose`) — use
+before any pose could exist (`FAIL: no pose`): use
 `sbatch --dependency=afterok:<foldjob>` next time.
 
-## STATUS 2026-07-30 — three scaffolding defects fixed; single-pair pilot queued
+## STATUS 2026-07-30: three scaffolding defects fixed; single-pair pilot queued
 
-Repo `0703ec9`. Fixed and deployed to the cluster (cluster copy is NOT a git repo —
+Repo `0703ec9`. Fixed and deployed to the cluster (cluster copy is NOT a git repo,
 files were pushed over the compute bridge, so verify by md5 after any edit):
 
 1. `build_system.sh` never produced `index.ndx`, `pepmeta.txt`, `min.gro`. It ended at
    `system.top`/`system.gro`, but `run_prod.sh` pre-flights on those three files, so all
    18 replicates died in 3-5 s. NOW: after packing/parametrisation the build runs
    `make_index.py` (peptide location + thermostat groups) and then grompp+mdrun on
-   `min.mdp` to produce `min.gro`. Order matters — `make_index.py` must run BEFORE the
+   `min.mdp` to produce `min.gro`. Order matters: `make_index.py` must run BEFORE the
    minimisation grompp, because that grompp takes `-n index.ndx`.
 2. `tilt.py` was validated but never wired in. NOW asserted (`--max-deg 10 --rec-chain A`)
    immediately after a successful memembed and BEFORE packing, so a silently-mis-oriented
    bundle fails the build instead of consuming a GPU-day to measure reorientation.
 3. `run_prod_job.sh` (new) wraps `run_prod.sh` and `exit $JOB_EXIT`, so `afterok`
    dependencies actually gate. Previously a job's last line echoed the status, which
-   always exits 0 — every dependent wave was released regardless of failure, which is
+   always exits 0: every dependent wave was released regardless of failure, which is
    what made the canary gate inert.
 
 ## MY DEFECT, NOT THE PIPELINE'S: overwrote a script while a job was running it
@@ -113,7 +113,7 @@ NEVER write in place to a script on this cluster. In-place is what broke this ru
 Relaunched clean (17826633's partial systems/c3b_dtII_DOR removed first):
   cpu 17836485 -> gpu 17836486 (afterok) -> prod 17836487 (afterok)
 
-## POST-MIN CONTACT GATE ADDED — 2026-07-31 (closes the gap FINDING 2 opened)
+## POST-MIN CONTACT GATE ADDED, 2026-07-31 (closes the gap FINDING 2 opened)
 
 New `scripts/contacts.py`, two modes:
   record  <top> <coords> <pepmeta> <out>    baseline the interface BEFORE minimisation
@@ -156,16 +156,16 @@ GATE TESTS (jobs 17826639, 17826640, 17826641 on pshort_el8):
      guessable "out" vector. T9 replaced guessing with a measured scan over +-5..25 A on
      each axis, picking the displacement that maximises the min distance.
 
-## PANEL PRE-FLIGHT SWEEP — 2026-07-30 (job 17826637, 46 s wall, all 6 tags PASS)
+## PANEL PRE-FLIGHT SWEEP, 2026-07-30 (job 17826637, 46 s wall, all 6 tags PASS)
 
 New `STAGE=orient` mode in build_system.sh: runs stages 1-3b (spec -> chirality -> amide
 -> memembed -> tilt fix/assert) then stops before packing. Emits ORIENT_OK, NOT
-BUILD_OK/BUILD_CPU_OK — a pre-flight dir has no topology and nothing runnable, so it can
+BUILD_OK/BUILD_CPU_OK: a pre-flight dir has no topology and nothing runnable, so it can
 never be mistaken for a usable system. New `SYSROOT` env var redirects output (scripts,
 envs, prod_all.txt still resolve under $W) so a sweep cannot touch systems/ or a build in
 flight. Sweep driver: sweep_orient.sh. Costs ~8 s/tag vs ~40 min for a full build.
 
-FINDING 1 — memembed mis-orientation is SYSTEMATIC, not a one-off:
+FINDING 1: memembed mis-orientation is SYSTEMATIC, not a one-off:
 
   tag             tilt_pre  tilt_post   min rec-pep (pre -> post)   D-centre
   c3b_dtI_MOR       36.43     0.00        2.09 -> 2.09 A            V=-2.481 D ok
@@ -177,14 +177,14 @@ FINDING 1 — memembed mis-orientation is SYSTEMATIC, not a one-off:
 
 6/6 exceeded the 10 deg gate (17.4-36.4 deg), EVERY ONE with memembed exiting 0 and the
 build recording "orientation: --preoriented". Never trust that exit code. The fix took
-all six to 0.00 deg with min rec-pep distance unchanged to 0.00 A in every case — rigid
+all six to 0.00 deg with min rec-pep distance unchanged to 0.00 A in every case, rigid
 rotation now confirmed panel-wide, not just on the pilot. Chemistry resolved from
 prod_all.txt correctly for all six: dtI/dtII -> dres=2 (D-centre asserted), em1 -> none
 (reported as not applicable rather than silently skipped).
 
 This supersedes the earlier "4 of 6" reading at the bottom of this file: it is 6 of 6.
 
-FINDING 2 — several systems carry very close receptor-peptide contacts. Measured on
+FINDING 2: several systems carry very close receptor-peptide contacts. Measured on
 heavy atoms with hydrogens EXCLUDED, so these are real, not H-placement artifacts.
 Worst pair per tag:
 
@@ -197,14 +197,14 @@ Worst pair per tag:
 
 These are Boltz co-fold artifacts, NOT introduced by the tilt fix (distances unchanged
 through it). 1.74 A between an amide N and a charged Lys NZ is well inside vdW contact.
-Minimisation should relieve them, so this is a WATCH not a blocker — but it means the
+Minimisation should relieve them, so this is a WATCH not a blocker, but it means the
 post-min check must RE-MEASURE these contacts, otherwise a system that failed to relax
 enters production with a clash driving the first ns of dynamics. NOT YET IMPLEMENTED;
 do this before authorising the full panel.
 
 Artifacts: cycle3b_preflight_sweep.csv, cycle3b_preflight_sweep.png
 
-## WRONG MOLECULE BUILT — 2026-07-30 — the worst class of bug in this pipeline
+## WRONG MOLECULE BUILT, 2026-07-30: the worst class of bug in this pipeline
 
 The tilt-corrected build (17818367/68) COMPLETED CLEANLY and was the wrong molecule.
 Its log read: `peptide: TYR-ALA-PHE-GLU-VAL-VAL-GLY-NHE`. Deltorphin II is
@@ -212,7 +212,7 @@ Tyr-**D-Ala**-Phe-Glu-Val-Val-Gly-NH2. The build was launched with dres=`none`, 
 D-Ala2 inversion never ran and the 155,323-atom system was the ALL-L analog. Every
 downstream check passed: tilt 0.00 deg, tleap Errors=0, groups partitioning exactly,
 min.gro written. Caught only by reading the peptide sequence in the log against the
-design table. Production 17818369 was cancelled while still PENDING — no GPU time lost.
+design table. Production 17818369 was cancelled while still PENDING: no GPU time lost.
 
 WHY NOTHING CAUGHT IT. `run_prod.sh` has a per-stage chirality gate, and it is SKIPPED
 when DRES_REL=none (run_prod.sh:64). Both build_system.sh (`DRES="${2:-none}"`) and
@@ -221,7 +221,7 @@ A silent default on a safety gate's own input disables the gate. And `none` is a
 LEGITIMATE value for part of the panel (c3b_em1_* are endomorphin-1, all-L), so a
 defaulted `none` is indistinguishable from a correct one by inspection.
 
-FIX — chemistry now comes from the design table, never the command line:
+FIX: chemistry now comes from the design table, never the command line:
   scripts/peptide_spec.sh   new. load_peptide_spec <tag> reads DRES+AMIDE from
                             prod_all.txt (the table of record) and hard-FAILS on an
                             unknown tag or inconsistent replicate rows.
@@ -242,35 +242,35 @@ physically valid, NOT that it is the intended molecule.
 
 Chain relaunched (all-L system deleted): cpu 17826633 -> gpu 17826634 -> prod 17826635.
 
-## TILT GATE FIRED ON THE FIRST REAL SYSTEM — 2026-07-30 (the gate earned its keep)
+## TILT GATE FIRED ON THE FIRST REAL SYSTEM, 2026-07-30 (the gate earned its keep)
 
 Run 17818364 FAILED in 14 s at the tilt gate: `TILT_DEG=19.65` on c3b_dtII_DOR, from 372
-receptor CA atoms — while memembed exited 0 and the build logged `orientation:
+receptor CA atoms, while memembed exited 0 and the build logged `orientation:
 --preoriented`. This is EXACTLY the silent memembed failure the gate was written for. The
 rigid-body and chain-preservation checks all passed; only the orientation was wrong, so
 nothing upstream would have caught it. Without the gate this system would have packed a
 bilayer around a 20 deg-tilted bundle and the 20 ns window would have measured the
 receptor righting itself, not the peptide binding. SLURM then marked the two dependent
-jobs `DependencyNeverSatisfied` — correct behaviour, and proof the afterok wiring works.
+jobs `DependencyNeverSatisfied`: correct behaviour, and proof the afterok wiring works.
 
 FIX (verified on the real failing file before relaunch, not assumed):
 `tilt.py fix` is now wired in ahead of the assert. Measured on the actual c3b_dtII_DOR
 complex: 19.65 -> 0.00 deg; min receptor-peptide distance 2.754 -> 2.754 A (docked pose
 untouched, rotation genuinely rigid); z-centre -0.82 -> -0.92 A (solute stays where
 memembed put it, so --preoriented bilayer placement is still valid); z-extent 111.5 ->
-121.6 A. That last number is the independent physical check — straightening a tilted
+121.6 A. That last number is the independent physical check: straightening a tilted
 bundle MUST lengthen its projection on the membrane normal. If z-extent ever DECREASES,
 the rotation went the wrong way and the "fix" is wrong; do not trust the 0.00 deg alone.
 
 SECOND BUG found while fixing this: the gate asserted on `complex_oriented.pdb` but
 packing consumes `complex_start.pdb` (DUM-stripped). Same tilt value either way (DUM
-atoms are not CAs and never enter the measurement), so it was harmless TODAY — but
+atoms are not CAs and never enter the measurement), so it was harmless TODAY, but
 validating a file the pipeline does not consume is how a gate goes stale silently. The
 gate now measures, fixes, re-asserts, and re-checks the pose all on complex_start.pdb.
 
-PILOT IN FLIGHT (one receptor pair, not the full panel — deliberate, per the decision to
+PILOT IN FLIGHT (one receptor pair, not the full panel, deliberate, per the decision to
 pilot before committing 6.7 GPU-days). SPLIT-STAGE build. Superseded chains: 17818362/63
-(combined build — queued the CPU hour behind the contended GPU), 17818364/65/66 (died at
+(combined build: queued the CPU hour behind the contended GPU), 17818364/65/66 (died at
 the tilt gate above). CURRENT:
   cpu  17818367  c3b_cpu_dtII_DOR   2 h  pshort_el8 (NO gpu, 5 idle nodes) -> BUILD_CPU_OK
   gpu  17818368  c3b_gpu_dtII_DOR  30 m  pgpu --gres=gpu:1  afterok:cpu    -> BUILD_OK
@@ -282,7 +282,7 @@ higher-priority pending job (est. up to ~1.5 d). pshort_el8 has 5 idle nodes and
 contention, so the CPU stage starts in minutes; only a ~5-min GPU minimisation then
 competes for the scarce card. build_system.sh gained a STAGE switch (all|cpu|gpu);
 minimisation is factored into one do_minimise() so both paths run IDENTICAL code. The CPU
-stage emits BUILD_CPU_OK (NOT BUILD_OK — the latter asserts min.gro, which only the GPU
+stage emits BUILD_CPU_OK (NOT BUILD_OK: the latter asserts min.gro, which only the GPU
 stage produces). Guards verified locally: bad STAGE value and STAGE=gpu with missing
 inputs both FAIL+exit 1.
 
@@ -308,27 +308,27 @@ gate terminates the cycle and is reported as a negative methodological result.
 ## Resume sequence
 
 1. Deploy the fixed `build_system.sh`; confirm `bash -n` passes on the cluster.
-2. Resubmit the 6 builds with `--resume` (fast — packing is skipped; expect
+2. Resubmit the 6 builds with `--resume` (fast: packing is skipped; expect
    minutes, not 30 min each). Confirm each logs `topology:`,
    `amide verified in final topology`, `Errors = 0`, and writes `system.top`,
    `system.gro`, `index.ndx`, `pepmeta.txt`.
 3. Locate the menk poses (`find $W/out_c3b_menk_* -name "*model_0*"`), then build
    those two with `--no-amidate`.
 4. Submit the 24 production replicates via `run_prod.sh <tag> <rep> <yes|no>
-   <dres_rel|none>` — already written, syntax-checked, not yet run. It re-runs
+   <dres_rel|none>`: already written, syntax-checked, not yet run. It re-runs
    NVT+NPT per replicate with a distinct `gen_seed` (independent velocities, so
    the three replicates are genuinely independent), asserts the amide before
    starting, and gates chirality post-NVT / post-NPT / post-production, exiting 3
    to DISCARD an inverted replicate rather than averaging it in.
 5. Then the G1/G2/G3 calibration gate. **Stage 2 stays unauthorised until it
-   passes** — per the pre-registration, a failed gate terminates the cycle and
+   passes**: per the pre-registration, a failed gate terminates the cycle and
    reports a negative methodological result.
 
 Budget unchanged: 71.5 ns/day measured → Stage 1 = 6.7 GPU-days (~3.4 d on 2 GPUs).
 
 ---
 
-# UPDATE — checkpoint check, two blocking findings
+# UPDATE: checkpoint check, two blocking findings
 
 ## Builds all SUCCEEDED; the species fix holds
 
@@ -337,7 +337,7 @@ All 6 systems built with `RESUME_EXIT=0`, `tleap Errors=0`, and every log carrie
 builds took 45 s – 2:48 instead of ~30 min. The nullglob fix for the silent EXIT=2
 is confirmed correct against real builds.
 
-## BLOCKER 1 — build → production skipped a stage
+## BLOCKER 1: build → production skipped a stage
 
 `build_system.sh` writes only `system.top` + `system.gro`. The files `run_prod.sh`
 needs (`index.ndx`, `pepmeta.txt`, `min.gro`) are produced by **`run_md.sh`**, which
@@ -347,7 +347,7 @@ the chain skipped. All 18 production tasks died in 3–5 s on
 Two fixes needed:
 1. Add a `--prep-only` mode to `run_md.sh` that stops after minimisation (index +
    pepmeta + min.gro), and run it between build and production. Do NOT run full
-   `run_md.sh` — it also does NVT/NPT/benchmark, which `run_prod.sh` redoes per
+   `run_md.sh`: it also does NVT/NPT/benchmark, which `run_prod.sh` redoes per
    replicate with its own seed, so that would waste ~37 min/system.
 2. `run_prod_job.sh` ends with `echo "JOB_EXIT=$?"`, so the job ALWAYS exits 0.
    SLURM therefore marked all 18 `COMPLETED` and `--dependency=afterok` released the
@@ -355,7 +355,7 @@ Two fixes needed:
    **`JOB_EXIT=1` in the log with sacct State=COMPLETED.** End the script with an
    explicit `exit $rc`.
 
-## BLOCKER 2 — the panel is not size-comparable (fix before spending GPU)
+## BLOCKER 2: the panel is not size-comparable (fix before spending GPU)
 
 | system | atoms | POPC | box x,y (nm) |
 |---|---|---|---|
@@ -374,7 +374,7 @@ Why this is disqualifying: the measurement is DOR vs MOR for the SAME peptide. W
 dtII_DOR at 3,234 lipids and dtII_MOR at 624, a difference in contact metrics is
 partly a difference in bilayer area, water-layer thickness and finite-size effects
 rather than in binding. Also note this rebuild gave 441,296 atoms where the original
-benchmark of the same system gave 270,287 from identical inputs — the geometry is not
+benchmark of the same system gave 270,287 from identical inputs: the geometry is not
 reproducible run-to-run, so it cannot be treated as a fixed property of the system.
 
 Budget consequence: 71.5 ns/day was measured at 270k atoms. The panel mean is now
@@ -401,7 +401,7 @@ Met-enkephalin remains blocked (co-fold wrote no `predictions/`), so Stage 1 is 
 
 ---
 
-# UPDATE 2 — root cause found; two of my own claims were wrong
+# UPDATE 2: root cause found; two of my own claims were wrong
 
 ## CORRECTION 1: the budget claim was wrong
 
@@ -409,13 +409,13 @@ I wrote "the panel mean is well above 270k atoms, so Stage 1 costs materially mo
 than 6.7 GPU-days". That is false. Panel mean is **188,383 atoms = 0.70x** the
 benchmark; median 121,054 = 0.45x. **Only dtII_DOR (441,296) exceeds the benchmark.**
 Scaling throughput as 1/N, the 18 as-built runs cost **3.5 GPU-days**, and a panel
-pinned at ~120k atoms costs **3.0 GPU-days for all 24 runs** — *cheaper* than the
+pinned at ~120k atoms costs **3.0 GPU-days for all 24 runs**, *cheaper* than the
 pre-registered 6.7, not more expensive. Compute was never the problem.
 
 ## CORRECTION 2: the met-enkephalin hypothesis was wrong
 
 I wrote "YGGFM is the shortest chain in the panel; check for a minimum-length
-condition". Endomorphin-1 is `YPWF` — **4 residues, shorter than YGGFM's 5** — and
+condition". Endomorphin-1 is `YPWF` (**4 residues, shorter than YGGFM's 5**) and
 folded fine. Minimum length is ruled out. The log shows Boltz's own
 `Number of failed examples: 1`, alongside `Found explicit empty MSA for some
 proteins, will run these in single sequence mode` (expected for any short peptide,
@@ -436,7 +436,7 @@ same method for every system, same receptor:
 | c3b_dtI_DOR | 29.8° | mis-oriented |
 | c3b_dtI_MOR | 34.8° | mis-oriented |
 
-The result is **bimodal** — 2 systems at ~3°, 4 at 24–35°. Identical inputs and
+The result is **bimodal**: 2 systems at ~3°, 4 at 24–35°. Identical inputs and
 identical method, so this is `memembed` succeeding on two and failing on four, not a
 property of the receptor. Every build logged `orientation: --preoriented`, so the
 build *believed* it was oriented and packed the bilayer around a tilted bundle.
@@ -447,7 +447,7 @@ This subsumes the box-size finding: a tilted bundle presents a wider xy footprin
 **Why it invalidates the runs rather than just costing more:** with a 24–35° tilt the
 TM hydrophobic belt does not align with the bilayer hydrophobic core, so TM residues
 sit against headgroups and water. The protein will rotate during equilibration to
-relieve that mismatch, which takes many ns — so a 20 ns production window would be
+relieve that mismatch, which takes many ns, so a 20 ns production window would be
 dominated by protein reorientation rather than by sampling the bound pose, and the
 contact metrics would be measuring the relaxation, not the binding.
 
@@ -459,7 +459,7 @@ are idle, so all 8 fit in one wave.
 
 ---
 
-# GATE EVALUATOR + PRE-REGISTRATION AMENDMENT — 2026-07-31
+# GATE EVALUATOR + PRE-REGISTRATION AMENDMENT: 2026-07-31
 
 ## The pre-registered G2 is unpassable; amended to G2' before any data existed
 

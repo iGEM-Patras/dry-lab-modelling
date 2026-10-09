@@ -1,4 +1,4 @@
-# Cycle 3a — Results
+# Cycle 3a: Results
 
 **Status:** complete · 14/14 co-folds succeeded (job `1391bb2a`, 57 min on one RTX 2080 Ti)
 **Held-out set:** 15 fresh diffusion samples per complex, seed 2026, 210 structures total
@@ -16,7 +16,7 @@
 | P4 | V4/V5 remain best-converged δ complexes | V5 (0.49 Å), V4 (0.84 Å) | ✅ CONFIRMED |
 | P5 | The n=5 Δ_sel ranking is **unstable** | top-2 changed; SEM ↓ 53 % | ✅ CONFIRMED |
 
-**3 of 5 confirmed — but the two that failed are the two that decide the hypothesis.**
+**3 of 5 confirmed, but the two that failed are the two that decide the hypothesis.**
 The success criterion required **P1 *and* P2**. Neither held.
 
 ---
@@ -42,14 +42,14 @@ were extreme on both axes (δ-convergence 5.89 and 4.16 Å against ≤1.42 Å fo
 else, and the only negative Δ_sel values). A rank correlation over n = 7 with two joint
 outliers is essentially a two-point fit. Remove them and the sign inverts: ρ = **+0.300**,
 i.e. among the five well-behaved peptides, *better* δ-convergence goes with *less*
-δ-preference — the opposite of H3a.
+δ-preference: the opposite of H3a.
 
 **Convergence itself is not reproducible at the peptide level.** V1's δ-convergence moved
 5.89 → 4.04 Å and V3's 0.90 → 2.10 Å between sample sets. The metric has a large spread
 *between* independent sample draws of the same complex, which is exactly what P3's
 favourable spread/noise ratio failed to capture: P3 measured dispersion *within* one
 sample set, not reproducibility *across* sets. **P3 is therefore confirmed but
-uninformative** — a well-powered measurement of an unstable quantity.
+uninformative**: a well-powered measurement of an unstable quantity.
 
 That is the methodological lesson of this cycle: high spread-to-noise within a run is not
 evidence of a reliable metric. Only replication on independent samples tests that, and
@@ -57,7 +57,7 @@ this is why the cycle was designed around held-out data rather than a bigger sin
 
 ---
 
-## P5 — our own Cycle 2 ranking was unreliable, as predicted
+## P5: our own Cycle 2 ranking was unreliable, as predicted
 
 | | ranking (best δ first) |
 |---|---|
@@ -67,7 +67,7 @@ this is why the cycle was designed around held-out data rather than a bigger sin
 V5 fell from 2nd to 4th; V3 rose from 5th to 3rd; the top-2 changed. Mean SEM fell 53 %
 (0.0079 → 0.0037), confirming n = 5 was badly under-powered.
 
-**Effect sizes shrank toward zero as n grew** — the signature of noise-driven estimates:
+**Effect sizes shrank toward zero as n grew**: the signature of noise-driven estimates:
 
 | peptide | Δ_sel n=5 | Δ_sel n=15 | pooled n=20 |
 |---|---|---|---|
@@ -78,7 +78,7 @@ V5 fell from 2nd to 4th; V3 rose from 5th to 3rd; the top-2 changed. Mean SEM fe
 
 At n = 20, **no peptide reaches Δ_sel > 0.007**, and the largest values (C1-BASE +0.0061,
 V4 +0.0060) are indistinguishable from each other. The one surviving significant result is
-still **V2 `YGGFELLG` preferring μ** (p = 0.008) — reproducing Cycle 2's direction with a
+still **V2 `YGGFELLG` preferring μ** (p = 0.008), reproducing Cycle 2's direction with a
 different variant, and reinforcing that added aliphatic bulk in the address biases μ-ward,
 opposite to the D-Ala²-backbone literature.
 
@@ -90,10 +90,10 @@ opposite to the D-Ala²-backbone literature.
    and 20 samples each, every Δ_sel is ≤ 0.006 with SEM ≈ 0.004. Boltz-2 ipTM cannot
    resolve δ/μ selectivity at the magnitude our designs produce.
 2. **Pose convergence is retired as a selectivity metric.** It stays in the record as a
-   *diagnostic* — V1/V2's 4 Å δ-pose spread is a real sign the model cannot place those
-   peptides confidently — but not as a selectivity readout.
+   *diagnostic*: V1/V2's 4 Å δ-pose spread is a real sign the model cannot place those
+   peptides confidently, but not as a selectivity readout.
 3. **Cycle 3b's premise is undermined.** It was to combine V4's and V5's "independent
-   wins". At n = 20, V5's win is +0.0032 ± 0.004 — not a win. Combining two effects that
+   wins". At n = 20, V5's win is +0.0032 ± 0.004, not a win. Combining two effects that
    are themselves within noise is not a design rationale.
 4. **The honest conclusion is that the in-silico screen has reached its resolution limit.**
    The next informative experiment is wet-lab, not another fold.
@@ -109,7 +109,7 @@ opposite to the D-Ala²-backbone literature.
   binding at OPRD1/OPRM1. The screen's actual output is a shortlist of 2, which is what
   it was ever able to deliver.
 - **(b) Change the observable.** If Cycle 3b is to stay in silico, it must measure
-  something with more dynamic range than ipTM — e.g. MM-GBSA rescoring of the co-fold
+  something with more dynamic range than ipTM, e.g. MM-GBSA rescoring of the co-fold
   poses, or explicit-solvent MD of the peptide–receptor complexes with per-residue
   interaction energies. That is a new method, so it needs its own pre-registration.
 

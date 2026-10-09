@@ -1,5 +1,5 @@
 id,sequence,modification,rationale,status
-C1-BASE,YGGFEVVG,baseline (Cycle 1 chimera),"reference — deltorphin II address, unmodified",done
+C1-BASE,YGGFEVVG,baseline (Cycle 1 chimera),"reference, deltorphin II address, unmodified",done
 V1,YGGFEIIG,"Val6,7 -> Ile,Ile","PRIMARY: Ile5,6-deltorphin II raised delta-selectivity to 2400-18000x (Sasaki 1991; Nevin 1994). beta-branched, more hydrophobic.",new
 V2,YGGFELLG,"Val6,7 -> Leu,Leu","hydrophobicity control: same added bulk, NOT beta-branched. Separates hydrophobicity from beta-branching.",new
 V3,YGGFDVVG,Glu5 -> Asp,"deltorphin I address (DVVG) vs deltorphin II (EVVG); both natural, highly delta-selective. Shorter anionic side chain.",new

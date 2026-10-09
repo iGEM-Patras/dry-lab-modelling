@@ -8,18 +8,18 @@ about 1 kcal/mol**, the size of the published met-enkephalin δ/μ preference.
 
 ## The two failure modes, which together rule out most of the field
 
-**Mode 1 — the published-affinity noise floor.** Four routes (BindPred, GPCRVS, TrGPCR,
+**Mode 1, the published-affinity noise floor.** Four routes (BindPred, GPCRVS, TrGPCR,
 our own fingerprint QSAR) calibrate against or interpolate from published affinities. Our
 own records disagree by **1.83 kcal/mol** on a single compound measured by two sources.
 That is larger than the effect. **Any method anchored to published affinity data is bounded
 below by this, regardless of how good the model is.** This is a property of the data, not of
 the algorithms, so it rules out the class rather than the instances.
 
-**Mode 2 — accumulation in a difference of large absolutes.** Cycle 14 computed the
+**Mode 2: accumulation in a difference of large absolutes.** Cycle 14 computed the
 selectivity as `ΔG(decouple from δ) − ΔG(decouple from μ)` = 2349.5 − 2346.5 kJ/mol: a
 3 kJ/mol answer extracted from two ~2350 kJ/mol quantities. Measured per interval, the
-per-window biases are small (max 3.5 kJ/mol, none above 5) but **correlated** — 40 of 55 and
-40 of 56 intervals share their leg's sign — so they accumulate to ≈30 kJ/mol per leg rather
+per-window biases are small (max 3.5 kJ/mol, none above 5) but **correlated**: 40 of 55 and
+40 of 56 intervals share their leg's sign, so they accumulate to ≈30 kJ/mol per leg rather
 than cancelling. Roughly **7 kcal/mol of replicate variation in each absolute**, for an
 effect of 0.81.
 
@@ -37,10 +37,10 @@ cannot either.
 This is not speculative. It is the published strategy for exactly this problem:
 
 - **Kinome-wide selectivity by free energy calculation**, Nature Communications 2025,
-  doi:10.1038/s41467-025-62722-w — uses *protein residue mutation* free energy calculations
+  doi:10.1038/s41467-025-62722-w: uses *protein residue mutation* free energy calculations
   to reduce off-target liability across a receptor family, the same shape of problem as
   δ versus μ.
-- **Protein-mutation FEP benchmark**, J Mol Biol 2024, doi:10.1016/j.jmb.2024.168640 —
+- **Protein-mutation FEP benchmark**, J Mol Biol 2024, doi:10.1016/j.jmb.2024.168640:
   establishes reliability of relative binding-energy prediction for single point mutations.
 
 ### Is it tractable here? Measured, not assumed.
@@ -76,7 +76,7 @@ conservative.
 ### What it would and would not tell you
 
 **Would:** which pocket differences actually drive δ/μ discrimination, as free energies with
-replicate error bars — and whether the engineered `EVVG` address exploits any of them.
+replicate error bars, and whether the engineered `EVVG` address exploits any of them.
 
 **Would not:** give a ΔΔG for `YGGFEVVG` itself. The quantity changes. This answers *why*
 selectivity arises, not *how much* this peptide has.
@@ -90,7 +90,7 @@ miss that entirely, and a null result would not distinguish "no contact-chemical
 
 ## Also identified, lower priority
 
-**Funnel-metadynamics on the opioid family** — J Chem Inf Model 2026,
+**Funnel-metadynamics on the opioid family**: J Chem Inf Model 2026,
 doi:10.1021/acs.jcim.5c02403, "Identification of Subtype-Selective Binding Sites in the
 Opioid Receptor Family", combines MD and funnel-metadynamics on μ, δ and κ specifically. It
 computes absolute binding free energies with a funnel restraint, so it does not escape Mode 2,
@@ -106,7 +106,7 @@ potency at both receptors directly, is subject to neither failure mode, and answ
 question the project actually needs answered. Every computational route assessed has cost
 days to weeks and returned either a failed gate or an uninterpretable number.
 
-If a computational route is wanted *alongside* the assay — for mechanism rather than for the
-answer — the **single-residue W284K pilot at ~1.9 days** is the right size: it tests whether
+If a computational route is wanted *alongside* the assay, for mechanism rather than for the
+answer, the **single-residue W284K pilot at ~1.9 days** is the right size: it tests whether
 residue-mutation FEP reproduces a known selectivity determinant before anything larger is
 committed, and it fails cheaply.

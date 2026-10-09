@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
-<title>PENK Dry-Lab — Presentation</title>
+<title>PENK Dry-Lab, Presentation</title>
 <style>
   :root{--ink:#1a2733;--accent:#1b6ca8;--warn:#b3341f;--ok:#1f8a4c;--bg:#f7f9fb;}
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -48,7 +48,7 @@
   <p class="big" style="margin:24px 0;">Make more enkephalin · degrade less of it · at the pain relay</p>
   <ul>
     <li><b>Make more:</b> a <b>PENK</b> plasmid expresses proenkephalin → processed to enkephalins → endogenous opioids acting on δ/μ receptors.</li>
-    <li><b>Degrade less:</b> silence <b>neprilysin (NEP/MME)</b>, the enzyme that inactivates enkephalin in seconds — an <b>siRNA</b> knockdown arm.</li>
+    <li><b>Degrade less:</b> silence <b>neprilysin (NEP/MME)</b>, the enzyme that inactivates enkephalin in seconds, an <b>siRNA</b> knockdown arm.</li>
     <li><b>Deliver both together:</b> co-formulated in a <b>lipoplex</b>, delivered locally (intrathecal, spinal dorsal horn).</li>
   </ul>
   <p class="sub" style="margin-top:16px;">Opioid-like analgesia without an exogenous opioid. Clinical precedent exists for enkephalin gene therapy in pain.</p>
@@ -57,35 +57,35 @@
 
 <!-- 3 plasmid audit -->
 <section class="slide">
-  <h2>1 · Plasmid audit — one real defect found</h2>
+  <h2>1 · Plasmid audit, one real defect found</h2>
   <table>
     <tr><th>#</th><th>Plasmid</th><th>PENK</th><th>Verdict</th></tr>
     <tr><td>1</td><td>mEGFP-IRES-PENK</td><td class="warn">TRUNCATED (6/7 cores)</td><td class="warn">DEFECT</td></tr>
     <tr><td>2</td><td>mEGFP-P2A-PENK</td><td>full length</td><td>OK, secretion caveat</td></tr>
-    <tr><td>3</td><td>PENK-IRES-mEGFP</td><td>full length</td><td class="ok">USE THIS — cleanest</td></tr>
+    <tr><td>3</td><td>PENK-IRES-mEGFP</td><td>full length</td><td class="ok">USE THIS, cleanest</td></tr>
     <tr><td>4</td><td>PENK-P2A-mEGFP</td><td>full length</td><td>OK (backup)</td></tr>
   </table>
   <ul style="margin-top:16px;">
-    <li><b>Use plasmid 3</b> — PENK cap-driven, signal peptide intact, byte-identical to reference.</li>
-    <li class="warn">Plasmid 1's truncation removes the 7th enkephalin core — and is <u>invisible on a gel</u>. Only Sanger sequencing catches it.</li>
+    <li><b>Use plasmid 3</b>, PENK cap-driven, signal peptide intact, byte-identical to reference.</li>
+    <li class="warn">Plasmid 1's truncation removes the 7th enkephalin core, and is <u>invisible on a gel</u>. Only Sanger sequencing catches it.</li>
   </ul>
   <div class="num">3</div><div class="footer">PENK dry-lab</div>
 </section>
 
 <!-- 4 restriction QC -->
 <section class="slide">
-  <h2>2 · Restriction-digest QC — before every transfection</h2>
+  <h2>2 · Restriction-digest QC, before every transfection</h2>
   <div class="two">
     <div>
-      <h3>Digest A — insert release</h3>
+      <h3>Digest A, insert release</h3>
       <p>AflII + XbaI → 5,345 bp backbone (control) + linker band:</p>
       <ul><li><b>~2.16 kb = IRES</b></li><li><b>~1.63 kb = P2A</b></li></ul>
-      <h3>Digest B — identity fingerprint</h3>
+      <h3>Digest B, identity fingerprint</h3>
       <p>NcoI (5 cuts) → unique 5-band pattern; second-largest band = gene order.</p>
     </div>
     <div>
       <h3>What it catches</h3>
-      <p>Mis-assembly, wrong linker, wrong gene order — before wasting a transfection.</p>
+      <p>Mis-assembly, wrong linker, wrong gene order, before wasting a transfection.</p>
       <h3 class="warn">What it can't</h3>
       <p class="warn">The plasmid-1 point truncation. Gel QC does <u>not</u> replace Sanger sequencing.</p>
     </div>
@@ -96,7 +96,7 @@
 
 <!-- 5 siRNA -->
 <section class="slide">
-  <h2>3 · Anti-NEP (MME) siRNA — knockdown reagents</h2>
+  <h2>3 · Anti-NEP (MME) siRNA, knockdown reagents</h2>
   <p>2,084 sites screened → sequence rules → thermodynamic asymmetry → off-target → <b>accessibility</b>. All target the CDS shared by <b>all 4 MME variants</b>.</p>
   <table>
     <tr><th>Priority</th><th>Name</th><th>Guide (5'→3')</th><th>Notes</th></tr>
@@ -110,7 +110,7 @@
 
 <!-- 6 MD -->
 <section class="slide">
-  <h2>4 · Lipoplex CG-MD — does pH control DNA binding?</h2>
+  <h2>4 · Lipoplex CG-MD, does pH control DNA binding?</h2>
   <p>MARTINI coarse-grained MD, 3 seeds × 3 formulations. Question: does the ionizable lipid bind DNA at endosomal pH but release at physiological pH?</p>
   <table>
     <tr><th>Formulation</th><th>DNA–lipid contacts (50 ns)</th><th>Reading</th></tr>
@@ -128,11 +128,11 @@
 <!-- 7 delivery -->
 <section class="slide">
   <h2>Why co-formulation is non-negotiable</h2>
-  <p class="big" style="margin:18px 0;">Silencing is cell-autonomous — but enkephalin degradation is not.</p>
+  <p class="big" style="margin:18px 0;">Silencing is cell-autonomous, but enkephalin degradation is not.</p>
   <ul>
     <li>NEP degrades enkephalin <b>extracellularly</b>, on the surface of <b>many</b> cells.</li>
     <li>siRNA only silences the cells it actually enters.</li>
-    <li>⇒ Silencing NEP only in the enkephalin-producing cell is <b>insufficient</b> — neighbours still degrade the secreted peptide.</li>
+    <li>⇒ Silencing NEP only in the enkephalin-producing cell is <b>insufficient</b>, neighbours still degrade the secreted peptide.</li>
     <li class="ok">⇒ Co-package siRNA + PENK plasmid in the <b>same lipoplex</b>, delivered to the <b>same locus</b>. This is what makes the lipoplex load-bearing.</li>
   </ul>
   <div class="num">7</div><div class="footer">PENK dry-lab</div>

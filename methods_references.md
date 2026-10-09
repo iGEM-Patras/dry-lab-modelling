@@ -1,4 +1,4 @@
-# Methods & References — PENK Dry-Lab Modelling (iGEM Patras)
+# Methods & References, PENK Dry-Lab Modelling (iGEM Patras)
 
 This file records every tool, force field, database, parameter, and published
 rule used in the computational work, so the methods section is fully traceable.
@@ -12,19 +12,19 @@ rule used in the computational work, so the methods section is fully traceable.
   Camacho C et al. (2009) *BMC Bioinformatics* 10:421. doi:10.1186/1471-2105-10-421
 
 ## Databases
-- **NCBI RefSeq** — human MME mRNA variants NM_000902.5, NM_007287, NM_007288,
+- **NCBI RefSeq** (human MME mRNA variants NM_000902.5, NM_007287, NM_007288,
   NM_007289 (all share identical 2,253-bp CDS). O'Leary NA et al. (2016)
   *Nucleic Acids Res* 44:D733–45. doi:10.1093/nar/gkv1189
-- **UniProt P08473** — human neprilysin (MME) protein reference.
+- **UniProt P08473** (human neprilysin (MME) protein reference.
 - Off-target DB: NCBI **refseq_rna**, restricted to *Homo sapiens* (txid9606).
 
 ## siRNA design rules
-- **Reynolds et al. (2004)** *Nat Biotechnol* 22(3):326–30 — rational siRNA
+- **Reynolds et al. (2004)** *Nat Biotechnol* 22(3):326–30 (rational siRNA
   sequence criteria (GC 30–52%, positional base preferences, low internal
   stability at guide 5' end). doi:10.1038/nbt936
-- **Ui-Tei et al. (2004)** *Nucleic Acids Res* 32(3):936–48 — guide 5'
+- **Ui-Tei et al. (2004)** *Nucleic Acids Res* 32(3):936–48 (guide 5'
   A/U, 3' G/C, GC-stretch ≤9 rule. doi:10.1093/nar/gkh247
-- **Khvorova/Schwarz asymmetry** — thermodynamic duplex-end asymmetry favours
+- **Khvorova/Schwarz asymmetry** (thermodynamic duplex-end asymmetry favours
   guide-strand RISC loading. Schwarz DS et al. (2003) *Cell* 115:199–208;
   Khvorova A et al. (2003) *Cell* 115:209–16.
 - Nearest-neighbour RNA ΔG parameters: **Turner & Mathews (2010)** / Xia et al.
@@ -36,19 +36,19 @@ rule used in the computational work, so the methods section is fully traceable.
 - **MARTINI 2** force field (v2.1 for DNA, v2.0 for lipids/cholesterol).
   - Marrink SJ et al. (2007) *J Phys Chem B* 111:7812–24 (MARTINI 2.0 lipids).
     doi:10.1021/jp071097f
-  - Monticelli L et al. (2008) *J Chem Theory Comput* 4:819–34 (MARTINI proteins) —
+  - Monticelli L et al. (2008) *J Chem Theory Comput* 4:819–34 (MARTINI proteins)
     cited for provenance of the shared bead-type table only. **No protein is present in
     any coarse-grained system here**; `martini_v2.2.itp` is not included by any topology.
     See [`04_lipoplex_md/FORCE_FIELD_AUDIT.md`](04_lipoplex_md/FORCE_FIELD_AUDIT.md).
   - **martini_v2.1-dna**: Uusitalo JJ et al. (2015) *J Chem Theory Comput*
-    11:3932–45 — MARTINI DNA. doi:10.1021/acs.jctc.5b00286
+    11:3932–45, MARTINI DNA. doi:10.1021/acs.jctc.5b00286
 - **Lipid models (analogy parameters, this project):**
-  - **DOTAP** — permanent +1 quaternary-ammonium head; built by analogy to
+  - **DOTAP**: permanent +1 quaternary-ammonium head; built by analogy to
     MARTINI DOPC (head Q0 +1, phosphate removed). NOT an independently validated
     parameter set; documented as an analogy model in DOTAP.itp header.
-  - **MC3T** — ionizable DLin-MC3-DMA-type surrogate, PROTONATED (+1, Qd head),
+  - **MC3T**: ionizable DLin-MC3-DMA-type surrogate, PROTONATED (+1, Qd head),
     di-linoleyl tails (DUPC architecture). Endosomal-pH (~5–6) state.
-  - **MC3N** — neutral reference (P4, charge 0 head) = physiological-pH (7.4)
+  - **MC3N**: neutral reference (P4, charge 0 head) = physiological-pH (7.4)
     state of the same lipid. Both are MARTINI-2 analogy models (MC3.itp header),
     NOT the published validated DLin-MC3-DMA parameters.
     Reference chemistry: Jayaraman M et al. (2012) *Angew Chem* 51:8529–33
@@ -77,7 +77,7 @@ rule used in the computational work, so the methods section is fully traceable.
   flexible bonds diverges (bond energy -> 1e11 kJ/mol).
 - Replicates differ by random velocity-generation seed (gen-vel = yes,
   gen-seed = distinct per replicate) from the shared equilibrated NPT
-  structure — standard practice for independent CG-MD replicates to estimate
+  structure: standard practice for independent CG-MD replicates to estimate
   statistical uncertainty (mean ± SEM across replicates).
 
 ## Robustness & convergence (iGEM Best Model)
@@ -98,9 +98,9 @@ rule used in the computational work, so the methods section is fully traceable.
   Consequently all conclusions are **qualitative/comparative** (relative ranking
   of DNA-condensing tendency across formulations and protonation states), not
   quantitative binding free energies. Extending sampling does not remove this
-  limitation — it is a parameter-provenance issue, disclosed by design.
+  limitation: it is a parameter-provenance issue, disclosed by design.
 
-## MD results — 50 ns stage (n=3 seeds/formulation)
+## MD results: 50 ns stage (n=3 seeds/formulation)
 - Metrics (mean ± SEM, equilibrated 2nd half): analysis groups defined via
   `gmx select` selection FILE with semicolons + a `"System" all` group (required
   by trjconv). Cation resname per system: DOTAP / MC3T (protonated) / MC3N (neutral).

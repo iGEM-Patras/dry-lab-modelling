@@ -1,6 +1,6 @@
 # 03 · Human anti-NEP (MME) siRNA design
 
-Silencing **neprilysin (NEP / CD10, gene MME)** — the principal enkephalin-degrading peptidase — prolongs the half-life of the enkephalins produced by the PENK construct. This is the knockdown arm of the therapy.
+Silencing **neprilysin (NEP / CD10, gene MME)**, the principal enkephalin-degrading peptidase, prolongs the half-life of the enkephalins produced by the PENK construct. This is the knockdown arm of the therapy.
 
 **Target:** all four human MME transcript variants (NM_000902.5, NM_007287/288/289) share an **identical 2,253 bp CDS**; every design targets that shared CDS, so a single siRNA silences all isoforms.
 
@@ -18,6 +18,6 @@ Silencing **neprilysin (NEP / CD10, gene MME)** — the principal enkephalin-deg
 **Validation:** qPCR of MME at 48 h (expect ≥70% knockdown for ≥2 duplexes) + NEP activity / CD10 Western; use ≥2 effective siRNAs to control for off-target phenotypes.
 
 ## Files
-- `sirna_design_table.csv` — full candidate scoring: guide + passenger strands, mRNA/CDS positions, GC, ΔΔG, off-target counts.
-- `sirna_design.md` — design rationale and method notes.
-- `sirna_design_figure.png` — target positions, off-target load, and guide-loading asymmetry vs GC.
+- `sirna_design_table.csv`: full candidate scoring: guide + passenger strands, mRNA/CDS positions, GC, ΔΔG, off-target counts.
+- `sirna_design.md`: design rationale and method notes.
+- `sirna_design_figure.png`: target positions, off-target load, and guide-loading asymmetry vs GC.

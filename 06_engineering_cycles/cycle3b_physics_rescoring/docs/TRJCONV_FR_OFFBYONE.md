@@ -1,4 +1,4 @@
-# trjconv -fr frame numbering is 1-based — defect note
+# trjconv -fr frame numbering is 1-based: defect note
 
 **Found:** 2026-08-31, first bound-mode run (c3b_dtII_MOR rep3).
 **Severity:** would have scored the wrong frames, silently, with a plausible number.
@@ -9,7 +9,7 @@
 indices to an index file, and passes it to `gmx trjconv -fr`. The selection code emitted
 0-based indices, matching the Python enumeration of the per-frame .xvg series.
 
-`trjconv -fr` numbers frames **1-based**. Index 56 extracted t = 550 ps — the 56th frame —
+`trjconv -fr` numbers frames **1-based**. Index 56 extracted t = 550 ps (the 56th frame),
 not t = 560 ps, which is what index 56 means in the .xvg. Every scored frame was the one
 immediately before the intended frame.
 
@@ -22,7 +22,7 @@ and refuses if any frame is in contact, because selection guarantees none are. I
 
 That check existed only because bound mode repurposed the original membrane gate from
 filter to verification rather than deleting it as redundant. Had it been deleted, the run
-would have completed and produced -70-something kcal/mol — indistinguishable from a
+would have completed and produced -70-something kcal/mol, indistinguishable from a
 correct answer.
 
 PBC treatment was ruled out as a cause by extracting with and without `-pbc mol` and
@@ -39,8 +39,8 @@ getting byte-identical distances.
 
 Same shape as the collect_dg.py delta-parse defect (see COLLECT_DG_DELTA_BUG.md): a wrong
 value that lands inside the plausible range is invisible to range checks. Both were caught
-by a *relational* check — components must sum to the total; extracted times must equal
-requested times — not by a plausibility check.
+by a *relational* check: components must sum to the total; extracted times must equal
+requested times, not by a plausibility check.
 
 When an off-by-one is possible, do not reason about the convention. Extract one element and
 compare it against what you asked for.

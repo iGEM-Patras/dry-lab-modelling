@@ -1,8 +1,8 @@
-# Cycle 5 — Can HEK293T express the designed construct and *not* process it?
+# Cycle 5: Can HEK293T express the designed construct and *not* process it?
 
 **Status:** pre-registered · written **before** transfection · [`de6a6f5`](https://github.com/kei-zan/PENK_engineering/commit/de6a6f5) pushed to remote
 
-**Type:** wet-lab expression validation cycle — first transfection of the designed constructs
+**Type:** wet-lab expression validation cycle: first transfection of the designed constructs
 
 **Learn input:** Cycle 4 (synthesis feasibility), Cycles 1–3 (cell-line processing competence audit)
 
@@ -15,7 +15,7 @@
 ### The design paradox
 
 Cycles 1–3 established that **HEK293T lacks the machinery to process PENK.** The cell line
-reports PCSK1 0.1 nTPM, PCSK2 0.1 nTPM, and SCG5 0.0 nTPM — no proprotein convertases and
+reports PCSK1 0.1 nTPM, PCSK2 0.1 nTPM, and SCG5 0.0 nTPM: no proprotein convertases and
 no 7B2 chaperone. Under those constraints, a classic endoproteolytic expression strategy
 will fail: transfect PENK → cells make precursor → cells do not cleave it → no free peptide.
 
@@ -34,7 +34,7 @@ despite lacking the "machinery," something is wrong with the model.**
 The four constructs are one panel spanning two dimensions:
 
 1. **Cistron 2 translation strategy:** P2A vs IRES (both well-characterized, but IRES
-   second-cistron efficiency is ~20–50% of cap-dependent — Mizuguchi et al., 2000).
+   second-cistron efficiency is ~20–50% of cap-dependent (Mizuguchi et al., 2000).
 2. **Which cistron carries the payload:** engPENK-first or mEGFP-first. This serves two
    purposes: (a) a fluorescence readout for transfection success, and (b) a test of the
    paradox's direction. The IRES constructs are controls; the P2A constructs are the
@@ -55,7 +55,7 @@ The four constructs are one panel spanning two dimensions:
 |---|---|---|---|
 | **P1** | All four constructs show green fluorescence (any signal >mock) at 24–48 h post-transfection in HEK293T | No green in a construct whose plasmid prep sequenced correct | CMV/CAG promoter + Kozak verified; mEGFP folding unaffected by synonymous recoding in Cycle 4 |
 | **P2** | IRES constructs show **2–5× weaker** second-cistron signal than P2A constructs (by densitometry or anti-tag IP) | IRES cistron-2 ≥ P2A cistron-2, or IRES/P2A ratio outside 1.3–10× | Mizuguchi et al. (2000): EMCV IRES second-cistron expression 20–50% of cap-dependent first; our P2A and IRES should differ by ~2–5× in efficiency |
-| **P3** | Anti-His western on cell lysate shows **single band at 30.9 or 32.8 kDa**, no ladder of small peptides | Multiple bands <10 kDa (evidence of endoproteolytic processing) | HEK293T PCSK1 0.1, PCSK2 0.1, SCG5 0.0 nTPM — no convertase, no chaperone; precursor cannot be cleaved to release free octapeptide |
+| **P3** | Anti-His western on cell lysate shows **single band at 30.9 or 32.8 kDa**, no ladder of small peptides | Multiple bands <10 kDa (evidence of endoproteolytic processing) | HEK293T PCSK1 0.1, PCSK2 0.1, SCG5 0.0 nTPM: no convertase, no chaperone; precursor cannot be cleaved to release free octapeptide |
 | **P4** | P2A constructs show a minor ~60 kDa read-through band (typically 5–20% of total His signal) | No 60 kDa species detectable, or it dominates cleaved products | P2A skipping is efficient but incomplete; read-through is routinely reported in the literature |
 | **P5** | **NO free YGGFEVVG detected** in conditioned medium by LC-MS/MS | YGGFEVVG [M+H]+ 827.39 detected above blank | Same absence of convertase/chaperone as P3; this is the central prediction of the design paradox |
 | **P6** | The secreted species in conditioned medium is the **intact ~31 kDa His-tagged precursor**, i.e. secretion succeeds even though processing fails | No His signal in medium while lysate is positive (= secretion failure or tag-position problem) | DeepSig SP scores 0.9997–0.9998 (native 0.9998); TM scores 0.0002 (native 0.0001). Signal peptide is correctly positioned and recognized. |

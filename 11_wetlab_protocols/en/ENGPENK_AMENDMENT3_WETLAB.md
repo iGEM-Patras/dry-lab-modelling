@@ -1,4 +1,4 @@
-# Amendment 3 — cassette 5 opens a second processing branch
+# Amendment 3, cassette 5 opens a second processing branch
 
 **Supersedes:** two statements in Amendment 2 (`NATIVE_PENK_AMENDMENT2_WETLAB`). Everything else in
 Amendments 1 and 2 stands. Triggered by Ozawa et al. 2007 (*Anal. Biochem.*), attached to this project.
@@ -7,14 +7,14 @@ Amendments 1 and 2 stands. Triggered by Ozawa et al. 2007 (*Anal. Biochem.*), at
 
 ## 0. Retractions
 
-**0.1 — "No monoisotopic collision within 1.5 Da between any native and any construct peak."**
+**0.1, "No monoisotopic collision within 1.5 Da between any native and any construct peak."**
 False. `VGRPEWWMDYQKRYG` (BAM-8-22) is produced by both the native precursor and the construct at
 **Δm = 0.0000 Da**, because it lies entirely downstream of the swapped core. It is not resolvable
 at any mass accuracy, any charge state, any isotope. Do not use it as a construct marker.
 The corrected statement: *all construct-specific peaks are mass-resolved from native background;
 one shared peak exists and is uninformative.*
 
-**0.2 — the engineered product panel has 6 species.**
+**0.2, the engineered product panel has 6 species.**
 It has 11. Cassette 5 sits in a downstream context byte-identical to native core 5, so it follows the
 BAM branch and yields five species the shipped target list omits.
 
@@ -29,7 +29,7 @@ counterpart**. The construct therefore inherits native processing fate cassette-
 | Fate class | Cassettes | Downstream flank | Consequence |
 |---|---|---|---|
 | clean dibasic | 1, 2, 3, 6 | `KR` / `KK` | octapeptide → amidated heptapeptide |
-| extended monobasic | 4, 7 | `RGL`, `RF` | extended product (native architecture — see Amd 2 §0.2) |
+| extended monobasic | 4, 7 | `RGL`, `RF` | extended product (native architecture: see Amd 2 §0.2) |
 | **BAM branch** | **5** | **`RRVGRPEWWMDYQKR…`** | **five additional species, previously unlisted** |
 
 ## 2. The five omitted species
@@ -40,7 +40,7 @@ counterpart**. The construct therefore inherits native processing fate cassette-
 | `YGGFEVVGRRVG` | pre-PAM acid | 1295.6855 | amidation substrate |
 | engBAM-22 | `YGGFEVVGRRVGRPEWWMDYQKRYG` | 3091.5107 | 2 Met → +1/+2 ox satellites |
 | engBAM-20 | `YGGFEVVGRRVGRPEWWMDYQKR` | 2871.4260 | 2 Met → +1/+2 ox satellites |
-| BAM-8-22 | `VGRPEWWMDYQKRYG` | 1970.9330 | **shared with native — not a marker** |
+| BAM-8-22 | `VGRPEWWMDYQKRYG` | 1970.9330 | **shared with native, not a marker** |
 
 Add all five to the method file. The first two are genuine construct-specific markers and are
 independently useful: they are a **second, independent readout of PAM activity** on this precursor,
@@ -50,7 +50,7 @@ at a different cassette from the ones the octapeptide reports on.
 
 The amidation question has blocked the peptide order since Amendment 1: we predict PAM converts
 `YGGFEVVG` → `YGGFEVV`-NH₂ but have never measured it. Ozawa et al. run the granule cascade
-**in vitro as three separate reactions** — convertase, then carboxypeptidase, then amidation —
+**in vitro as three separate reactions**: convertase, then carboxypeptidase, then amidation.
 because the buffers required downstream inhibit the convertase, so the steps cannot be combined
 in one tube. Each step is read by mass.
 

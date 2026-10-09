@@ -1,4 +1,4 @@
-# Cycle 14 · Gate G4 — replicate independence
+# Cycle 14 · Gate G4: replicate independence
 
 **Status: PASSED.** Scored 2026-10-03, before any production window ran.
 
@@ -13,7 +13,7 @@ independent: fresh velocity generation **and** independent NVT and NPT, rather t
 8's pair which shared one equilibrated structure and differed only by thermostat seed.
 
 **Peptide identity verified, not assumed.** The last five residues of the Protein group
-render as `YGGFM` in both receptors — met-enkephalin, numbering restarting at 1 — so the
+render as `YGGFM` in both receptors (met-enkephalin, numbering restarting at 1), so the
 RMSD selection is the intended solute.
 
 ---
@@ -35,7 +35,7 @@ periodic wrapping scatters it, so the metric measured solvent diffusion, not str
 divergence. The giveaway is a maximum displacement of 18 nm in a box roughly 15 nm across,
 between two runs started from the *same* minimised structure.
 
-Against solvent, 0.05 nm is unreachable in the failing direction — **any** two independent
+Against solvent, 0.05 nm is unreachable in the failing direction: **any** two independent
 runs clear it by two orders of magnitude. The same structures measured both ways:
 
 | metric | value |
@@ -45,7 +45,7 @@ runs clear it by two orders of magnitude. The same structures measured both ways
 | ratio | **17.7×** |
 
 **The defect is in the pre-registration, not the execution.** G4 named a threshold without
-naming an atom selection, and an unspecified selection means everything — which for a
+naming an atom selection, and an unspecified selection means everything, which for a
 membrane system is overwhelmingly solvent. A gate that cannot fail is not evidence, and
 this one would have gone into the record as passed.
 
@@ -62,8 +62,8 @@ selection it applies to.**
 ## Measured GPU equilibration throughput
 
 Equilibration was moved from `pibu_el8` to `pgpu` partway through. Unlike the production
-windows — where GROMACS keeps PME and the perturbed nonbonded terms on CPU under
-free-energy perturbation — equilibration is plain MD, so both offload to GPU.
+windows, where GROMACS keeps PME and the perturbed nonbonded terms on CPU under
+free-energy perturbation: equilibration is plain MD, so both offload to GPU.
 
 | stage | system | ns/day |
 |---|---|---|
@@ -79,7 +79,7 @@ on `pgpu`; production stays on CPU** where the comparator legs ran.
 
 ## What this licenses
 
-Stage 2 — the 57-window re-spaced ladder — may run, and its replicate spread will measure
+Stage 2 (the 57-window re-spaced ladder) may run, and its replicate spread will measure
 structural plus thermal variation rather than thermostat seed alone.
 
 ## What it does not

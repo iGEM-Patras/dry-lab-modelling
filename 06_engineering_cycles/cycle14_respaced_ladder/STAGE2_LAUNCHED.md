@@ -7,7 +7,7 @@
 | ladder | 57 states, equal thermodynamic length, corner at state 26 |
 | predicted overlap | ~1.0 kT per interval, against a previous maximum of 10.56 |
 | legs | met-enkephalin × {DOR, MOR} × {r1, r2} |
-| replicates | independent equilibrations — fresh velocities **and** own NVT/NPT |
+| replicates | independent equilibrations: fresh velocities **and** own NVT/NPT |
 | hardware | CPU only, matching the comparator legs from Cycle 8 |
 
 Gates were committed before any window ran: see `data/cycle14_prereg.json`. The
@@ -20,7 +20,7 @@ against the published **+0.81 kcal/mol**.
 
 ### 1 · The first window generation inherited the wrong peptide's protocol
 
-All 228 windows built cleanly — from `c3b_menk_*` structures but with the production
+All 228 windows built cleanly, from `c3b_menk_*` structures but with the production
 protocol of **`c3b_em1_DOR_rep1`**, the endomorphin-1 leg, for all four met-enkephalin
 legs.
 
@@ -32,7 +32,7 @@ sixteen production directories.
 Those 228 inputs were deleted and rebuilt from explicitly named per-receptor sources
 with no fallback.
 
-**It would probably have produced correct physics by coincidence** — the endomorphin-1
+**It would probably have produced correct physics by coincidence**: the endomorphin-1
 protocol declares `couple-moltype = system2`, and `system2` is also the peptide in the
 met-enkephalin topologies, because both were built by the same pipeline. That is luck,
 not a protocol, and nothing in the check would have caught a source whose `couple-moltype`
@@ -41,7 +41,7 @@ pointed at a differently-numbered moleculetype.
 ### 2 · The check meant to catch it could not
 
 The generation job ran `gmx dump -s w00.tpr | grep -iE "couple|init-lambda-state"` and
-printed `nsttcouple` and `nstpcouple` — but **not** `couple-moltype`, because `gmx dump`
+printed `nsttcouple` and `nstpcouple`, but **not** `couple-moltype`, because `gmx dump`
 does not emit that directive. This was already established earlier in this campaign by
 running the same query against a known-good file and finding it absent there too.
 
@@ -64,7 +64,7 @@ settled by exact count rather than a window.
 ## What the worker fixes, from failures this campaign already paid for
 
 **It holds a claimed window to completion.** The original workers gave each window a
-fixed two-hour stint, released it, and exited after one pass — which is why the first
+fixed two-hour stint, released it, and exited after one pass, which is why the first
 campaign reached 51.6% of its sampling with only 6 of 108 windows closed. This loops
 until nothing is left to claim.
 

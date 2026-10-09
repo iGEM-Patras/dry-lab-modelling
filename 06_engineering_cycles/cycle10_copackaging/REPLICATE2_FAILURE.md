@@ -1,4 +1,4 @@
-# Cycle 10 condition B: replicate 2 failed numerically at 106.5 ns — protocol exonerated
+# Cycle 10 condition B: replicate 2 failed numerically at 106.5 ns: protocol exonerated
 
 **Date:** 2026-09-25 · **Consequence:** condition B reports **n = 2**, not n = 3.
 Replicates 1 and 3 are verified complete and their protocol is verified correct.
@@ -13,7 +13,7 @@ Box[2] = { -nan, -nan,  inf }
 ```
 
 The system diverged numerically at ~106.5 ns. The box became infinite, so `prod.cpt`
-holds a corrupt state and the run is **not recoverable by resuming** — a resume attempt
+holds a corrupt state and the run is **not recoverable by resuming**: a resume attempt
 re-reads the same non-finite coordinates and fails identically.
 
 ## Verified state of all three replicates
@@ -24,8 +24,8 @@ re-reads the same non-finite coordinates and fails identically.
 | rep2 | 106,500 ps | **absent** | 27.0 MB | **failed** |
 | rep3 | **200,000 ps** | present | 50.5 MB | complete |
 
-Checked three independent ways — logged time, presence of the final structure, and
-trajectory size — rather than from a status line.
+Checked three independent ways: logged time, presence of the final structure, and
+trajectory size, rather than from a status line.
 
 ## The protocol is not the cause. Hypothesis falsified.
 
@@ -55,7 +55,7 @@ rep3's data stands on a verified protocol rather than on chance.**
 ## The failure was sudden, not a slow degradation
 
 `prod.edr` contains **214 frames and zero non-finite values.** The last written frame at
-106,500 ps is entirely normal, and the divergence occurred at step 106,547,400 — **within
+106,500 ps is entirely normal, and the divergence occurred at step 106,547,400: **within
 47 ps** of a healthy frame.
 
 Final six frames before failure: potential ≈ −6.16 × 10⁵ kJ/mol, volume 2779–2784 nm³,
@@ -66,14 +66,14 @@ pressure fluctuating in the normal ±50 bar range. No trend, no drift, no warnin
 | | rep1 | rep2 at failure | rep3 |
 |---|---|---|---|
 | box volume | 2784.2 nm³ | **2784 nm³** | 2783.3 nm³ |
-| volume drift over run | −0.30 % | — | −0.33 % |
-| volume SD | 4.92 nm³ | — | 5.01 nm³ |
+| volume drift over run | −0.30 % | N/A | −0.33 % |
+| volume SD | 4.92 nm³ | N/A | 5.01 nm³ |
 
 Volumes agree to within 0.03 %. rep2 was sampling the same ensemble as the two that
 finished, right up to the event.
 
-**Reading:** a single-event numerical divergence — a rare close contact, or a
-hardware/arithmetic fault on the node — not a systematic protocol problem. Consistent with
+**Reading:** a single-event numerical divergence, a rare close contact, or a
+hardware/arithmetic fault on the node, not a systematic protocol problem. Consistent with
 the sudden onset, the clean energy history, and the identical settings across replicates.
 
 ## Consequence for the result
@@ -82,8 +82,8 @@ the sudden onset, the clean energy history, and the identical settings across re
 ensemble properties agreeing to 0.03 %. The replicate spread from two seeds is the
 available uncertainty and should be reported as such.
 
-A fresh rep2 from a new seed would be scientifically sound — the protocol is not
-implicated — but it is a third seed on a result that already has two, at ~2.3 days of GPU.
+A fresh rep2 from a new seed would be scientifically sound: the protocol is not
+implicated, but it is a third seed on a result that already has two, at ~2.3 days of GPU.
 Not run; the allocation is committed to the Cycle 8 engPENK arm, which is untested.
 
 ## Method note: my retry loop concealed this
@@ -94,7 +94,7 @@ Two defects:
 1. The loop was written for node failures, where retrying is correct. It treated a
    deterministic, unrecoverable error as transient and re-ran it 200 times.
 2. Its exit status reflected whether the *loop* completed, not whether the simulation
-   *progressed* — so the job reported success on a run that advanced zero steps.
+   *progressed*: so the job reported success on a run that advanced zero steps.
 
 Reading only the job status would have produced "rep2 completed". The fourth instance this
 week of a check passing for the wrong reason. The correct construction compares the

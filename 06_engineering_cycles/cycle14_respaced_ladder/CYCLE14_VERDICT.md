@@ -1,4 +1,4 @@
-# Cycle 14 — final verdict: the control fails its replicate-agreement gate
+# Cycle 14, final verdict: the control fails its replicate-agreement gate
 
 **Scored 8 Oct 2026 against gates committed in `data/cycle14_prereg.json` before any
 window ran. 684 ns across 228 windows, all four legs complete.**
@@ -22,10 +22,10 @@ window ran. 684 ns across 228 windows, all four legs complete.**
 
 | Gate (as pre-registered) | Criterion | Result |
 |---|---|---|
-| **G1_overlap** | median s < 1.5 kT and ≤ 3 of 56 intervals > 2 kT, every leg | **PASS** — measured: median 0.30–0.43 kT, **0 of 56** above 2 kT in all four legs |
-| **G2_sign** | ΔΔG > 0 | **PASS** — both replicates positive |
-| **G3_accuracy** | two-replicate mean within 1.5 kcal/mol of +0.81 | **FAIL** — mean **+7.59**, off by **6.78** |
-| **G4_reproducibility** | replicates agree within 2.0 kcal/mol | **FAIL** — **13.75** apart |
+| **G1_overlap** | median s < 1.5 kT and ≤ 3 of 56 intervals > 2 kT, every leg | **PASS** (measured: median 0.30–0.43 kT, **0 of 56** above 2 kT in all four legs) |
+| **G2_sign** | ΔΔG > 0 | **PASS**: both replicates positive |
+| **G3_accuracy** | two-replicate mean within 1.5 kcal/mol of +0.81 | **FAIL**: mean **+7.59**, off by **6.78** |
+| **G4_reproducibility** | replicates agree within 2.0 kcal/mol | **FAIL**: **13.75** apart |
 
 **Decision rule, as written: engPENK runs only if G1–G4 all pass. Two fail, so it does not run.**
 
@@ -36,7 +36,7 @@ exactly what it was designed to do. It simply was not sufficient.
 
 ## Replicate 1 was luck, and the gate is what caught it
 
-Reported two days ago, rep1 landed 0.09 kcal/mol from the literature — the closest this
+Reported two days ago, rep1 landed 0.09 kcal/mol from the literature, the closest this
 project had come, and on its own it reads as a vindication of the re-spaced ladder. It
 was coincidence. Replicate 2, identical protocol and an independent equilibration, gives
 **+14.47**, which implies 4×10¹⁰-fold δ-preference. The most δ-selective compound in our
@@ -46,7 +46,7 @@ exceeds ~1000-fold, so rep2 is not a measurement at all.
 Had the campaign stopped at one replicate we would have published a number that looked
 like a success. This is exactly the outcome G4 was pre-registered to catch.
 
-## Why it fails — not one bad window
+## Why it fails: not one bad window
 
 | leg | r1 | r2 | shift |
 |---|---|---|---|
@@ -65,7 +65,7 @@ Decomposed per λ interval (`data/` holds every value):
 
 That last figure is the finding. At 50% the deviations would be random noise and would
 partly cancel; at ~73% they are systematically biased within a replicate, so they
-accumulate monotonically along the path to ≈30 kJ/mol — about **7 kcal/mol of replicate
+accumulate monotonically along the path to ≈30 kJ/mol, about **7 kcal/mol of replicate
 variation in each absolute free energy**, when the quantity we need is a difference of two
 of them and the effect is 0.81.
 
@@ -77,7 +77,7 @@ of them and the effect is 0.81.
 | new, 57 windows | +0.72, +14.47 | **13.75** |
 
 The Cycle 13 diagnosis was right that λ spacing was too coarse, and G3 confirms the
-overlap problem is solved. But precision did not improve — it got worse, and plausibly
+overlap problem is solved. But precision did not improve: it got worse, and plausibly
 *because* doubling the windows doubles the number of terms whose small biases accumulate.
 Fixing overlap was necessary and insufficient.
 
@@ -95,5 +95,5 @@ stated before any of this ran.
 Nothing here touches the structural results. The Cycle 12/13 pose findings use no
 free-energy number and are unaffected, as is the calibrated Cycle 7 estimate
 (+1.23 ± 1.76 kcal/mol, δ-preferring but not separable from no preference). The poster's
-position — *design goal, not demonstrated result* — remains correct and is now better
+position (*design goal, not demonstrated result*) remains correct and is now better
 supported than when it was written.

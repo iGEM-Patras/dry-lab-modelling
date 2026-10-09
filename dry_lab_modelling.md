@@ -3,7 +3,7 @@
 ## 1. Plasmid Design & Codon Optimization
 
 ### Problem
-Four expression cassettes (mEGFP-P2A-His-PENK, His-PENK-P2A-mEGFP, mEGFP-IRES-His-PENK, His-PENK-IRES-mEGFP) require synthesis. The raw sequences sit at 51–59% GC — above the synthesis-friendly window (35–45%) — so every codon must be optimized without changing the protein.
+Four expression cassettes (mEGFP-P2A-His-PENK, His-PENK-P2A-mEGFP, mEGFP-IRES-His-PENK, His-PENK-IRES-mEGFP) require synthesis. The raw sequences sit at 51–59% GC, above the synthesis-friendly window (35–45%), so every codon must be optimized without changing the protein.
 
 ### Approach
 Feature-aware recoding: lock the signal peptide, IRES element, initiation context (Kozak), self-cleaving peptide (P2A), and stop codons; recoded only in-frame annotated CDS blocks; checked motifs in a 31-nt window around each candidate swap to avoid creating new synthesis liabilities.
@@ -16,11 +16,11 @@ Feature-aware recoding: lock the signal peptide, IRES element, initiation contex
 | mEGFP-IRES-His-PENK | 45% | 45.0% | 0.738 | ✓ |
 | His-PENK-IRES-mEGFP | 45% | 44.9% | 0.745 | ✓ |
 
-**Trade-off:** CAI fell by 8–30% (average 15.5%). That's real — transfection efficiency may be impacted. Expression readout is non-negotiable.
+**Trade-off:** CAI fell by 8–30% (average 15.5%). That's real: transfection efficiency may be impacted. Expression readout is non-negotiable.
 
 **Why two targets?** P2A constructs hit 40% GC (tighter margin for synthesis precision); IRES constructs tolerate 45% GC. All four were validated in SnapGene by round-trip parsing.
 
-**Junction risk:** The two P2A constructs carry the mEGFP–P2A–His junction, which in immunogenicity screening came out as the highest immunogenicity hotspot (2.07% strong MHC-I binders vs. 1.77–1.86% for native or engineered epitope). This is why the IRES pair was included — it trades the P2A junction for the 7 YGGFEVVG repeats.
+**Junction risk:** The two P2A constructs carry the mEGFP–P2A–His junction, which in immunogenicity screening came out as the highest immunogenicity hotspot (2.07% strong MHC-I binders vs. 1.77–1.86% for native or engineered epitope). This is why the IRES pair was included: it trades the P2A junction for the 7 YGGFEVVG repeats.
 
 ---
 
@@ -44,7 +44,7 @@ MHCflurry 2.x prediction across 10 common HLA alleles (A∗01:01, A∗02:01, A�
 
 **Interpretation:** The engineered epitope itself is NOT more immunogenic than native. The P2A junction is the liability (0.3% absolute increase). This drove inclusion of the IRES pair as a lower-immunogenicity alternative.
 
-**Limitation:** No human data — MHCflurry is trained on ligand elution + crystal structures, not cellular responses. True immunogenicity requires cell-based assay in HLA-matched lines or patient PBMCs.
+**Limitation:** No human data, MHCflurry is trained on ligand elution + crystal structures, not cellular responses. True immunogenicity requires cell-based assay in HLA-matched lines or patient PBMCs.
 
 ---
 
@@ -67,7 +67,7 @@ The paper claimed HEK293T cells express proenkephalin (PENK) and its processing 
 
 **Workaround:** Cathepsin L is present. But it cleaves **before** the dibasic KR site (↓YGGFEVVG→KR), not after, yielding a 10-amino-acid product (YGGFEVVGKR) instead of the 8-amino-acid peptide. Off-target.
 
-**Consequence:** Cell-free assay is not a validation — it is the *only* route to confirm that the engineered cassette actually works when given the right enzymes. See Section 6.
+**Consequence:** Cell-free assay is not a validation, it is the *only* route to confirm that the engineered cassette actually works when given the right enzymes. See Section 6.
 
 ---
 
@@ -91,9 +91,9 @@ Molecular dynamics (MARTINI 2 coarse-grained model, 200 ns, triplicate 2000-bp D
 **Stability:** DOTAP shows consistent binding (11–33 persistent contacts). MC3-protonated also consistent (47–48 contacts, except one outlier at 2.2). MC3-neutral has one replicate that never engages (3.1 nm, 0 contacts).
 
 **Interpretation:**
-- **DOTAP is reliable** — predictable, tight binding across replicates, suitable for preclinical formulation.
-- **MC3-protonated is equally tight** — validates the computational model that low-pH conformation drives compact lipoplex. Relevant for endosomal escape (low pH triggers protonation and release).
-- **MC3-neutral is heterogeneous** — one of three replicates failed to bind, suggesting pH-neutral MC3 is not a "weak" state but rather a **bistable** state (either binds or doesn't). Real cellular data needed to know which state dominates *in vivo*.
+- **DOTAP is reliable**: predictable, tight binding across replicates, suitable for preclinical formulation.
+- **MC3-protonated is equally tight**: validates the computational model that low-pH conformation drives compact lipoplex. Relevant for endosomal escape (low pH triggers protonation and release).
+- **MC3-neutral is heterogeneous**: one of three replicates failed to bind, suggesting pH-neutral MC3 is not a "weak" state but rather a **bistable** state (either binds or doesn't). Real cellular data needed to know which state dominates *in vivo*.
 
 **Caveat:** Coarse-grained MARTINI model; all-atom validation recommended before formulation scale-up.
 
@@ -107,13 +107,13 @@ physics-based free-energy method confirm delta-over-mu preference *before* commi
 radioligand assay?
 
 ### Approach
-Pre-registered gate on four **known** control peptides with published delta/mu selectivity —
-met-enkephalin, deltorphin I, deltorphin II, endomorphin-1 — docked into both receptors and
+Pre-registered gate on four **known** control peptides with published delta/mu selectivity:
+met-enkephalin, deltorphin I, deltorphin II, endomorphin-1, docked into both receptors and
 rescored by conditional bound-state MM-GBSA. All 40 runs (4 controls x 2 receptors x n=5) were
 rescored in bound mode, selecting frames where the ligand is genuinely in the pocket.
 The gate tests the *method*, not the engineered peptide.
 
-### Result — FAIL; Stage 2 not authorised
+### Result: FAIL; Stage 2 not authorised
 
 | Control | n | Computed ΔΔG | SEM | Experimental |
 |---|---|---|---|---|
@@ -122,12 +122,12 @@ The gate tests the *method*, not the engineered peptide.
 | deltorphin II | 5 | +7.48 | 3.24 | +5.39 |
 | endomorphin-1 | 5 | −0.91 | 3.32 | −2.99 |
 
-- **G1 PASS** — all sign and ranking checks hold. The method gets the direction right.
-- **G2′ FAIL** — only met-enkephalin falls under the 1.5 kcal/mol SEM threshold; the others are 3.2–5.0.
-- **G3 FAIL** — slope 0.594, 95% CI [−1.024, 2.213], r = 0.179 over 20 points. The CI spans zero.
+- **G1 PASS**: all sign and ranking checks hold. The method gets the direction right.
+- **G2′ FAIL**: only met-enkephalin falls under the 1.5 kcal/mol SEM threshold; the others are 3.2–5.0.
+- **G3 FAIL**: slope 0.594, 95% CI [−1.024, 2.213], r = 0.179 over 20 points. The CI spans zero.
 
 **Reading.** The failure is replicate scatter, not a broken pipeline: per-replicate ΔΔG within a
-single control spans 27 kcal/mol for deltorphin I. Met-enkephalin is the informative outlier —
+single control spans 27 kcal/mol for deltorphin I. Met-enkephalin is the informative outlier:
 tightest replicate agreement and the largest error, which is the signature of a *systematic*
 one. These are enthalpy-dominated effective energies with no entropy term, and met-enkephalin is
 the smallest and most flexible of the four, so the missing configurational-entropy penalty should
@@ -138,8 +138,8 @@ MM-GBSA at n=5 does not resolve delta/mu selectivity for these peptides. **No co
 claim about the engineered peptide's selectivity is authorised.** The standing recommendation is
 radioligand competition binding on `YGGFEVVG` and the `YGGFDIIG` variant.
 
-*Reporting a pre-registered gate that failed is deliberate. The alternative — quoting the one
-control that passed — would have sent the wet lab into an expensive assay on a method that
+*Reporting a pre-registered gate that failed is deliberate. The alternative, quoting the one
+control that passed, would have sent the wet lab into an expensive assay on a method that
 cannot support it.*
 
 ---
@@ -153,7 +153,7 @@ the intended peptides is to supply the processing enzymes and measure the produc
 ### Design
 HEK293T cannot do this: PC1/3, PC2 and 7B2 are all absent (Section 3). The protocol therefore
 uses **defined recombinant enzymes on synthetic substrate**, with conditions taken verbatim from
-the cited primary source rather than estimated — 50 mM Na-acetate pH 5.5, 5 mM CaCl2,
+the cited primary source rather than estimated: 50 mM Na-acetate pH 5.5, 5 mM CaCl2,
 0.1% octyl-beta-glucopyranoside, 37 °C, with 100 mM NaCl added for PC2 only.
 
 ### Target species
@@ -162,19 +162,19 @@ so endogenous PENK products are not mistaken for construct output:
 
 | Species | Sequence | [M+H]+ | Origin |
 |---|---|---|---|
-| Engineered mature | `YGGFEVVG` | 827.39 | cassettes 1,2,3,5,6 — dibasic flanks |
+| Engineered mature | `YGGFEVVG` | 827.39 | cassettes 1,2,3,5,6, dibasic flanks |
 | Engineered amidated | `YGGFEVV`-NH2 | 769.39 | after granule PAM |
-| Engineered extended | `YGGFEVVGRGL` | 1153.60 | cassette 4 — monobasic RGL |
-| Engineered extended | `YGGFEVVGRF` | 1130.56 | cassette 7 — monobasic RF |
+| Engineered extended | `YGGFEVVGRGL` | 1153.60 | cassette 4, monobasic RGL |
+| Engineered extended | `YGGFEVVGRF` | 1130.56 | cassette 7, monobasic RF |
 | Endogenous MERGL | `YGGFMRGL` | 900.44 | native core 4 |
 | Endogenous MERF | `YGGFMRF` | 877.40 | native core 7 |
 
 **Predicted outcome:** **four** clean octapeptides (cassettes 1, 2, 3, 6) plus **three** extended
-species (cassettes 4, 5, 7) — *not* seven identical peptides. See Section 7.2 for why that is the
+species (cassettes 4, 5, 7): *not* seven identical peptides. See Section 7.2 for why that is the
 design and not a defect.
 
 Cassette 5 is the non-obvious one: its downstream flank is dibasic (`RRV`), but in native PENK
-core 5 does not release a pentapeptide — it enters the BAM-22 → BAM-20 → adrenorphin route
+core 5 does not release a pentapeptide: it enters the BAM-22 → BAM-20 → adrenorphin route
 [5,6]. The engineered cassette follows the same route, giving four additional species that
 were absent from the original target list:
 
@@ -186,10 +186,10 @@ were absent from the original target list:
 | BAM-22 counterpart | `YGGFEVVGRRVGRPEWWMDYQKRYG` | 3091.51 | BAM-22 (2838.35) |
 
 These are calculated, not measured. Note that the engineered BAM-20 counterpart (2871.43) lies
-1.09 Da from native BAM-22 +2ox (2870.34) — resolving power >2600 or MS2 confirmation is needed
+1.09 Da from native BAM-22 +2ox (2870.34): resolving power >2600 or MS2 confirmation is needed
 to separate them, and the acquisition range must extend to 3100 Da rather than 2900.
 
-### Controls and handling — not optional
+### Controls and handling: not optional
 - **Untransfected and empty-vector controls**, same cell line and passage, every run. They define
   the endogenous baseline for all 20 native peaks.
 - **Acquire 550–2900 Da**, not a narrow enkephalin window; the BAM series sits at 2618–2870.
@@ -204,7 +204,7 @@ does not address transfection efficiency, expression level, secretion, or therap
 
 ---
 
-## 7. Why the Construct Is "Not Native PENK" — By Design
+## 7. Why the Construct Is "Not Native PENK": By Design
 
 A reviewer reading the engineered sequence without project context will conclude the construct
 is a corrupted proenkephalin: the enkephalin cores are the wrong length, and two of the seven
@@ -215,7 +215,7 @@ section documents why, because the point is easy to lose and expensive to re-lit
 
 Native human proenkephalin-A (UniProt P01210, 267 aa) carries six copies of Met-enkephalin
 (`YGGFM`) and one of Leu-enkephalin (`YGGFL`) [1,2]. The engineered
-construct carries **zero copies of either** — all seven cassettes encode `YGGFEVVG`.
+construct carries **zero copies of either**: all seven cassettes encode `YGGFEVVG`.
 
 The substitution follows the message–address model of opioid peptide recognition
 [12]: an N-terminal *message* domain drives receptor activation, while the
@@ -236,7 +236,7 @@ chimera of two natural opioid peptides, not an arbitrary sequence.
 from D-alanine at position 2, which blocks aminopeptidase attack at the Tyr1-Xaa2 bond
 [11]. D-amino acids have no codon; a ribosomally expressed peptide is all-L by
 construction and cannot reproduce that feature. The cassette inherits deltorphin's selectivity
-motif and **none** of its protease resistance — `YGGFEVVG` carries three NEP-susceptible bonds
+motif and **none** of its protease resistance: `YGGFEVVG` carries three NEP-susceptible bonds
 against Met-enkephalin's one, so it is *less* stable than the native peptide, not more. Since
 enkephalins are cleared in seconds, principally by neprilysin [10], this is why the
 project's NEP-siRNA arm is load-bearing rather than adjunct: the two arms cannot be evaluated
@@ -279,7 +279,7 @@ If an analysis flags the seven cassettes as non-functional because the sequence 
 PENK, the three checks that separate a real problem from this expected result are:
 
 1. **Is anything being cleaved?** If no cassette yields product, the fault is enzyme
-   availability, not architecture — HEK293T lacks PC1/3, PC2 and 7B2 entirely (Section 3).
+   availability, not architecture: HEK293T lacks PC1/3, PC2 and 7B2 entirely (Section 3).
 2. **Are four cassettes clean and three extended?** That is the predicted outcome, not a failure.
 3. **Is detection the limit?** No commercial anti-enkephalin antibody binds `YGGFEVVG`; the
    custom anti-`YGGFEVVG` polyclonal gates the entire expression readout.
@@ -288,14 +288,14 @@ PENK, the three checks that separate a real problem from this expected result ar
 
 ## Methods & Data
 
-- **Plasmid optimization:** `09_codon_gc_design/PENK_recode_validation.csv` — validated per-cistron translation, homopolymer checks
-- **Ordering sheet:** `09_codon_gc_design/PENK_order_sheet.csv` — synthesis parameters for all four cassettes
-- **HEK293T audit:** `08_checkable_audit/tables/hek293t_processing_competence.csv` — expression data from public datasets (re-quantified against Ensembl GRCh38)
-- **MHC predictions:** `10_immunogenicity_antibody/mhc_predictions_full.csv` and `mhc_group_summary.csv` — full MHCflurry 2.x run
-- **Antibody guide:** `10_immunogenicity_antibody/antibody_shortlist.csv` — registry of anti-enkephalin antibodies and why none work
-- **Lipoplex MD:** `04_lipoplex_md/data/md_formulation_summary.json` — per-replicate contact distances and metrics
-- **Cycle 3b verdict:** `06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md` — full rescoring report with control peptides
-- **In vitro protocol:** `07_invitro_penk/docs/PENK_INVITRO_PROTOCOL.md` — recombinant-enzyme conditions (verbatim from the cited primary source + UniProt), mass spectrometry targets
+- **Plasmid optimization:** `09_codon_gc_design/PENK_recode_validation.csv` (validated per-cistron translation, homopolymer checks)
+- **Ordering sheet:** `09_codon_gc_design/PENK_order_sheet.csv` (synthesis parameters for all four cassettes)
+- **HEK293T audit:** `08_checkable_audit/tables/hek293t_processing_competence.csv` (expression data from public datasets, re-quantified against Ensembl GRCh38)
+- **MHC predictions:** `10_immunogenicity_antibody/mhc_predictions_full.csv` and `mhc_group_summary.csv` (full MHCflurry 2.x run)
+- **Antibody guide:** `10_immunogenicity_antibody/antibody_shortlist.csv` (registry of anti-enkephalin antibodies and why none work)
+- **Lipoplex MD:** `04_lipoplex_md/data/md_formulation_summary.json` (per-replicate contact distances and metrics)
+- **Cycle 3b verdict:** `06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md` (full rescoring report with control peptides)
+- **In vitro protocol:** `07_invitro_penk/docs/PENK_INVITRO_PROTOCOL.md` (recombinant-enzyme conditions (verbatim from the cited primary source + UniProt), mass spectrometry targets)
 
 ---
 
@@ -306,7 +306,7 @@ The iGEM competition rewards **honest experimental design.** Your dry-lab work:
 1. **Caught a design flaw early** (HEK293T lacks PC1/3, PC2 and 7B2 → the cell-free recombinant-enzyme route is the only one that can generate the peptides).
 2. **Quantified trade-offs** (GC targets cost 8–30% CAI; the P2A junction is the immunogenicity hotspot, not the engineered epitope).
 3. **Protects the wet lab** (a pre-registered gate failed and was reported as a negative result, rather than sending the bench into a radioligand assay on a method that cannot support the claim).
-4. **Shows iteration** (immunogenicity screening drove inclusion of the IRES pair; Amendment 2 formally retracted two of the dry lab's own earlier claims — see Section 7).
+4. **Shows iteration** (immunogenicity screening drove inclusion of the IRES pair; Amendment 2 formally retracted two of the dry lab's own earlier claims, see Section 7).
 
 Next steps are clear and prioritized:
 - **Now (before constructs arrive):** Order the custom anti-`YGGFEVVG` polyclonal (KLH-conjugated, ≥2 rabbits, 10–12 week lead). No commercial anti-enkephalin antibody detects the product; this gates the entire expression readout.

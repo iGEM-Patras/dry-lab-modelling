@@ -1,4 +1,4 @@
-# Native PENK — what the unmodified precursor actually makes
+# Native PENK, what the unmodified precursor actually makes
 
 Computed from `P01210_native_PENK.fasta` (UniProt P01210, 267 aa precursor).
 Chain coordinates are UniProt's; masses are computed, not quoted.
@@ -20,19 +20,19 @@ is what produces the native product diversity:
 | 6 | 230 | KR | `YGGFL` Leu-enkephalin |
 | 7 | 261 | **RF** (precursor C-term) | `YGGFMRF` Met-enk-Arg-Phe (heptapeptide) |
 
-Cores 4, 5 and 7 are *designed* to be extended — those flanks are the native source of the
+Cores 4, 5 and 7 are *designed* to be extended, those flanks are the native source of the
 octapeptide, heptapeptide and the BAM series. In the engineered construct the same two
 positions (4 and 7) were flagged as producing "unclean" extended product. **That framing was
 too harsh: extension at those positions is the native behaviour, not a construct defect.**
 What is new in the engineered construct is that the extended products are
 `YGGFEVVGRGL` / `YGGFEVVGRF`, which are not natural ligands and have not been characterised.
 
-## Core 5 is a PAM substrate — native PENK does amidate
+## Core 5 is a PAM substrate, native PENK does amidate
 
 The amendment sheet stated that native cores end in Met or Leu and are therefore not PAM
 substrates. That holds for the *enkephalin* products, but **core 5 is the exception**:
 `YGGFMRRVG`… is trimmed by CPE to `YGGFMRRVG` and amidated by PAM to **adrenorphin
-(metorphamide), `YGGFMRRV`-NH₂, [M+H]⁺ 984.5196** — a genuine amidated native product.
+(metorphamide), `YGGFMRRV`-NH₂, [M+H]⁺ 984.5196**, a genuine amidated native product.
 So amidation machinery is demonstrably active in these granules on this precursor, which
 *strengthens* the prediction that the engineered `…VVG` cassette will be amidated.
 
@@ -62,7 +62,7 @@ Counting susceptible bonds:
 | ACE (C-terminus open) | yes | yes | **no** |
 | Met oxidation | 1 | **0** | **0** |
 
-**The engineered cassette is not more protease-stable than native Met-enkephalin — it is
+**The engineered cassette is not more protease-stable than native Met-enkephalin, it is
 less.** The two extra valines add NEP-susceptible bonds. Amidation removes the ACE liability
 but not the NEP or aminopeptidase ones.
 
@@ -76,7 +76,7 @@ cassette inherits deltorphin's δ-selectivity motif but none of its protease res
 
 1. **The NEP siRNA is doing more work than assumed.** With the engineered peptide carrying
    3 NEP sites against Met-enkephalin's 1, knocking down NEP is not an adjunct to the
-   construct — it is what makes the construct viable at all. Those two arms are coupled.
+   construct, it is what makes the construct viable at all. Those two arms are coupled.
 2. **Native PENK output is the assay background.** Any transfected cell already secretes
    Met-enkephalin, Leu-enkephalin, the octa- and heptapeptides, and the BAM series from its
    endogenous locus. The MS method needs all of them, plus their sulfoxides, or endogenous
@@ -84,6 +84,6 @@ cassette inherits deltorphin's δ-selectivity motif but none of its protease res
 3. **Reconsider whether the cassette should be enkephalin-like at all.** If protease
    resistance is the goal, extending the C-terminus (as native cores 4/5/7 do) protects the
    scissile region better than the bare octapeptide does.
-4. **Cores 4 and 7 in the engineered construct are less anomalous than reported** — they
+4. **Cores 4 and 7 in the engineered construct are less anomalous than reported**, they
    reproduce native flank architecture. The open question is pharmacological
    characterisation of the extended engineered species, not whether to eliminate them.

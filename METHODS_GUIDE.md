@@ -5,7 +5,7 @@ chosen over the alternatives, how to read its output, and the conditions under w
 
 Written to be followed by a reader who can program but has no background in computational
 chemistry or bioinformatics. Where a method has a known failure mode it is described alongside
-the method rather than omitted — several of them are ones this project hit.
+the method rather than omitted: several of them are ones this project hit.
 
 Companion documents: [`GLOSSARY.md`](GLOSSARY.md) for terminology,
 [`methods_references.md`](methods_references.md) for tool versions, force fields and citations,
@@ -16,24 +16,24 @@ and [`docs/project_brief.pdf`](docs/project_brief.pdf) for the scientific narrat
 ## 0. The one convention that shapes everything
 
 Every cycle has a `*_DESIGN.md` written and **pushed to git before the test runs**, containing
-the hypothesis, the predictions, and a **gate** — a numeric pass/fail threshold fixed in
+the hypothesis, the predictions, and a **gate** (a numeric pass/fail threshold fixed in
 advance. The matching `*_RESULTS.md` scores every prediction as confirmed, falsified, or
 unresolved.
 
 This is not bureaucracy. Computational methods are unusually easy to fool yourself with,
 because you can re-run an analysis fifty times and report the run that looked best. A gate
-committed beforehand makes that impossible to do silently — the commit order is checkable.
+committed beforehand makes that impossible to do silently: the commit order is checkable.
 
 Two derived rules you will see enforced in code:
 
 - **A method must be calibrated against known answers before its output is quoted.** If the
-  calibration fails, the target number is withheld — not reported with a caveat. See §5.
+  calibration fails, the target number is withheld, not reported with a caveat. See §5.
 - **Compute the threshold, don't pick it.** Our correlation gates come from the sample size
   (`critical_r(n)`), not from judgement.
 
 ---
 
-## 1. Sequence work — the foundation
+## 1. Sequence work: the foundation
 
 **What it is:** proteins and DNA as strings, with domain rules. Library: **Biopython**.
 
@@ -44,11 +44,11 @@ The operations that recur:
 | Translation | DNA → protein, 3 letters per amino acid |
 | ORF finding | Locate where a coding sequence starts (after a Kozak motif) and ends (stop codon) |
 | Motif search | Find cleavage sites (`KR`, `KK`, `RR`), restriction sites, repeats |
-| Molecular weight | Exact mass of a peptide — needed to tell mass spec what to look for |
+| Molecular weight | Exact mass of a peptide, needed to tell mass spec what to look for |
 | Isoelectric point (pI) | The pH at which a protein has zero net charge |
 
 **Why pI matters and where it bit us:** a protein is least soluble near its pI. Our mature
-chain has pI ≈ 5.19 and the processing enzymes need pH 5.5 — so the digest runs exactly where
+chain has pI ≈ 5.19 and the processing enzymes need pH 5.5, so the digest runs exactly where
 the protein is most likely to fall out of solution. We could not raise the pH because the whole
 enzyme panel has acidic optima, so it is documented as a risk in
 [`07_invitro_penk/`](07_invitro_penk/) rather than solved.
@@ -59,7 +59,7 @@ Lesson: when you slice a sequence, assert the length you expect.
 
 ---
 
-## 2. Signal peptide prediction — DeepSig
+## 2. Signal peptide prediction, DeepSig
 
 **Question:** will the cell actually secrete this protein?
 
@@ -69,7 +69,7 @@ inside the cell and the whole scheme fails.
 
 **DeepSig** is a neural network that takes a protein sequence and returns whether a signal
 peptide is present, its cleavage position, and a confidence score. We ran it on every
-engineered N-terminus — including the unusual case where a construct's protein begins with a
+engineered N-terminus, including the unusual case where a construct's protein begins with a
 self-cleaving-peptide remnant rather than a normal start.
 
 **How to read the output:** a probability plus a predicted cleavage site. What you care about
@@ -83,7 +83,7 @@ wrong place is a failure, not a pass.
 **Question:** will the DNA synthesis company physically make this?
 
 Several DNA codons encode the same amino acid, so you can rewrite DNA without touching the
-protein — **synonymous recoding**. We use this to hit a target **GC content** (40–45 %) because
+protein: **synonymous recoding**. We use this to hit a target **GC content** (40–45 %) because
 synthesis fails outside a workable range.
 
 The cost is **CAI** (codon adaptation index, 0–1): how well codon choice matches what human
@@ -95,21 +95,21 @@ cells prefer. Optimising GC pushes CAI down. Ours land at 0.65–0.74. That is a
 reverse-engineering problem: take the rejection reports, infer scoring rules, predict the next
 submission's score, submit, compare. Two rules were recovered:
 
-1. **Repeats** — including a *terminal inverted repeat*, where the sequence's two ends are
+1. **Repeats**: including a *terminal inverted repeat*, where the sequence's two ends are
    reverse complements of each other. The checker finds it twice, once from each end.
-2. **Local composition** — a window dominated by one base.
+2. **Local composition**: a window dominated by one base.
 
 The v4 failure was in flanking sequence **inherited from existing lab files** that nobody had
 tested as a pair. Standing rule adopted: *inherited sequence is still untested sequence.*
 
 ---
 
-## 4. Structure prediction and co-folding — Boltz-2
+## 4. Structure prediction and co-folding: Boltz-2
 
 **Question:** what does the peptide–receptor complex look like, and how tightly does it bind?
 
 **Boltz-2** is a neural network in the AlphaFold family. Give it sequences; it predicts the 3D
-structure. Give it *two* molecules and it predicts them **together** — a **co-fold** — which is
+structure. Give it *two* molecules and it predicts them **together** (a **co-fold**), which is
 how we model a peptide sitting in a receptor.
 
 Input is a YAML declaring each chain. A peptide can be declared two ways, and **the choice has
@@ -119,8 +119,8 @@ consequences**:
 - as a **ligand** (SMILES string) → you get correct chemistry but the model writes it as one
   undifferentiated residue with no backbone topology.
 
-Cycle 7 declared our peptide as a ligand. The atoms were all correct — element counts matched
-the free-acid formula exactly — but force-field tools could not parametrise it, which is why
+Cycle 7 declared our peptide as a ligand. The atoms were all correct, element counts matched
+the free-acid formula exactly, but force-field tools could not parametrise it, which is why
 Cycle 8 needed a re-run. Worth knowing before you write a YAML.
 
 ### Reading the confidence scores
@@ -129,10 +129,10 @@ Cycle 8 needed a re-run. Worth knowing before you write a YAML.
 |---|---|---|
 | **ipTM** | 0–1 | Confidence in how the two chains sit *relative to each other* |
 | **pLDDT** | 0–100 | Per-residue confidence in local structure |
-| **affinity_pred_value** | — | The affinity head's binding prediction |
+| **affinity_pred_value** |, | The affinity head's binding prediction |
 
 **These are confidence, not correctness, and ipTM is not binding strength.** Our co-folds score
-ipTM 0.958 at δ and 0.957 at μ — nearly identical, which is *why* ipTM cannot serve as a
+ipTM 0.958 at δ and 0.957 at μ, nearly identical, which is *why* ipTM cannot serve as a
 selectivity metric. That was Cycle 7's B2 gate failing, and it is a genuinely useful negative.
 
 **Low pLDDT is not always bad.** Our payload is disordered by design; its low pLDDT reflects
@@ -141,7 +141,7 @@ is supposed to be.
 
 ---
 
-## 5. Calibration — the method that made Cycle 7 work
+## 5. Calibration: the method that made Cycle 7 work
 
 This is the most transferable idea in the repo.
 
@@ -150,12 +150,12 @@ the *same predictor* on molecules whose answer is already published, and check.
 
 The procedure:
 
-1. **Build a reference panel** — compounds with published δ and μ binding values, all from a
+1. **Build a reference panel**: compounds with published δ and μ binding values, all from a
    *single source* so the axis is internally consistent. We use ChEMBL. Mixing our own stored
    literature values with database medians produced disagreements for the same molecule, so the
    single-source rule is now standing.
 2. **Set the gate before looking.** Required correlation is computed from sample size:
-   `critical_r(13) = 0.553`. Not chosen — derived.
+   `critical_r(13) = 0.553`. Not chosen: derived.
 3. **Score.** Cycle 7: r = 0.805, p = 0.0009, signs correct on 12 of 13. Gate passed.
 4. **Back-project the target through the fitted line** to get a corrected estimate with an
    uncertainty from the residual spread.
@@ -175,13 +175,13 @@ This procedure is packaged as a reusable skill, `calibrated-prediction-gate`, wi
 
 ---
 
-## 6. Molecular dynamics — GROMACS
+## 6. Molecular dynamics: GROMACS
 
 **Question:** what does the complex do over time, rather than in one static snapshot?
 
 MD integrates Newton's equations for every atom in femtosecond steps. Structure prediction
-gives you one pose; MD tells you whether that pose is stable, how it moves, and — with the
-right protocol — how strongly it binds.
+gives you one pose; MD tells you whether that pose is stable, how it moves, and, with the
+right protocol, how strongly it binds.
 
 **The pipeline**, and what each stage is for:
 
@@ -199,15 +199,15 @@ right protocol — how strongly it binds.
 
 | Extension | Contents |
 |---|---|
-| `.mdp` | Run configuration — the input file you edit |
+| `.mdp` | Run configuration: the input file you edit |
 | `.gro` / `.pdb` | Coordinates. `npt.gro` = the equilibrated structure |
-| `.top` / `.itp` | Topology — which atoms are bonded to which |
-| `.ndx` | Index groups — named atom selections |
+| `.top` / `.itp` | Topology: which atoms are bonded to which |
+| `.ndx` | Index groups: named atom selections |
 | `.tpr` | Compiled run input (config + topology + coordinates) |
-| `.xtc` / `.trr` | Trajectory — coordinates over time. Large |
+| `.xtc` / `.trr` | Trajectory: coordinates over time. Large |
 | `.edr` | Energies over time |
 | `.xvg` | Plain-text numeric output. This is what analysis reads |
-| `.cpt` | Checkpoint — lets an interrupted run resume |
+| `.cpt` | Checkpoint: lets an interrupted run resume |
 
 **Two rules that exist because we violated them:**
 
@@ -220,7 +220,7 @@ right protocol — how strongly it binds.
 
 ---
 
-## 7. MM-GBSA — the fast approximation, and why it failed
+## 7. MM-GBSA: the fast approximation, and why it failed
 
 **MM-GBSA** estimates binding energy from an MD trajectory by computing the energy of the
 complex minus the free partners, with solvent treated by an implicit model rather than explicit
@@ -228,7 +228,7 @@ water molecules. Much faster than the rigorous route.
 
 Cycle 3b tried it and **failed its own pre-registered gate**. The diagnostic was that the
 control with the *tightest replicate agreement* also had the *largest error* against its known
-value — agreement without accuracy, which points to systematic bias rather than insufficient
+value, agreement without accuracy, which points to systematic bias rather than insufficient
 sampling. The cycle was terminated per its pre-registration rather than rescued.
 
 Worth reading [`cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md`](06_engineering_cycles/cycle3b_physics_rescoring/docs/GATE_VERDICT_BOUND.md)
@@ -236,20 +236,20 @@ as an example of a gate doing its job.
 
 ---
 
-## 8. Free-energy perturbation / thermodynamic integration — Cycle 8
+## 8. Free-energy perturbation / thermodynamic integration: Cycle 8
 
 **The rigorous method.** No empirical slope to correct, no dependence on having published
 controls in the right range.
 
-**How it works.** You cannot simulate a peptide "unbinding" directly — it takes far too long.
+**How it works.** You cannot simulate a peptide "unbinding" directly, it takes far too long.
 Instead you compute the free energy of an *alchemical* path: gradually switch off the peptide's
 interactions with its surroundings, from fully coupled to fully decoupled, through a series of
 intermediate states indexed by **λ** (we use **27 windows**). At each window you record
-**dH/dλ** — how the energy changes with the coupling parameter. Integrating dH/dλ over λ gives
+**dH/dλ**, how the energy changes with the coupling parameter. Integrating dH/dλ over λ gives
 the free energy of removing the peptide.
 
 Do that in the receptor and in water; the difference is binding free energy. Do that at δ and
-at μ; the difference of differences is **ΔΔG** — the selectivity number.
+at μ; the difference of differences is **ΔΔG**, the selectivity number.
 
 **Key `.mdp` settings** (in `cycle8_fep/mdp/`):
 
@@ -257,7 +257,7 @@ at μ; the difference of differences is **ΔΔG** — the selectivity number.
 |---|---|
 | `couple-moltype` | **Which molecule gets decoupled.** Naming the wrong one runs for weeks and returns a plausible, wrong number |
 | `init-lambda-state` | Which window this run is |
-| `coul-lambdas` / `vdw-lambdas` | The λ schedule — electrostatics switched off before van der Waals |
+| `coul-lambdas` / `vdw-lambdas` | The λ schedule: electrostatics switched off before van der Waals |
 | `sc-alpha`, `sc-power`, `sc-sigma` | **Soft-core** parameters: prevent a singularity as atoms vanish |
 | `nstdhdl` | How often dH/dλ is written |
 
@@ -274,7 +274,7 @@ reads zero for hours while work is happening.
 
 ---
 
-## 9. Cheminformatics and machine learning — Cycle 7's screen
+## 9. Cheminformatics and machine learning: Cycle 7's screen
 
 **RDKit** handles small molecules. A molecule is a **SMILES** string (`CC(=O)O` is acetic
 acid); RDKit parses it into a graph and computes descriptors.
@@ -292,7 +292,7 @@ predict ΔΔG for candidate variants.
   in train and test, inflating performance. Grouping by chemical scaffold forces the model to
   generalise. We report the scaffold-split number as the honest one.
 - **Applicability domain.** A model only speaks to chemistry it has seen. Our peptide's maximum
-  Tanimoto similarity to the training set is low — it sits *outside* the domain of a
+  Tanimoto similarity to the training set is low, it sits *outside* the domain of a
   small-molecule model. Stated explicitly rather than quietly ignored.
 
 ---
@@ -304,14 +304,14 @@ siRNA off-target screening: a candidate that matches something other than its in
 will silence the wrong gene. `blastn-short` is the variant tuned for short queries.
 
 A result worth knowing: the original four-duplex panel was **withdrawn** because it
-cross-reacted with mouse *Mme* — one guide a perfect 19/19 match. The corollary is that the
+cross-reacted with mouse *Mme* (one guide a perfect 19/19 match). The corollary is that the
 human-exclusive replacements cannot be validated in a mouse model.
 
 **MHC-I binding prediction** ([`10_immunogenicity_antibody/`](10_immunogenicity_antibody/))
 asks whether our engineered sequence produces fragments the immune system will flag. Scanning
 6,120 allele–peptide pairs showed the engineered epitope is no more immunogenic than the native
 one (1.86 % vs 1.77 % strong binders), but the **P2A junction is the worst of the three**
-(2.07 %) — an argument for the IRES constructs.
+(2.07 %): an argument for the IRES constructs.
 
 ---
 
@@ -319,11 +319,11 @@ one (1.86 % vs 1.77 % strong binders), but the **P2A junction is the worst of th
 
 | Concept | How we use it |
 |---|---|
-| **Pearson r** | Linear correlation — does predicted track measured? |
-| **Spearman ρ** | Rank correlation — does the *ordering* match? Used when a method ranks reliably but is miscalibrated in magnitude. Cycle 9: ρ = 1.000 |
+| **Pearson r** | Linear correlation: does predicted track measured? |
+| **Spearman ρ** | Rank correlation: does the *ordering* match? Used when a method ranks reliably but is miscalibrated in magnitude. Cycle 9: ρ = 1.000 |
 | **critical r** | The correlation needed for significance at a given n. **Computed, not chosen** |
 | **Power analysis** | Before expanding a failed test, we compute whether the larger n could actually detect the effect |
-| **SEM vs spread** | A metric is only useful if panel spread exceeds measurement noise. Cycle 2's ipTM had spread ≈ 4× its SEM; convergence ratio ≈ 45× — which is why one worked |
+| **SEM vs spread** | A metric is only useful if panel spread exceeds measurement noise. Cycle 2's ipTM had spread ≈ 4× its SEM; convergence ratio ≈ 45×, which is why one worked |
 | **Signs correct** | Simple, robust: did we get the direction right? 12/13 in Cycle 7 |
 | **Residency fraction** | Proportion of simulation with the peptide actually bound. Gates every ΔG |
 
@@ -336,7 +336,7 @@ committed `.csv`/`.xvg` outputs. Python with Biopython, pandas, numpy, matplotli
 scikit-learn.
 
 **On the cluster only:** MD, FEP, and Boltz-2 co-folds. Scheduler is **SLURM** (`sbatch` to
-submit, `squeue -u $USER` to check). Partitions differ in wall-time limits — a 2-hour cap
+submit, `squeue -u $USER` to check). Partitions differ in wall-time limits: a 2-hour cap
 killed two co-folds mid-inference before we moved to a longer-limit partition.
 
 **You do not need to re-run simulations to work with results.** Every `.csv` and `.xvg` output
@@ -357,7 +357,7 @@ is committed.
 
 The most educational section. Each of these is documented in the repo.
 
-**Confidence is not correctness.** ipTM 0.958 at δ and 0.957 at μ — high confidence, zero
+**Confidence is not correctness.** ipTM 0.958 at δ and 0.957 at μ: high confidence, zero
 discriminating power. A confident model can be confidently uninformative.
 
 **Two checks sharing a bug look like corroboration.** A scan reported the peptide absent from a
@@ -365,16 +365,16 @@ structure file. It had used the same record-type filter that caused the original
 it "confirmed" the earlier wrong conclusion. Independent checks must be *independent*.
 
 **A gate can pass for the wrong reason.** A completion check once verified that a step *ran*
-rather than that it *produced anything* — reporting success on a system containing zero peptide
+rather than that it *produced anything*: reporting success on a system containing zero peptide
 atoms. Assert the property you care about, not that the code executed.
 
 **A gate can also fail for the wrong reason.** A later pre-flight asserted snapshot values of
 two windows that were actively being sampled. The values legitimately grew, so the gate rejected
-healthy data. Never validate a moving quantity against a frozen snapshot — validate against a
+healthy data. Never validate a moving quantity against a frozen snapshot: validate against a
 synthetic fixture whose content you control.
 
 **Testing the wrong input invalidates the answer.** A geometric test of whether a peptide could
-extend to solvent returned "impossible" — measured on a raw predicted structure with 1.2–1.7 Å
+extend to solvent returned "impossible": measured on a raw predicted structure with 1.2–1.7 Å
 pre-existing atomic overlaps, which guaranteed that answer regardless of the real geometry. The
 corrected measurement on the equilibrated structure reached the same conclusion, but the first
 result was not evidence. See [`cycle8_fep/GRAFT_ROUTE_REJECTED.md`](06_engineering_cycles/cycle8_fep/GRAFT_ROUTE_REJECTED.md).

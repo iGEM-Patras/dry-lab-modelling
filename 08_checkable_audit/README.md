@@ -1,7 +1,7 @@
 # 08 · Checkable audit
 
 An independent audit of the wet-lab bench guide. Every finding is stated so that it can be
-checked against a cited source rather than taken on authority — hence "checkable".
+checked against a cited source rather than taken on authority, hence "checkable".
 
 | Contents | What it is |
 |---|---|

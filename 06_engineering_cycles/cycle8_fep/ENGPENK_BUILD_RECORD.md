@@ -1,4 +1,4 @@
-# engPENK system build — record and verification
+# engPENK system build: record and verification
 
 **Date:** 2026-09-19 · **Status:** both systems built, minimised and verified · no GPU required
 
@@ -7,7 +7,7 @@ The two target systems for the free-energy campaign, `YGGFEVVG` bound to OPRD1 (
 ## Provenance of the starting poses
 
 Cycle 7's co-folds declared the peptide as a **SMILES ligand**, which yields correct chemistry
-but no backbone topology — `tleap` cannot parametrise it. Cycle 8 therefore re-ran the co-folds
+but no backbone topology: `tleap` cannot parametrise it. Cycle 8 therefore re-ran the co-folds
 with the peptide as a **protein chain**. Two practical notes for anyone repeating this:
 
 - **Boltz-2 writes mmCIF, not PDB.** Four attempts were recorded as failures before it was noticed
@@ -15,18 +15,18 @@ with the peptide as a **protein chain**. Two practical notes for anyone repeatin
   in fact succeeded in about 7 minutes once the sequence alignment was cached.
 - Re-typing the peptide dropped interface confidence from **ipTM 0.958 (ligand form) to 0.863 (δ)
   and 0.874 (μ)**. Lower and more believable. δ and μ remain near-identical, which is a third
-  independent line showing ipTM cannot discriminate these two receptors — consistent with Cycle 7's
+  independent line showing ipTM cannot discriminate these two receptors, consistent with Cycle 7's
   B2 gate failure.
 
 ## Chemistry declaration
 
 Taken from the design table's own convention, not a default. `prod_all.txt` records all four
-designed peptides as `amide=yes` and met-enkephalin — the neutral reference — as the single
+designed peptides as `amide=yes` and met-enkephalin (the neutral reference) as the single
 `amide=no` entry. `YGGFEVVG` as released by the processing cascade is a **free acid**, so both
 Cycle 8 tags are declared `amide=no, dres=none` in a separate `prod_cycle8.txt` via the
 `PROD_TABLE` override, leaving Cycle 3b's table untouched as the record of what Cycle 3b ran.
 
-The build **refused to run** when that table was absent — *"refusing to guess peptide chemistry"* —
+The build **refused to run** when that table was absent: *"refusing to guess peptide chemistry"*,
 which is correct behaviour, since amide and free acid are different molecules.
 
 ## Build
@@ -56,7 +56,7 @@ convergence problem, not a sampling problem; the GPU buys nothing that justifies
 glycine, `O` and `OXT`, both typed `O2`, with residue charge −1.
 
 *Correction to an earlier check:* a post-build assertion reported `OXT present: 0` and was recorded
-as a failure. It inspected `pep_chir.pdb` — the **pre-tleap** intermediate — whereas `tleap` adds
+as a failure. It inspected `pep_chir.pdb` (the **pre-tleap** intermediate) whereas `tleap` adds
 OXT during assembly. The property asserted was right; the file was wrong. `YGGFEVVG` has 58 heavy
 atoms as predicted, 59 once OXT is added.
 
@@ -72,7 +72,7 @@ Asp3.32 is the conserved opioid-receptor residue that salt-bridges the protonate
 opioid ligand. Its spontaneous formation in both systems is independent evidence the pose is sane.
 
 **Chirality: all five chiral centres are L, in both systems.** This check is mandatory rather than
-optional, because `build_system.sh` **skips its own chirality gate when `dres=none`** — correct for
+optional, because `build_system.sh` **skips its own chirality gate when `dres=none`**, correct for
 an all-L peptide, and the same coupling that once allowed an all-L analogue of deltorphin II to pass
 every downstream check. ff14SB has no D-amino-acid templates, so handedness carries no energetic
 term: the force field is **enantiomer-blind** and cannot detect an inversion. Verification must be
@@ -90,7 +90,7 @@ Confirmed two independent ways:
 
 Gly2, Gly3 and Gly8 are achiral.
 
-*Correction:* the first independent calculation reported **all five centres as D** — a catastrophic
+*Correction:* the first independent calculation reported **all five centres as D**, a catastrophic
 result that would have condemned both systems. It was wrong. The triple product was correct but the
 L/D test was inverted, against the convention stated in `chirality.py`'s own docstring (*"L-amino
 acids give V > 0"*) which had been printed four lines earlier in the same output. Every measured V

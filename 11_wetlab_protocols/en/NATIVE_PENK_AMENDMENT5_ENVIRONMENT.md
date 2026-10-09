@@ -1,5 +1,5 @@
 
-# Native PENK Amendment 5 — the extracellular environment changes the analysis
+# Native PENK Amendment 5: the extracellular environment changes the analysis
 
 **Scope:** native (unmodified) human proenkephalin, P01210, 267 aa. Companion to
 Amendment 2, which covered granule processing only. **Basis:** the peptidase evidence
@@ -10,12 +10,12 @@ established in engPENK Amendment 4, applied to the native panel.
 Amendment 2 analysed native PENK as a **granule** problem: PC1/PC3 and PC2 cut at dibasic
 sites, CPE trims basic residues, PAM amidates a Gly-extended precursor. That is correct and
 stands. But it stops at the granule membrane. Once secreted, every product enters a
-compartment with a different pH, no Ca²⁺ gradient, and a different enzyme set —
+compartment with a different pH, no Ca²⁺ gradient, and a different enzyme set,
 **NEP, ACE and APN on the cell surface**. Three consequences, none of which were in
 Amendment 2:
 
 1. The panel is not 25 peaks. It is **49**, because ACE generates a second tier of products.
-2. Two enkephalin peaks are **route-ambiguous** — the same mass arises granule-side and
+2. Two enkephalin peaks are **route-ambiguous**: the same mass arises granule-side and
    extracellular-side.
 3. The MS method needs a stated resolving power, because the extended panel contains a
    1.27 Da pair.
@@ -25,7 +25,7 @@ architecture) is unaffected.
 
 ## §1 The NEP site count, corrected
 
-Amendment 2 inherited the flat rule — every bond followed by a hydrophobic residue counted
+Amendment 2 inherited the flat rule: every bond followed by a hydrophobic residue counted
 as a neprilysin site. That rule is wrong (see engPENK Amendment 4 §0 R1): the S1′ pocket is
 shaped by Phe563 and prefers **aromatic** P1′ residues, and a valine at P1′ leaves an
 unfavourable gap on binding (Sexton et al. 2012). Re-scored in tiers:
@@ -42,7 +42,7 @@ unfavourable gap on binding (Sexton et al. 2012). Re-scored in tiers:
 | BAM-20 | **4** | 2 | 1 |
 | BAM-22 | **5** | 2 | 1 |
 
-The pentapeptides carry exactly one canonical site — `Gly3-Phe4`, the classical
+The pentapeptides carry exactly one canonical site: `Gly3-Phe4`, the classical
 enkephalinase bond. The **BAM peptides carry four to five**, which is the quantitative
 reason they are short-lived extracellularly and why granule content and secreted content
 are not the same population.
@@ -54,7 +54,7 @@ amidated substrates too (Bernstein et al. 2013). Applied to every native species
 
 | substrate | ACE removes | product | product [M+H]⁺ | identity |
 |---|---|---|---|---|
-| `YGGFMRF` (MERF) | Arg-Phe | `YGGFM` | 574.2330 | **Met-enkephalin — activating** |
+| `YGGFMRF` (MERF) | Arg-Phe | `YGGFM` | 574.2330 | **Met-enkephalin, activating** |
 | `YGGFMRGL` (MERGL) | Gly-Leu | `YGGFMR` | 730.3341 | novel fragment |
 | `YGGFMRRV`-NH₂ | Arg-Val-NH₂ | `YGGFMR` | 730.3341 | novel fragment |
 | `YGGFM` | Phe-Met | `YGG` | 296.1241 | inactive |
@@ -87,7 +87,7 @@ precursor's C-terminal acidic region, which is a major secreted product:
 
 This region carries three Ser and one Tyr, so the phospho-forms are the species to expect,
 not the free acid. **This is where the panel gets hard**: enkelytin+2P at 2632.9925 sits
-**1.268 Da** from BAM-20+1ox at 2634.2605 — a
+**1.268 Da** from BAM-20+1ox at 2634.2605, a
 resolving power of **≈2100** at z=1, and the same requirement at z=2 and z=3. Any
 instrument below that will merge the two. Every other pair in the 49-peak panel is
 either resolved or a same-sequence duplicate.
@@ -102,20 +102,20 @@ The engineered cassette is judged against native background, so the background m
 - **Both are ACE substrates and both give an activating conversion.** ACE turns native MERF
   into Met-enkephalin; it turns the cassette 7 analogue `YGGFEVVGRF` into the target
   octapeptide `YGGFEVVG` (827.3934). The same chemistry, on both sides.
-- **BAM-8-22 remains the shared peak** (1970.9330, engPENK Amendment 3 §0) — it lies
+- **BAM-8-22 remains the shared peak** (1970.9330, engPENK Amendment 3 §0): it lies
   downstream of the swapped core and is produced identically by native and construct.
   Its ACE product `VGRPEWWMDYQKR` at 1750.8482 is shared for the same reason. Add it to
   the shared-peak list, not the marker list.
 
 ## §5 Bench actions
 
-1. **Extend the MS target list to 49 peaks** — see `native_penk_extended_ms_panel.csv`.
+1. **Extend the MS target list to 49 peaks**: see `native_penk_extended_ms_panel.csv`.
    The 24 new entries are ACE products and the C-terminal/phospho forms.
 2. **Specify R ≥ 3000** on the method (1.4× margin over the 2100 requirement) or exclude
    the 2620–2640 window from quantitation.
 3. **Add a captopril arm** to any experiment quantifying Met-enkephalin or BAM-20.
    Without it, granule-derived and ACE-derived peaks are not separable.
-4. **Add thiorphan** if BAM peptide recovery is low — four to five canonical NEP sites
+4. **Add thiorphan** if BAM peptide recovery is low: four to five canonical NEP sites
    predicts rapid loss, and low recovery is expected rather than a handling failure.
 5. **Look for the phospho-enkelytin forms**, not the free acid.
 
@@ -130,7 +130,7 @@ The engineered cassette is judged against native background, so the background m
 
 ## References
 
-1. Sexton T. et al. (2012) *PLoS ONE* 7:e32343 — NEP S1′ pocket, Phe563, aromatic P1′ preference. doi:10.1371/journal.pone.0032343
-2. Bernstein K.E. et al. (2013) *Pharmacol Rev* 65:1 — ACE as dipeptidyl carboxypeptidase; amidated substrates. doi:10.1124/pr.112.006809
-3. Bhatt et al. (2025) *Commun Biol* — ACE inhibition raises MERF selectively. doi:10.1038/s42003-025-08790-6
-4. Ozawa A. et al. (2007) *Anal Biochem* — in-vitro PC2/CPE/PAM cascade.
+1. Sexton T. et al. (2012) *PLoS ONE* 7:e32343, NEP S1′ pocket, Phe563, aromatic P1′ preference. doi:10.1371/journal.pone.0032343
+2. Bernstein K.E. et al. (2013) *Pharmacol Rev* 65:1, ACE as dipeptidyl carboxypeptidase; amidated substrates. doi:10.1124/pr.112.006809
+3. Bhatt et al. (2025) *Commun Biol*: ACE inhibition raises MERF selectively. doi:10.1038/s42003-025-08790-6
+4. Ozawa A. et al. (2007) *Anal Biochem*: in-vitro PC2/CPE/PAM cascade.

@@ -1,4 +1,4 @@
-# collect_dg.py delta-parse defect — post-mortem
+# collect_dg.py delta-parse defect: post-mortem
 
 **Found:** 2026-08-31, by the first real rescoring run (c3b_dtII_DOR rep1).
 **Severity:** silent wrong number that passed every existing guard.
@@ -9,13 +9,13 @@
 
 | block | label | value (this run) |
 |---|---|---|
-| Complex | `TOTAL` | — |
-| Receptor | `TOTAL` | — |
+| Complex | `TOTAL` | - |
+| Receptor | `TOTAL` | - |
 | Ligand | `TOTAL` | **-123.33** |
 | Delta (Complex - Receptor - Ligand) | `ΔTOTAL` | **-67.48** |
 
 Only the delta row is prefixed with U+0394. The old pattern was
-`(?:DELTA\s+TOTAL|Delta\s+TOTAL|TOTAL)` taking the **last** match — which never
+`(?:DELTA\s+TOTAL|Delta\s+TOTAL|TOTAL)` taking the **last** match, which never
 matches the glyph, so it returned the **ligand's absolute GB energy** as dG_bind.
 
 ## Why no guard caught it
@@ -34,7 +34,7 @@ these two quantities.
 3. accepts the total row with or without the leading glyph;
 4. requires **exactly one** total row in that block, else refuses;
 5. **cross-checks that the printed components sum to the printed total** (tolerance
-   0.5 kcal/mol). This is the structural safeguard — it does not depend on knowing
+   0.5 kcal/mol). This is the structural safeguard: it does not depend on knowing
    the label.
 
 Both negative controls refuse correctly: delta block deleted -> FAIL; one component
@@ -48,5 +48,5 @@ The single result row carrying -123.33 was **quarantined, not deleted**:
 ## Generalisable lesson
 
 A range-based sanity check cannot separate two quantities whose ranges overlap.
-Where a total is printed alongside its components, cross-check the sum — that
+Where a total is printed alongside its components, cross-check the sum: that
 constraint is independent of parsing and of the label.

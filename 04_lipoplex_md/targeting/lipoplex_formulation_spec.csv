@@ -1,12 +1,12 @@
 formulation,component,mol_pct,mw,formal_charge,nmol_per_100ug_NA,ug_per_100ug_NA,nmol_per_well,ug_per_well,role
-A — DOTAP lipoplex (MD-matched),DOTAP (chloride salt),50.0,698.54,1.0,909.09,635.04,6.1205,4.2754,permanent quaternary ammonium; +1 at all pH
-A — DOTAP lipoplex (MD-matched),DOPE,33.3,744.03,0.0,605.45,450.48,4.0762,3.0328,fusogenic helper; cone shape drives endosomal escape
-A — DOTAP lipoplex (MD-matched),Cholesterol,16.7,386.65,0.0,303.64,117.4,2.0442,0.7904,membrane rigidity / stability
-"B1 — MC3 LNP, MD-matched + PEG",DLin-MC3-DMA,49.25,642.09,,1818.18,1167.44,12.2409,7.8598,"ionizable tertiary amine, pKa 6.44"
-"B1 — MC3 LNP, MD-matched + PEG",DOPE,32.8,744.03,0.0,1210.89,900.94,8.1523,6.0656,fusogenic helper; cone shape drives endosomal escape
-"B1 — MC3 LNP, MD-matched + PEG",Cholesterol,16.45,386.65,0.0,607.29,234.81,4.0886,1.5809,membrane rigidity / stability
-"B1 — MC3 LNP, MD-matched + PEG",DMG-PEG2000,1.5,2509.2,0.0,55.38,138.95,0.3728,0.9355,"steric stabiliser; controls size, blocks aggregation"
-"B2 — MC3 LNP, clinical benchmark",DLin-MC3-DMA,50.0,642.09,,1818.18,1167.44,12.2409,7.8598,"ionizable tertiary amine, pKa 6.44"
-"B2 — MC3 LNP, clinical benchmark",DSPC,10.0,790.15,0.0,363.64,287.33,2.4482,1.9344,saturated structural helper (clinical LNP)
-"B2 — MC3 LNP, clinical benchmark",Cholesterol,38.5,386.65,0.0,1400.0,541.31,9.4255,3.6444,membrane rigidity / stability
-"B2 — MC3 LNP, clinical benchmark",DMG-PEG2000,1.5,2509.2,0.0,54.55,136.87,0.3672,0.9214,"steric stabiliser; controls size, blocks aggregation"
+A, DOTAP lipoplex (MD-matched),DOTAP (chloride salt),50.0,698.54,1.0,909.09,635.04,6.1205,4.2754,permanent quaternary ammonium; +1 at all pH
+A, DOTAP lipoplex (MD-matched),DOPE,33.3,744.03,0.0,605.45,450.48,4.0762,3.0328,fusogenic helper; cone shape drives endosomal escape
+A, DOTAP lipoplex (MD-matched),Cholesterol,16.7,386.65,0.0,303.64,117.4,2.0442,0.7904,membrane rigidity / stability
+"B1, MC3 LNP, MD-matched + PEG",DLin-MC3-DMA,49.25,642.09,,1818.18,1167.44,12.2409,7.8598,"ionizable tertiary amine, pKa 6.44"
+"B1, MC3 LNP, MD-matched + PEG",DOPE,32.8,744.03,0.0,1210.89,900.94,8.1523,6.0656,fusogenic helper; cone shape drives endosomal escape
+"B1, MC3 LNP, MD-matched + PEG",Cholesterol,16.45,386.65,0.0,607.29,234.81,4.0886,1.5809,membrane rigidity / stability
+"B1, MC3 LNP, MD-matched + PEG",DMG-PEG2000,1.5,2509.2,0.0,55.38,138.95,0.3728,0.9355,"steric stabiliser; controls size, blocks aggregation"
+"B2, MC3 LNP, clinical benchmark",DLin-MC3-DMA,50.0,642.09,,1818.18,1167.44,12.2409,7.8598,"ionizable tertiary amine, pKa 6.44"
+"B2, MC3 LNP, clinical benchmark",DSPC,10.0,790.15,0.0,363.64,287.33,2.4482,1.9344,saturated structural helper (clinical LNP)
+"B2, MC3 LNP, clinical benchmark",Cholesterol,38.5,386.65,0.0,1400.0,541.31,9.4255,3.6444,membrane rigidity / stability
+"B2, MC3 LNP, clinical benchmark",DMG-PEG2000,1.5,2509.2,0.0,54.55,136.87,0.3672,0.9214,"steric stabiliser; controls size, blocks aggregation"

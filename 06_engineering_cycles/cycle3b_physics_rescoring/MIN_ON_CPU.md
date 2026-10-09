@@ -1,11 +1,11 @@
-# Moving minimisation off the GPU — and validating that it is equivalent
+# Moving minimisation off the GPU, and validating that it is equivalent
 
 **Date:** 2026-08-12
 
 ## Why
 
 `17970387` (GPU minimisation of 5 systems) was scheduled by SLURM to start
-**2026-08-15T15:00** — a three-day wait behind another group's array job. But
+**2026-08-15T15:00**: a three-day wait behind another group's array job. But
 `min.mdp` is:
 
 ```
@@ -24,8 +24,8 @@ Three days of queue became two minutes of compute.
 
 ## Validation: measured, not assumed
 
-Equivalence was tested rather than argued. `c3b_dtII_DOR` — the one system that
-had been minimised on GPU — was re-minimised on CPU from the identical inputs in
+Equivalence was tested rather than argued. `c3b_dtII_DOR`, the one system that
+had been minimised on GPU, was re-minimised on CPU from the identical inputs in
 a scratch directory (`xcheck2/`), and the interface gate was run on the result.
 
 | | GPU (reference) | CPU (`-nb cpu`, 32 threads) | Δ |
@@ -34,7 +34,7 @@ a scratch directory (`xcheck2/`), and the interface gate was run on the result.
 | Potential energy | −2.0416499e+06 | −2.0527742e+06 | −0.055 % |
 | Max force | 8.0689435e+02 | 9.2713959e+02 | both < emtol |
 | worst-clash atom | 5339 | 5339 | same atom |
-| interface gate | pass | `XCHECK2_GATE_OK` | — |
+| interface gate | pass | `XCHECK2_GATE_OK` | - |
 
 The two backends land in the same basin: energies agree to 0.05 %, both satisfy
 the same convergence criterion, and both identify the *same atom* (5339) as the
@@ -47,7 +47,7 @@ interface relaxation: 2.75 -> 2.60 A (-0.15 A)
 contacts OK (2.60 A >= 2.5 A)
 ```
 
-## The first cross-check attempt was invalid — and looked like a physics failure
+## The first cross-check attempt was invalid, and looked like a physics failure
 
 `17971195` reported no CPU numbers at all and died with
 `FileNotFoundError: min.gro does not exist`. Cause:
@@ -60,7 +60,7 @@ line 18: gmx: command not found
 The script called bare `gmx` while `PATH` pointed at the Boltz-2 env, which has no
 GROMACS. `build_system.sh` itself does this correctly
 (`GMX=/data/users/kzanaj/envs/gmxcuda/bin/gmx`), and the host notes for this
-cluster document the trap explicitly — the envs have no `bin/activate` and
+cluster document the trap explicitly: the envs have no `bin/activate` and
 binaries must be called by absolute path. The rerun uses `$GMXBIN`.
 
 Worth naming the failure mode: an empty results section plus a missing-file
@@ -82,7 +82,7 @@ or not the science worked. They were re-audited from their own logs:
 | `c3b_em1_MOR` | −1.1576044e+06 | 9.239e+02 | 2.78 Å | OK |
 | `c3b_menk_MOR` | −1.2387839e+06 | 9.352e+02 | 2.69 Å | OK |
 
-All six: `BUILD_OK`, `MIN_CPU_EXIT=0`, no pair below 2.6 Å. Genuinely fine — but
+All six: `BUILD_OK`, `MIN_CPU_EXIT=0`, no pair below 2.6 Å. Genuinely fine, but
 that was established by reading the logs, not by trusting the scheduler.
 
 **Lesson for future array jobs: do not put a bare `echo` after the payload.**
@@ -91,8 +91,8 @@ the real status.
 
 ## One system was outside the array
 
-`c3b_menk_DOR` finished its CPU stage at 19:28 — eight minutes *after* the
-minimisation array was submitted — so it was never in `TAGS`. Minimised separately
+`c3b_menk_DOR` finished its CPU stage at 19:28, eight minutes *after* the
+minimisation array was submitted, so it was never in `TAGS`. Minimised separately
 as `17974079`. This is the hazard of enumerating tags by hand at submit time while
 other builds are still running.
 
@@ -107,5 +107,5 @@ c3b_dtI_MOR   dres=2    amide=yes      c3b_menk_MOR  dres=none amide=no
 
 Matches `CYCLE3B_DESIGN.md`: deltorphins D-Ala², endomorphin-1 all-L amidated,
 met-enkephalin all-L **free acid**. The amidation binding introduced earlier is
-doing its job — met-enkephalin built as the free acid without anyone remembering
+doing its job: met-enkephalin built as the free acid without anyone remembering
 to pass a flag.

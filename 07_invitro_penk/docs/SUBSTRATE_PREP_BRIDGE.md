@@ -1,4 +1,4 @@
-# Substrate preparation — from conditioned medium to digest tube
+# Substrate preparation: from conditioned medium to digest tube
 
 **Status:** dry-lab derived · written while the transfection is running · not yet wet-tested
 
@@ -23,7 +23,7 @@ Calculated from the v6 coding sequences, after signal-peptide removal (residues 
 
 The His6 tag sits at the **N-terminus of the mature chain** (positions 1–6, immediately
 after signal-peptide cleavage, followed by a GS linker). It is solvent-exposed and is the
-IMAC handle. Three further His residues occur internally in the payload — 9 in total —
+IMAC handle. Three further His residues occur internally in the payload (9 in total),
 which is why the tag binds tightly enough to tolerate a stringent wash.
 
 **A280 note.** Use the tabulated A280 values, not a Bradford or BCA assay, for the
@@ -31,7 +31,7 @@ purified protein. ε₂₈₀ = 32 890 M⁻¹cm⁻¹ (reduced) from 3 Trp + 11 T
 
 ---
 
-## 2. Finding #1 — the engPENK-first P2A construct carries a dead tail
+## 2. Finding #1: the engPENK-first P2A construct carries a dead tail
 
 In `His_PENK_P2A_mEGFP`, engPENK is cistron 1, so the P2A peptide stays **fused to the
 C-terminus** of the engPENK product after ribosome skipping: **19 extra residues**,
@@ -41,10 +41,10 @@ C-terminus** of the engPENK product after ribosome skipping: **19 extra residues
 single K at position 8 and no dibasic. Consequence: **cassette 7 of this construct cannot
 be released as a short peptide.** It stays fused to 19 residues of P2A through the digest.
 
-### This costs zero free octapeptide — do not re-order
+### This costs zero free octapeptide: do not re-order
 
 Cassette 7 was **never** going to yield free `YGGFEVVG`. Its C-terminal context is `RF`,
-ending at the stop codon, and CPE removes only C-terminal **basic** residues — it cannot
+ending at the stop codon, and CPE removes only C-terminal **basic** residues; it cannot
 remove Phe. Cassette 7's product is `YGGFEVVGRF` in *every* construct: an extended
 species, by design. It is the engineered equivalent of native PENK's terminal
 `YGGFMRF` (Met-enkephalin-Arg-Phe, MERF), itself a naturally extended end-product.
@@ -72,16 +72,16 @@ extended species, in one of four constructs:
 | `His_PENK_P2A_mEGFP` | `YGGFEVVGRF` + P2A tail | 29 aa | 3098.5218 |
 
 So: **nothing is lost that the experiment was measuring.** Add 3098.52 to the MS target
-list for that one construct and treat it as a **free internal negative control** — a
+list for that one construct and treat it as a **free internal negative control**, a
 species that should *not* be cleaved, sitting in the same tube as five that should. That
 is a control the panel did not previously have.
 
 This was not caught earlier because the cistron-order panel was designed for expression
-comparison, not for digest yield — and, as it turns out, digest yield is not affected.
+comparison, not for digest yield, and, as it turns out, digest yield is not affected.
 
 ---
 
-## 3. Finding #2 — the digest buffer sits on the substrate's pI
+## 3. Finding #2: the digest buffer sits on the substrate's pI
 
 **pI = 5.19. The published digest buffer is pH 5.5.** That is 0.3 units away.
 
@@ -94,7 +94,7 @@ comparison, not for digest yield — and, as it turns out, digest yield is not a
 | 5.0 | +0.0 | 0.00 |
 
 Below roughly \|z\|/kDa ≈ 0.30 a protein has little electrostatic self-repulsion and
-aggregation risk rises. At the digest pH this substrate is at **0.19** — inside that
+aggregation risk rises. At the digest pH this substrate is at **0.19**, inside that
 window. It is a 31 kDa acidic protein with a disordered, highly charged payload, so it is
 not a classic aggregator, but the margin is thin and the failure mode is silent: substrate
 drops out of solution and the digest simply under-performs.
@@ -117,27 +117,27 @@ Standard His-tag IMAC, with the buffer choices justified rather than defaulted.
 | **1 · bind** | 50 mM NaH₂PO₄ **pH 8.0**, 300 mM NaCl, 10 mM imidazole | pH 8.0 holds the protein at z = −17.9, far from the pI. 300 mM NaCl suppresses non-specific ionic binding to the resin. 10 mM imidazole blocks weak binders. |
 | **2 · wash** | same + 20–30 mM imidazole | 9 His residues total → tight binding → a stringent wash is affordable and worth it. |
 | **3 · elute** | same + 250 mM imidazole | Single-step elution; no gradient needed for a His6 tag. |
-| **4 · exchange** | → 50 mM Na-acetate **pH 5.5**, 5 mM CaCl₂, **100–150 mM NaCl** — spin desalt, 3–10 kDa MWCO | **This is the step that matters.** See below. |
+| **4 · exchange** | → 50 mM Na-acetate **pH 5.5**, 5 mM CaCl₂, **100–150 mM NaCl** (spin desalt, 3–10 kDa MWCO) | **This is the step that matters.** See below. |
 
-### Step 4 in detail — the pH transition
+### Step 4 in detail: the pH transition
 
 The protein must cross its own pI to get from IMAC into digest buffer. Do it in the way
 that spends least time near zero charge and lowest concentration:
 
-1. **Exchange directly into digest buffer.** Do not elute, concentrate, and then acidify —
+1. **Exchange directly into digest buffer.** Do not elute, concentrate, and then acidify:
    that concentrates the protein *and* walks it through the pI at high concentration,
    which is the worst combination.
 2. **Keep 100–150 mM NaCl in the digest buffer.** Screening ions substitute for the
    electrostatic repulsion the protein loses near its pI. The PC2 protocol already
    specifies 100 mM NaCl, so for the PC2 arm this is free; add it to the PC1/3 arm too.
-3. **Stay dilute during the transition** — below ~0.5 mg/mL. Concentrate afterwards if
+3. **Stay dilute during the transition**, below ~0.5 mg/mL. Concentrate afterwards if
    the digest needs it, in the final buffer.
 4. **Work at 4 °C** through the exchange; warm to 37 °C only when the enzyme goes in.
 5. **Spin the substrate before adding enzyme** (10 min, 16 000 × g, 4 °C) and read A280 on
    the supernatant. If you lost material, you will see it here rather than blaming the
    enzyme later.
 
-### Reducing agent — a decision, not a default
+### Reducing agent: a decision, not a default
 
 The mature chain has **6 cysteines, all in the N-terminal region (positions 10, 14, 17,
 32, 36, 49 of the mature chain)**. This Cys-rich domain is inherited from native PENK,
@@ -145,7 +145,7 @@ not engineered.
 
 - The **PC1/3 and PC2 arms** are published without reducing agent. Run them that way.
 - The **cathepsin L arm requires 5 mM DTT** (it is a cysteine protease). That DTT will also
-  reduce the substrate's own disulfides — acceptable, and possibly helpful, since a reduced
+  reduce the substrate's own disulfides, acceptable, and possibly helpful, since a reduced
   substrate is more accessible. Just be aware the two arms present structurally different
   substrate.
 - Do not add DTT "for safety" to the PC arms. It changes the substrate between arms and
@@ -153,7 +153,7 @@ not engineered.
 
 ---
 
-## 5. Enzyme staging — what can share a tube
+## 5. Enzyme staging: what can share a tube
 
 Derived from the requirements already tabulated in `enzyme_conditions.csv`. Two hard
 constraints: **pH** and **metal-vs-chelator**.
@@ -174,14 +174,14 @@ The full pairwise matrix is in `tables/enzyme_compatibility_matrix.csv`.
 
 ---
 
-## 6. Steric accessibility of the seven cleavage sites — checked, passes
+## 6. Steric accessibility of the seven cleavage sites: checked, passes
 
 **Question:** the payload is intrinsically disordered by design, but is every dibasic site
 actually accessible to PC1/3 and PC2, or does any of them sit buried in the one folded
 domain the protein has?
 
 **Source of the answer:** the corrected AlphaFold run already in this repo
-(`04_structures/engPENK_alphafold_per_residue_plddt.csv`, 288-aa proprotein — the run
+(`04_structures/engPENK_alphafold_per_residue_plddt.csv`, 288-aa proprotein, the run
 validated in `cycle3b_physics_rescoring/ALPHAFOLD_RESUBMIT_NOTE.md` after the earlier
 DNA-submitted run was rejected). No new prediction was needed. AlphaFold's own
 `fraction_disordered` for this model is **0.83**, pTM 0.26.
@@ -205,14 +205,14 @@ Per-site, over a 10-residue window centred on each scissile bond:
 | 6 | 243–244 | 35.6 | 31.9 | yes |
 | 7 | 277–278 | 36.3 | 25.6 | yes |
 
-**All 7 of 7 sites are at pLDDT 26–36 — deeply disordered, far below the 50 threshold.**
+**All 7 of 7 sites are at pLDDT 26–36, deeply disordered, far below the 50 threshold.**
 Not one lies inside the folded anchor; the first dibasic site sits **21 residues past** the
 anchor's C-terminal boundary. A disordered site is an extended site, which is the
 conformation PC1/3 and PC2 require. There is no steric reason for any cassette to
 under-cut.
 
 **What this does and does not license.** It says no site is *occluded*. It does not predict
-*rates* — pLDDT is a confidence measure, not a free energy, and cleavage kinetics depend on
+*rates*: pLDDT is a confidence measure, not a free energy, and cleavage kinetics depend on
 sequence context and enzyme concentration, which this does not model. If a cassette
 under-performs in the digest, the cause is kinetic or compositional, not steric, and the
 per-site sequence context in `cleavage_predictions.csv` is where to look.
@@ -221,7 +221,7 @@ per-site sequence context in `cleavage_predictions.csv` is where to look.
 the *folded* anchor, and the nearest dibasic site is 66 residues downstream with the whole
 anchor in between. Processing interference is therefore implausible. But note the pLDDT run
 was done **without** the tag, so it says nothing about whether appending His6-GS perturbs
-the anchor's own fold — that is a solubility/folding question, not a processing one, and it
+the anchor's own fold: that is a solubility/folding question, not a processing one, and it
 is still open.
 
 ---
@@ -245,18 +245,18 @@ is still open.
 
 ## 8. Files
 
-- `tables/substrate_properties.csv` — per-construct mass, pI, charge, A280, C-terminal end
-- `tables/purification_plan.csv` — the four buffer steps with rationale
-- `tables/enzyme_compatibility_matrix.csv` — full pairwise co-incubation matrix
-- `substrate_prep_bridge.png` — charge-vs-pH curve and enzyme staging
-- `tables/cassette_fate.csv` — per-cassette C-terminal context and product
-- `tables/cassette_yield_accounting.csv` — free-octapeptide yield per construct
-- `tables/cassette_accessibility.csv` — per-site pLDDT windows
-- `cassette_accessibility.png` — pLDDT profile with cleavage sites, and cassette fate
+- `tables/substrate_properties.csv`: per-construct mass, pI, charge, A280, C-terminal end
+- `tables/purification_plan.csv`, the four buffer steps with rationale
+- `tables/enzyme_compatibility_matrix.csv`, full pairwise co-incubation matrix
+- `substrate_prep_bridge.png`, charge-vs-pH curve and enzyme staging
+- `tables/cassette_fate.csv`, per-cassette C-terminal context and product
+- `tables/cassette_yield_accounting.csv`, free-octapeptide yield per construct
+- `tables/cassette_accessibility.csv`, per-site pLDDT windows
+- `cassette_accessibility.png`, pLDDT profile with cleavage sites, and cassette fate
 
 **Data sources.** Sequences: the ordered v6 FASTA files in
 `06_engineering_cycles/cycle4_synthesizability/data/`. Mass, pI, ε₂₈₀: Biopython
 `ProtParam` on the translated mature chain. Enzyme requirements: `enzyme_conditions.csv`
 in this directory (Yoon 2022, UniProt P29120/P16519/P05408/P07711/P16870/P19021/P09958).
-Net-charge curve: Henderson–Hasselbalch over standard side-chain pKa values — a model,
+Net-charge curve: Henderson–Hasselbalch over standard side-chain pKa values, a model,
 not a measurement.

@@ -31,7 +31,7 @@ than alphabetically. No biology background assumed.
 | **Codon** | Three DNA letters coding one amino acid. Multiple codons per amino acid → redundancy. |
 | **Synonymous recoding** | Changing DNA without changing the protein, by swapping in alternative codons. Used to fix synthesis problems. |
 | **GC content** | Fraction of DNA letters that are G or C. Too high or too low and synthesis fails. We target 40–45 %. |
-| **CAI** (codon adaptation index) | 0–1 score of how closely codon choice matches the host's preferences. Higher is usually better expressed. Recoding for GC costs CAI — a real trade-off. |
+| **CAI** (codon adaptation index) | 0–1 score of how closely codon choice matches the host's preferences. Higher is usually better expressed. Recoding for GC costs CAI: a real trade-off. |
 | **Plasmid** | A circular DNA molecule you can put into cells. Our constructs are delivered this way. |
 | **Construct / cassette** | An engineered stretch of DNA designed to do one thing. We have four constructs; each carries seven peptide cassettes. |
 | **Kozak sequence** | A short motif before a start codon telling the cell to begin translating here. |
@@ -52,7 +52,7 @@ than alphabetically. No biology background assumed.
 | **Ki / IC50** | Experimentally measured binding strength. Lower = tighter. What published papers report. |
 | **δ-selectivity** | Preferring the δ receptor over μ. The whole point of the payload design. |
 | **Agonist** | A molecule that activates a receptor. Our peptides are agonists. |
-| **Antagonist** | A molecule that blocks a receptor without activating it. Several of our calibration references are antagonists — which is why the panel calibrates *binding*, not *effect*. |
+| **Antagonist** | A molecule that blocks a receptor without activating it. Several of our calibration references are antagonists, which is why the panel calibrates *binding*, not *effect*. |
 | **Co-folding** | Predicting the 3D structure of two molecules together, e.g. peptide inside receptor. Done with Boltz-2. |
 | **ipTM** | Boltz-2's confidence in the *interface* between two chains. 0–1, higher better. **Confidence, not correctness.** |
 | **pLDDT** | Per-residue structural confidence, 0–100. Low pLDDT often means genuinely floppy, not merely uncertain. |
@@ -63,7 +63,7 @@ than alphabetically. No biology background assumed.
 | **λ window** | One intermediate step in an FEP calculation, where the molecule is partly "switched off". We use 27 per leg. |
 | **Replicate** | A repeat of the same simulation with different starting velocities. Needed to estimate error. |
 | **QSAR** | Predicting activity from chemical structure using machine learning. Used in Cycle 7's variant screen. |
-| **Applicability domain** | Whether a new molecule resembles a model's training data enough for its prediction to mean anything. Our peptide sits outside the small-molecule domain — stated explicitly. |
+| **Applicability domain** | Whether a new molecule resembles a model's training data enough for its prediction to mean anything. Our peptide sits outside the small-molecule domain, stated explicitly. |
 
 ## Statistics and our conventions
 
@@ -72,13 +72,13 @@ than alphabetically. No biology background assumed.
 | **Pre-registration** | Writing down predictions and pass/fail thresholds *before* running the test, and committing them to git. Our core convention. |
 | **Gate** | A numeric pass/fail criterion fixed in advance. E.g. Cycle 7's "correlation must exceed 0.553". |
 | **Falsified** | A prediction the data contradicted. We record these deliberately. |
-| **Unresolved** | A prediction the experiment could not settle either way — distinct from falsified, and recorded separately. |
+| **Unresolved** | A prediction the experiment could not settle either way, distinct from falsified, and recorded separately. |
 | **r (Pearson)** | Linear correlation, −1 to +1. Cycle 7 achieved r = 0.805. |
-| **ρ (Spearman)** | Rank correlation — does the ordering match? Cycle 9 achieved ρ = 1.000, i.e. perfect ranking. |
+| **ρ (Spearman)** | Rank correlation: does the ordering match? Cycle 9 achieved ρ = 1.000, i.e. perfect ranking. |
 | **p-value** | Probability of seeing a result this strong by chance. Below 0.05 is conventionally "significant". |
-| **SEM** | Standard error of the mean — the uncertainty on an average. |
+| **SEM** | Standard error of the mean: the uncertainty on an average. |
 | **Critical r** | The correlation you must exceed for significance at a given sample size. We compute it from n rather than picking a threshold. |
-| **Residency fraction** | The proportion of a simulation during which the peptide actually stayed in the pocket. **A bound-state ΔG is meaningless without it** — enforced by the tooling. |
+| **Residency fraction** | The proportion of a simulation during which the peptide actually stayed in the pocket. **A bound-state ΔG is meaningless without it**: enforced by the tooling. |
 | **DBTL** | Design–Build–Test–Learn. The iGEM engineering cycle. One cycle = one Learn→Design edge, not one construct. |
 
 ## Lab and infrastructure
@@ -87,7 +87,7 @@ than alphabetically. No biology background assumed.
 |---|---|
 | **Transfection** | Putting DNA into cultured cells so they express it. |
 | **HEK293T** | A common human cell line. **Our finding: it lacks the enzymes needed to process our precursor.** |
-| **Conditioned medium** | The liquid cells have been growing in — contains whatever they secreted. Our starting material. |
+| **Conditioned medium** | The liquid cells have been growing in (contains whatever they secreted). Our starting material. |
 | **IMAC** | Nickel-column purification that captures His6-tagged proteins. |
 | **LC-MS/MS** | Mass spectrometry. Identifies peptides by exact mass. How we will confirm the payload was released. |
 | **In vitro** | In a tube, outside a living organism. Our processing assay. |
@@ -103,11 +103,11 @@ than alphabetically. No biology background assumed.
 
 | Sequence | What it is |
 |---|---|
-| `YGGFM` | Met-enkephalin — the natural human peptide |
+| `YGGFM` | Met-enkephalin: the natural human peptide |
 | `YGGFEVVG` | **Our engineered payload**, 8 residues |
-| `YGGF` | The shared "message" region of all opioid peptides — triggers the receptor |
-| `EVVG` | Our "address" region — tunes receptor preference |
+| `YGGF` | The shared "message" region of all opioid peptides: triggers the receptor |
+| `EVVG` | Our "address" region: tunes receptor preference |
 | `YGGFEVVGRF` | What the 7th cassette releases (extended, by design) |
-| `KR`, `KK`, `RR` | Dibasic motifs — where the convertases cut |
-| `MARFLTLCTWLLLLGPGLLATVRA` | The signal peptide — "secrete this protein" |
+| `KR`, `KK`, `RR` | Dibasic motifs: where the convertases cut |
+| `MARFLTLCTWLLLLGPGLLATVRA` | The signal peptide: "secrete this protein" |
 | `ATNFSLLKQAGDVEENPGP` | The P2A self-cleaving peptide |

@@ -5,14 +5,14 @@
 **Predictions are committed and pushed before the test that could falsify them.**
 
 Every engineering cycle in `06_engineering_cycles/` has a `*_DESIGN.md` containing its
-hypothesis, its numeric predictions, and a **gate** — a pass/fail threshold fixed in
-advance — pushed before the corresponding run starts. The matching `*_RESULTS.md` scores
+hypothesis, its numeric predictions, and a **gate** (a pass/fail threshold fixed in
+advance), pushed before the corresponding run starts. The matching `*_RESULTS.md` scores
 every prediction as confirmed, falsified, or unresolved.
 
 This is what makes the commit history evidence rather than narrative. A prediction added
 or edited after seeing its result destroys that property for the whole repository, not
 just for one cycle. If a prediction turns out to have been badly specified, say so in the
-results document — do not revise the design document.
+results document: do not revise the design document.
 
 ## Reporting results
 

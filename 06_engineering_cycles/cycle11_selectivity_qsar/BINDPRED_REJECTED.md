@@ -2,7 +2,7 @@
 
 BindPred (Bioinformatics 2026, doi:10.1093/bioinformatics/btag309) predicts binding affinity
 from sequence alone using ESM2 embeddings plus gradient boosting, r = 0.86 on an 11,919-complex
-benchmark. Structure-agnostic, so no pose dependence — genuinely attractive.
+benchmark. Structure-agnostic, so no pose dependence: genuinely attractive.
 
 **Rejected, and the reason is structural rather than a failed fit.**
 
@@ -41,7 +41,7 @@ matching: generate candidate sequences from the precursors, build them, compare 
 
 Also corrected in the same analysis: our sign convention had been inverted, making DAMGO appear
 delta-preferring. Fixing it dissolved an apparent disagreement between the ChEMBL value for
-Met-enkephalin (+0.15) and our stored +0.81 — same direction, magnitude differing by ordinary
+Met-enkephalin (+0.15) and our stored +0.81, same direction, magnitude differing by ordinary
 between-source scatter.
 
 ## GPCRVS also checked, also not applicable
@@ -71,7 +71,7 @@ fingerprint. GLASS also contains opioid receptors, unlike GPCRVS.
 TrGPCR predicts **affinity**, not selectivity. A ddG is therefore a difference of two
 predictions and inherits sqrt(2) x the per-prediction error.
 
-Reported: *"RMSE and MAE values of 1.804 and 1.478 on Core 2016"* — their best figure. Units
+Reported: *"RMSE and MAE values of 1.804 and 1.478 on Core 2016"*, their best figure. Units
 are explicit in the paper: affinities are pKd, defined there as `pKd = -log10(Kd/1e9)`, so
 RMSE is in **log10 units**.
 
@@ -89,7 +89,7 @@ is still far above what this question needs.
 
 **Prediction error on our side, recorded.** Before reading the paper we estimated the plausible
 RMSE range as 0.5-0.9 log units, extrapolating from DeepDTA's published performance on Davis
-and KIBA. The actual figure is 1.804 — more than double the top of that range. Those benchmarks
+and KIBA. The actual figure is 1.804, more than double the top of that range. Those benchmarks
 are kinase sets with far denser data; GPCRs are the hard case, which is this paper's own stated
 motivation. The lesson is not to extrapolate a benchmark figure across target families.
 
@@ -97,7 +97,7 @@ motivation. The lesson is not to extrapolate a benchmark figure across target fa
 
 `opioid`, `OPRD`, `OPRM` appear **zero** times in the paper. Their GPCR dataset is 356 proteins,
 5,359 ligands and 15,343 interactions, and opioid receptors are never named. GLASS contains
-them, but there is no evidence they are in the evaluated split — so using it here would mean
+them, but there is no evidence they are in the evaluated split, so using it here would mean
 extrapolating on top of an error bar already 4x too large.
 
 ---
@@ -113,7 +113,7 @@ extrapolating on top of an error bar already 4x too large.
 
 The common cause is not four unlucky methods. **The published affinity data cannot resolve a
 ~1 kcal/mol selectivity difference for a peptide in this region of chemical space.** Our own
-records disagree by 1.83 kcal/mol on one compound measured by two sources — larger than the
+records disagree by 1.83 kcal/mol on one compound measured by two sources, larger than the
 effect itself.
 
 **Consequence.** Alchemical free energy is the only method available that does not interpolate
@@ -142,14 +142,14 @@ this, and the wet-lab cAMP assay is the arbiter.
 Su, Liggett, Kim, Kim & Goddard, *npj Drug Discovery* 2026;3:13, doi:10.1038/s44386-026-00046-5.
 An integrated GPCR discovery workflow: computational modelling, functional cell assays, and
 **FLOWER** (Frequency Locked Optical Whispering Evanescent Resonator) for label-free direct
-binding measurement. Case studies are bitter (TAS2R) and sweet (T1R2/T1R3) taste receptors —
+binding measurement. Case studies are bitter (TAS2R) and sweet (T1R2/T1R3) taste receptors,
 not opioid receptors, though the authors state the approach is generalizable.
 
 ## It contains no computational method that passes our resolution filter
 
 Named: GEnSeMBLE, DarwinDock, NAMD/CHARMM36m, and Allosite / PASSer for allosteric pockets.
 These are structure-generation, docking and MD tools. The paper reports **no selectivity
-benchmark for any of them** — no RMSE, no correlation against measured ddG. They do not fail
+benchmark for any of them** (no RMSE, no correlation against measured ddG). They do not fail
 our 0.52 log-unit requirement so much as never state a number against which it could be
 applied. Allosite and PASSer target hidden allosteric pockets, which does not apply to an
 orthosteric peptide. NAMD/CHARMM36m is MD, which this project already runs.
@@ -161,7 +161,7 @@ near-physiological conditions, enabling computational predictions of binding str
 selectivity to be tested against experimentally determined equilibrium constants (Kd) without
 the use of tags."*
 
-The paper's answer to computational ambiguity is not a better model — it is direct experimental
+The paper's answer to computational ambiguity is not a better model: it is direct experimental
 binding measurement. That is the same place the four assessments above arrived from the
 opposite direction.
 
@@ -183,7 +183,7 @@ replicates -- see the correction above; this paragraph originally cited the with
 **The planned arbiter, cAMP, measures functional POTENCY.**
 
 Consequence: if the cAMP delta/mu ratio disagrees with the predicted binding ddG, that may be
-**ligand bias** rather than a wrong prediction — and without a binding measurement there is no
+**ligand bias** rather than a wrong prediction, and without a binding measurement there is no
 way to tell which. cAMP is the right assay for "does it work" and for the therapeutic claim,
 but it cannot strictly validate or refute the dry-lab selectivity predictions; it answers an
 adjacent question. Worth knowing before a judge asks.
@@ -193,10 +193,10 @@ adjacent question. Worth knowing before a judge asks.
 FLOWER is the Su lab's instrument (Wyant College of Optical Sciences, Arizona) and is not
 accessible to this project. The generic requirement is any direct binding measurement:
 
-- **Radioligand displacement** — previously considered and set aside in favour of cAMP. Yields
+- **Radioligand displacement**: previously considered and set aside in favour of cAMP. Yields
   Ki at each receptor, hence an experimental ddG directly comparable to every dry-lab number.
   This paper is an argument for revisiting it IF the delta/mu question specifically matters.
-- **SPR / BLI** at a core facility — label-free Kd on standard instruments, but GPCRs are
+- **SPR / BLI** at a core facility: label-free Kd on standard instruments, but GPCRs are
   membrane proteins requiring nanodiscs or virus-like particles to immobilise, which is
   precisely why FLOWER is notable. Likely out of scope for this timeline.
 

@@ -1,4 +1,4 @@
-# iGEM Model / Best Model — how the dry-lab package aligns
+# iGEM Model / Best Model: how the dry-lab package aligns
 
 **iGEM Patras · dry-lab modelling** · a self-audit mapping our computational work to the iGEM judging framework, so the wiki and judging-form entries are targeted rather than generic.
 
@@ -9,12 +9,12 @@
 Gold is **no longer a separate judge vote**. It is now inferred from the three
 **Special Awards** a team selects on the Judging Form: each judge scores those
 awards on their rubrics, and **all three selected awards must reach a "yes"**
-for the Gold criterion to be met. Teams elect up to three awards — at least one
+for the Gold criterion to be met. Teams elect up to three awards, at least one
 from each list plus a third from either. Selecting fewer than three forfeits
 Gold eligibility.
 
 **Implication for us:** if the team selects **Best Model** as one of its three,
-the modelling work is not decoration — it is load-bearing for the medal. This
+the modelling work is not decoration: it is load-bearing for the medal. This
 document is written so that selection is defensible.
 
 > The per-question rubric wording is deliberately unpublished by iGEM (to stop
@@ -45,16 +45,16 @@ the wet lab can close the loop:
 - Lipoplex → gel-shift / DLS at endosomal vs physiological pH should mirror the
   MD contact trend (MC3 binds low-pH, releases neutral; DOTAP binds both).
 
-This is the modelling↔wet-lab **iterative loop** iGEM rewards — each model
+This is the modelling↔wet-lab **iterative loop** iGEM rewards: each model
 output names the experiment that would confirm or refute it.
 
-**(3) Consider future implementation — application, scalability, safety.**
+**(3) Consider future implementation: application, scalability, safety.**
 
 - **Application:** **intranasal** lipoplex delivery for analgesia (stated, with the BBB
   rationale). *(Superseded: an earlier draft of this document said intrathecal.)*
 - **Scalability:** the pipeline is a reusable code repository (below), not a
-  one-off — any PENK/NEP construct can be re-audited.
-- **Safety:** limitations are stated *by design*, not hidden — NEP off-target
+  one-off: any PENK/NEP construct can be re-audited.
+- **Safety:** limitations are stated *by design*, not hidden; NEP off-target
   substrates (Aβ, substance P) motivate keeping knockdown local/transient; MD
   models are MARTINI analogies so conclusions are comparative, not affinities.
 
@@ -70,7 +70,8 @@ overclaims. Our package is built to that standard:
    evidence the audit is real.
 2. **Error bars and convergence honesty.** MD metrics are reported as mean ± SEM
    over 3 seeds, and the large error bars are acknowledged (binding still
-   nucleating at 50 ns) — which is *why* the 200 ns extension is running. We
+   nucleating at 50 ns), which is *why* the 200 ns extension was run, and it has since
+   completed. We
    report uncertainty instead of a single pretty number.
 3. **Stated model limitations.** MARTINI topologies are analogy models;
    accessibility folding ignores RNA-binding proteins; seed-level off-target
@@ -91,10 +92,10 @@ To convert this into a scoring wiki page and judging-form entry:
 - [ ] Embed the figures: `restriction_qc_gel.png`, `sirna_design_v2_figure.png`,
       `lipoplex_md_50ns.png` (→ 200 ns when it lands).
 - [ ] A **methods & reproducibility** section linking the GitHub repo and the
-      methods log — reproducibility is a scored differentiator.
+      methods log, reproducibility is a scored differentiator.
 - [ ] The **model→experiment loop** table (expectation 2 above) shown
       explicitly, so judges see validation is planned, not hoped for.
-- [ ] A **limitations** box — counterintuitively a *positive* signal to judges.
+- [ ] A **limitations** box: counterintuitively a *positive* signal to judges.
 - [ ] 150-word judging-form description: lead with "our models made three
       concrete design decisions the wet lab acted on."
 
@@ -102,7 +103,7 @@ To convert this into a scoring wiki page and judging-form entry:
 
 ## One-paragraph pitch (drop-in for the 150-word form)
 
-> Our dry-lab did not describe the system — it decided it. A sequence-level
+> Our dry-lab did not describe the system. It decided it. A sequence-level
 > audit of four PENK cassettes found a real defect (a truncated enkephalin
 > core) and selected the construct to build. A ViennaRNA-scored siRNA pipeline
 > screened 2,084 sites to four orderable anti-neprilysin duplexes with a ranked
@@ -110,7 +111,7 @@ To convert this into a scoring wiki page and judging-form entry:
 > (triplicate seeds, mean ± SEM) resolved the pH-dependent DNA-binding switch
 > that motivates our ionizable-lipid choice over a permanent cation. Every model
 > output is written as a testable prediction with a named wet-lab assay, closing
-> the design–build–test loop. Limitations — MARTINI analogy topologies, in-cell
-> RNA structure, off-target seed frequency — are stated beside each result. The
+> the design–build–test loop. Limitations: MARTINI analogy topologies, in-cell
+> RNA structure, off-target seed frequency, are stated beside each result. The
 > full pipeline is reproducible and version-controlled. The model is
 > load-bearing: remove it and three wet-lab decisions lose their basis.

@@ -1,4 +1,4 @@
-# Cycle 16 — is the address graft enough? (pre-registered, not yet run)
+# Cycle 16: is the address graft enough? (pre-registered, not yet run)
 
 **The literature moved under this project's central assumption, and that is worth knowing
 before 21 October.**
@@ -28,7 +28,7 @@ If so, this is not a sixth method failure. It is an *explanation* for the five:
 | cycle | result |
 |---|---|
 | 1 | Δ_sel indistinguishable from zero (after correction) |
-| 7 | +1.23 ± 1.76 — interval spans zero |
+| 7 | +1.23 ± 1.76, interval spans zero |
 | 8 | μ-preferring |
 | 14 | replicates disagree by 17× the effect |
 
@@ -45,10 +45,10 @@ against the canonical Asp3.32 amine anchor (DOR D128 / MOR D149):
 |---|---|---|---|
 | **2.63** | **K108** | **N129** | divergent, loses a formal charge |
 | **3.29** | **L125** | **I146** | divergent |
-| 3.32 | D128 | D149 | conserved — anchor, not a determinant |
+| 3.32 | D128 | D149 | conserved, anchor, not a determinant |
 | 6.58 | W284 | K305 | divergent, **not literature-named** |
 
-**K108 was not even in Cycle 15's candidate set** — that selection began at residue 125.
+**K108 was not even in Cycle 15's candidate set**: that selection began at residue 125.
 
 ## What Cycle 16 does
 
@@ -57,7 +57,7 @@ Measures whether the payload carries the *conformational* property, not just the
 `data/cycle16_prereg.json`, written before any analysis.
 
 The design has internal controls: deltorphin (D-Ala², constrained) and EM-1 (β-turn,
->1500×) against met-enkephalin (flexible, 3.7×). **G1 can fail** — if the constrained
+>1500×) against met-enkephalin (flexible, 3.7×). **G1 can fail**: if the constrained
 peptides do not separate from the flexible one, the metrics do not capture constraint here
 and nothing is claimed.
 

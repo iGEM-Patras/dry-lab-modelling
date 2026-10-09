@@ -1,4 +1,4 @@
-# Lipoplex CG-MD — 200 ns extended results
+# Lipoplex CG-MD, 200 ns extended results
 
 All 9 replicates (3 formulations × 3 seeds) extended from 50 ns to **200 ns**. Metrics computed on the equilibrated second half (100–200 ns), identical pipeline to the original 50 ns analysis. Values are mean ± SEM over 3 seeds.
 
@@ -21,9 +21,9 @@ All 9 replicates (3 formulations × 3 seeds) extended from 50 ns to **200 ns**. 
 
 ## Interpretation
 
-- **DOTAP** (permanent cationic): strong DNA binding at both lengths (~0.46 nm contact), between-seed SEM tightened on extension — constitutive binding, as expected for a non-titratable lipid.
-- **MC3-H⁺** (protonated, endosomal pH ~5–6): the large 50 ns spread (contacts SEM 15.1, min-dist SEM 0.126) **collapsed** at 200 ns (SEM 8.6 and 0.013) — binding is now robustly tight (~0.47 nm), matching DOTAP. The short run had caught nucleation mid-transient; the extension confirms genuine strong binding.
-- **MC3⁰** (neutral, physiological pH ~7.4): weak binding throughout — 8.1 contacts, DNA held ~1.27 nm away, RDF peak ~1.0 (bulk). One seed does not bind at all (0.08 contacts, 2.36 nm).
+- **DOTAP** (permanent cationic): strong DNA binding at both lengths (~0.46 nm contact), between-seed SEM tightened on extension: constitutive binding, as expected for a non-titratable lipid.
+- **MC3-H⁺** (protonated, endosomal pH ~5–6): the large 50 ns spread (contacts SEM 15.1, min-dist SEM 0.126) **collapsed** at 200 ns (SEM 8.6 and 0.013): binding is now robustly tight (~0.47 nm), matching DOTAP. The short run had caught nucleation mid-transient; the extension confirms genuine strong binding.
+- **MC3⁰** (neutral, physiological pH ~7.4): weak binding throughout, 8.1 contacts, DNA held ~1.27 nm away, RDF peak ~1.0 (bulk). One seed does not bind at all (0.08 contacts, 2.36 nm).
 
 **The pH-switch is reproduced:** the ionizable lipid binds DNA tightly when protonated (endosomal, condensation/protection) and releases it when neutral (physiological, circulation), while the permanent-cationic DOTAP holds on regardless.
 

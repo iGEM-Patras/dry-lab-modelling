@@ -1,4 +1,4 @@
-# Large MD trajectories & checkpoints — kept on cluster, not versioned
+# Large MD trajectories & checkpoints, kept on cluster, not versioned
 *.xtc
 *.trr
 *.cpt

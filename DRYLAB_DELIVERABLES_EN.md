@@ -1,4 +1,4 @@
-# Dry-Lab Deliverables — engineered PENK (iGEM Patras)
+# Dry-Lab Deliverables: engineered PENK (iGEM Patras)
 
 **For:** wet-lab team
 **Date:** 2026-09-07
@@ -7,10 +7,10 @@ in-house.
 
 ---
 
-## 0. The headline — the 7 cassettes are NOT broken
+## 0. The headline: the 7 cassettes are NOT broken
 
 An external analysis told you the 7 cassettes are non-functional. **That is wrong**, and the
-reason is specific: it applied the test *"is this native PENK?"*. The answer is no —
+reason is specific: it applied the test *"is this native PENK?"*. The answer is no:
 **deliberately**. That is the entire project.
 
 The construct is not corrupted PENK. It is a **chimera of two natural opioid peptides**:
@@ -28,15 +28,15 @@ Verified directly from `engPENK_insert_annotated.gb` (CDS translated, every flan
 
 | Cassette | aa | upstream | downstream | Verdict |
 |---|---|---|---|---|
-| 1 | 100 | KR | **KR**Y | dibasic — clean octapeptide |
-| 2 | 110 | KR | **KK**M | dibasic — clean octapeptide |
-| 3 | 142 | KR | **KK**D | dibasic — clean octapeptide |
-| 4 | 195 | KR | RGL | monobasic — **extended, by design** |
-| 5 | 222 | KR | **RR**V | dibasic, but **adrenorphin branch** — gives extended, not octapeptide |
-| 6 | 245 | KR | **KR**F | dibasic — clean octapeptide |
-| 7 | 279 | KR | RF* | monobasic — **extended, by design** |
+| 1 | 100 | KR | **KR**Y | dibasic, clean octapeptide |
+| 2 | 110 | KR | **KK**M | dibasic, clean octapeptide |
+| 3 | 142 | KR | **KK**D | dibasic, clean octapeptide |
+| 4 | 195 | KR | RGL | monobasic, **extended, by design** |
+| 5 | 222 | KR | **RR**V | dibasic, but **adrenorphin branch**: gives extended, not octapeptide |
+| 6 | 245 | KR | **KR**F | dibasic: clean octapeptide |
+| 7 | 279 | KR | RF* | monobasic, **extended, by design** |
 
-All seven have **intact upstream KR**. Cassettes 4 and 7 carry monobasic downstream flanks — and
+All seven have **intact upstream KR**. Cassettes 4 and 7 carry monobasic downstream flanks, and
 those are **exactly** the positions where native PENK deliberately makes *extended* peptides:
 the octapeptide `YGGFMRGL` (MERGL) and the heptapeptide `YGGFMRF` (MERF). The construct
 **reproduces native architecture**; it does not fail to be cleaved.
@@ -46,7 +46,7 @@ the octapeptide `YGGFMRGL` (MERGL) and the heptapeptide `YGGFMRF` (MERF). The co
 > **success**, not partial failure.
 
 Why cassette 5 gives an extended product despite a dibasic downstream flank (`RRV`): in native
-PENK, core 5 does not release a pentapeptide — it enters the
+PENK, core 5 does not release a pentapeptide, it enters the
 **BAM-22 → BAM-20 → adrenorphin** route (`YGGFMRRV`-NH2). Engineered cassette 5 follows the
 same route. See §3 for the four masses this produces.
 
@@ -62,7 +62,7 @@ dry lab itself in `NATIVE_PENK_AMENDMENT2_WETLAB.md` §0.2.*
 | mEGFP-P2A-His-PENK | 1674 | 57.5% | 40.0% | 0.863 | 0.736 | −14.7% |
 | His-PENK-P2A-mEGFP | 1671 | 51.6% | 40.0% | 0.767 | 0.733 | −4.4% |
 | mEGFP-IRES-His-PENK | 2197 | 58.6% | 45.0% | 0.753 | 0.694 | −7.8% |
-| His-PENK-IRES-mEGFP | — | 58.6% | 45.0% | 0.709 | 0.651 | −8.2% |
+| His-PENK-IRES-mEGFP | - | 58.6% | 45.0% | 0.709 | 0.651 | −8.2% |
 
 **Verified in all four:** protein **identical** in every cistron (no amino-acid change),
 **7 copies** of `YGGFEVVG` present, **signal peptide untouched**, **Kozak untouched**, zero new
@@ -73,7 +73,7 @@ window; we are not hiding it.
 
 **Why both P2A and IRES versions exist:** P2A leaves a ~21 aa remnant on the N-terminus of the
 second peptide, and that junction is the strongest immunogenicity hotspot in the whole
-construct — **not** the engineered epitope. The IRES pair is the alternative without that remnant.
+construct, **not** the engineered epitope. The IRES pair is the alternative without that remnant.
 
 ---
 
@@ -93,28 +93,28 @@ This is the **most consequential** finding for experimental design.
 | PCSK1N (proSAAS) | **inhibitor** of PC1/3 | 55.3 | yes |
 
 **Consequence:** in HEK293T, engPENK will accumulate as **unprocessed precursor**. No small
-opioid peptides will form. And it is not only that the enzymes are missing — the **inhibitor**
+opioid peptides will form. And it is not only that the enzymes are missing, the **inhibitor**
 proSAAS is present at high level.
 
 **Therefore:** "Stage 2" (adding recombinant convertases in vitro) is **not a confirmatory step
-— it is the entire experiment.** Skip it and there is no experiment.
+It is the entire experiment.** Skip it and there is no experiment.
 
 **Two further protocol consequences:**
 1. **siRNA knockdown** of the degrading peptidases is not testable here: MME 0.7 and ANPEP 0.1
-   nTPM — **already absent**. There is nothing to knock down; a null result is uninformative.
+   nTPM: **already absent**. There is nothing to knock down; a null result is uninformative.
 2. In plasmid 3, mEGFP is **IRES-driven** and systematically under-reads PENK (IRES second-gene
    expression: 6–100% of cap-dependent, typically 20–50%). Do not use it as a quantitative
    PENK readout.
 
-**Good news, specific to HEK293T:** PENK is 0.0 nTPM — there is **no endogenous PENK
+**Good news, specific to HEK293T:** PENK is 0.0 nTPM, there is **no endogenous PENK
 background** in this line. Amendment 2's general warning ("any cell line with an intact PENK
 locus secretes all of this before you transfect anything") holds in general, but HEK293T is the
-favourable exception. Untransfected controls remain **mandatory** — they will most likely just
+favourable exception. Untransfected controls remain **mandatory**: they will most likely just
 be clean.
 
 ---
 
-## 3. Deliverable: MS target list — what to look for
+## 3. Deliverable: MS target list: what to look for
 
 | Species | Sequence | C-term | [M+H]+ | From |
 |---|---|---|---|---|
@@ -125,7 +125,7 @@ be clean.
 | Native MERGL | `YGGFMRGL` | free acid | 900.44 | native core 4 |
 | Native MERF | `YGGFMRF` | free acid | 877.40 | native core 7 |
 
-### New finding — 4 species MISSING from the list
+### New finding: 4 species MISSING from the list
 
 Cassette 5's downstream is `RRVG`, which in native PENK is the
 **adrenorphin/metorphamide** branch and, upstream of it, BAM-20 / BAM-22. The list carried the
@@ -146,20 +146,20 @@ product" when in fact 5 did and one went unmonitored.
 native BAM-22 +2ox (2870.34). This needs resolving power >2600 or MS2 confirmation, or the two
 will be read as **one** peak.
 
-### Sample handling — not optional
+### Sample handling: not optional
 - **Acquisition range 550–3100 Da** (the original instruction was 550–2900; extended for the
   new species).
 - **Untransfected + empty-vector controls**, same line and passage, **every run**.
-- **Include the +16 oxidation satellites** — otherwise Met peptides will appear "lost" when they
+- **Include the +16 oxidation satellites**: otherwise Met peptides will appear "lost" when they
   have only oxidised. Quantify **parent + sulfoxide as one pool**.
 - Collect on ice, acidify immediately (0.1% formic acid), avoid freeze-thaw.
 
 ---
 
-## 4. Deliverable: a negative result — Cycle 3b (and why we report it)
+## 4. Deliverable: a negative result: Cycle 3b (and why we report it)
 
 We tested whether a physics-based method (MM-GBSA) can **predict** delta/mu selectivity, using
-**4 known** control peptides — not the engineered one.
+**4 known** control peptides, not the engineered one.
 
 | Control | n | Computed ΔΔG | SEM | Experimental |
 |---|---|---|---|---|
@@ -168,43 +168,43 @@ We tested whether a physics-based method (MM-GBSA) can **predict** delta/mu sele
 | deltorphin II | 5 | +7.48 | 3.24 | +5.39 |
 | endomorphin-1 | 5 | −0.91 | 3.32 | −2.99 |
 
-- **G1 PASS** — direction and ranking are correct.
-- **G2' FAIL** — only met-enkephalin clears the 1.5 kcal/mol SEM threshold; the others are 3.2–5.0.
-- **G3 FAIL** — slope 0.594, 95% CI [−1.024, 2.213], r = 0.179. The CI spans zero.
+- **G1 PASS**: direction and ranking are correct.
+- **G2' FAIL**: only met-enkephalin clears the 1.5 kcal/mol SEM threshold; the others are 3.2–5.0.
+- **G3 FAIL**: slope 0.594, 95% CI [−1.024, 2.213], r = 0.179. The CI spans zero.
 
 **Verdict: FAIL. Stage 2 is not authorised.** Therefore **no computational claim about
 `YGGFEVVG`'s selectivity is valid.** The only valid route is **radioligand competition binding**.
 
-*We report this deliberately. The alternative — showing only the one control that passed —
+*We report this deliberately. The alternative (showing only the one control that passed)
 would have sent you into an expensive assay on a method that cannot support it.*
 
 ---
 
-## 5. What to do — in priority order
+## 5. What to do: in priority order
 
 1. **NOW, before the plasmids arrive: order the custom anti-`YGGFEVVG` polyclonal.**
    KLH-conjugated, >=2 rabbits, **10–12 week** lead time. **No** commercial anti-enkephalin
-   antibody recognises `YGGFEVVG` — all are raised against the native pentapeptide and most
+   antibody recognises `YGGFEVVG` (all are raised against the native pentapeptide and most
    require the free C-terminal Met. **This is the bottleneck on the entire expression readout.**
    Confirm the immunogen is `YGGFEVVG` and not just the `YGGF` core.
 2. **Synthesise the 4 constructs** from `PENK_order_sheet.csv`.
 3. **Extend the MS list** with the 4 cassette-5 species (§3) and the range to 3100 Da.
-4. **In vitro processing with recombinant enzymes** — not cells alone (§2).
+4. **In vitro processing with recombinant enzymes** (not cells alone) (§2).
 5. **Radioligand binding** for `YGGFEVVG` and the `YGGFDIIG` variant (§4).
 
 ---
 
-## 6. What remains OPEN — you should know
+## 6. What remains OPEN: you should know
 
 - The engineered extended species `YGGFEVVGRGL` and `YGGFEVVGRF` have **no published
-  pharmacology**. They are novel, they are expected, and they should be **characterised** — not
+  pharmacology**. They are novel, they are expected, and they should be **characterised**, not
   engineered away.
 - `YGGFEVVG` is **less** stable than native Met-enkephalin, not more: 3 NEP-susceptible sites
   against 1. Deltorphin's stability comes from **D-Ala** at position 2, and D-amino acids
-  **have no codon** — a ribosomally expressed peptide cannot reproduce it. We inherit the
+  **have no codon**: a ribosomally expressed peptide cannot reproduce it. We inherit the
   selectivity motif and **none** of the protease resistance. This is why the NEP-siRNA arm is
   **load-bearing**, not adjunct.
-- **The cassette-5 table (§3) is my calculation** — not measured, and not reviewed by anyone else.
+- **The cassette-5 table (§3) is my calculation**: not measured, and not reviewed by anyone else.
 
 ---
 

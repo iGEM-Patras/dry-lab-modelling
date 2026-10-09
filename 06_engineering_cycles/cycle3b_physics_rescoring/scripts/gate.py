@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Cycle 3b Stage-1 calibration gate — G1 / G2' / G3.
+Cycle 3b Stage-1 calibration gate, G1 / G2' / G3.
 
 Reads per-replicate MM-GBSA dG_bind values and issues a single PASS/FAIL
 verdict that authorises (or terminates) Stage 2.

@@ -20,5 +20,5 @@ Project-level narrative documents.
 | `PARADOTEA_DRYLAB_EL.md` | Bench-facing deliverables, Greek |
 
 The brief predates the later engineering cycles. Where it disagrees with a cycle document
-in `06_engineering_cycles/`, the cycle document is authoritative — check
+in `06_engineering_cycles/`, the cycle document is authoritative, check
 `git log -1 --format=%ad -- <file>` on both.

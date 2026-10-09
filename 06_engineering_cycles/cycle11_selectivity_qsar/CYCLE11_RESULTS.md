@@ -1,4 +1,4 @@
-# Cycle 11 — Can a selectivity QSAR trained directly on ddG answer the engPENK question?
+# Cycle 11: Can a selectivity QSAR trained directly on ddG answer the engPENK question?
 
 **Status: CLOSED. No ddG reported for YGGFEVVG.**
 
@@ -13,8 +13,8 @@ evidence it was not written after the fact.
 
 ## Why this was worth trying
 
-Every selectivity method used in this project — ipTM, MM-GBSA, the affinity head,
-alchemical free energy, BindPred — computes selectivity as the **difference of two separately
+Every selectivity method used in this project: ipTM, MM-GBSA, the affinity head,
+alchemical free energy, BindPred, computes selectivity as the **difference of two separately
 predicted affinities**, which inflates the error by sqrt(2). This cycle regressed on ddG
 **directly**, which does not pay that penalty.
 
@@ -57,17 +57,17 @@ reporting a number. We do not, because G1b's stated rationale was precisely that
 1.0 cannot resolve a ~1 kcal/mol effect. Exploiting a drafting omission is the opposite of
 what a pre-registration is for.
 
-## The diagnostic finding — this generalises beyond this cycle
+## The diagnostic finding: this generalises beyond this cycle
 
 Compounds at Tanimoto >= 0.30 to the payload (n=200) span **-7.01 to +5.17 kcal/mol**, with
-sd **2.44** — *higher* than the full set's 1.66. Chemical similarity at Morgan r=2 resolution
+sd **2.44**, *higher* than the full set's 1.66. Chemical similarity at Morgan r=2 resolution
 carries **no** selectivity signal in this region of chemical space.
 
 An earlier reading of this, based on the six nearest compounds only, said the neighbourhood was
 "enkephalins, all mildly delta-preferring". That was wrong and is corrected here.
 
 **Consequence:** any method that interpolates from chemically similar compounds will fail here
-for the same reason — the local published data spans the entire selectivity range. That covers
+for the same reason: the local published data spans the entire selectivity range. That covers
 fingerprint QSAR, language-model embeddings, and similarity-based screening generally. It is
 consistent with the published fact that opioid peptide selectivity turns on single residues and
 stereochemistry.
@@ -97,16 +97,16 @@ r = 0.769, 82% sign accuracy, RMSE 1.06 kcal/mol on a scaffold split across 3,57
 the best aggregate performance of any selectivity method in this project. It is usable for
 **ranking structurally diverse small molecules**. It is not usable for this peptide.
 
-`data/cycle11_dataset.csv` — 3,579 compounds with ddG, SMILES, Murcko scaffold and Tanimoto to
-the payload — is reusable for any future selectivity work.
+`data/cycle11_dataset.csv`: 3,579 compounds with ddG, SMILES, Murcko scaffold and Tanimoto to
+the payload, is reusable for any future selectivity work.
 
 ---
 
-## Amendment, same day — the chirality objection, tested and answered
+## Amendment, same day: the chirality objection, tested and answered
 
 **The objection.** The features above used Morgan fingerprints with `useChirality=False`
 (the RDKit default). Opioid peptide selectivity is carried substantially by D- vs L-
-stereochemistry — it is why DAMGO and dermorphin are mu-selective. A chirality-blind
+stereochemistry: it is why DAMGO and dermorphin are mu-selective. A chirality-blind
 fingerprint encodes DAMGO identically to its all-L analogue despite a ~4 kcal/mol
 difference, which would **manufacture** the "similar compounds span the whole range"
 pattern reported above as a property of chemical space.
@@ -146,7 +146,7 @@ this region, with or without stereochemistry in the descriptor.
 
 What was **not** demonstrated: that a representation encoding stereochemistry more
 prominently would also fail. Note that even the chiral fingerprint rates an enantiomeric
-pair at 0.81-0.87 similarity — the stereochemical signal is a small fraction of 2,048 bits.
+pair at 0.81-0.87 similarity: the stereochemical signal is a small fraction of 2,048 bits.
 Two explanations remain open and this test cannot separate them:
 
 1. stereochemistry is not the dominant driver of selectivity in this region, or

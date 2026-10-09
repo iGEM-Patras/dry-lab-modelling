@@ -1,10 +1,10 @@
-> **SUPERSEDED IN PART — see [`ORDER.md`](ORDER.md) for the current order sheet.**
+> **SUPERSEDED IN PART: see [`ORDER.md`](ORDER.md) for the current order sheet.**
 > The primary guide is unchanged (this document's position 2541 in `NM_000902.5` is
 > 2700-2722 on MME-213). The **second guide has changed**: DSIR efficacy scoring and a
 > direct count of seed sites across 20,094 human 3' UTRs, neither available when this was
 > written, moved it to **2562-2584**. Everything else below stands.
 
-# Anti-neprilysin siRNA — v3, siDirect candidates screened and placed on the v2 scale
+# Anti-neprilysin siRNA, v3, siDirect candidates screened and placed on the v2 scale
 
 **Input.** 206 siDirect candidates (21-nt guide + 21-nt passenger), supplied by the wet lab.
 siDirect had already applied: Ui-Tei functional selection, seed-duplex Tm <= 21.5 C, and a
@@ -15,15 +15,15 @@ itself) and **zero** 1-mismatch off-targets.
 onward is shifted by one. A naive read puts the passenger Tm in the minimum-mismatch column
 and silently inverts the ranking.
 
-## Isoform coverage — three candidates must be excluded
+## Isoform coverage: three candidates must be excluded
 
 The siDirect input was **NM_007288.3** (5,818 nt; transcript variant 3), not the canonical
 NM_000902.5 (5,593 nt). Checking all 206 against all four MME transcript variants:
 
-- **203 of 206 hit all four variants** — good coverage.
+- **203 of 206 hit all four variants**: good coverage.
 - **3 hit only NM_007288** and would miss the canonical transcript. Excluded.
 
-## Screening — four filters siDirect does not apply
+## Screening: four filters siDirect does not apply
 
 | filter | remaining |
 |---|---|
@@ -48,9 +48,9 @@ genome-wide specificity. Their rankings **anti-correlate**:
 | CDS266 | 39.6 (2nd worst) | survives every filter |
 
 Five of eleven v2 guides never entered the 206 at all. This is not an error in either
-pipeline — a site can be highly accessible yet carry a stable seed duplex, or vice versa.
+pipeline: a site can be highly accessible yet carry a stable seed duplex, or vice versa.
 
-## Resolution — accessibility computed on the v2 scale
+## Resolution: accessibility computed on the v2 scale
 
 The 17 survivors were folded with the **identical** protocol used in v2 (NM_000902.5,
 RNAplfold local partition function, W=240, L=160).
@@ -61,7 +61,7 @@ probabilities to the exponent. The new numbers therefore sit on the existing sca
 
 **14 of 17 beat the v2 median (0.412). One beats the best v2 guide (0.608).**
 
-### Recommended guide — position 2541 (NM_000902.5)
+### Recommended guide: position 2541 (NM_000902.5)
 
 ```
 guide      5'-AAUGAUUGACUUGAUAGACCU-3'
@@ -72,7 +72,7 @@ passenger  5'-GUCUAUCAAGUCAAUCAUUUC-3'
 |---|---|
 | mean unpaired probability | **0.658** (best v2 guide: 0.608) |
 | seed-region unpaired | 0.569 |
-| seed-duplex Tm (guide) | 13.6 C — second lowest of the 17 |
+| seed-duplex Tm (guide) | 13.6 C, second lowest of the 17 |
 | off-targets at 0 / 1 / 2 mismatches | 0 / 0 / 0 |
 | minimum mismatches to any off-target | 3 |
 | MME variants hit | 4 of 4 |
@@ -81,7 +81,7 @@ passenger  5'-GUCUAUCAAGUCAAUCAUUUC-3'
 | guide 5' / passenger 5' | A / G (correct loading asymmetry) |
 
 It is more accessible than every guide in the v2 set **and** cleaner on specificity than
-any of them — the combination neither pipeline alone could find. It was absent from the v2
+any of them: the combination neither pipeline alone could find. It was absent from the v2
 shortlist because that search never considered it, and unremarkable to siDirect because
 siDirect does not compute accessibility.
 

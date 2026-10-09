@@ -1,14 +1,14 @@
-# Cycle 3b — Stage 1 benchmark: measured, not estimated
+# Cycle 3b: Stage 1 benchmark: measured, not estimated
 
-Benchmark system: **c3b_dtII_DOR** — deltorphin II co-folded into DOR, embedded in a
+Benchmark system: **c3b_dtII_DOR** (deltorphin II co-folded into DOR, embedded in a
 POPC bilayer.
 
 > **CORRECTION.** This benchmark ran the **free acid** (`YaFEVVG-OH`), not the amide.
 > An earlier version of this file claimed the system "carries both the non-standard
-> D-centre and the C-terminal amide" — the D-centre was installed and verified, but
+> D-centre and the C-terminal amide" (the D-centre was installed and verified, but
 > the amide was **not**: `packmol-memgen --parametrize` runs `tleap`, which defaults a
 > bare C-terminus to the charged free acid, and nothing in the pipeline installed an
-> NHE cap. The gate's own output shows it — the peptide was read as 7 residues ending
+> NHE cap. The gate's own output shows it: the peptide was read as 7 residues ending
 > in GLY, with no NHE.
 >
 > This is the same wrong-species error that Cycle 3b was created to correct,
@@ -17,7 +17,7 @@ POPC bilayer.
 > charge 0.000 vs −1 for the acid), so a calibration built on it would be measuring
 > the wrong molecule.
 >
-> **The timings and throughput below remain valid** — the amide adds 4 atoms to a
+> **The timings and throughput below remain valid** (the amide adds 4 atoms to a
 > 270,287-atom system, which does not change ns/day. The *chemistry* of this
 > particular run does not, and it is not used for calibration. `amidate.py` now
 > installs the cap, `build_system.sh` calls it by default, and the final topology is
@@ -46,7 +46,7 @@ POPC bilayer.
 | min + NVT 200 ps + NPT 1 ns | 37.4 min per system | RTX 2080 Ti |
 | **production throughput** | **71.5 ns/day** | RTX 2080 Ti, 2 fs step |
 
-## Budget — replaces the pre-registered guess
+## Budget: replaces the pre-registered guess
 
 The pre-registration used a literature-typical ~10 ns/day for a system of this size.
 The measured rate is **7.2x faster**, which changes the affordability conclusion:
@@ -74,25 +74,25 @@ V = (N-CA) . [(C-CA) x (CB-CA)]; V < 0 is D, V > 0 is L.
 | after minimisation | -2.389 | D retained |
 | after NPT equilibration | -2.156 | D retained |
 
-This matters because **ff14SB is enantiomer-blind by construction** — no improper term
+This matters because **ff14SB is enantiomer-blind by construction**, no improper term
 references the sp3 alpha-carbon type, so the force field cannot itself notice an
 inversion. `test_chirality.sh` (8/8 passing locally and on the cluster) guards the
 assertion itself.
 
 ## Bugs the assertions caught (rather than bad numbers reaching a result)
 
-1. `*.prmtop` glob — `packmol-memgen --parametrize` writes `<input>_lipid.top/.crd`, so a
+1. `*.prmtop` glob: `packmol-memgen --parametrize` writes `<input>_lipid.top/.crd`, so a
    successful 61-min build reported `EXIT=2`.
-2. `tc-grps = Water_and_ions` — that group does not exist on this system; Lipid21 yields
+2. `tc-grps = Water_and_ions`: that group does not exist on this system; Lipid21 yields
    separate PA/PC/OL groups. Caught before `grompp`.
-3. Selecting index groups by NUMBER — `make_ndx` emits more than 19 default groups here
+3. Selecting index groups by NUMBER: `make_ndx` emits more than 19 default groups here
    (20 is already `non-Water`), so `name 20 MEMB` silently renamed the wrong group. The
    partition assertion (Protein + MEMB + SOLV == System) refused it. Replaced by
    `make_index.py`, which writes groups from residue identity.
-4. Chirality gate index — a peptide-relative index applied to the whole system first hit
+4. Chirality gate index: a peptide-relative index applied to the whole system first hit
    the receptor's CB-less residue 2, then an Na+ ion (because `editconf` does not preserve
    the topology's solvent ordering). Gate now extracts the peptide via `system.top`.
-5. PDB atom-serial overflow — at 270,287 atoms a PDB cannot be parsed
+5. PDB atom-serial overflow: at 270,287 atoms a PDB cannot be parsed
    (`Coordinate mismatch in model 1`); the gate reads `.gro` instead.
 
 Each of these would have been invisible in a pipeline without assertions: three would

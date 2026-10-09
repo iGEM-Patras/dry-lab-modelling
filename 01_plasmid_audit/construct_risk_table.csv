@@ -1,5 +1,5 @@
 plasmid,orf_aa,YGGF_cassettes,PENK_matches_P01210,signal_peptide,P2A_remnant_on_PENK,GSG_spacer_present,spacer_observed,secretion_risk,processing_risk,usable_for_their_aim
-1_mEGFP_IRES_PENK,263,6,False,"N-terminal, native (Met1 intact)",False,False,n/a (IRES),LOW — signal peptide is at the true N-terminus,"SEVERE — cassette 7 ablated: 12-nt in-frame deletion, YGGFMRF -> YGF",NO
-2_mEGFP_P2A_PENK,523,7,False,Met1 -> Pro (P2A-derived); h-region intact,False,False,LYK,MODERATE/UNTESTED — SP sequence retained but initiator Met replaced by P2A's proline; no slipstreaming rescue exists,none detected,NO
-3_PENK_IRES_mEGFP,267,7,True,"N-terminal, native (Met1 intact)",False,False,n/a (IRES),LOW — signal peptide is at the true N-terminus,none detected,YES — only clean construct
-4_PENK_P2A_mEGFP,523,7,True,"N-terminal, native (Met1 intact)",True,False,MRF,LOW — signal peptide is at the true N-terminus,SEVERE — 18-aa P2A remnant fused to cassette 7; MERF becomes YGGFMRF+ATNFSLLKQAGDVEENPG with NO dibasic site to remove it,NO
+1_mEGFP_IRES_PENK,263,6,False,"N-terminal, native (Met1 intact)",False,False,n/a (IRES),LOW, signal peptide is at the true N-terminus,"SEVERE, cassette 7 ablated: 12-nt in-frame deletion, YGGFMRF -> YGF",NO
+2_mEGFP_P2A_PENK,523,7,False,Met1 -> Pro (P2A-derived); h-region intact,False,False,LYK,MODERATE/UNTESTED, SP sequence retained but initiator Met replaced by P2A's proline; no slipstreaming rescue exists,none detected,NO
+3_PENK_IRES_mEGFP,267,7,True,"N-terminal, native (Met1 intact)",False,False,n/a (IRES),LOW, signal peptide is at the true N-terminus,none detected,YES, only clean construct
+4_PENK_P2A_mEGFP,523,7,True,"N-terminal, native (Met1 intact)",True,False,MRF,LOW, signal peptide is at the true N-terminus,SEVERE, 18-aa P2A remnant fused to cassette 7; MERF becomes YGGFMRF+ATNFSLLKQAGDVEENPG with NO dibasic site to remove it,NO

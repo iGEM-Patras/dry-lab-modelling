@@ -1,5 +1,5 @@
 #!/bin/bash
-# Cycle 3b Stage-1 MM-GBSA rescoring — one run (one system, one replicate).
+# Cycle 3b Stage-1 MM-GBSA rescoring, one run (one system, one replicate).
 #
 # WHY THIS EXISTS
 #   run_prod.sh ends at production MD. Nothing in the pipeline computed dG_bind,

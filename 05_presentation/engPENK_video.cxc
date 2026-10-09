@@ -1,4 +1,4 @@
-# ChimeraX — engineered PENK story, three shots
+# ChimeraX, engineered PENK story, three shots
 # usage:  chimerax --script engPENK_video.cxc
 set bgColor black
 # ---------- shot 1: the receptor-peptide complex, AlphaFold pLDDT colours

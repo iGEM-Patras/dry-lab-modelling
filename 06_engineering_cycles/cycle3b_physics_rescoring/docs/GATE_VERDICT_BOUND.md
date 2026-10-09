@@ -1,8 +1,8 @@
-# Cycle 3b Stage-1 gate — final verdict on the complete n=5 dataset
+# Cycle 3b Stage-1 gate: final verdict on the complete n=5 dataset
 
 **Date:** 2026-08-31
 **Input:** all 40 replicates, conditional bound-state MM-GBSA (GB, one frame definition)
-**Verdict:** **FAIL** — Stage 2 is not authorised.
+**Verdict:** **FAIL** (Stage 2 is not authorised.)
 
 ## What changed since the last run
 
@@ -20,7 +20,7 @@ conditional bound-state energy and a last-10ns energy are different quantities a
 not be pooled. The recomputation cost ~2 h of `pshort_el8` time and removes the ambiguity.
 
 **The two definitions agree closely where both exist.** For the 31 runs scoreable either
-way, median |shift| = 1.04 kcal/mol, mean 1.50, max 4.59 — within MM-GBSA's own
+way, median |shift| = 1.04 kcal/mol, mean 1.50, max 4.59, within MM-GBSA's own
 1–2 kcal/mol uncertainty. The bound-frame restriction does not distort the runs that never
 left the pocket; it only rescues the ones that did.
 
@@ -33,11 +33,11 @@ left the pocket; it only rescues the ones that did.
 | deltorphin II | 5 | +7.48 | 7.25 | 3.24 | +5.39 |
 | endomorphin-1 | 5 | −0.91 | 7.41 | 3.32 | −2.99 |
 
-- **G1 PASS** — all four sign/ranking checks hold: both deltorphins > 0, endomorphin-1 < 0,
+- **G1 PASS**: all four sign/ranking checks hold: both deltorphins > 0, endomorphin-1 < 0,
   and the deltorphins rank above endomorphin-1. The method gets the *direction* right.
-- **G2′ FAIL** — only met-enkephalin (SEM 1.46) is under the 1.5 kcal/mol threshold.
+- **G2′ FAIL**: only met-enkephalin (SEM 1.46) is under the 1.5 kcal/mol threshold.
   The other three are 3.2–5.0.
-- **G3 FAIL** — slope 0.594, 95% CI [−1.024, 2.213], r = 0.179 over 20 points. The CI
+- **G3 FAIL**: slope 0.594, 95% CI [−1.024, 2.213], r = 0.179 over 20 points. The CI
   spans zero, so the computed–experimental correlation is not distinguishable from none.
 
 ## Reading
@@ -49,7 +49,7 @@ replicates cannot pin a mean to the 1.5 kcal/mol the gate demands.
 Met-enkephalin is the informative outlier: it has the *tightest* replicate agreement
 (SEM 1.46) and is also the *most wrong* (+26.4 computed vs 0.0 experimental). A reproducible
 large error is a systematic one. This is consistent with the standing caveat that these are
-enthalpy-dominated effective energies with no entropy term — met-enkephalin is the smallest
+enthalpy-dominated effective energies with no entropy term: met-enkephalin is the smallest
 and most flexible of the four, so the missing configurational-entropy penalty should hit it
 hardest, and it does.
 
@@ -57,7 +57,7 @@ hardest, and it does.
 
 Per the pre-registration, cycle 3b terminates and reports a negative methodological result:
 **single-trajectory MM-GBSA at n=5 does not resolve δ/μ selectivity for these peptides.**
-The project recommendation is unchanged — radioligand competition binding on YGGFEVVG and
+The project recommendation is unchanged: radioligand competition binding on YGGFEVVG and
 YGGFDIIG.
 
 ## Residency caveat (mandatory when quoting any single value)

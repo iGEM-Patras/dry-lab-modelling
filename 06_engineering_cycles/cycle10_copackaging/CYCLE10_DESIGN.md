@@ -1,16 +1,16 @@
-# Cycle 10 — Do the two cargoes compete for the carrier?
+# Cycle 10: Do the two cargoes compete for the carrier?
 
 **Status:** PRE-REGISTERED, **amended 2026-09-19 before any simulation was run**.
 **Date:** 2026-09-19
 
-> **Amendment 1 — corrected charge accounting.** The first version of this document computed
+> **Amendment 1: corrected charge accounting.** The first version of this document computed
 > every gate from a 60-**bp** duplex. The system's DNA is a **30-bp** duplex (60 *nucleotides*);
 > `04_lipoplex_md/README.md` conflated the two and that error was inherited here. The bead
 > count settles it independently: `dna_cg.gro` has 388 beads over 60 nucleotides = 6.47
 > beads/nt, MARTINI 2's DNA resolution. Consequently the existing N/P is **2.00, not 1.00**,
 > and the charge-proportional null is **41.2 %, not 25.9 %**, with a per-phosphate parity
 > ratio of **0.700, not 0.350**. All gates below are the corrected values. Nothing had run
-> when this was found — which is the reason the numbers were written down in advance.
+> when this was found, which is the reason the numbers were written down in advance.
 
 ## Why this cycle exists
 
@@ -21,7 +21,7 @@ occupy the same lipoplex, or whether one excludes the other, has never been aske
 
 It is not an idle question. Cationic lipid is finite, both cargoes are polyanions competing
 for the same binding partner, and they differ roughly threefold in charge. If the larger
-construct monopolises the lipid, the siRNA arm is under-delivered and the knockdown fails —
+construct monopolises the lipid, the siRNA arm is under-delivered and the knockdown fails.
 a formulation problem that would present in the wet lab as "the siRNA doesn't work".
 
 ## The honest limitation, stated before the result
@@ -42,10 +42,10 @@ What that surrogate can and cannot answer:
 This sits on top of the parameter caveat already disclosed for the lipid topologies, which
 are MARTINI-2 analogy models. Conclusions are comparative, never absolute affinities.
 
-> **Amendment 2 — phosphate count derived from the topology, not from base-pair arithmetic.**
+> **Amendment 2: phosphate count derived from the topology, not from base-pair arithmetic.**
 > Amendment 1 corrected 60 bp to 30 bp but still computed charge as 2 phosphates per base
 > pair. That over-counts: a **free 5′ terminus carries no phosphate**, which is visible in
-> the bead counts (`DA5` has 6 beads where `DA` has 7 — the missing bead *is* the phosphate).
+> the bead counts (`DA5` has 6 beads where `DA` has 7; the missing bead *is* the phosphate).
 > Summing the charge column of each topology gives **construct −58, surrogate −40, total 98**,
 > not 102. `genion` independently confirmed it by requesting exactly 22 counter-ions for a
 > +120/−98 system, matching the derivation. Corrected values, used in the gates below:
@@ -73,19 +73,19 @@ existing protocol.
 | | cationic lipids | phosphates | N/P | question |
 |---|---|---|---|---|
 | current, DNA only | 120 | 58 | 2.07 | *(reference, already run)* |
-| **A — sufficient lipid** | **203** | 98 | **2.07** | do both bind when carrier is not scarce? |
-| **B — limiting lipid** | **120** | 98 | **1.22** | who wins when it is? |
+| **A: sufficient lipid** | **203** | 98 | **2.07** | do both bind when carrier is not scarce? |
+| **B, limiting lipid** | **120** | 98 | **1.22** | who wins when it is? |
 
 Condition B is the one that matters. Holding the lipid fixed while adding cargo forces the
 competition that a real formulation faces.
 
 **Charge accounting.** 30-bp construct duplex = 60 phosphates; 21-bp surrogate = 42
-phosphates; total **102**. The surrogate therefore carries **41.2 %** of total cargo charge —
+phosphates; total **102**. The surrogate therefore carries **41.2 %** of total cargo charge , 
 the two cargoes are far closer in charge than the raw base-pair counts suggest, which makes
 the competition question sharper rather than weaker.
 
 **What the construct fragment actually is.** `frag.fasta` reads
-`AAGCGTTACGGTGGTTTCGAGGTCGTCGGT`, which translates to **`KR-YGGFEVVG`** — the dibasic
+`AAGCGTTACGGTGGTTTCGAGGTCGTCGGT`, which translates to **`KR-YGGFEVVG`**, the dibasic
 processing site followed by the engineered octapeptide. The DNA in these simulations is one
 cassette of the real construct, not a generic duplex.
 
@@ -105,13 +105,13 @@ phosphate count, so the surrogate takes **41.2 %** of contacts and the per-phosp
 | **P5** | Adding a second cargo does not detach the first | DNA min-dist in B within 0.10 nm of the DNA-only reference (0.469 nm) |
 
 **Direction of the substantive prediction:** P3 says the 60-bp duplex outcompetes the
-surrogate per unit charge, because multivalent binding favours the longer polyanion — more
+surrogate per unit charge, because multivalent binding favours the longer polyanion, more
 simultaneous contacts, slower off-rate. If P3 is **falsified** and the surrogate competes
 equally or better, that is the more interesting result and the more consequential one for
 formulation: it would mean the small cargo can displace the large one.
 
-**What falsification would change.** If P4 fails — the surrogate is excluded below
-detection under limiting lipid — the recommendation becomes *formulate the two cargoes in
+**What falsification would change.** If P4 fails, the surrogate is excluded below
+detection under limiting lipid, the recommendation becomes *formulate the two cargoes in
 separate particles*, which is a real, actionable design change and would need to reach the
 wet lab before any co-formulation is attempted.
 
@@ -123,7 +123,7 @@ comparable to the published 200 ns results: DNA–lipid contacts within 0.6 nm
 gyration (`gmx gyrate`). Metrics computed on the equilibrated second half only.
 
 Contacts are reported **separately for each cargo** and **normalised per phosphate**, since
-the raw count is confounded by size — that normalisation is the whole point of P3.
+the raw count is confounded by size: that normalisation is the whole point of P3.
 
 ## Sampling, and a constraint on it
 
@@ -135,7 +135,7 @@ whatever it appears to show.
 
 `pibu_el8` has **495 idle cores** at the time of writing, so all six 200 ns runs are
 affordable. (An earlier reading of this document claimed the partition was heavily degraded;
-that was a misreading of `sinfo` — 10 nodes are `down~` but 17 others are `mix`/`idle`.) The
+that was a misreading of `sinfo`: 10 nodes are `down~` but 17 others are `mix`/`idle`.) The
 fallback, should capacity change, is condition **B only** at three seeds, since B carries the
 decision. It is recorded now so it cannot be presented later as the plan all along.
 
@@ -148,7 +148,7 @@ glossed over.
 
 ---
 
-## Build log — what it took to assemble condition B
+## Build log: what it took to assemble condition B
 
 Recorded because the failures are informative and because a later reader repeating this will
 hit the same walls.
@@ -157,22 +157,22 @@ hit the same walls.
 full: the lipid aggregate spans z 0.81–9.68 nm of a 14.82 nm box and the construct spans
 5.78–16.91 nm (wrapping the boundary). The largest void anywhere offers **0.31 nm** clearance;
 a 7 nm duplex needs far more. `gmx insert-molecules` reported `Added 0 molecules` while
-`Replaced 398 residues` — a *destructive no-op* that deletes solvent and inserts nothing, and
+`Replaced 398 residues`, a *destructive no-op* that deletes solvent and inserts nothing, and
 exits 0. Caught by counting nucleotide beads (388, not the required 659) rather than trusting
 the exit status.
 
-**Both cargoes place cleanly into an empty box**, confirming the duplex was never too large —
+**Both cargoes place cleanly into an empty box**, confirming the duplex was never too large.
 the order of assembly is what matters. Condition B is therefore rebuilt from scratch with the
 reference's box and lipid content, both cargoes placed before lipids and solvent.
 
 **Names must be read, not assumed.** The cationic lipid's residue is `MC3T`; `MC3P` is only the
 replicate *directory* name. Ion moleculetypes are `NA`/`CL`, not `NA+`/`CL-`. No coarse-grained
 water template exists on the cluster, so one was built from the reference's own 23,934
-equilibrated waters — a better template anyway, since it carries the right density for this
+equilibrated waters, a better template anyway, since it carries the right density for this
 temperature and salt.
 
 **`polyply gen_coords` returns bead-correct, geometry-wrong output.** It produced 271 beads for
-the surrogate — the right number — but with base-pair bonds spanning a **median 7.16 nm** where
+the surrogate, the right number, but with base-pair bonds spanning a **median 7.16 nm** where
 they should be 0.445 nm: the two strands were placed unpaired. The count assertion passed and
 the structure was carried through four further steps before a geometric check caught it.
 **Bead count is not geometry.** The remedy is what the original build already did for its own
@@ -204,25 +204,25 @@ rather than lost.
 ### Where it stops
 
 Energy minimisation of the assembled condition-B system will not converge:
-`Fmax = 5.4 × 10⁷` — identical before and after 100,000 steps, i.e. stalled immediately —
+`Fmax = 5.4 × 10⁷`: identical before and after 100,000 steps, i.e. stalled immediately,
 followed by 1,498 LINCS warnings when a short MD relaxation was attempted. The stall is on a
 **lipid** bead (index 2925, in the DOPE block), not on either cargo.
 
 The close-contact scan in that run listed pairs at 0.160 nm that are all **intra-residue**
-(e.g. beads 521 and 524, both `DG3`), i.e. bonded neighbours my exclusion rule missed — so
+(e.g. beads 521 and 524, both `DG3`), i.e. bonded neighbours my exclusion rule missed, so
 that scan did *not* locate the real overlap. The genuine clash has not been identified.
 
 ### What a resumption should do differently
 
 Randomly packing 240 lipids around two pre-placed cargoes produces overlaps too severe for
-steepest descent to resolve. The reference systems were not built that way — `asm/` contains
+steepest descent to resolve. The reference systems were not built that way, `asm/` contains
 `ion_MC3_declash.gro` and a `rescue_DOTAP.sh` whose schedule is EM → NVT → gentle NPT with
 `dt = 1 fs`, a `c-rescale` barostat at `tau-p = 20`, and `-DFLEXIBLE` throughout, wrapped in a
 200-attempt restart loop. **That pipeline should be reused directly rather than re-derived**;
 the present attempt failed by improvising a shorter one.
 
 An alternative worth costing first: build the lipid phase *without* cargo, equilibrate it, then
-place both cargoes into a pre-formed aggregate — closer to how the reference systems came to
+place both cargoes into a pre-formed aggregate, closer to how the reference systems came to
 exist, and it avoids packing lipids around a rigid 7 nm rod.
 
 ### Why it was parked
@@ -232,7 +232,7 @@ moved with `cd`, a topology parser that read angle lines as atoms, an assumed re
 (`MC3P` for `MC3T`), a missing water template, an `mdp` option invalid with Verlet lists, a
 bead-count check that passed on unfolded coordinates, and a bond-length threshold calibrated
 on one molecule and applied to another. Each was caught before it could contaminate a result,
-which is the system working — but the cost was the time budget for the production runs.
+which is the system working, but the cost was the time budget for the production runs.
 
 The deliverables that stand without the simulation: this pre-registration with its verified
 charge accounting, the build log above, and the PI briefing that asks whether a DNA charge
@@ -241,20 +241,20 @@ remaining build work should not be done.
 
 ---
 
-## Amendment 3 — the PI's answers, and what they change (2026-09-24)
+## Amendment 3: the PI's answers, and what they change (2026-09-24)
 
 Two answers came back on the [lipoplex briefing](../../04_lipoplex_md/). They are recorded
 here because one of them revises this pre-registration's null hypothesis and the other
 retires a limitation.
 
-### Briefing question 3 — answered: surrogates are acceptable
+### Briefing question 3, answered: surrogates are acceptable
 
 > *"Is DNA-as-siRNA acceptable for a competition question? ... If you regard the surrogate
 > as uninformative we will drop the claim rather than qualify it."*
 
 **The PI's answer is that surrogates are used for this purpose.** The claim therefore
 stands, qualified as it already was. The surrogate framing is **not** removed from this
-document or from the briefing — it is endorsed, and the disclosure stays exactly as
+document or from the briefing: it is endorsed, and the disclosure stays exactly as
 written.
 
 ### Separately: the NEP-inhibition arm becomes circular DNA
@@ -283,7 +283,7 @@ plasmid-vs-plasmid pair spans. The existing systems became *more* representative
 
 **Gate restatement.** P2's charge-proportional null of 40.8 % and P3's per-phosphate ratio
 were derived from the simulated 58:40 split and remain the correct nulls **for the systems
-that were run** — those gates are unchanged and still scoreable. What changes is the
+that were run**: those gates are unchanged and still scoreable. What changes is the
 design-relevant null for the *biological* pair, which is set by the two plasmid lengths:
 
 - equal lengths → 50.0 %

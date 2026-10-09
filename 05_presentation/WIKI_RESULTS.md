@@ -13,27 +13,27 @@ alignment before synthesis.
 | | |
 |---|---|
 | cassettes carrying the engineered payload | 7 × `YGGFEVVG` |
-| carboxy-terminal product | `YGGFEVVGRF` — a decapeptide, preserved by tag placement |
+| carboxy-terminal product | `YGGFEVVGRF` (a decapeptide, preserved by tag placement) |
 | purification tag | His₆ + GS linker, positioned not to disrupt processing |
 
 Two rounds with the synthesis vendor were needed. The first ordering-ready set was rejected,
 and the diagnosis **inverted our working assumption**: the fault was not in the recoded
 payload but in two terminal flanking sequences that were exact reverse complements of each
-other — a defect inherited from existing lab files and carried forward untested. We recorded
+other: a defect inherited from existing lab files and carried forward untested. We recorded
 it as our own error, and the rule it produced: *inherited sequence is still untested
 sequence.*
 
 We then reverse-engineered the vendor's scoring from two rejection reports, **pre-registered
 predicted scores for the corrected set**, and queried the vendor. Most predicted scores were
-exact. The one miss revealed a secondary-structure rule our model never encoded — and it
+exact. The one miss revealed a secondary-structure rule our model never encoded, and it
 overturned an earlier prediction we had scored as confirmed.
 
 ## 2 · Two parts submitted to the Registry
 
 | part | length | status |
 |---|---|---|
-| basic — engineered PENK cassette | **867 bp** | clean for RFC10, RFC1000 and every Type IIS site after **8 silent changes**, protein byte-identical |
-| composite — Kozak + basic part + IRES + mEGFP | **2,164 bp** | clean on both standards **without modification** |
+| basic: engineered PENK cassette | **867 bp** | clean for RFC10, RFC1000 and every Type IIS site after **8 silent changes**, protein byte-identical |
+| composite: Kozak + basic part + IRES + mEGFP | **2,164 bp** | clean on both standards **without modification** |
 
 The composite **contains the basic part verbatim**, so the relationship is verifiable with a
 single search and the two read as one coherent submission. Both are designed sequences: the
@@ -45,7 +45,7 @@ on the part pages rather than leaving a judge to find it.
 
 From **206 duplex candidates** against the neprilysin transcript, two were selected and
 ordered. The selection survived four successive wet-lab objections, each resolved by
-measurement rather than argument — including one round where the candidate set under
+measurement rather than argument, including one round where the candidate set under
 discussion proved to be from an entirely different gene, established by mapping it at a
 constant offset and confirming by translation.
 
@@ -53,12 +53,12 @@ One error of ours is recorded in full: a frame offset meant we had been reading 
 score of a **neighbouring candidate**. It invalidated two published claims, which we
 corrected immediately and told the team to hold the order.
 
-## 4 · Selectivity — the central question, unresolved
+## 4 · Selectivity: the central question, unresolved
 
 This is the project's primary pharmacological hypothesis, and our computational methods
 could not settle it.
 
-> **+1.23 ± 1.76 kcal/mol** δ-over-μ (≈7×) — nominally δ-preferring, **not statistically
+> **+1.23 ± 1.76 kcal/mol** δ-over-μ (≈7×): nominally δ-preferring, **not statistically
 > separable from no preference**, and not separable from native Met-enkephalin.
 
 That is the project's best calibrated estimate, from a model validated against 13 published
@@ -101,7 +101,7 @@ peripherally where ours is intranasal.
 
 | | |
 |---|---|
-| transfection — peptide produced and secreted | **pending** |
+| transfection: peptide produced and secreted | **pending** |
 | quantitative expression yield (the dose model's only required input) | **pending** |
 | neprilysin knockdown by qPCR | **pending** |
 | δ/μ functional potency by cAMP | **pending** |

@@ -1,33 +1,33 @@
-# Dry-lab audit and wet-lab handoff — engineered proenkephalin project
+# Dry-lab audit and wet-lab handoff: engineered proenkephalin project
 
 **Scope.** This report re-runs the project's computational audit against **HEK293T**, the cell line named in the wet-lab guide (*ΑΝΑΛΥΣΗ ΘΕΜΑΤΟΣ*), replacing an earlier analysis that had used cultured fibroblasts. It adds an MHC class I immunogenicity assessment of the engineered `YGGFEVVG` cassette, a construct-level check of all four plasmids, and an error list against the guide. Every quantitative claim is traceable to a named source; DOIs are in §7.
 
 ---
 
-## 1. The cell line cannot process the precursor — and that is the experiment
+## 1. The cell line cannot process the precursor, and that is the experiment
 
 The guide assumes transfected HEK293T will secrete processed enkephalin peptides. It will not.
 
 | Gene | Role | HEK293 (nTPM) | Status |
 |---|---|---|---|
-| *PCSK1* | PC1/3 — endoproteolysis at dibasic sites | 0.1 | **absent** |
-| *PCSK2* | PC2 — principal generator of small opioid peptides | 0.1 | **absent** |
-| *SCG5* | 7B2 — obligate PC2 chaperone | 0 | **absent** |
-| *PCSK1N* | proSAAS — endogenous PC1/3 inhibitor | 55.3 | present |
-| *CPE* | carboxypeptidase E — trims C-terminal K/R | 73.7 | present |
+| *PCSK1* | PC1/3, endoproteolysis at dibasic sites | 0.1 | **absent** |
+| *PCSK2* | PC2, principal generator of small opioid peptides | 0.1 | **absent** |
+| *SCG5* | 7B2, obligate PC2 chaperone | 0 | **absent** |
+| *PCSK1N* | proSAAS, endogenous PC1/3 inhibitor | 55.3 | present |
+| *CPE* | carboxypeptidase E, trims C-terminal K/R | 73.7 | present |
 | *PAM* | peptidylglycine alpha-amidating monooxygenase | 37.5 | present |
 | *FURIN* | constitutive-pathway convertase (R-X-K/R-R) | 33 | present |
-| *MME* | neprilysin — cuts Gly3-Phe4 | 0.7 | **absent** |
-| *ANPEP* | aminopeptidase N — removes Tyr1 | 0.1 | **absent** |
+| *MME* | neprilysin, cuts Gly3-Phe4 | 0.7 | **absent** |
+| *ANPEP* | aminopeptidase N, removes Tyr1 | 0.1 | **absent** |
 | *PENK* | proenkephalin (endogenous background) | 0 | **absent** |
-| *CTSL* | cathepsin L — alternative processing route | 35.5 | present |
+| *CTSL* | cathepsin L, alternative processing route | 35.5 | present |
 
 HEK293 lacks **both** prohormone convertases and the obligate PC2 chaperone 7B2. This is a stronger result than the earlier fibroblast analysis, which had found only PC2 missing.
 
 Three consequences, two of which are in your favour:
 
 - **Stage 1 yields unprocessed proenkephalin.** No PC1/3, no PC2, no 7B2 means no endoproteolysis at the dibasic sites. Expect the intact precursor in the supernatant.
-- **Stage 2 is therefore the whole experiment, not a confirmation.** The guide's plan — isolate the precursor, add convertase externally — is the only step that can generate peptides. Treat it as the primary endpoint and resource it accordingly.
+- **Stage 2 is therefore the whole experiment, not a confirmation.** The guide's plan (isolate the precursor, add convertase externally) is the only step that can generate peptides. Treat it as the primary endpoint and resource it accordingly.
 - **Two things work in your favour.** *PAM* is abundant (37.5 nTPM), so C-terminal amidation is available. Endogenous *PENK* is 0.0 nTPM, so there is **no background**: anything you detect is construct-derived. This is a genuine advantage of HEK293T over a neuroendocrine line.
 
 One arm is invalidated: *MME* (0.7 nTPM) and *ANPEP* (0.1 nTPM) are both absent, so the Cycle 5 knockdown has no endogenous target here (§4, finding ¶49).
@@ -44,17 +44,17 @@ Parsed directly from your SnapGene files; *PENK* was unannotated in all four, so
 
 | Plasmid | ORF (aa) | YGGF cassettes | Matches P01210 | Signal peptide | Processing risk | Usable |
 |---|---|---|---|---|---|---|
-| `1_mEGFP_IRES_PENK` | 263 | 6/7 | **no** | N-terminal, native (Met1 intact) | SEVERE — cassette 7 ablated: 12-nt in-frame deletion, YGGFMRF -> YGF | **NO** |
+| `1_mEGFP_IRES_PENK` | 263 | 6/7 | **no** | N-terminal, native (Met1 intact) | SEVERE, cassette 7 ablated: 12-nt in-frame deletion, YGGFMRF -> YGF | **NO** |
 | `2_mEGFP_P2A_PENK` | 523 | 7/7 | **no** | Met1 -> Pro (P2A-derived); h-region intact | none detected | **NO** |
-| `3_PENK_IRES_mEGFP` | 267 | 7/7 | yes | N-terminal, native (Met1 intact) | none detected | **YES — only clean construct** |
-| `4_PENK_P2A_mEGFP` | 523 | 7/7 | yes | N-terminal, native (Met1 intact) | SEVERE — 18-aa P2A remnant fused to cassette 7; MERF becomes YGGFMRF+ATNFSLLKQAGDVEENPG with NO dibasic site to remove it | **NO** |
+| `3_PENK_IRES_mEGFP` | 267 | 7/7 | yes | N-terminal, native (Met1 intact) | none detected | **YES, only clean construct** |
+| `4_PENK_P2A_mEGFP` | 523 | 7/7 | yes | N-terminal, native (Met1 intact) | SEVERE, 18-aa P2A remnant fused to cassette 7; MERF becomes YGGFMRF+ATNFSLLKQAGDVEENPG with NO dibasic site to remove it | **NO** |
 
 Detail on each defect:
 
-- **`1_mEGFP_IRES_PENK`** carries a **12-nt in-frame deletion** turning the C-terminal cassette `YGGFMRF` into `YGF`. This ablates cassette 7 and, critically, destroys the context `VPRMEKRYGGFMQ` — the **highest-kcat/Km PC2 site in the entire precursor** (9.4×10⁴ M⁻¹ s⁻¹, 39-fold above the weakest site in the same substrate series) [1].
-- **`2_mEGFP_P2A_PENK`** places *PENK* downstream of P2A, so its initiator Met1 is replaced by the proline that terminates the P2A ribosome-skipping event. The signal peptide's h-region is intact, but a downstream position does not restore signal-peptide function — a signal sequence is still required, and being downstream of a 2A peptide does not supply one [3].
+- **`1_mEGFP_IRES_PENK`** carries a **12-nt in-frame deletion** turning the C-terminal cassette `YGGFMRF` into `YGF`. This ablates cassette 7 and, critically, destroys the context `VPRMEKRYGGFMQ`, the **highest-kcat/Km PC2 site in the entire precursor** (9.4×10⁴ M⁻¹ s⁻¹, 39-fold above the weakest site in the same substrate series) [1].
+- **`2_mEGFP_P2A_PENK`** places *PENK* downstream of P2A, so its initiator Met1 is replaced by the proline that terminates the P2A ribosome-skipping event. The signal peptide's h-region is intact, but a downstream position does not restore signal-peptide function: a signal sequence is still required, and being downstream of a 2A peptide does not supply one [3].
 - **`4_PENK_P2A_mEGFP`** leaves an **18-aa P2A remnant** (`ATNFSLLKQAGDVEENPG`) fused to cassette 7, giving `YGGFMRF`+remnant with **no dibasic site** to excise it. The remnant is not removable by any convertase in the pathway. Note the annotated P2A in your files lacks the canonical GSG spacer, which reduces skipping efficiency [4].
-- **`3_PENK_IRES_mEGFP`** is the **only clean construct** — byte-identical to P01210, native N-terminal signal peptide, no remnant. Its one limitation is the reporter: IRES-driven second-gene expression runs at 6–100% of cap-dependent levels, typically 20–50% [2], so mEGFP **under-reads** *PENK*.
+- **`3_PENK_IRES_mEGFP`** is the **only clean construct**: byte-identical to P01210, native N-terminal signal peptide, no remnant. Its one limitation is the reporter: IRES-driven second-gene expression runs at 6–100% of cap-dependent levels, typically 20–50% [2], so mEGFP **under-reads** *PENK*.
 
 **Action: sequence-verify all four before use, and build your primary experiments on plasmid 3.**
 
@@ -62,7 +62,7 @@ Detail on each defect:
 
 ## 3. The engineered epitope swaps the immunopeptidome rather than enlarging it
 
-MHCflurry 2.1 [5] was run on 612 peptides — 8–11-mers spanning the engineered `YGGFEVVG` cassettes, the native `YGGFM`/`YGGFL` cassettes as a matched comparator, and the P2A remnant junction — against 10 HLA supertype representatives (6,120 allele–peptide pairs).
+MHCflurry 2.1 [5] was run on 612 peptides, 8–11-mers spanning the engineered `YGGFEVVG` cassettes, the native `YGGFM`/`YGGFL` cassettes as a matched comparator, and the P2A remnant junction, against 10 HLA supertype representatives (6,120 allele–peptide pairs).
 
 ![MHC immunogenicity](figures/fig_mhc_immunogenicity.png)
 
@@ -70,7 +70,7 @@ MHCflurry 2.1 [5] was run on 612 peptides — 8–11-mers spanning the engineere
 
 - **The aggregate rate is unchanged.** 1.86% of engineered pairs vs 1.77% of native pairs are predicted presented (Fisher exact p = 0.84). On this measure the engineering is neutral.
 - **But the epitope identity is completely different.** 44 engineered and 26 native peptides are strong binders, and **the intersection is empty**. The engineering does not add epitopes on net; it replaces one set with another that the recipient's immune system has never seen in this context.
-- **21 neoepitopes require the engineered address**, spanning 7 of 10 alleles. The strongest are `FEVVGKRY` (HLA-B\*44:03, 73 nM, 0.19th percentile), `FEVVGKRF` (B\*44:03) and `RYGGFEVVGRF` (A\*24:02). Under Hardy-Weinberg with US-European allele frequencies, roughly 85% of individuals carry at least one affected allele — indicative only, as frequencies are population-specific.
+- **21 neoepitopes require the engineered address**, spanning 7 of 10 alleles. The strongest are `FEVVGKRY` (HLA-B\*44:03, 73 nM, 0.19th percentile), `FEVVGKRF` (B\*44:03) and `RYGGFEVVGRF` (A\*24:02). Under Hardy-Weinberg with US-European allele frequencies, roughly 85% of individuals carry at least one affected allele (indicative only, as frequencies are population-specific).
 - **Plasmid 4 carries additional epitope risk.** The P2A remnant junction generates 9 strong binders, including `GFMRFATNF` (A\*24:02, 0.13th percentile) which spans the junction itself and therefore exists only in that construct.
 
 These are *in silico* binding and presentation predictions, not measured immunogenicity: MHC presentation is necessary but not sufficient for a T-cell response. The finding is a flag for a therapeutic trajectory, not a result about the current experiments.
@@ -86,7 +86,7 @@ These are *in silico* binding and presentation predictions, not measured immunog
 1. **Cell count is not proenkephalin yield** (¶31). The guide picks the harvest timepoint by counting cells. Cell number and per-cell secretion are separate quantities, and Lipofectamine is cytotoxic, so the peak-count timepoint can be the *lowest*-expression timepoint. Measure the supernatant directly (mEGFP fluorescence normalised to viable cells, or an immunoassay), not the cell count.
 2. **PC1/3 is prioritised over PC2** (¶33). The guide runs PC1/3 first and treats PC2, 7B2 and CPE as optional extras. PC2 is responsible for essentially all small-opioid-peptide generation from proenkephalin, and the strongest PC2 site in the whole precursor (`VPRMEKRYGGFMQ`, kcat/Km 9.4×10⁴ M⁻¹ s⁻¹) is 39-fold better than the weakest. Run PC2 + 7B2 as the primary reaction.
 3. **The Cycle 1 conclusion is asserted independently of the data** (¶37). The text says that whatever the result, the literature already establishes that IRES changes expression. If the conclusion does not depend on the measurement, the measurement is not an experiment. State a falsifiable prediction with a threshold beforehand.
-4. **The neprilysin knockdown has no target in this cell line** (¶49). HEK293 expresses MME at 0.7 nTPM and ANPEP at 0.1 nTPM — both effectively absent. There is nothing to knock down, so the siRNA arm cannot produce a signal. Either supply the peptidase exogenously to an in vitro reaction, or move this arm to a cell line that expresses it.
+4. **The neprilysin knockdown has no target in this cell line** (¶49). HEK293 expresses MME at 0.7 nTPM and ANPEP at 0.1 nTPM, both effectively absent. There is nothing to knock down, so the siRNA arm cannot produce a signal. Either supply the peptidase exogenously to an in vitro reaction, or move this arm to a cell line that expresses it.
 5. **The siRNA timepoints are far too early** (¶53). Readouts at 1 h and 2 h precede any protein depletion; RNAi requires transcript cleavage followed by turnover of pre-existing protein. Use 24, 48 and 72 h.
 
 ### Full list
@@ -119,7 +119,7 @@ Two things in the guide that are **correct** and should not be changed: Lipofect
 
 The guide's Cycles 1–6 and the repository's Cycles 1–3b **share no questions**. The guide's cover wet-lab construct/expression work (1, 2), the delivery vehicle (3, 4), the degradation arm (5) and safety (6). The repository's cover the deltorphin chimera, delta-selectivity, and selectivity-metric validation. Zero overlap.
 
-The practical hazard: **"Cycle 3" is ambiguous** — lipoplex modelling in one scheme, selectivity-metric validation in the other. Prefix them (`W1`–`W6` for wet-lab, `D1`–`D3b` for dry-lab) before the two records are read side by side.
+The practical hazard: **"Cycle 3" is ambiguous**: lipoplex modelling in one scheme, selectivity-metric validation in the other. Prefix them (`W1`–`W6` for wet-lab, `D1`–`D3b` for dry-lab) before the two records are read side by side.
 
 ---
 
@@ -127,14 +127,14 @@ The practical hazard: **"Cycle 3" is ambiguous** — lipoplex modelling in one s
 
 Ordered by what unblocks them soonest.
 
-1. **Deliver expected digest band sizes for all four plasmids** — computable now from the maps, and it converts ¶6's "two ladders" into a specific pass/fail. *(Blocks nothing else; do first.)*
-2. **Deliver exact target masses and expected fragment sets** for the PC2 + 7B2 + CPE reaction, per plasmid, so ¶35's chromatography becomes identification rather than a retention-time observation. The in vitro protocol in `07_invitro_penk` already computes these — they need to be handed over as a bench sheet.
-3. **Specify the Stage 2 reaction conditions** — enzyme:substrate ratio, buffer, pH, Ca²⁺, time course, and the paired controls (no-enzyme, no-substrate, native-PENK positive). `enzyme_conditions.csv` holds these.
+1. **Deliver expected digest band sizes for all four plasmids**: computable now from the maps, and it converts ¶6's "two ladders" into a specific pass/fail. *(Blocks nothing else; do first.)*
+2. **Deliver exact target masses and expected fragment sets** for the PC2 + 7B2 + CPE reaction, per plasmid, so ¶35's chromatography becomes identification rather than a retention-time observation. The in vitro protocol in `07_invitro_penk` already computes these, they need to be handed over as a bench sheet.
+3. **Specify the Stage 2 reaction conditions**: enzyme:substrate ratio, buffer, pH, Ca²⁺, time course, and the paired controls (no-enzyme, no-substrate, native-PENK positive). `enzyme_conditions.csv` holds these.
 4. **Re-plan Cycle 5.** With no *MME* or *ANPEP* in HEK293T, propose the in vitro alternative: purified peptidase added to synthetic peptide, ± inhibitor, with degradation half-life as the readout.
 5. **Provide a quantitative read-out plan for Cycles 1 and 2** with a pre-registered threshold, replacing ¶37's data-independent conclusion.
 6. **Flag the immunogenicity finding into the project's safety record** for Cycle 6, with the neoepitope list attached.
 
-Two things I should **not** do: claim the P2A constructs will give more *PENK* (the analysis says the opposite for plasmids 2 and 4), and let the reporter stand as a proxy for peptide yield — mEGFP is a separate translation product from *PENK* in all four plasmids.
+Two things I should **not** do: claim the P2A constructs will give more *PENK* (the analysis says the opposite for plasmids 2 and 4), and let the reporter stand as a proxy for peptide yield: mEGFP is a separate translation product from *PENK* in all four plasmids.
 
 ---
 
@@ -145,8 +145,8 @@ Two things I should **not** do: claim the P2A constructs will give more *PENK* (
 3. Yan L, Kaplan FS, Shore EM, Xu M. *Signal sequence is still required in genes downstream of “autocleaving” 2A peptide for secretary or membrane-anchored expression.* Anal Biochem 2010;399(1):144–146. doi:[10.1016/j.ab.2009.11.032](https://doi.org/10.1016/j.ab.2009.11.032)
 4. Liu Z, Chen O, Wall JBJ, Zheng M, Zhou Y, Wang L, Ruth Vaseghi H, Qian L, Liu J. *Systematic comparison of 2A peptides for cloning multi-genes in a polycistronic vector.* Sci Rep 2017;7:2193. doi:[10.1038/s41598-017-02460-2](https://doi.org/10.1038/s41598-017-02460-2)
 5. O'Donnell TJ, Rubinsteyn A, Laserson U. *MHCflurry 2.0: improved pan-allele prediction of MHC class I-presented peptides by incorporating antigen processing.* Cell Syst 2020;11(1):42–48.e7. doi:[10.1016/j.cels.2020.06.010](https://doi.org/10.1016/j.cels.2020.06.010)
-6. Uhlén M, Fagerberg L, Hallström BM, et al. *Tissue-based map of the human proteome.* Science 2015;347(6220):1260419. doi:[10.1126/science.1260419](https://doi.org/10.1126/science.1260419) — Human Protein Atlas cell-line RNA data (HEK293), [proteinatlas.org](https://www.proteinatlas.org)
-7. UniProt Consortium. *UniProt: the Universal Protein Knowledgebase in 2025.* Nucleic Acids Res 2025;53(D1):D609–D617. doi:[10.1093/nar/gkae1010](https://doi.org/10.1093/nar/gkae1010) — accessions P01210 (PENK), P29120 (PCSK1), P16519 (PCSK2), P05408 (SCG5/7B2), P16870 (CPE)
+6. Uhlén M, Fagerberg L, Hallström BM, et al. *Tissue-based map of the human proteome.* Science 2015;347(6220):1260419. doi:[10.1126/science.1260419](https://doi.org/10.1126/science.1260419) (Human Protein Atlas cell-line RNA data (HEK293), [proteinatlas.org](https://www.proteinatlas.org))
+7. UniProt Consortium. *UniProt: the Universal Protein Knowledgebase in 2025.* Nucleic Acids Res 2025;53(D1):D609–D617. doi:[10.1093/nar/gkae1010](https://doi.org/10.1093/nar/gkae1010) (accessions P01210 (PENK), P29120 (PCSK1), P16519 (PCSK2), P05408 (SCG5/7B2), P16870 (CPE))
 8. GTEx Consortium. *The GTEx Consortium atlas of genetic regulatory effects across human tissues.* Science 2020;369(6509):1318–1330. doi:[10.1126/science.aaz1776](https://doi.org/10.1126/science.aaz1776)
 
 ---

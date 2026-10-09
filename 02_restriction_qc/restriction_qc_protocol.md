@@ -1,4 +1,4 @@
-# Restriction-Digest QC Protocol — Four PENK Cassette Plasmids
+# Restriction-Digest QC Protocol: Four PENK Cassette Plasmids
 
 **Purpose:** Confirm construct identity (correct insert, linker type, and gene order)
 and catch mis-assembly before transfection. Two-tier scheme.
@@ -12,7 +12,7 @@ and catch mis-assembly before transfection. Two-tier scheme.
 | 4 | PENK-P2A-mEGFP  | 6,971 | P2A  | PENK first |
 
 ---
-## Digest A — insert release (screen all four in one master mix)
+## Digest A: insert release (screen all four in one master mix)
 **Enzymes:** AflII + XbaI (double digest). Both single-cutters in all four plasmids.
 
 Expected bands (bp):
@@ -25,9 +25,9 @@ Expected bands (bp):
 
 - The **5,345 bp backbone band is constant across all four** → internal loading/complete-digestion control.
 - Insert band reports **linker type**: ~2.16 kb = IRES, ~1.63 kb = P2A.
-- **Limitation:** cannot distinguish the two IRES plasmids (2,155 vs 2,167 bp — 12 bp apart, unresolvable) or the two P2A plasmids (identical). Gene order needs Digest B.
+- **Limitation:** cannot distinguish the two IRES plasmids (2,155 vs 2,167 bp, 12 bp apart, unresolvable) or the two P2A plasmids (identical). Gene order needs Digest B.
 
-## Digest B — identity fingerprint (confirm gene order / catch mis-assembly)
+## Digest B: identity fingerprint (confirm gene order / catch mis-assembly)
 **Enzyme:** NcoI (single digest, 5 cuts each). Fingerprint is unique per plasmid.
 
 Expected bands (bp):
@@ -39,8 +39,8 @@ Expected bands (bp):
 | 4 PENK-P2A-mEGFP  | 3,342 / 2,226 / 735 / 357 / 311 |
 
 - Shared 3,342 + 735 bp bands = common backbone/cassette landmarks.
-- The **diagnostic band** is the second-largest: 1,648+1,446 doublet (P1) / 2,416 (P2) / 2,749 (P3) / 2,226 (P4) — resolves gene order.
-- **The plasmid-1 truncation** (PENK missing its C-terminal core) will NOT change these gel bands (it's a point-level premature stop) — flag: gel QC passing does NOT clear plasmid 1; it must be confirmed by **Sanger sequencing** of the PENK 3' end.
+- The **diagnostic band** is the second-largest: 1,648+1,446 doublet (P1) / 2,416 (P2) / 2,749 (P3) / 2,226 (P4): resolves gene order.
+- **The plasmid-1 truncation** (PENK missing its C-terminal core) will NOT change these gel bands (it's a point-level premature stop): flag: gel QC passing does NOT clear plasmid 1; it must be confirmed by **Sanger sequencing** of the PENK 3' end.
 
 ---
 ## Bench recipe (per lane, adjust to your kit)
@@ -52,4 +52,4 @@ Expected bands (bp):
 ## Interpretation logic
 1. **Digest A**: every lane must show the 5,345 bp band + one insert band. Missing backbone band → incomplete digest. Wrong insert size → wrong linker.
 2. **Digest B**: match the 5-band fingerprint to the table to confirm which plasmid is in the tube (gene order).
-3. **Sanger** the PENK ORF (esp. plasmid 1 3' end) — gel cannot detect the single-core truncation.
+3. **Sanger** the PENK ORF (esp. plasmid 1 3' end): gel cannot detect the single-core truncation.

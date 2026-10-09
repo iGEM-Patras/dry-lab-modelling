@@ -1,4 +1,4 @@
-# Cycle 3b — status 2026-08-27 00:45 CEST
+# Cycle 3b, status 2026-08-27 00:45 CEST
 
 ## What happened to array 18122521: disk quota, not science
 
@@ -11,7 +11,7 @@ with major instabilities resulting in coordinates that are NaN or too large ...
 ```
 
 GROMACS reports disk exhaustion and numerical blow-up through the **same** error
-string. It was disk: a different project of the user's filled `/data`. Confirmed —
+string. It was disk: a different project of the user's filled `/data`. Confirmed:
 `/data` (GPFS `fs1`) now takes 2 GB at 1.1 GB/s, 368 TB free.
 
 **Zero chirality discards, zero mount-race failures.** Both guards from the previous
@@ -30,7 +30,7 @@ session behaved. `exit 143` on job `cd089423` was my own `scancel`, expected.
 | if restarted from scratch | 428.0 M |
 
 `prod.mdp` has `continuation = yes`, `gen-vel = no`, so `mdrun -cpi prod.cpt`
-continues bit-reproducibly — velocities, box, thermostat and barostat state all
+continues bit-reproducibly: velocities, box, thermostat and barostat state all
 travel in the checkpoint. **Resuming saves 22% of total compute.** New script
 `scripts/resume_prod.sh` resumes when a checkpoint exists and starts fresh
 otherwise; it is idempotent, so a re-queued task never discards banked sampling.
@@ -45,7 +45,7 @@ Also deleted 15 GROMACS `#backup#` files (0.12 GB).
 
 ## Now running: split across BOTH partitions
 
-**`pgpu` alone would have been slower than the CPU route** — it has exactly one node
+**`pgpu` alone would have been slower than the CPU route**: it has exactly one node
 (`binfservas30`, 2 GPUs, already shared with two other users). Measured:
 
 | route | per-replicate | slots | makespan + queue |
@@ -56,9 +56,9 @@ Also deleted 15 GROMACS `#backup#` files (0.12 GB).
 
 So both are in flight, split by *remaining* work (longest-first to the fast GPUs):
 
-- **`18170461`** — `pgpu`, array 1-8%2, 8 cores + 1 GPU each, `prod_gpu.txt`.
+- **`18170461`**: `pgpu`, array 1-8%2, 8 cores + 1 GPU each, `prod_gpu.txt`.
   The 8 longest tasks (all `c3b_menk_*`, fresh starts, 10.7 M steps each).
-- **`18170462`** — `pibu_el8`, array 1-32%20, 48 cores (12 ranks x 4 threads),
+- **`18170462`**: `pibu_el8`, array 1-32%20, 48 cores (12 ranks x 4 threads),
   `prod_cpu.txt`. 4 running at last check; 15 nodes currently have >=48 free cores
   so the remaining slots fill as tasks land.
 

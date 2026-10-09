@@ -3,7 +3,7 @@
 ## Rationale
 Neprilysin (NEP / CD10 / enkephalinase, gene **MME**) is the principal peptidase
 degrading enkephalins. Silencing it prolongs the half-life of the enkephalin
-peptides produced by the PENK construct — the knockdown arm of the therapy.
+peptides produced by the PENK construct, the knockdown arm of the therapy.
 
 ## Target definition
 - **Gene:** MME (membrane metalloendopeptidase), human.
@@ -23,7 +23,7 @@ peptides produced by the PENK construct — the knockdown arm of the therapy.
    into RISC.
 4. **Off-target screen**: NCBI blastn-short (word size 7) of a position-diverse
    11-candidate shortlist against human `refseq_rna` (txid9606). Ranked by number
-   of near-full-length off-targets (≥17/19 identity — the band that risks
+   of near-full-length off-targets (≥17/19 identity, the band that risks
    silencing).
 
 ## Recommended siRNAs (all 19/19 on-target to MME; 0 off-targets ≥17/19)

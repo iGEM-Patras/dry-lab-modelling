@@ -1,6 +1,6 @@
 # Engineering Success
 
-*Epione — a DNA-encoded enkephalin factory for chronic cancer pain. iGEM Patras 2026.*
+*Epione: a DNA-encoded enkephalin factory for chronic cancer pain. iGEM Patras 2026.*
 
 Our project is wet-lab led. The dry lab's job is to decide **what to build** and to
 refuse to let an untested assumption reach the bench. This page documents three
@@ -17,13 +17,13 @@ is in [`06_engineering_cycles/`](https://github.com/kei-zan/dry-lab-modelling/tr
 
 ---
 
-## Cycle 1 — Designing a payload that DNA can encode
+## Cycle 1: Designing a payload that DNA can encode
 
 ![Native human proenkephalin against our engineered precursor: seven cassettes in both, the same
 dibasic processing sites, with the native YGGFM/YGGFL cores replaced by YGGFEVVG](../07_invitro_penk/figures/fig_junction_map.png)
 
-*The engineered precursor keeps the native architecture — seven cassettes at the native spacing,
-flanked by the same dibasic sites the cell's convertases already recognise — and changes only the
+*The engineered precursor keeps the native architecture: seven cassettes at the native spacing,
+flanked by the same dibasic sites the cell's convertases already recognise, and changes only the
 message-plus-address sequence inside them. The cassette count is not an optimisation: it is what
 human PENK carries, so the spacing is already known to work in secretory granules.*
 
@@ -41,7 +41,7 @@ activate the receptor) and an **address** (the C-terminal residues that select *
 receptor).
 
 We could not use deltorphin II itself. It contains **D-alanine** and a **C-terminal amide**,
-and a gene can encode neither — the ribosome builds L-amino acids and leaves a free acid.
+and a gene can encode neither: the ribosome builds L-amino acids and leaves a free acid.
 
 So we built a chimera: deltorphin's δ-**address** on the enkephalin **message**.
 
@@ -67,7 +67,7 @@ predicted complexes.
 
 **The direction was right; our first quantitative claim was wrong.** An early version of this
 cycle reported the payload as 1.96× more δ-preferring than native enkephalin. **That figure
-is withdrawn** — it came from an estimator we had not calibrated against any experimental
+is withdrawn**: it came from an estimator we had not calibrated against any experimental
 value, and when we later calibrated one properly (see *Method validation*), the number did
 not survive.
 
@@ -79,7 +79,7 @@ on our poster and we say so here.
 
 ---
 
-## Cycle 2 — Can the cassette actually be manufactured?
+## Cycle 2: Can the cassette actually be manufactured?
 
 ![Where the GC-rich windows sit along the construct and the targeted recoding that fixes them](../09_codon_gc_design/figures/fig_gc_where_and_fix.png)
 
@@ -97,14 +97,14 @@ Four bicistronic constructs, codon- and GC-optimised, submitted for synthesis.
 **Result: denied.** One construct scored **23.8** on the vendor's complexity scale, where
 anything at or above 10 is refused.
 
-### Round 1 · Learn — and the finding that justifies the whole cycle
+### Round 1 · Learn, and the finding that justifies the whole cycle
 
 Our assumption had been that if anything was unmanufacturable it would be the engineered
 part: seven near-identical repeats of a synthetic cassette is exactly the kind of sequence
 a synthesiser struggles with.
 
 **That assumption was wrong.** The itemised rejection report put most of the score on two
-*terminal flanking sequences* — not our cassettes at all. Those two flanks are exact reverse
+*terminal flanking sequences*, not our cassettes at all. Those two flanks are exact reverse
 complements of one another, forming a **10 bp terminal inverted repeat**.
 
 Those flanks came from the wet lab's own existing plasmid files. They were inherited, not
@@ -112,8 +112,8 @@ designed by us, and they had never been tested as a pair.
 
 The lesson we took, and now apply to every sequence that enters a design:
 **inherited sequence is still untested sequence.** A terminal inverted repeat is also a
-genuine biological liability beyond synthesis — it can form a hairpin and destabilise the
-construct — so this was worth catching before the bench, not after.
+genuine biological liability beyond synthesis: it can form a hairpin and destabilise the
+construct, so this was worth catching before the bench, not after.
 
 ### Round 2 · Design → Test
 
@@ -125,7 +125,7 @@ panel so the wet lab's existing cloning scheme still worked.
 ### Round 2 · Learn
 
 The vendor's report named **two** scoring rules and we had only modelled one. The residual
-flag came from long-range repeats *between* tandem cassettes — a consequence of repeating
+flag came from long-range repeats *between* tandem cassettes, a consequence of repeating
 one cassette seven times, and invisible to the local scoring window we had been using.
 
 ### Round 3 · Design → Test → Learn
@@ -148,7 +148,7 @@ three rounds, and it caught a defect in material the project had been treating a
 
 ---
 
-## Cycle 3 — What should the first transfection produce? *(in progress)*
+## Cycle 3, What should the first transfection produce? *(in progress)*
 
 ![Predicted western-blot bands and mass-spectrometry targets for each of the four constructs,
 committed before the first transfection](../06_engineering_cycles/cycle5_expression_processing/cycle5_predictions.png)
@@ -163,8 +163,8 @@ is what an open cycle should look like.
 ### Design
 
 Rather than transfect and then interpret whatever appears, we committed falsifiable
-predictions first — band sizes, which species should be present, which should be **absent**,
-and target masses for mass spectrometry — so the first experiment can contradict us.
+predictions first: band sizes, which species should be present, which should be **absent**,
+and target masses for mass spectrometry, so the first experiment can contradict us.
 
 ### Build
 
@@ -176,7 +176,7 @@ orientations, so the comparison is controlled rather than anecdotal.
 Transfection, western blot, and a biomimetic *in vitro* digest using the convertase pair
 that generates enkephalins natively.
 
-### Learn — already, before the bench
+### Learn, already, before the bench
 
 Two findings came out of the prediction work itself:
 
@@ -187,7 +187,7 @@ western blot should show it.
 
 **One cassette cannot release free peptide.** Computing the C-terminal context of every
 cassette showed that the terminal cassette has no downstream cleavage site, so it releases an
-extended species rather than a free octapeptide — in **all four** constructs equally. That
+extended species rather than a free octapeptide, in **all four** constructs equally. That
 told us the yield is identical across the constructs we had already ordered, so no re-order
 was warranted. We added the extended species to the mass-spectrometry target list as a
 labelled internal negative control.
@@ -197,11 +197,11 @@ cores, so it is expected behaviour rather than a defect.
 
 ---
 
-## Cycle 4 — Engineering the instrument, not the product
+## Cycle 4, Engineering the instrument, not the product
 
 A large part of our computational effort went into one question: **is `YGGFEVVG` really
 δ-preferring?** None of it changed the construct. What it did change, twice, was the method
-we use to answer the question — and that is a Design–Build–Test–Learn loop in its own right,
+we use to answer the question, and that is a Design–Build–Test–Learn loop in its own right,
 with the Learn step of each round visibly driving the Design of the next.
 
 ### Round 1 · a method that failed its own control
@@ -214,7 +214,7 @@ selective reference in the set.
 
 **Learn.** The failure was *statistical power*, not the method. We computed the correlation
 threshold that n = 4 can clear and found the test could not have passed even had the method
-been perfect. The honest consequence was to withhold the target number entirely — and it is
+been perfect. The honest consequence was to withhold the target number entirely, and it is
 worth saying what that cost: had we skipped the controls, the withheld value would have
 agreed with our own earlier null and been mistaken for confirmation.
 
@@ -232,18 +232,18 @@ project got its first calibrated selectivity estimate.
 **Learn.** Three limits came with it, all reported: the regression slope compresses
 magnitudes, so direction and ranking are calibrated while absolute values are not; the panel
 contains no control in the strongly δ-selective regime, because the two most selective
-peptides failed the inclusion criterion — and those are exactly the two the method had called
+peptides failed the inclusion criterion, and those are exactly the two the method had called
 with the wrong sign at n = 4; and binding is not efficacy.
 
 ### Round 3 · a harder method, and what its control did to it
 
 **Design.** Replace the ranking score with alchemical free energy, which does not interpolate
-from published values at all. **Test.** Run native Met-enkephalin — whose selectivity is
-published — through the identical protocol as a control.
+from published values at all. **Test.** Run native Met-enkephalin, whose selectivity is
+published, through the identical protocol as a control.
 
 ![Per-interval overlap along the thermodynamic path: the ladder validated on a 5-residue control peptide is too coarse for the 8-residue payload](../06_engineering_cycles/cycle12_pose_independence/ladder_convergence.png)
 
-**Result.** The control's two replicates came back at **−3.12 and +5.41 kcal/mol** — opposite
+**Result.** The control's two replicates came back at **−3.12 and +5.41 kcal/mol**, opposite
 signs, from nothing but a different random seed.
 
 **Learn.** Rather than stop at "the method is noisy", we measured why. Along the
@@ -254,8 +254,8 @@ decoupled, so a ladder validated on a 5-residue peptide is too coarse for an 8-r
 More computer time would have tightened the error bar around a biased number, which is worse
 than a visibly noisy one.
 
-**Design, again.** A 57-window ladder spaced for uniform overlap — placing windows where the
-measurement said they were needed rather than doubling them everywhere — with replicates
+**Design, again.** A 57-window ladder spaced for uniform overlap: placing windows where the
+measurement said they were needed rather than doubling them everywhere, with replicates
 generated from independent equilibrations rather than from a shared one. Four gates were
 committed to version control before a single window ran.
 
@@ -265,24 +265,24 @@ committed to version control before a single window ran.
 
 | gate | criterion | result |
 |---|---|---|
-| overlap | median s < 1.5 kT, ≤3 of 56 intervals > 2 kT, every leg | **pass** — median 0.30–0.43 kT, **0 of 56** above threshold |
-| sign | δ-preferring | **pass** — both replicates positive |
-| accuracy | two-replicate mean within 1.5 kcal/mol of published | **fail** — mean +7.59 against +0.81 |
-| reproducibility | replicates agree within 2.0 kcal/mol | **fail** — **13.75** apart |
+| overlap | median s < 1.5 kT, ≤3 of 56 intervals > 2 kT, every leg | **pass**: median 0.30–0.43 kT, **0 of 56** above threshold |
+| sign | δ-preferring | **pass**: both replicates positive |
+| accuracy | two-replicate mean within 1.5 kcal/mol of published | **fail**: mean +7.59 against +0.81 |
+| reproducibility | replicates agree within 2.0 kcal/mol | **fail**: **13.75** apart |
 
 **The diagnosis was right.** Zero intervals exceed the overlap threshold, against 20–21 of 25
 on the old ladder. The spacing problem identified in round 3 is solved.
 
 **The measurement still fails.** The two replicates give **+0.72** and **+14.47** kcal/mol.
 The first sits 0.09 from the published value and, reported alone, would have read as a
-complete success — which is precisely what the reproducibility gate existed to prevent us
+complete success, which is precisely what the reproducibility gate existed to prevent us
 from claiming.
 
-**Learn, again — and this is the part that generalises.** We decomposed the disagreement per
+**Learn, again, and this is the part that generalises.** We decomposed the disagreement per
 window rather than calling the method noisy. No single window is responsible: the largest
 replicate difference in any interval is 3.5 kJ/mol and none exceeds 5. But **40 of 55 and 40
 of 56 intervals share the sign of their leg's total**, where random noise would give half. The
-small biases are correlated, so they accumulate along the path instead of cancelling —
+small biases are correlated, so they accumulate along the path instead of cancelling:
 reaching ≈30 kJ/mol per leg, about **7 kcal/mol of replicate variation in each absolute free
 energy**, when the quantity we want is a *difference* of two of them and the effect is 0.81.
 
@@ -304,23 +304,23 @@ looking only for methods that escape both.
 **Build (a).** One route escapes both by construction: mutate the **receptor** rather than
 decoupling the ligand twice, so the large absolute quantity is never formed. We costed it
 from our own measured throughput, counted the divergent orthosteric pocket residues by
-aligning the two receptors, and built the hybrid residue — verifying atom by atom that it
+aligning the two receptors, and built the hybrid residue, verifying atom by atom that it
 carried both side chains and that the net charge changed by exactly +1, as the mutation
 requires.
 
 **Test (a).** It was blocked, and not by the science. Our membrane system was built with
 Amber tooling and converted into a *standalone* topology with every parameter written out
 and no includes. The mutation toolchain emits the other kind. Reconciling them failed in both
-directions — the force field's bonded tables reference type names the standalone file does
+directions: the force field's bonded tables reference type names the standalone file does
 not declare, and the library that produced that file classifies the alchemical dummy atoms as
 virtual sites and refuses to bond them to each other, which is exactly what a dual topology
 requires.
 
-**Learn (a) — and a correction to our own recommendation.** Before accepting the block we
+**Learn (a), and a correction to our own recommendation.** Before accepting the block we
 checked whether anything resolves it. Nothing installed here does. But the search turned up
 something that mattered more: the purpose-built state of the art for this calculation reports
 **RMSE 1.61 kcal/mol**, whose optimistic bound still exceeds the **0.81 kcal/mol** effect we
-are trying to measure, and it names charge-changing mutations — our exact case — as its
+are trying to measure, and it names charge-changing mutations (our exact case) as its
 hardest class. We had recommended this route as escaping both failure modes **without
 checking its resolution against the effect**, which is the first test we apply to everything
 else. The tooling block saved us days that would have ended at an unresolvable number.
@@ -330,7 +330,7 @@ argues that δ/μ selectivity arises from **conformational constraint** beyond t
 message–address framework a payload like ours is built on: a rigid, turn-forming tetrapeptide
 is >1500-fold selective, while a more flexible endogenous peptide binds both receptors
 equally. Our payload is all-L and gene-encoded, so it **cannot** carry either of the features
-that rigidify the selective comparators — a D-amino acid or a C-terminal amide. If constraint
+that rigidify the selective comparators: a D-amino acid or a C-terminal amide. If constraint
 is what selectivity needs, that is a structural explanation for several cycles of null
 results.
 
@@ -339,7 +339,7 @@ around controls: a constrained peptide and a highly selective one against a flex
 five replicates each on both receptors, 20 ns matched.
 
 **Learn (b).** **The control gate failed.** The constrained peptide was indistinguishable
-from the flexible one, and the most selective peptide in the set was the *least* turn-like —
+from the flexible one, and the most selective peptide in the set was the *least* turn-like:
 the opposite of the prediction. The diagnosis is in the replicates: five runs of the same
 system, differing only by seed, span the entire range of the metric. Twenty nanoseconds from
 a modelled pose does not re-equilibrate a bound peptide's backbone, so the analysis cannot
@@ -359,10 +359,10 @@ documented reason.**
 | MM-GBSA rescoring | failed its own pre-registered gate |
 | Fingerprint QSAR (ours) | aggregate correlation looks good, but the prediction is a nearest-neighbour lookup and flips sign when neighbours are removed |
 | Published sequence- and transfer-learning predictors | their reported error, converted to a selectivity difference, is several times larger than the effect we need to resolve |
-| Alchemical free energy | its own control's replicates disagree by **17× the effect** — and after re-spacing fixed the overlap problem, by more |
+| Alchemical free energy | its own control's replicates disagree by **17× the effect** (and after re-spacing fixed the overlap problem, by more) |
 
-That last one is the most informative. We ran native Met-enkephalin — whose selectivity is
-published — through the identical protocol as a control. Its two replicates came back at
+That last one is the most informative. We ran native Met-enkephalin, whose selectivity is
+published, through the identical protocol as a control. Its two replicates came back at
 **−3.12 and +5.41 kcal/mol**: opposite signs, from nothing but a different random seed. We
 then measured *why*: along the thermodynamic path, **20–21 of 25 intervals** had poorly
 overlapping work distributions for our payload (9–15 of 25 for the control), which makes the
@@ -370,12 +370,12 @@ estimator noisy rather than wrong-headed. More computer time cannot fix that; on
 path can, which is what we are now running.
 
 **The common cause is the reference data, not any single method.** Four of the five calibrate
-against published binding affinities — and our own records disagree by **1.83 kcal/mol** on a
+against published binding affinities, and our own records disagree by **1.83 kcal/mol** on a
 single compound measured in two different studies, which is *larger than the effect we are
 trying to measure*.
 
 So the honest position, and the one on our poster: **δ-preference is a design goal, and the
-cAMP assay is the experiment that decides it** — not a confirmation of a computational
+cAMP assay is the experiment that decides it**, not a confirmation of a computational
 result, but the only measurement that can settle it.
 
 **Four of the five approaches in that table are our own, and we report all four as failed.**
@@ -389,8 +389,8 @@ trust the three cycles above.
 
 ## Delivery vehicle
 
-The construct has to reach nasal epithelium. We modelled a non-viral lipoplex — coarse-grained
-molecular dynamics of a lipid formulation with the DNA cargo — and produced a formulation
+The construct has to reach nasal epithelium. We modelled a non-viral lipoplex, coarse-grained
+molecular dynamics of a lipid formulation with the DNA cargo, and produced a formulation
 specification for the wet lab.
 
 Non-viral delivery is a deliberate choice rather than a fallback: no genomic integration, no

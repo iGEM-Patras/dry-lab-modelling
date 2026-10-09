@@ -1,4 +1,4 @@
-Cycle 3b Stage-1 MM-GBSA — parameters fixed by CYCLE3B_DESIGN.md, not by defaults.
+Cycle 3b Stage-1 MM-GBSA, parameters fixed by CYCLE3B_DESIGN.md, not by defaults.
 &general
   sys_name             = "c3b"
   startframe           = 1

@@ -1,11 +1,11 @@
 scheme,label,question,layer,status_in_source,maps_to_dry,note,has_dry_counterpart
-guide,Cycle 1,"Do the IRES constructs express, and does IRES change expression level?",wet-lab: construct/expression,planned,none — dry lab never modelled IRES or expression level,Testable in HEK293T. Prediction should be quantified (Mizuguchi 2000: 20-50%).,False
+guide,Cycle 1,"Do the IRES constructs express, and does IRES change expression level?",wet-lab: construct/expression,planned,none, dry lab never modelled IRES or expression level,Testable in HEK293T. Prediction should be quantified (Mizuguchi 2000: 20-50%).,False
 guide,Cycle 2,Which construct expresses more (fluorescence microscopy)?,wet-lab: construct/expression,planned,none,Duplicates guide Cycle 1's read-out; repurpose to localisation/secretion.,False
 guide,Cycle 3,In silico lipoplex modelling,dry-lab: delivery vehicle,planned,LIPOPLEX workstream (not in 06_engineering_cycles),This IS a dry-lab cycle but is NOT one of the 06_ cycles. Separate workstream.,True
-guide,Cycle 4,Lipoplex formulation optimisation (lipid ratios/sizes),dry-lab: delivery vehicle,planned,LIPOPLEX workstream,Sequential dependency on guide Cycle 3 — correctly split.,True
+guide,Cycle 4,Lipoplex formulation optimisation (lipid ratios/sizes),dry-lab: delivery vehicle,planned,LIPOPLEX workstream,Sequential dependency on guide Cycle 3, correctly split.,True
 guide,Cycle 5,Does siRNA knockdown of neprilysin extend enkephalin presence?,wet-lab: degradation arm,planned,none,NOT TESTABLE in HEK293T as written (MME 0.7 nTPM). Needs MME-cDNA reconstitution.,False
 guide,Cycle 6,Toxicity/safety of plasmid and siRNA,wet-lab: safety,planned,none,No dry-lab counterpart. Immunogenicity of the engineered epitope belongs here.,False
-repo,Cycle 1,Does grafting the deltorphin II address bias the payload to delta?,dry-lab: payload sequence,complete; quantitative claim withdrawn,self,Produced YGGFEVVG — the sequence the whole wet-lab plan now expresses.,True
+repo,Cycle 1,Does grafting the deltorphin II address bias the payload to delta?,dry-lab: payload sequence,complete; quantitative claim withdrawn,self,Produced YGGFEVVG, the sequence the whole wet-lab plan now expresses.,True
 repo,Cycle 2,Does enhancing address hydrophobicity improve delta selectivity?,dry-lab: payload sequence,complete; primary hypothesis falsified (4/5),self,Multi-arm panel counted as one cycle by an explicit stated rule.,True
 repo,Cycle 3a,Is pose convergence a valid selectivity metric?,dry-lab: method validation,"complete; H3a rejected, metric retired",self,Negative result.,True
 repo,Cycle 3b,Does MM-GBSA ddG reproduce experimental selectivity?,dry-lab: method validation,gated; premise withdrawn,self,Terminated on calibration failure. Residency salvaged as a hypothesis.,True

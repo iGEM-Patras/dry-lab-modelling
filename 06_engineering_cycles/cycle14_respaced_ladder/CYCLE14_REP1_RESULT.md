@@ -1,4 +1,4 @@
-# Cycle 14 — replicate 1 of the met-enkephalin control
+# Cycle 14: replicate 1 of the met-enkephalin control
 
 **Scored 7 Oct 2026, against gates committed in `data/cycle14_prereg.json` before the
 campaign started.**
@@ -23,8 +23,8 @@ to refuse a partial ladder.
 |---|---|---|
 | G1 | sign correct (positive = δ-preferring) | **pass** |
 | G2 | interval covers the published value | **pass** |
-| G3 | λ-interval overlap (property of the ladder) | pass by construction — predicted ~1.0 kT vs the old ladder's max 10.56 |
-| G4 | replicate agreement | **not yet testable** — rep2 is incomplete |
+| G3 | λ-interval overlap (property of the ladder) | pass by construction: predicted ~1.0 kT vs the old ladder's max 10.56 |
+| G4 | replicate agreement | **not yet testable**: rep2 is incomplete |
 
 ## What this does and does not license
 
@@ -34,7 +34,7 @@ same control, replicates differing only by thermostat seed. That is a real impro
 and it vindicates the diagnosis: the failure was λ spacing, not sampling time.
 
 **Does not.** The uncertainty is **3.9× the effect being measured**. The interval runs
-+3.85 to −2.41 kcal/mol — from 661-fold δ-preferring to 58-fold μ-preferring. An
++3.85 to −2.41 kcal/mol: from 661-fold δ-preferring to 58-fold μ-preferring. An
 agreement of 0.09 kcal/mol inside a window of ±3.13 is *consistent with* accuracy; it is
 not evidence of it, and it is equally consistent with coincidence. One replicate cannot
 distinguish the two.

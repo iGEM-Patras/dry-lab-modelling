@@ -1,4 +1,4 @@
-# 10 — Immunogenicity & antibody detection
+# 10, Immunogenicity & antibody detection
 
 Two independent questions about the **engineered** product that the original design did not ask.
 
@@ -7,7 +7,7 @@ Two independent questions about the **engineered** product that the original des
 No. The construct recodes every enkephalin core to `YGGFEVVG`; every registry
 anti-enkephalin antibody is raised against native `YGGFM`. `antibody_shortlist.csv`
 records 11 candidates with RRIDs and a verdict for each. A **custom anti-`YGGFEVVG`
-polyclonal is on the critical path** — the peptide exists (`10_immunogenicity_antibody`
+polyclonal is on the critical path**, the peptide exists (`10_immunogenicity_antibody`
 cross-refs `04_structures`), but the antibody does not.
 
 ## 2. Is the engineered epitope predicted immunogenic?
@@ -23,7 +23,7 @@ MHC class I binding was predicted with **MHCflurry 2.x** over a common HLA-A/B/C
 
 **Reading:** the engineered epitope is not meaningfully more immunogenic than the native
 one it replaces (1.86 % vs 1.77 % strong binders). The **P2A remnant junction is the highest
-of the three** — a specific argument for preferring the IRES cassettes if immunogenicity of
+of the three**, a specific argument for preferring the IRES cassettes if immunogenicity of
 a persistently expressed product matters, since P2A leaves a 21-residue remnant on the
 upstream protein by design.
 

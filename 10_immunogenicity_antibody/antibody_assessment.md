@@ -1,4 +1,4 @@
-# Antibody assessment for the lipoplex — from the wet-lab suggestion
+# Antibody assessment for the lipoplex, from the wet-lab suggestion
 
 Source: `LIPOPLEX(1).docx`. The document's antibody content is a **targeting** proposal
 (surface ligands for neurotropism), not validation reagents. Assessed below against the
@@ -20,13 +20,13 @@ pentapeptide, so all of them miss the product:
 | AB_2530349 | anti-Met-enkephalin mAb 1194/334 | YGGFM | **will not detect** |
 | AB_2492947 | anti-Met-enkephalin pAb | PENK 237–241 (=YGGFM) | **will not detect** |
 | AB_3430419 | anti-Met-enkephalin | Met-enkephalin | **will not detect** |
-| — | custom anti-`YGGFEVVG`–KLH | the engineered octapeptide | **required; must be custom-raised** |
-| — | precursor-directed anti-PENK | PENK backbone | precursor only; cannot show maturation |
+|, | custom anti-`YGGFEVVG`–KLH | the engineered octapeptide | **required; must be custom-raised** |
+|, | precursor-directed anti-PENK | PENK backbone | precursor only; cannot show maturation |
 
 The shared `YGGF` N-terminal core is not sufficient: anti-Met-enkephalin antibodies are
 raised against the whole pentapeptide and typically require the free C-terminal Met,
 which the product does not have. **Order a custom polyclonal against `YGGFEVVG`
-(KLH-conjugated, ≥2 rabbits) now** — it is a 10–12 week lead time and it gates the
+(KLH-conjugated, ≥2 rabbits) now**, it is a 10–12 week lead time and it gates the
 entire expression readout.
 
 ## Targeting: TfR is sound, TRPV1 is weak
@@ -44,7 +44,7 @@ target:
 | RI7217 | AB_3715099 | mouse TFRC (Q62351) | most-cited low-avidity transcytosis clone |
 | 8D3 | AB_1511006 | mouse TFRC | high avidity; binds BECs but transcytoses poorly |
 
-Human vs mouse TfR is 77.2% identical (global alignment) — below the ~90% where
+Human vs mouse TfR is 77.2% identical (global alignment), below the ~90% where
 cross-reactivity is usually retained. There is **no single TfR antibody that works in
 both the rodent model and human cells.** The document's point about preferring low
 affinity/avidity for transcytosis is correct [7,12] and is the reason to
@@ -52,20 +52,20 @@ prefer RI7217 over 8D3.
 
 **TRPV1 (`anti-TRPV1` in the document) is a poor surface-targeting choice.** Two registry
 antibodies are sold as "extracellular" and both check out against UniProt topology [16],
-consistent with the cryo-EM structures [9,10] —
+consistent with the cryo-EM structures [9,10]:
 human aa 456–471 `RPVDGLPPFKMEKTGD` sits in the 456–472 extracellular domain, and rat
 aa 605–619 in the 599–630 loop. But:
 
 - **Only 56 of 839 residues (6.7%) of TRPV1 are extracellular**, in four loops of 17, 3,
   32 and 4 aa. There is very little surface to bind.
-- Both are **polyclonal** — no orientation control for site-directed conjugation.
+- Both are **polyclonal**: no orientation control for site-directed conjugation.
 - The epitopes are only 56–60% conserved human↔rat, against 85.7% for the whole protein,
   so neither reagent transfers between models.
 - The rat vendor peptide differs from UniProt O35433 at one position (Cys616→Ser);
   confirm with the vendor, as a Cys in the immunogen is also a conjugation handle.
 
 Only 15 of 485 TRPV1 records mention flow cytometry; the set is dominated by western
-(194) and IHC (145) — i.e. fixed/permeabilised formats that say nothing about
+(194) and IHC (145), i.e. fixed/permeabilised formats that say nothing about
 live-cell surface accessibility.
 
 **Recommendation:** keep the RVG peptide as the neuronal ligand [6] (it is a peptide, cheap,
@@ -81,10 +81,10 @@ handle than an antibody against a 6.7%-exposed target.
 | B141M / B139M | AB_936779 / AB_936777 | PEG backbone |
 
 Terminus + backbone pair supports a sandwich ELISA for surface PEG density, and screens
-anti-PEG immunogenicity [14] — a real failure mode for the repeat-dosed PEG(2000)-CerC8
+anti-PEG immunogenicity [14]: a real failure mode for the repeat-dosed PEG(2000)-CerC8
 formulation the document specifies.
 
-## siRNA arm — re-designed for human exclusivity
+## siRNA arm: re-designed for human exclusivity
 
 The wet lab requires the siRNA to be **exclusively human, with no mouse cross-reactivity.**
 The previously delivered panel does not meet that constraint. Every one of its 11 guides is
@@ -107,7 +107,7 @@ word size 7, RID 6N566XEC014), duplex asymmetry [8] and GC content:
 
 SIRNA_FIGURE_PLACEHOLDER
 
-**Recommended lead: CDS303** — guide `AAAGUUGCCGUAACGGGAGdTdT`, passenger
+**Recommended lead: CDS303**: guide `AAAGUUGCCGUAACGGGAGdTdT`, passenger
 `CUCCCGUUACGGCAACUUUdTdT`. 19/19 on human *MME*, 14/19 on mouse *Mme* with 2 of
 those mismatches inside the seed (guide positions 4,7), **zero** human
 off-targets at ≥17/19, and favourable duplex asymmetry (ΔΔG = 4.20 kcal/mol,
@@ -119,7 +119,7 @@ Guide positions 2–8 are the seed; a mismatch there is the most reliable way to
 activity on an unintended transcript, which is why exclusivity was ranked on seed
 divergence rather than on total identity alone. Note the corollary: **these guides cannot
 be tested in a mouse model.** Knockdown validation must be done in human cells, and any
-in-vivo rodent work needs a separate mouse-targeting surrogate — accepting that it is then
+in-vivo rodent work needs a separate mouse-targeting surrogate, accepting that it is then
 a different molecule, not the same one.
 
 For the validation western, only **4 MME/neprilysin records** exist in the registry;
@@ -131,7 +131,7 @@ before ordering.
 Two links are NotebookLM notebooks (not citable) and one is a sci-hub mirror. That last
 one resolves to a legitimate citation: Shimoni, Shi, Adlard & Bush, "Delivery of
 Fluorescent Nanoparticles to the Brain", *Journal of Molecular Neuroscience* (2016),
-doi:10.1007/s12031-016-0833-5 (ref. 15) — cite that directly rather than the mirror.
+doi:10.1007/s12031-016-0833-5 (ref. 15): cite that directly rather than the mirror.
 
 ## Consequence for the CG-MD work
 
@@ -139,7 +139,7 @@ Adding a conjugated antibody is **not** a parameter change to the existing lipop
 model. An IgG is ~150 kDa against lipid components of a few hundred daltons, so it would
 dominate box size and runtime, and there is no coarse-grained membrane skill available
 here. If targeting ligands are going into the model, scFv or nanobody (as the document
-itself suggests, ~28/15 kDa) is the only tractable option — and the DOTAP/MC3 replicate
+itself suggests, ~28/15 kDa) is the only tractable option, and the DOTAP/MC3 replicate
 results should be finished and reported on the bare formulation first.
 
 ## What the wet lab still needs to supply
@@ -147,7 +147,7 @@ results should be finished and reported on the bare formulation first.
 For each antibody they recommend: **catalog number + vendor, clone ID or RRID, the
 immunogen sequence or residue range, validated applications, species reactivity, and
 whether it is carrier-free.** The immunogen sequence is the one most often omitted and
-the one that decides whether a reagent works here — as the PENK finding above shows.
+the one that decides whether a reagent works here, as the PENK finding above shows.
 
 ## Methods
 

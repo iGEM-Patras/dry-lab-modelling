@@ -1,7 +1,7 @@
-# Cycle 4 — Can the designed cassette actually be manufactured?
+# Cycle 4, Can the designed cassette actually be manufactured?
 
 **Status:** **CLOSED** · v6 accepted by the vendor and **ordered**. Pre-registration scored below.
-**Type:** wet–dry closed loop — the first cycle in this repo whose Test step is an
+**Type:** wet–dry closed loop, the first cycle in this repo whose Test step is an
 external instrument (the vendor's synthesis-feasibility engine) rather than a simulation
 **Learn input:** the four ordering-ready constructs produced by the tag-relocation work
 (`09_codon_gc_design`, `10_immunogenicity_antibody`)
@@ -18,7 +18,7 @@ DNA arrives and the entire wet-lab plan stalls.
 
 That makes it the first cycle where the dry lab's output is falsified by something other
 than more dry lab. It also makes it the cycle with the shortest feedback loop in the
-project — minutes, not GPU-days — which is precisely why it is worth formalising: a
+project (minutes, not GPU-days), which is precisely why it is worth formalising: a
 cheap, high-frequency oracle is the ideal place to practise honest pre-registration.
 
 The Learn edge is real and sequential: v4 → v5 → v6, each round's design determined by
@@ -29,12 +29,12 @@ what the previous round's rejection report revealed about the vendor's scoring r
 IDT's gBlocks complexity checker returns a **total score** plus an itemised breakdown.
 **Score ≥ 10 ⇒ manufacturing denied.** The itemisation is the valuable part: it names
 each offending rule, its location in the sequence, and its individual point contribution.
-This is a rare thing in this project — an external judge that not only says *wrong* but
+This is a rare thing in this project: an external judge that not only says *wrong* but
 says *why*, in coordinates.
 
 ---
 
-## Round 1 (v4) — prediction FALSIFIED
+## Round 1 (v4): prediction FALSIFIED
 
 **Predicted:** all four constructs orderable; no complexity flags.
 **Observed:** `mEGFP_P2A_His_PENK` **DENIED, total 23.8**.
@@ -56,7 +56,7 @@ revcomp(CATTAGCACT) = AGTGCTAATG
 
 The construct therefore carries a **10 bp terminal inverted repeat**. IDT's checker
 searches both strands, finds the 5′ flank again at the 3′ end, and scores it as a
-long-range repeat — from each end independently, hence the double 10.
+long-range repeat, from each end independently, hence the double 10.
 
 **This defect was inherited, not introduced.** All four of the wet lab's original
 `final *.gb` files carry the same inverted-repeat pair. It was never caught because
@@ -66,7 +66,7 @@ verbatim on the assumption that the wet lab's own cloning scheme was authoritati
 The assumption was reasonable; the failure was in not testing it. **The rule this cycle
 adds: inherited sequence is still untested sequence.**
 
-> Beyond synthesis, a terminal inverted repeat is a genuine liability — it can form a
+> Beyond synthesis, a terminal inverted repeat is a genuine liability: it can form a
 > hairpin in the single-stranded product and is a documented source of
 > polymerase slippage and template secondary structure.
 
@@ -77,7 +77,7 @@ documentation and primer notes stay valid. New 3′ flank `ACGCTCTTAC`, selected
 constraints: not the reverse complement of the 5′ flank, contains no site from a 35-enzyme
 panel on either strand, 35–65% GC, no homopolymer ≥ 4, and absent from all four payloads.
 
-## Round 2 (v5) — 3 of 4 CONFIRMED, 1 FALSIFIED
+## Round 2 (v5): 3 of 4 CONFIRMED, 1 FALSIFIED
 
 | Construct | Predicted | Observed | Outcome |
 |---|---|---|---|
@@ -86,7 +86,7 @@ panel on either strand, 35–65% GC, no homopolymer ≥ 4, and absent from all f
 | `His_PENK_IRES_mEGFP` | 5.2, accept | accepted | ✅ |
 | `mEGFP_IRES_His_PENK` | 5.6, accept | **DENIED, exactly 10.0** | ❌ |
 
-The inverted-repeat flags disappeared from all four — that part of the prediction held.
+The inverted-repeat flags disappeared from all four: that part of the prediction held.
 
 ### What the surviving failure taught us
 
@@ -97,7 +97,7 @@ The inverted-repeat flags disappeared from all four — that part of the predict
 
 My repeat estimate was good to 0.9 percentage points and 0.4 score points. The failure was
 one of **coverage, not calibration**: I had reverse-engineered one of the vendor's rules
-and silently assumed it was the only one. A second rule — local single-base composition —
+and silently assumed it was the only one. A second rule, local single-base composition,
 contributed the 4 points that pushed the total to exactly the denial threshold.
 
 Two calibration points now pin the repeat rule precisely:
@@ -121,10 +121,10 @@ Decomposing the 8-mer repeat coverage of `mEGFP_IRES_His_PENK` by region:
 | **mature PENK (7× YGGFEVVG)** | **69.7%** |
 
 The mature PENK region is the largest contributor **and the only one that is freely
-recodable** — mEGFP and the IRES are functional elements we do not want to touch, and the
+recodable**: mEGFP and the IRES are functional elements we do not want to touch, and the
 IRES in particular is a structured RNA whose activity depends on its exact sequence.
 
-## Round 3 (v6) — designed, pre-registered, NOT YET TESTED
+## Round 3 (v6): designed, pre-registered, NOT YET TESTED
 
 ### Design
 
@@ -136,7 +136,7 @@ minimise total 8-mer repeat coverage across the whole construct (both strands), 
 - no restriction site from the 35-enzyme panel created
 - mEGFP, IRES, signal peptide, His₆ tag, Kozak and flanks all untouched
 
-A local-window objective was tried first and changed **zero codons** — the repeats are
+A local-window objective was tried first and changed **zero codons**: the repeats are
 long-range, between the seven cassettes, and invisible to a ±16 bp window. This is why
 the global objective was necessary.
 
@@ -156,7 +156,7 @@ and belong to enzymes these constructs do not use).
 ### The C-tract is deliberately left in place
 
 The remaining 4-point flag on both IRES constructs is the EMCV oligo(C) tract in IRES
-domain I. Trimming it from 10 C's down to 6 was tested and **does not clear the flag** —
+domain I. Trimming it from 10 C's down to 6 was tested and **does not clear the flag** , 
 the surrounding region is C-rich, so a >80% window survives at every trim length. Since
 the trim buys nothing numerically and the tract is part of a structured functional element,
 it stays. 4 points is comfortably below the threshold of 10.
@@ -173,7 +173,7 @@ Committed **before** submitting v6 to the checker.
 | `mEGFP_IRES_His_PENK` | 0.0 | 4.0 | **4.0** | ACCEPT |
 
 **P1** All four accepted (total < 10).
-**P2** Both P2A constructs score 0.0 — no flag of any kind.
+**P2** Both P2A constructs score 0.0, no flag of any kind.
 **P3** Both IRES constructs retain exactly one flag, the C-composition window, worth 4.0.
 **P4** No construct shows a repeat flag; all are below the 40% coverage rule.
 **P5** No *new* flag type appears that neither round revealed.
@@ -182,11 +182,11 @@ P5 is the one to watch. It is the same class of prediction that failed in round 
 the two-rule model has only ever been validated against two reports. If a third rule
 exists, P5 is how we find out.
 
-### Outcome — all four accepted and ordered
+### Outcome, all four accepted and ordered
 
 | Prediction | Outcome | Evidence |
 |---|---|---|
-| **P1** all four accepted (total < 10) | **CONFIRMED** | observed 0, 1, 4, 4 — all below the threshold of 7 |
+| **P1** all four accepted (total < 10) | **CONFIRMED** | observed 0, 1, 4, 4, all below the threshold of 7 |
 | **P2** both P2A constructs score exactly 0.0 | **FALSIFIED** | `mEGFP_P2A` scored 0; `His_PENK_P2A` scored 1.0 on a hairpin flag |
 | **P3** both IRES constructs keep exactly one 4.0 C-flag | **CONFIRMED** | exactly one 12-base composition flag each, 4.0 pts, as predicted |
 | **P4** no repeat flag on any construct | **CONFIRMED** | the repeat-coverage rule fired on none of the four |
@@ -199,7 +199,7 @@ Previously recorded as 2 confirmed, 0 falsified, 3 unresolved.
 
 The original justification read: *"a third rule would have added points; all four stayed under 10."*
 That infers the **absence** of a rule from an aggregate verdict that looks identical whether or not
-the rule exists — a construct scoring 1.0 and a construct scoring 0.0 both read as "accepted". The
+the rule exists: a construct scoring 1.0 and a construct scoring 0.0 both read as "accepted". The
 itemised report falsifies it outright.
 
 This is the same error this cycle's own Learn section warns against: *a prediction must name a
@@ -221,17 +221,17 @@ than quietly amended.
 **Rule 2 (local composition) reproduced exactly.** Same 12-base window, same >80% single-base
 threshold, correct 4.0 points on both IRES constructs. Two refinements the reports add: the flag is
 worth a **flat 4.0** whether the window is 83.3% or 91.7% (my detector found 91.7% C; the vendor
-reports 83.3%), and the reported position sits **+4 bp from mine in both constructs** — a constant
+reports 83.3%), and the reported position sits **+4 bp from mine in both constructs**, a constant
 offset across two independent sequences, so a reporting convention rather than a detection failure.
 
 **Rule 1 (repeat coverage) fired on nothing**, as predicted.
 
 **Rule 3 is a hairpin term, and the motif is not new.** The stem `GGACCTGGATT` occurs forward at
-position 65 and as its **reverse complement** at 956 — an inverted repeat, structurally the same
+position 65 and as its **reverse complement** at 956: an inverted repeat, structurally the same
 defect class that caused the v4 denial. What differs is severity: **1.0 point here against 10.0 per
 flag in v4**, where the repeat sat at positions 1 and 1691, i.e. at both termini. The most economical
 reading is that the vendor penalises inverted repeats far more harshly when terminal, which matches
-the biology — terminal repeats disrupt assembly, internal ones only slow synthesis. The v4 rule and
+the biology: terminal repeats disrupt assembly, internal ones only slow synthesis. The v4 rule and
 the v6 rule are plausibly one rule with a position-dependent weight.
 
 **Status of the model: incomplete, not wrong.** Every encoded rule fired correctly where it applied;
@@ -249,7 +249,7 @@ under both outcomes.** "Scores exactly 0.0" is only checkable on a rejection. Ha
 been phrased against what the accept path does return, they would have scored.
 
 This also caps what Cycle 4 can claim. The two-rule model reproduced both denial reports
-to within 0.5 points and correctly predicted four acceptances — but "correctly predicted
+to within 0.5 points and correctly predicted four acceptances, but "correctly predicted
 the verdict" is weaker evidence than "correctly predicted the score", and only the former
 is in hand. The model is validated at verdict level, on 6 observations (2 denials, 4
 acceptances), not at point level.
@@ -279,7 +279,7 @@ documented cut-off.
 **All four falsifications were informative rather than merely wrong.** v4's revealed a
 defect sitting in the wet lab's own files that nobody had detected. v5's revealed an entire
 scoring rule missing from the dry lab's model of the oracle. v6's two: one construct scored
-1.0 against a predicted 0.0 from a **hairpin rule** the two-rule model never encoded — and
+1.0 against a predicted 0.0 from a **hairpin rule** the two-rule model never encoded, and
 that motif is structurally an inverted repeat, the same class that caused the v4 denial,
 scored far more leniently when internal than when terminal. And P5, which we had scored
 CONFIRMED and then **retracted**, because it had been confirmed by inferring a rule's
@@ -292,10 +292,10 @@ way; the retraction is recorded in [`data/v6_scoring_verdict.json`](data/v6_scor
 The v6 FASTA files in [`data/`](data/) are paste-ready, 60-column wrapped. Before ordering:
 
 1. Paste each into the complexity checker and **record the returned score**, including
-   for the two predicted to score 0.0 — a confirmed prediction only counts if it was
+   for the two predicted to score 0.0: a confirmed prediction only counts if it was
    checked.
 2. Enter the observed values in [`data/prediction_scorecard.csv`](data/prediction_scorecard.csv).
-3. If any construct is denied, the itemised report names the rule and the coordinate —
+3. If any construct is denied, the itemised report names the rule and the coordinate:
    send it back to the dry lab rather than editing the sequence by hand, because a manual
    edit risks the frame, the tag junction, or an enzyme site.
 
@@ -328,6 +328,6 @@ were re-derived from the returned reports as documented above.
 - Mizuguchi H, Xu Z, Ishii-Watabe A, Uchida E, Hayakawa T. **IRES-dependent second gene
   expression is significantly lower than cap-dependent first gene expression in a
   bicistronic vector.** *Mol Ther* 2000;1(4):376–82. doi:[10.1006/mthe.2000.0050](https://doi.org/10.1006/mthe.2000.0050)
-- Sharp PM, Li WH. **The codon adaptation index — a measure of directional synonymous codon
+- Sharp PM, Li WH. **The codon adaptation index: a measure of directional synonymous codon
   usage bias, and its potential applications.** *Nucleic Acids Res* 1987;15(3):1281–95.
   doi:[10.1093/nar/15.3.1281](https://doi.org/10.1093/nar/15.3.1281)

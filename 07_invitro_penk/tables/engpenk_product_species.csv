@@ -1,7 +1,7 @@
 seq,term,n,mono_neutral,mh,avg,src
-YGGFEVVG,free acid,8,826.3861,827.3934,826.9043,"cassettes 1,2,3,5,6 — unamidated fraction"
-YGGFEVV,amide,7,768.3806,769.3879,768.8684,"cassettes 1,2,3,5,6 — after granule PAM"
-YGGFEVVGRGL,free acid,11,1152.5927,1153.6000,1153.3031,"cassette 4 — monobasic flank, extended"
-YGGFEVVGRF,free acid,10,1129.5556,1130.5629,1130.2684,"cassette 7 — C-terminal, extended"
+YGGFEVVG,free acid,8,826.3861,827.3934,826.9043,"cassettes 1,2,3,5,6, unamidated fraction"
+YGGFEVV,amide,7,768.3806,769.3879,768.8684,"cassettes 1,2,3,5,6, after granule PAM"
+YGGFEVVGRGL,free acid,11,1152.5927,1153.6000,1153.3031,"cassette 4, monobasic flank, extended"
+YGGFEVVGRF,free acid,10,1129.5556,1130.5629,1130.2684,"cassette 7, C-terminal, extended"
 YGGFM,free acid,5,573.2257,574.2330,573.6643,native Met-enkephalin comparator
 YGGFEVVG,amide,8,825.4021,826.4094,825.9203,ONLY if cassette changed to YGGFEVVGG

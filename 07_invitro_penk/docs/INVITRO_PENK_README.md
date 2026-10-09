@@ -53,6 +53,6 @@ tables/   junction_peptides_order   24 peptides, vendor-ready
 
 ## Caveats
 
-Reference 2 (Dupuy 2003) was read from its abstract only — it is paywalled. Confirm before
+Reference 2 (Dupuy 2003) was read from its abstract only, it is paywalled. Confirm before
 publication. Reference 3 (Shennan 1995) reports zymogen *maturation* parameters, not
 mature-enzyme turnover optima, and must not be used as an assay optimum.

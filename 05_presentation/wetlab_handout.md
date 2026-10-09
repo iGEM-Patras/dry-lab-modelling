@@ -1,4 +1,4 @@
-# PENK Project — Wet-Lab Decision Sheet
+# PENK Project: Wet-Lab Decision Sheet
 
 **iGEM Patras · from the dry-lab modelling team** · one page, four decisions
 
@@ -8,10 +8,10 @@
 
 | Use | Avoid | Why |
 |---|---|---|
-| **Plasmid 3** — cleanest | **Plasmid 1** — defective | Plasmid 3 has PENK cap-driven, full-length, signal peptide intact, byte-identical to reference. Plasmid 1 is missing the 7th enkephalin core (YGGFMRF truncated). |
+| **Plasmid 3**: cleanest | **Plasmid 1**: defective | Plasmid 3 has PENK cap-driven, full-length, signal peptide intact, byte-identical to reference. Plasmid 1 is missing the 7th enkephalin core (YGGFMRF truncated). |
 
 - **Plasmid 2** works but PENK sits behind P2A → loses its start Met, gains a proline → may impair secretion. Fine as backup, not first choice.
-- **Plasmid 4** is OK (gene order correct) — second choice after 3.
+- **Plasmid 4** is OK (gene order correct); second choice after 3.
 
 > ⚠️ **The plasmid-1 defect is invisible on a gel.** It is a point truncation. Only **Sanger sequencing of the PENK 3′ end** catches it. Do not clear plasmid 1 on gel QC alone.
 
@@ -21,8 +21,8 @@
 
 | Digest | Enzymes | What it tells you |
 |---|---|---|
-| **A — insert release** | AflII + XbaI | Linker type: **~2.16 kb band = IRES**, **~1.63 kb = P2A**. Constant 5,345 bp backbone = loading control. |
-| **B — identity fingerprint** | NcoI (5 cuts) | Gene order: read the **second-largest band** (see gel figure). |
+| **A: insert release** | AflII + XbaI | Linker type: **~2.16 kb band = IRES**, **~1.63 kb = P2A**. Constant 5,345 bp backbone = loading control. |
+| **B: identity fingerprint** | NcoI (5 cuts) | Gene order: read the **second-largest band** (see gel figure). |
 
 - Run both per prep against a **1 kb Plus ladder**. Match to the virtual gel in the protocol.
 - Full recipe + band table: `restriction_qc_protocol.md`, `restriction_qc_gel.png`.
@@ -49,9 +49,9 @@ All target the CDS shared by **all four MME variants** → one duplex silences e
 
 ## 4 · How to deliver → **co-formulate siRNA + plasmid in ONE lipoplex**
 
-- **Do not deliver them separately.** NEP is degraded extracellularly but silencing is cell-autonomous — the enkephalin-producing cells and the NEP-silenced cells must be the **same** cells. Co-package both nucleic acids in the same lipoplex, same locus.
-- **Lipid choice:** an **ionizable lipid (MC3-type)** is preferred over permanent-cation (DOTAP) — the MD shows it binds DNA at endosomal pH but releases at physiological pH (needed for circulation + endosomal escape). DOTAP binds constitutively (harder to release).
-- **Where:** local/regional delivery — **intranasal (nose-to-brain)** is the primary target. *(Superseded: earlier versions of this handout said intrathecal/spinal dorsal horn.)* Lipoplexes do not cross the blood–brain barrier.
+- **Do not deliver them separately.** NEP is degraded extracellularly but silencing is cell-autonomous, the enkephalin-producing cells and the NEP-silenced cells must be the **same** cells. Co-package both nucleic acids in the same lipoplex, same locus.
+- **Lipid choice:** an **ionizable lipid (MC3-type)** is preferred over permanent-cation (DOTAP), the MD shows it binds DNA at endosomal pH but releases at physiological pH (needed for circulation + endosomal escape). DOTAP binds constitutively (harder to release).
+- **Where:** local/regional delivery, **intranasal (nose-to-brain)** is the primary target. *(Superseded: earlier versions of this handout said intrathecal/spinal dorsal horn.)* Lipoplexes do not cross the blood–brain barrier.
 
 ---
 

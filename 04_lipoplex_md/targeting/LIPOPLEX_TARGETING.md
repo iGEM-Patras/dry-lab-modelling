@@ -3,14 +3,14 @@
 **Date:** 2026-08-12
 **Trigger:** ΒΙΒΛΙΟΓΡΑΦΙΑ.docx, section «Antibodies on the lipoplex», proposing
 two-level targeting `TfR + P2X3` and `TfR + TRPV1`.
-**Scope:** targets never previously assessed in this project — P2X3, NaV1.7,
+**Scope:** targets never previously assessed in this project: P2X3, NaV1.7,
 NaV1.8, TRPA1, INSR. TfR and TRPV1 were covered in `antibody_assessment.md`
 and are re-computed here on the same footing for comparison.
 
 ## Method
 
 For each target, three species (human / rat / mouse), reviewed UniProt entries
-resolved by `gene_exact` + `organism_id` rather than by recalled accession —
+resolved by `gene_exact` + `organism_id` rather than by recalled accession:
 three of my recalled accessions were wrong and were caught by a length check
 before use.
 
@@ -20,7 +20,7 @@ before use.
 2. **Cross-species epitope transfer.** Global Needleman-Wunsch identity
    (match +1, mismatch -1, gap -2) computed twice: over the full sequence, and
    over the concatenated extracellular segments only. The **difference** is the
-   informative number — a reagent is raised against the ectodomain, not the
+   informative number: a reagent is raised against the ectodomain, not the
    average protein.
 
 ## Result
@@ -43,17 +43,17 @@ species-restricted; **C** limited surface; **D** not a viable antibody surface.
 **`TfR + P2X3` is well founded. `TfR + TRPV1` is not.**
 
 P2X3 presents **70.3% of its mass extracellularly in a single 279-residue
-loop** — a genuine, contiguous, antibody-sized surface. TRPV1 presents 6.7%
+loop** (a genuine, contiguous, antibody-sized surface). TRPV1 presents 6.7%
 across four loops whose largest is 32 aa. That is a tenfold difference in
 available surface and it is the whole argument: an antibody cannot bind a
 target that is inside the cell. This confirms, on independent evidence, the
 existing assessment's rejection of TRPV1 as a surface-targeting handle.
 
 **The conservation result is the useful surprise.** For every target that
-fails, the ectodomain is *less* conserved than the protein average — TRPV1
+fails, the ectodomain is *less* conserved than the protein average: TRPV1
 loses 32 points, TRPA1 19, NaV1.8 18. For P2X3 it goes the other way: the
 ectodomain is **more** conserved (95.7%) than the full protein (94.0%). The
-practical consequence is direct — an anti-P2X3 reagent validated in rat should
+practical consequence is direct: an anti-P2X3 reagent validated in rat should
 transfer to human without re-raising, and the same construct serves both the
 animal model and the eventual human target.
 
@@ -81,11 +81,11 @@ species-restriction problem.
 | TfR + antibody + brain delivery/transcytosis | 324 |
 
 Read this honestly. P2X3 is **well validated as a nociceptor marker** (283) and
-**clinically drugged** (52 — the gefapixant programme), but has only 9 papers
+**clinically drugged** (52, the gefapixant programme), but has only 9 papers
 touching live-cell surface antibody work and 13 on nanoparticle targeting.
 So the topology is favourable and the biology is established, but **P2X3 has
 not been used as a nanoparticle-targeting ligand before**. That is a novelty
-claim, not a de-risked path — and it means the surface-binding step needs its
+claim, not a de-risked path, and it means the surface-binding step needs its
 own validation rather than a citation.
 
 TfR, by contrast, has 324 brain-delivery papers: the BBB-crossing half of the
@@ -104,7 +104,7 @@ pair rests on established ground.
 - **Your own annotation stands.** The bibliography already notes that
   nociceptor markers are not synonymous with central pain regions. Nothing
   here addresses whether P2X3+ peripheral terminals are the right
-  compartment for an intranasally delivered lipoplex — that is a separate
+  compartment for an intranasally delivered lipoplex: that is a separate
   question from whether P2X3 is bindable.
 - **P2X3 is not exclusively neuronal.** It is expressed on bladder urothelium
   and in the airway (the mechanism of gefapixant's cough indication, and of
@@ -114,7 +114,7 @@ pair rests on established ground.
 ## Recommendation
 
 1. Carry **`TfR + P2X3`** forward as the lead targeting pair. Drop
-   `TfR + TRPV1` — the surface is not there.
+   `TfR + TRPV1`: the surface is not there.
 2. Carry **INSR** as the alternative BBB handle, since it avoids the
    species-restriction that forces a clone swap between rat and human work.
 3. Treat P2X3 surface-targeting as **unprecedented and requiring validation**:
@@ -126,38 +126,38 @@ pair rests on established ground.
 
 ## Files
 
-- `lipoplex_targeting_assessment.csv` — full table, all three species
-- `lipoplex_targeting_assessment.png` — the two decisive axes
-- `uniprot_targets.json` — raw UniProt records as fetched
+- `lipoplex_targeting_assessment.csv`: full table, all three species
+- `lipoplex_targeting_assessment.png`: the two decisive axes
+- `uniprot_targets.json`: raw UniProt records as fetched
 
 ### Registry-wide screen (added 2026-08-12, superseding the literature-only search)
 
 The literature-mining route above found only reagents that papers happened to cite. A direct
-registry query returned **103 P2X3 records / 93 unique reagents** — the full commercial landscape.
+registry query returned **103 P2X3 records / 93 unique reagents**: the full commercial landscape.
 Four publish a full immunogen sequence; each was located in the human and rat sequences and tested
 against the 44–322 ectodomain:
 
 | RRID | Vendor / cat | Immunogen position | Verdict |
 |---|---|---|---|
-| **AB_2757757** | ABclonal A10232 | **44–317** (274 aa) | **Extracellular** — essentially the entire ectodomain |
-| **AB_2683526** | Atlas HPA057776 | **184–260** (77 aa) | **Extracellular** — PrEST, wholly inside the ectodomain |
-| AB_2759812 | ABclonal A12965 | 328–397 | Cytoplasmic — not for targeting |
-| AB_2759770 | ABclonal A12924 | 328–397 | Cytoplasmic — not for targeting |
+| **AB_2757757** | ABclonal A10232 | **44–317** (274 aa) | **Extracellular**: essentially the entire ectodomain |
+| **AB_2683526** | Atlas HPA057776 | **184–260** (77 aa) | **Extracellular**: PrEST, wholly inside the ectodomain |
+| AB_2759812 | ABclonal A12965 | 328–397 | Cytoplasmic: not for targeting |
+| AB_2759770 | ABclonal A12924 | 328–397 | Cytoplasmic: not for targeting |
 
 This changes the recommendation. **A10232 (AB_2757757)** now has the strongest verified epitope of
-any P2X3 reagent — its immunogen *is* the ectodomain, confirmed against the sequence rather than
+any P2X3 reagent: its immunogen *is* the ectodomain, confirmed against the sequence rather than
 inferred. It is listed for rat, but the human sequence over those same positions is **95.6%**
 identical, consistent with the ectodomain conservation computed above. **HPA057776 (AB_2683526)** is
 the human-listed counterpart (aa 184–260; 92.2% identical in rat), so the two together cover both
 species with verified extracellular epitopes.
 
-Neither is validated for live-cell surface binding — A10232 lists WB only, HPA057776 IHC only. The
+Neither is validated for live-cell surface binding: A10232 lists WB only, HPA057776 IHC only. The
 binding gate in the protocol still applies; these are better *starting* reagents, not a shortcut past
 validation.
 
 Separately, the **Bioss bs-4249R series** is the only P2X3 reagent listing **flow cytometry**
 (1:20–100) and ships in 14 pre-conjugated variants (FITC, PE, Cy3, Cy5, Cy7, biotin, …), which would
-remove a conjugation step. Its epitope is undisclosed — request it before relying on it.
+remove a conjugation step. Its epitope is undisclosed: request it before relying on it.
 
 *Screen: `p2x3_registry_epitope_screen.csv`. Note the earlier lead, PA5-77682, remains valid but its
 immunogen is still undisclosed, so its epitope is asserted by the vendor rather than verified here.*

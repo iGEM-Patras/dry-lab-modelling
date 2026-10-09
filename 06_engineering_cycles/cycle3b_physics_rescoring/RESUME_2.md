@@ -1,4 +1,4 @@
-# Cycle 3b — resume state, 2026-08-12
+# Cycle 3b: resume state, 2026-08-12
 
 Supplements `RESUME.md`. Nothing here changes the science; it records where the
 work physically is and one dispatch failure mode that cost a day.
@@ -13,7 +13,7 @@ work physically is and one dispatch failure mode that cost a day.
 Both `PENDING (Priority)`. `pgpu` is a **single node**, both GPUs allocated, and
 an unrelated 9-day job of ours (`17958523`, `PRJNA845531_run`) holds it. Neither
 job competes with the other; both wait on partition capacity. This is a
-scheduling constraint, not a defect — do not "fix" it by editing the scripts.
+scheduling constraint, not a defect: do not "fix" it by editing the scripts.
 
 ## Dispatch failure that must not be repeated
 
@@ -37,7 +37,7 @@ byte-identical to the copy running on the cluster.
 
 ## What is still missing before a verdict exists
 
-The pipeline **ended at production MD** — nothing computed the ΔG the gate reads.
+The pipeline **ended at production MD**: nothing computed the ΔG the gate reads.
 That gap is now filled by `rescore.sh` + `make_mmgbsa_groups.py` + `collect_dg.py`
 (this commit). Order of operations:
 
@@ -53,15 +53,15 @@ tuned to the result afterwards.
 
 ## Interfaces that were assumed wrong once (check, don't recall)
 
-* `chirality.py` — `assert <peptide.pdb> <resid> --by-position`. Positional. It
+* `chirality.py`: `assert <peptide.pdb> <resid> --by-position`. Positional. It
   reads a **single-residue-indexable PDB**, not a trajectory.
-* `DRES_REL` — a **run parameter**, not a field in `pepmeta.txt`. Obtained by
+* `DRES_REL`: a **run parameter**, not a field in `pepmeta.txt`. Obtained by
   sourcing `peptide_spec.sh` and calling `load_peptide_spec "$TAG"`, which sets
   `SPEC_DRES`/`SPEC_AMIDE` from `prod_all.txt`. Sentinel for all-L is the string
   `none`, not `0`. That helper exists because a silently defaulting positional
   argument once built the all-L analog of deltorphin II *and* disarmed the
   chirality gate meant to catch it.
-* run directory — `systems/<TAG>/rep<REP>`, not `runs/<TAG>_r<REP>`.
-* `PBRadii` — gmx_MMPBSA's default is `3` (mbondi2). The design specifies
+* run directory: `systems/<TAG>/rep<REP>`, not `runs/<TAG>_r<REP>`.
+* `PBRadii`: gmx_MMPBSA's default is `3` (mbondi2). The design specifies
   **mbondi3**, which is `PBRadii = 4`. Confirmed against the installed package's
   own mapping, not from memory.

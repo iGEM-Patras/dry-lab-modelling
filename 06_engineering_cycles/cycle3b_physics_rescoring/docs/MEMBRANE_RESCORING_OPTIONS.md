@@ -1,4 +1,4 @@
-# Implicit membrane for the escaped deltorphin/mu replicates — what is and is not possible
+# Implicit membrane for the escaped deltorphin/mu replicates: what is and is not possible
 
 **Question:** can we recover MM-GBSA energies for the 9 replicates the membrane gate
 refused (deltorphin I at mu 3/5, deltorphin II at mu 4/5, endomorphin-1 at delta 1/5)?
@@ -34,7 +34,7 @@ already-passed validation of the GB path.
 ## Chosen route instead: bound-frame-restricted GB
 
 The reason those runs were refused is not a solvation-model deficiency. It is that the
-peptide **is not in the binding site for much of the window** — deltorphin II rep3 spends
+peptide **is not in the binding site for much of the window** (deltorphin II rep3 spends
 99.8% of frames touching lipid. A binding energy averaged over frames where the ligand has
 left the pocket is not a binding energy under any solvation model.
 
@@ -43,9 +43,9 @@ window to frames where the peptide is genuinely in the pocket, and score those w
 *same validated GB protocol* used for every other arm. This keeps all 40 numbers on one
 scale, and it splits the observable honestly into two reportable parts:
 
-1. **residency** — what fraction of the trajectory the peptide stays bound (already measured
+1. **residency**: what fraction of the trajectory the peptide stays bound (already measured
    for all 40 runs);
-2. **conditional dG_bind** — how tightly it binds while it is bound.
+2. **conditional dG_bind**: how tightly it binds while it is bound.
 
 Neither is the whole story alone; together they are.
 

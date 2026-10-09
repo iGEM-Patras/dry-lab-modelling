@@ -1,11 +1,11 @@
-# Where engPENK actually gets cut — and what the Nissl-body lumen does to it
+# Where engPENK actually gets cut, and what the Nissl-body lumen does to it
 
 Analysis of `engPENK_insert_annotated.gb` (288 aa proprotein) against native human PENK
 (P01210). All numbers below are computed from the sequences, not quoted.
 
 ## The short answer: the Nissl body is not where it gets cut
 
-"Nissl bodies" are stacks of rough ER plus free polyribosomes in the neuronal soma — the
+"Nissl bodies" are stacks of rough ER plus free polyribosomes in the neuronal soma, the
 basophilic granules are rRNA. That is the **synthesis and folding** compartment, and the
 proprotein leaves it intact. Cleavage of the cassettes happens two compartments later.
 
@@ -21,7 +21,7 @@ The reason is mechanistic, not incidental: the prohormone convertases that cut K
 themselves pro-enzymes in the ER. PC2 requires its 7B2 chaperone and an acidic, high-Ca²⁺ lumen
 to remove its own propeptide, which does not happen until the TGN. So the ER lumen contains the
 substrate and the enzymes, but the enzymes are not yet competent. **This is what the construct
-needs** — seven tandem cassettes have to survive transit as one chain and be released only in
+needs**, seven tandem cassettes have to survive transit as one chain and be released only in
 the granule.
 
 ## What the Nissl-body lumen *does* do to it
@@ -48,7 +48,7 @@ Each cassette replaces a Met-containing native core with `YGGFEVVG`, so the matu
 | mature granule | 5.1 | -7.9 | -1.5 | -6.4 |
 
 Sorting into dense-core granules is driven by pH- and Ca²⁺-dependent self-aggregation in the TGN.
-An extra 7 e of negative charge could plausibly go either way — more carboxylates to bridge with
+An extra 7 e of negative charge could plausibly go either way, more carboxylates to bridge with
 Ca²⁺, or higher solubility that resists condensation. **This is a prediction, not a result**, and
 it is measurable: compare secreted vs. cell-associated peptide, and check for constitutive
 (unregulated) release, against a native-PENK control in the same cell line.
@@ -64,7 +64,7 @@ YGGFEVVG  --PAM-->  YGGFEVV-NH2     (769.3879 [M+H]+)   a 7-mer, amide on Val
 ```
 
 That is **not** the deltorphin-II-like species the docking and MD work scored. Deltorphin II is
-`Y-a-F-E-V-V-G-NH2` — amide on Gly. To get the Gly-amide, the cassette would need a **second
+`Y-a-F-E-V-V-G-NH2`, amide on Gly. To get the Gly-amide, the cassette would need a **second
 Gly**: `YGGFEVVGG`.
 
 Three species are therefore possible from the current construct:
@@ -84,13 +84,13 @@ products are **58.01 Da apart**, so the amidation readout is unambiguous on any 
 | **fixed** (`YGGFEVVGG`) | 884.4148 | 826.4094 (`YGGFEVVG-NH₂`, deltorphin-II geometry) | 58.01 Da |
 
 The near-isobaric pair is **827.3934** (as-built free acid) vs **826.4094** (fixed-construct
-amide) — 0.98 Da apart, with the amide's ¹³C₁ peak 0.0193 Da (23 ppm) from the acid's
+amide): 0.98 Da apart, with the amide's ¹³C₁ peak 0.0193 Da (23 ppm) from the acid's
 monoisotopic peak, needing **R ≈ 42,784 FWHM** to separate. Those two never coexist in one
 construct, so this matters in exactly two situations:
 
-1. **QC of a vendor synthetic standard** — free acid vs amide differ by 0.98 Da. If the vendor
+1. **QC of a vendor synthetic standard**: free acid vs amide differ by 0.98 Da. If the vendor
    silently ships the amide (a common default), low-resolution MS will not catch it.
-2. **Running as-built and fixed-construct supernatants in the same batch** — do not co-inject
+2. **Running as-built and fixed-construct supernatants in the same batch**: do not co-inject
    without high resolution.
 
 ## Two cassettes will not give a clean product
@@ -110,10 +110,10 @@ of the yield is C-terminally extended and pharmacologically distinct.
 ## What to do
 
 1. **Decide the intended C-terminus.** If the deltorphin-II amide is the goal, the cassette must be
-   `YGGFEVVGG` — a single codon insertion, cheap now, expensive after cloning.
+   `YGGFEVVGG`, a single codon insertion, cheap now, expensive after cloning.
 2. **Fix cassettes 4 and 7** by giving them their own dibasic downstream flank if uniform product
    is wanted.
-3. **Measure, don't assume, the C-terminus** — high-resolution MS/MS on granule-derived peptide;
+3. **Measure, don't assume, the C-terminus**: high-resolution MS/MS on granule-derived peptide;
    0.98 Da is the whole question.
 4. The ER-side chemistry (signal cleavage, 3 disulfides, 2 native sequons) is unchanged from
    native. Nothing in the Nissl body needs redesign.

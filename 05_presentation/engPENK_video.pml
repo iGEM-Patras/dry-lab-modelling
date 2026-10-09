@@ -1,4 +1,4 @@
-# PyMOL — same three shots
+# PyMOL, same three shots
 load DOR_engPENK_complex_annotated.pdb, cplx
 bg_color black
 hide everything; show cartoon, cplx

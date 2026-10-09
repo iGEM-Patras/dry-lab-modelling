@@ -1,19 +1,19 @@
-> **SUPERSEDED IN PART — see [`ORDER.md`](ORDER.md) for the current order sheet.**
+> **SUPERSEDED IN PART, see [`ORDER.md`](ORDER.md) for the current order sheet.**
 > The primary guide is unchanged (this document's position 2541 in `NM_000902.5` is
 > 2700-2722 on MME-213). The **second guide has changed**: DSIR efficacy scoring and a
 > direct count of seed sites across 20,094 human 3' UTRs, neither available when this was
 > written, moved it to **2562-2584**. Everything else below stands.
 
-# Anti-neprilysin siRNA — validation record
+# Anti-neprilysin siRNA, validation record
 
 **Target:** human *MME* (neprilysin / CD10), the enzyme that degrades enkephalins.
 Knocking it down extends the payload's half-life; it does not change receptor preference.
-The pharmacology of inhibiting neprilysin is established — sacubitril is an approved
+The pharmacology of inhibiting neprilysin is established: sacubitril is an approved
 neprilysin inhibitor.
 
-**Recommendation: position 2541** (= 2700-2722 on MME-213) — **still current**.
+**Recommendation: position 2541** (= 2700-2722 on MME-213): **still current**.
 
-~~with position 2066 as the hedge~~ — **superseded.** The second guide is now
+~~with position 2066 as the hedge~~: **superseded.** The second guide is now
 **2562-2584**, after DSIR efficacy scoring and a direct seed-site count across human
 3' UTRs. See [`ORDER.md`](ORDER.md).
 
@@ -40,12 +40,12 @@ The candidate file is **siDirect** output (206 guides, 21-mers). It had already 
 | genome-wide 1-mismatch off-targets | 0 |
 
 So the specificity screen was done before we started. All 206 pass all four. That means
-**no ranking signal is available from those columns** — they are constant across the set —
+**no ranking signal is available from those columns** (they are constant across the set)
 and the ranking has to come from checks siDirect does not perform.
 
 ---
 
-## 2 · Filters we added — 206 → 17
+## 2 · Filters we added: 206 → 17
 
 | check | threshold | rationale | guides lost |
 |---|---|---|---|
@@ -58,11 +58,11 @@ and the ranking has to come from checks siDirect does not perform.
 Transcript variants checked by exact sequence match against
 **NM_000902.5, NM_007287.4, NM_007288.3, NM_007289.4** fetched from NCBI. This also
 identified the transcript siDirect was run on: **NM_007288.3** (5,818 nt), the only variant
-containing all 206 target sites — the input was not the canonical transcript.
+containing all 206 target sites; the input was not the canonical transcript.
 
 ---
 
-## 3 · Accessibility — and the one step that makes the numbers comparable
+## 3 · Accessibility, and the one step that makes the numbers comparable
 
 **Method.** RNAplfold local partition function (ViennaRNA 2.7.2) on **NM_000902.5**, window
 **W = 240**, maximum base-pair span **L = 160**, unpaired-stretch length **u = 21**. Mean
@@ -75,7 +75,7 @@ rather than a parallel one.
 **Validation.** Before computing anything new, we recomputed the accessibility of all
 **11 guides from the v2 design** and compared against their published values.
 
-> **All 11 reproduced exactly** — agreement to four decimal places, including the
+> **All 11 reproduced exactly**: agreement to four decimal places, including the
 > all-unpaired probabilities to the exponent, **r = 1.0000**.
 
 That check is what licenses the comparison. Without it, "2541 is more accessible than your
@@ -86,7 +86,7 @@ most accessible guide in the v2 design.
 
 ---
 
-## 4 · Robustness — does the pick survive a different folding window?
+## 4 · Robustness: does the pick survive a different folding window?
 
 Accessibility is window-dependent, so a guide that only wins at one setting is not a pick.
 We re-folded the whole transcript at four (W, L) settings and re-ranked all 17.
@@ -103,7 +103,7 @@ choice inherited from v2.
 
 ---
 
-## 5 · SNP overlap — the check that changed the recommendation
+## 5 · SNP overlap: the check that changed the recommendation
 
 A common variant under the guide abolishes silencing in carriers. This had **not** been
 done in earlier rounds and is the reason this document exists.
@@ -115,11 +115,11 @@ then queried for overlapping variants.
 Two methodological points, both of which would have produced wrong answers if skipped:
 
 1. **Sequence match, not coordinate arithmetic.** The Ensembl transcript is 5,656 nt against
-   RefSeq's 5,593 — a constant 63 nt offset from a longer 5′ UTR. Locating sites by sequence
+   RefSeq's 5,593 (a constant 63 nt offset from a longer 5′ UTR). Locating sites by sequence
    established that offset rather than assuming the two numbering systems agreed. All 17
    mapped with the full 21 nt accounted for.
 2. **Alternate-allele frequency, not the maximum over alleles.** A first pass took the
-   highest frequency across all population records and returned **1.0 for every variant** —
+   highest frequency across all population records and returned **1.0 for every variant**:
    that is the *reference* allele. The reference base is the first entry in the variant's
    allele string; frequencies must be taken over the non-reference alleles only.
 
@@ -143,7 +143,7 @@ central mismatch.
 This is the single result that changed the output of the whole exercise.
 
 **One incidental finding:** position 2066 spans an exon–exon junction. That is a point in its
-favour — such a guide cannot target pre-mRNA or genomic DNA, only the mature transcript.
+favour: such a guide cannot target pre-mRNA or genomic DNA, only the mature transcript.
 
 ---
 
@@ -151,7 +151,7 @@ favour — such a guide cannot target pre-mRNA or genomic DNA, only the mature t
 
 **No positive control exists that we could find.** The strongest possible validation would be
 to score published, experimentally-validated *MME* siRNAs through this pipeline and check
-that it ranks known-working guides highly — the same gate structure used elsewhere in this
+that it ranks known-working guides highly, the same gate structure used elsewhere in this
 project. A literature search returned several studies that knock down neprilysin, but all
 used commercial reagents and none of the abstracts disclose the guide sequence. **So this
 ranking has not been tested against any guide of known efficacy.** That is a real limitation
@@ -170,7 +170,7 @@ They fail differently, which is the point of ordering two: 2541 wins on whole-si
 accessibility (0.658, rank 1 under every window), while 2066 has a more open seed region and
 spans an exon junction. Both are clean on specificity, variant load, GC, runs and motifs.
 
-**Do not order 954** despite its accessibility ranking — rs149431215 sits under it at 1.92 %.
+**Do not order 954** despite its accessibility ranking: rs149431215 sits under it at 1.92 %.
 
 **Decide by qPCR**, not by this table.
 

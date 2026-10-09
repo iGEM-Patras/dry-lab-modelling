@@ -1,7 +1,7 @@
-# Cycle 3a — Is pose convergence a better selectivity proxy than ipTM?
+# Cycle 3a: Is pose convergence a better selectivity proxy than ipTM?
 
 **Status:** pre-registered · written **before** any Cycle 3a analysis was run
-**Type:** metric-validation cycle — no new chemistry, no new sequences
+**Type:** metric-validation cycle, no new chemistry, no new sequences
 **Learn input:** Cycle 2 finding #4 (unplanned observation)
 
 ---
@@ -48,12 +48,12 @@ independent samples.
 
 No new sequences. Two independent tests:
 
-**Test 1 — replication on held-out samples.** All Cycle 1/2 numbers came from 5 diffusion
+**Test 1: replication on held-out samples.** All Cycle 1/2 numbers came from 5 diffusion
 samples per complex. Generate **15 additional samples** per complex (distinct seeds) for
 all 7 peptides × 2 receptors. Recompute Δ_sel and convergence on the new samples only.
 The Cycle 2 relationship was fit on the first 5; this tests it on 15 it has never seen.
 
-**Test 2 — leave-the-outliers-out.** Refit the convergence↔Δ_sel relationship excluding
+**Test 2: leave-the-outliers-out.** Refit the convergence↔Δ_sel relationship excluding
 V1 and V2. If the correlation collapses, the signal was two outliers.
 
 **Statistics.** Spearman ρ (rank-based, robust to small n and non-linearity) between
@@ -71,10 +71,10 @@ spread to within-peptide noise, computed the same way for each metric.
 | P2 | The relationship survives dropping V1 and V2 (ρ stays negative) | ρ flips sign without them |
 | P3 | Convergence has a higher spread-to-noise ratio than ipTM | ipTM ratio ≥ convergence ratio |
 | P4 | V4 and V5 remain the two best-converged δ complexes at n = 20 | either drops below C1-BASE |
-| P5 | Δ_sel rankings shift at n = 20 — the n = 5 ranking is not stable | top-2 unchanged *and* all SEMs shrink < 20 % |
+| P5 | Δ_sel rankings shift at n = 20: the n = 5 ranking is not stable | top-2 unchanged *and* all SEMs shrink < 20 % |
 
 P5 is deliberately a prediction that our **own Cycle 2 ranking is unreliable**. If it is
-falsified — if the ranking is stable — that strengthens Cycle 2 rather than this cycle.
+falsified: if the ranking is stable, that strengthens Cycle 2 rather than this cycle.
 
 ---
 

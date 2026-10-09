@@ -17,11 +17,11 @@ produced them.
 Both are *confidence*, not correctness, and neither is a binding affinity. Two results in
 this project depend on that distinction:
 
-- Co-folds of our payload score ipTM ≈ 0.86 at δ and ≈ 0.87 at μ — high, and effectively
+- Co-folds of our payload score ipTM ≈ 0.86 at δ and ≈ 0.87 at μ, high, and effectively
   identical. Cycle 7 accordingly **failed** its gate for using the confidence difference as
   a selectivity metric.
 - The engineered proenkephalin's low pLDDT reflects genuine disorder by design, not model
-  failure. `fraction_disordered` is 0.83, and the cleavage sites sit in that region — which
+  failure. `fraction_disordered` is 0.83, and the cleavage sites sit in that region, which
   is what makes them sterically accessible to the processing enzymes.
 
 ## A note on output formats
