@@ -1,6 +1,14 @@
-# Cycle 14 · Gate G4: replicate independence
+# Cycle 14 · replicate INDEPENDENCE check (not a pre-registered gate)
 
-**Status: PASSED.** Scored 2026-10-03, before any production window ran.
+> **Naming correction, 9 Oct 2026.** This file was titled "Gate G4". That collides with
+> **`G4_reproducibility`**, which is a pre-registered gate in `data/cycle14_prereg.json` and
+> which **FAILED** (see [`CYCLE14_VERDICT.md`](CYCLE14_VERDICT.md)). The check described here
+> is a different thing: a structural comparison of the two equilibrations, scored *before*
+> production, confirming the replicates started independently. It is **not** one of the four
+> pre-registered gates. Two documents in this directory saying "G4" with opposite verdicts
+> was a real trap for a reader, and this notice exists to remove it.
+
+**Status of this check: PASSED.** Scored 2026-10-03, before any production window ran.
 
 | receptor | solute RMSD (r2 vs r1) | Protein atoms | residues |
 |---|---|---|---|

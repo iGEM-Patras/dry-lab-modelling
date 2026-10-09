@@ -1,4 +1,11 @@
-# Cycle 16: is the address graft enough? (pre-registered, not yet run)
+# Cycle 16: is the address graft enough? (RUN. Control gate failed.)
+
+> **Outcome, 9 Oct 2026.** This cycle ran. **G1, the control-validity gate, FAILED**: a
+> conformationally constrained peptide was indistinguishable from a flexible one, so the
+> metric cannot detect constraint in this system. Following the pre-registered decision rule,
+> our own payload was **not scored and not run**. Full verdict in [`VERDICT.md`](VERDICT.md).
+> The pre-registration below is unchanged from before the trajectories were opened.
+
 
 **The literature moved under this project's central assumption, and that is worth knowing
 before 21 October.**

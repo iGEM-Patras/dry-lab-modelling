@@ -1,4 +1,21 @@
-# Cycle 8: the engPENK free energy points AWAY from δ-preference
+# Cycle 8: the engPENK free energy points AWAY from δ-preference (RETRACTED)
+
+> ## RETRACTED, 9 Oct 2026. Do not cite the number below.
+>
+> **The value in this document is not a result.** Its own control, native Met-enkephalin
+> whose selectivity is published, returned **-3.12 and +5.41 kcal/mol** across two replicates:
+> opposite signs from a seed change. A re-spaced 57-window campaign (Cycle 8b, directory
+> `cycle14_respaced_ladder/`) then fixed the overlap problem decisively and **still failed
+> reproducibility**, with replicates at +0.72 ± 3.13 and +14.47 ± 3.28 kcal/mol.
+>
+> **No free-energy value is quoted for `YGGFEVVG` anywhere in this project.** The project's
+> estimate remains Cycle 7's calibrated **+1.23 ± 1.76 kcal/mol**, whose interval includes zero.
+> See [`../cycle14_respaced_ladder/CYCLE14_VERDICT.md`](../cycle14_respaced_ladder/CYCLE14_VERDICT.md).
+>
+> The text below is preserved unchanged as the record of what was computed and believed at
+> the time. That is the point of keeping it.
+
+## Original document: Cycle 8: the engPENK free energy points AWAY from δ-preference
 
 **Date:** 2026-09-27 · **Campaign complete:** 4/4 legs, 108/108 windows, 324 ns, 0 failures
 
