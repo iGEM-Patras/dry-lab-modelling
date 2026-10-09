@@ -1,0 +1,9 @@
+construct,stage,GC_pct,CAI_computed,README_claims_CAI,repo_order_sheet,repo_optim_summary,repo_gc40_floors
+His-PENK-IRES-mEGFP,GC-target design stage,58.6,0.825,0.65 to 0.74,0.651,0.864,0.688
+His-PENK-P2A-mEGFP,GC-target design stage,40.0,0.661,0.65 to 0.74,0.733,0.977,0.624
+mEGFP-IRES-His-PENK,GC-target design stage,58.6,0.825,0.65 to 0.74,0.694,0.829,0.713
+mEGFP-P2A-His-PENK,GC-target design stage,40.0,0.688,0.65 to 0.74,0.736,0.962,0.624
+His-PENK-IRES-mEGFP,v6 delivered (ordered),50.2,0.762,0.65 to 0.74,0.651,0.864,0.688
+His-PENK-P2A-mEGFP,v6 delivered (ordered),46.4,0.775,0.65 to 0.74,0.733,0.977,0.624
+mEGFP-IRES-His-PENK,v6 delivered (ordered),50.0,0.762,0.65 to 0.74,0.694,0.829,0.713
+mEGFP-P2A-His-PENK,v6 delivered (ordered),49.5,0.754,0.65 to 0.74,0.736,0.962,0.624
