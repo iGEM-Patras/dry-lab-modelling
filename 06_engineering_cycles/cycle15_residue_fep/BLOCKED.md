@@ -47,6 +47,47 @@ setting.
 | Hand-construct B-states for 37 atoms inside a 56,000-line topology, converting type-lookup bonded parameters to explicit ones | ~1 day of careful scripting | **high, and silent** — a wrong dihedral would run cleanly and return a plausible wrong number |
 | Run the mutation without the membrane | ~0.5 day | the receptor distorts without a bilayer; a ΔΔG from a deformed receptor is not interpretable |
 
+## The literature answer: the tooling block was not the binding constraint
+
+**Searched 9 Oct 2026 for anything that resolves the ParmEd/Amber incompatibility.** Three
+bypass routes exist in principle — Amber's own TI engine, OpenMM/Perses, or rebuilding the
+system natively in GROMACS. **None is installed here** (no `pmemd`, `sander`, `tleap`, no
+OpenMM in any environment), and the original Amber `prmtop`/`rst7` files did **not** survive
+the ParmEd conversion — only GROMACS `.top` files remain. So every route costs days of setup.
+
+But the more important finding is that it would not matter.
+
+**Perses protein-mutation FEP benchmark** — *Identifying and Overcoming the Sampling
+Challenges in Relative Binding Free Energy Calculations of a Model Protein:Protein Complex*,
+J. Chem. Theory Comput. 2023, doi:10.1021/acs.jctc.3c00333 — is the state of the art for
+exactly this calculation, GPU-accelerated and purpose-built for amino-acid mutations. Its
+reported accuracy:
+
+> RMSE **1.61 kcal/mol**, 95% CI [1.12, 2.11]
+
+Against what we need to resolve:
+
+| quantity | kcal/mol |
+|---|---|
+| published met-enkephalin δ/μ selectivity (the whole effect) | **0.81** |
+| largest δ/μ discrimination in our own 13-compound panel | 2.13 |
+| **method RMSE** | **1.61** |
+| method's optimistic 95% CI bound | 1.12 |
+
+**Even the optimistic bound exceeds the entire effect.** A single pocket residue's
+contribution is a fraction of the 0.81 total, and the method's error is twice that total.
+
+And the same paper names our exact case as the hardest class:
+
+> mutations with sampling problems often involve **charge-changes**
+
+W284K changes net charge by exactly +1 — verified in our own hybrid, `qA 13.000 → qB 14.000`.
+
+**This is the same filter that ruled out four earlier routes in this project:** a method whose
+reported error exceeds the effect cannot answer the question, however well it is implemented.
+Cycle 15 fails it too. The tooling block saved several days that would have ended at an
+unresolvable number.
+
 ## Recommendation
 
 **Stop here.** Not because the method is wrong — it is the right method, and it is the one
