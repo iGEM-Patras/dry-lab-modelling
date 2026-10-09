@@ -51,11 +51,11 @@ All target the CDS shared by **all four MME variants** → one duplex silences e
 
 - **Do not deliver them separately.** NEP is degraded extracellularly but silencing is cell-autonomous — the enkephalin-producing cells and the NEP-silenced cells must be the **same** cells. Co-package both nucleic acids in the same lipoplex, same locus.
 - **Lipid choice:** an **ionizable lipid (MC3-type)** is preferred over permanent-cation (DOTAP) — the MD shows it binds DNA at endosomal pH but releases at physiological pH (needed for circulation + endosomal escape). DOTAP binds constitutively (harder to release).
-- **Where:** local/regional delivery — **intrathecal (spinal dorsal horn)** is the primary target. Lipoplexes do not cross the blood–brain barrier.
+- **Where:** local/regional delivery — **intranasal (nose-to-brain)** is the primary target. *(Superseded: earlier versions of this handout said intrathecal/spinal dorsal horn.)* Lipoplexes do not cross the blood–brain barrier.
 
 ---
 
 ### One-line summary
-**Use plasmid 3, QC it by 2-digest gel + Sanger, order si-MME-3 (+ one more), and co-formulate siRNA + plasmid in an ionizable-lipid lipoplex delivered intrathecally.**
+**Use plasmid 3, QC it by 2-digest gel + Sanger, order si-MME-3 (+ one more), and co-formulate siRNA + plasmid in an ionizable-lipid lipoplex delivered **intranasally**.**
 
 *Full rationale, methods, and caveats: consolidated project brief (`project_brief.pdf`).*

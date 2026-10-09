@@ -293,6 +293,61 @@ The fix was necessary, correct, and self-defeating.
 selectivity value is quoted from this method. A wet-lab cAMP assay measures the quantity
 directly and is not subject to any of this.
 
+### Round 5 · two more instruments, and the limit we hit
+
+**Design.** Round 4 left us with two general reasons a method fails here, and we used them as
+a filter rather than trying things at random. Anything anchored to *published affinities*
+inherits a between-source disagreement larger than the effect. Anything computing selectivity
+as a *difference of two large absolute quantities* accumulates correlated bias. We went
+looking only for methods that escape both.
+
+**Build (a).** One route escapes both by construction: mutate the **receptor** rather than
+decoupling the ligand twice, so the large absolute quantity is never formed. We costed it
+from our own measured throughput, counted the divergent orthosteric pocket residues by
+aligning the two receptors, and built the hybrid residue — verifying atom by atom that it
+carried both side chains and that the net charge changed by exactly +1, as the mutation
+requires.
+
+**Test (a).** It was blocked, and not by the science. Our membrane system was built with
+Amber tooling and converted into a *standalone* topology with every parameter written out
+and no includes. The mutation toolchain emits the other kind. Reconciling them failed in both
+directions — the force field's bonded tables reference type names the standalone file does
+not declare, and the library that produced that file classifies the alchemical dummy atoms as
+virtual sites and refuses to bond them to each other, which is exactly what a dual topology
+requires.
+
+**Learn (a) — and a correction to our own recommendation.** Before accepting the block we
+checked whether anything resolves it. Nothing installed here does. But the search turned up
+something that mattered more: the purpose-built state of the art for this calculation reports
+**RMSE 1.61 kcal/mol**, whose optimistic bound still exceeds the **0.81 kcal/mol** effect we
+are trying to measure, and it names charge-changing mutations — our exact case — as its
+hardest class. We had recommended this route as escaping both failure modes **without
+checking its resolution against the effect**, which is the first test we apply to everything
+else. The tooling block saved us days that would have ended at an unresolvable number.
+
+**Build (b).** The second route came from the literature rather than from us. A 2026 review
+argues that δ/μ selectivity arises from **conformational constraint** beyond the
+message–address framework a payload like ours is built on: a rigid, turn-forming tetrapeptide
+is >1500-fold selective, while a more flexible endogenous peptide binds both receptors
+equally. Our payload is all-L and gene-encoded, so it **cannot** carry either of the features
+that rigidify the selective comparators — a D-amino acid or a C-terminal amide. If constraint
+is what selectivity needs, that is a structural explanation for several cycles of null
+results.
+
+**Test (b).** We pre-registered the gates before opening a trajectory, and built the test
+around controls: a constrained peptide and a highly selective one against a flexible one,
+five replicates each on both receptors, 20 ns matched.
+
+**Learn (b).** **The control gate failed.** The constrained peptide was indistinguishable
+from the flexible one, and the most selective peptide in the set was the *least* turn-like —
+the opposite of the prediction. The diagnosis is in the replicates: five runs of the same
+system, differing only by seed, span the entire range of the metric. Twenty nanoseconds from
+a modelled pose does not re-equilibrate a bound peptide's backbone, so the analysis cannot
+separate real conformational preferences from the starting pose. Following the decision rule,
+**we did not score our own peptide and did not spend the compute to do so.**
+
+---
+
 ### Where that leaves the question
 
 **We assessed five independent computational approaches. Each one failed, for a specific and

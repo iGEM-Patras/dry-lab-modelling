@@ -50,8 +50,8 @@ output names the experiment that would confirm or refute it.
 
 **(3) Consider future implementation — application, scalability, safety.**
 
-- **Application:** intrathecal lipoplex delivery to the spinal dorsal horn for
-  analgesia (stated, with the BBB rationale).
+- **Application:** **intranasal** lipoplex delivery for analgesia (stated, with the BBB
+  rationale). *(Superseded: an earlier draft of this document said intrathecal.)*
 - **Scalability:** the pipeline is a reusable code repository (below), not a
   one-off — any PENK/NEP construct can be re-audited.
 - **Safety:** limitations are stated *by design*, not hidden — NEP off-target
