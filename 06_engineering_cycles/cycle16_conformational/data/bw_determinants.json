@@ -1,0 +1,32 @@
+[
+ {
+  "bw": "2.63",
+  "dor": "K108",
+  "mor": "N129",
+  "divergent": true
+ },
+ {
+  "bw": "3.29",
+  "dor": "L125",
+  "mor": "I146",
+  "divergent": true
+ },
+ {
+  "bw": "3.32",
+  "dor": "D128",
+  "mor": "D149",
+  "divergent": false
+ },
+ {
+  "bw": "6.58",
+  "dor": "W284",
+  "mor": "K305",
+  "divergent": true
+ },
+ {
+  "bw": "6.59",
+  "dor": "T285",
+  "mor": "A306",
+  "divergent": true
+ }
+]

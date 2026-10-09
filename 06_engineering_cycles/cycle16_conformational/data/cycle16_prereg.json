@@ -1,0 +1,39 @@
+{
+ "cycle": 16,
+ "written": "2026-10-09, before any trajectory was analysed",
+ "question": "Does the engineered payload carry the CONFORMATIONAL property that newer literature attributes delta/mu selectivity to, or only the address SEQUENCE? Acta Pharm Sin B 2026 (doi:10.1016/j.apsb.2025.11.039) reports that EM-1's >1500x mu-selectivity is driven by steric hindrance and a beta-turn, while beta-endorphin's more flexible sequence binds non-selectively. This project's design rests on message-address transfer alone; that paper is explicitly titled 'beyond the message-address conceptual framework'.",
+ "why_this_is_answerable_when_ddG_was_not": "This measures a STRUCTURAL descriptor from trajectories already in hand, with internal positive and negative controls from the same force field and protocol. It makes no free-energy claim, so it is not subject to the ~1 kcal/mol resolution floor that falsified the five previous routes.",
+ "data": "cycle8_prod and cycle14 w00 (fully coupled, lambda state 0) trajectories, already computed",
+ "systems": {
+  "positive_control_constrained": [
+   "c3b_dtI_*",
+   "c3b_dtII_*",
+   "c3b_em1_*"
+  ],
+  "negative_control_flexible": [
+   "c3b_menk_*"
+  ],
+  "test": [
+   "c8_engPENK_*"
+  ]
+ },
+ "metrics": [
+  "backbone RMSF of message residues 1-4",
+  "radius of gyration of the peptide",
+  "end-to-end CA1-CAn distance, mean and spread",
+  "beta-turn occupancy by the CA(i)-CA(i+3) < 7 A criterion"
+ ],
+ "gates": {
+  "G1_control_validity": "Deltorphin (D-Ala2, conformationally constrained) must show measurably LESS backbone flexibility than met-enkephalin on at least 2 of the 4 metrics. If it does not, these metrics do not capture backbone constraint in this system and the analysis is UNINFORMATIVE -- report that and stop. This gate can fail.",
+  "G2_dynamic_range": "EM-1 (>1500x mu-selective) and met-enkephalin (3.7x delta-preferring) must separate on the same metrics and in the same direction as G1. Two independent selective peptides agreeing is the evidence that the descriptor tracks selectivity.",
+  "G3_the_question": "Does engPENK group with the constrained/selective peptides or with flexible met-enkephalin? Scored only if G1 and G2 pass.",
+  "G4_replicate": "Where two replicates exist, the grouping in G3 must be the same in both. A conclusion that flips between replicates is not reported."
+ },
+ "preregistered_interpretation": {
+  "engPENK groups with met-enkephalin": "Structural evidence that the address GRAFT transferred sequence but not conformational constraint. This EXPLAINS the project's repeated null selectivity results rather than adding another failure, and the design direction becomes rigidification of the message, not further address engineering.",
+  "engPENK groups with deltorphin/EM-1": "The flexibility mechanism does NOT explain our nulls; something else does. Report that the hypothesis was tested and failed to explain the data.",
+  "G1 fails": "Metrics uninformative. No claim either way. Stop."
+ },
+ "what_this_cannot_do": "It cannot produce a delta/mu selectivity value for YGGFEVVG. It tests whether a STRUCTURAL PRECONDITION for selectivity is present. The cAMP assay remains the only thing that measures the quantity itself.",
+ "known_hard_constraint": "The cassette must be ribosomally encoded, so D-amino acids and a C-terminal amide are impossible. Any rigidification must use L-residues -- the repo already documents this limit (WIKI_ENGINEERING.md)."
+}
