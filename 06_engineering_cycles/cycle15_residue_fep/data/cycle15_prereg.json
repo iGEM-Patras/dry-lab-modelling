@@ -1,0 +1,29 @@
+{
+ "cycle": 15,
+ "written": "2026-10-08, before any system was built or any window run",
+ "question": "Does a protein residue-mutation free energy calculation resolve a delta/mu selectivity determinant? Pilot on DOR W284 -> K305(MOR-equivalent), the largest chemical change among the 11 divergent orthosteric pocket residues.",
+ "why_this_and_not_more_cycle8_style_sampling": "Cycle 14 computed selectivity as dG(decouple from DOR) - dG(decouple from MOR) = 2349.5 - 2346.5 kJ/mol: a 3 kJ/mol answer from two ~2350 kJ/mol absolutes. Measured per interval, the per-window biases were small (max 3.5 kJ/mol) but CORRELATED -- 40 of 55 and 40 of 56 intervals shared their leg's sign -- so they accumulated to ~30 kJ/mol per leg instead of cancelling. A residue mutation computes the ddG directly; no large absolute is ever formed, so that specific failure cannot recur.",
+ "what_this_does_NOT_answer": "It does not give a ddG for YGGFEVVG. The quantity is different: it reports how much a single pocket difference contributes to discrimination. No selectivity value for the engineered peptide may be quoted from this cycle under any outcome.",
+ "gates": {
+  "G1_cycle_closure": "the thermodynamic cycle must close: |dG(holo mutation) - dG(apo mutation) - ddG| < 0.5 kcal/mol by construction, and the forward and reverse transformations must agree within 1.0 kcal/mol. Measured from the output, not asserted -- Cycle 14's overlap gate was initially recorded as passing on a PREDICTED value, which is the error this gate is written to prevent.",
+  "G2_overlap": "median relative entropy s < 1.5 kT and no more than 2 of 24 intervals above 2 kT, every leg.",
+  "G3_reproducibility": "two replicates from independent equilibrations agree within 1.0 kcal/mol.",
+  "G4_magnitude_plausibility": "the computed contribution must be smaller than the total measured delta/mu discrimination of any ligand in our 13-compound panel (max 2.13 kcal/mol). A single pocket residue contributing more than the whole observed range is not a result, it is an artefact -- this is the check that would have caught Cycle 14's +14.47 immediately."
+ },
+ "decision_rule": "If G1 fails the calculation is not internally consistent and nothing is reported. If G1 passes but G3 fails, the method is no more reproducible than Cycle 14 and the route is closed. Only if G1-G4 all pass is the contribution reported, and only then is expansion to the remaining 10 residues considered.",
+ "prior": "Stated before running: I expect G1 and G2 to pass -- cycle closure is largely a property of correct setup and 24 windows over a single side-chain is a far smaller perturbation than decoupling an 8-residue peptide. G3 is the genuine unknown. G4 I expect to pass; if it fails the result is an artefact regardless of the other three.",
+ "scope": {
+  "mutation": "DOR W284 -> K (the MOR-equivalent residue at the aligned position)",
+  "legs": [
+   "holo (peptide bound)",
+   "apo (peptide absent)"
+  ],
+  "replicates": 2,
+  "windows_per_leg": 24,
+  "ns_per_window": 3.0,
+  "total_ns": 288,
+  "measured_pool_ns_per_day": 155,
+  "estimated_days": 1.9
+ },
+ "conserved_caveat": "18 of 29 orthosteric pocket residues are conserved between OPRD1 and OPRM1. If selectivity is substantially conformational rather than contact-chemical, this method cannot see it, and a null result does NOT distinguish 'this residue does not contribute' from 'the method cannot detect the mechanism'."
+}
