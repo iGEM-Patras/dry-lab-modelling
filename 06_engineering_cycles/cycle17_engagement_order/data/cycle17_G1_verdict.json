@@ -1,0 +1,30 @@
+{
+ "gate": "G1_native_recovery",
+ "verdict": "PASS",
+ "question": "Can blind CABS-dock re-find the crystal pose of deltorphin in 8F7S, WITHOUT the membrane term the preprint used?",
+ "full_sampling": {
+  "models": 32,
+  "best_rmsd_A": 3.41,
+  "n_below_5A": 4,
+  "n_below_8A": 5,
+  "wall_s": 10328,
+  "settings": "10 replicas, 50 MC cycles, 50 MC steps, seed 1"
+ },
+ "negative_control": {
+  "models": 26,
+  "best_rmsd_A": 39.05,
+  "n_below_5A": 0,
+  "settings": "4 replicas, 2x2 MC -- deliberately under-sampled"
+ },
+ "why_the_control_matters": "The under-sampled run recovers NOTHING (best 39 A). The signal appears only with real sampling, so 3.41 A is not an artefact of the RMSD selection, which takes the last 7 CA atoms of each model.",
+ "measured_cost": {
+  "s_per_simulation": 10328,
+  "core_h_per_100_sims": 286,
+  "core_h_two_peptides_100_sims": 572
+ },
+ "limits": [
+  "One simulation, seed 1. This answers 'can it', not 'how often'.",
+  "No membrane term, no DSSP, no D-Ala, CA-only models: four declared deviations.",
+  "G1 passing is permission to spend more, not an engagement-order result."
+ ]
+}
