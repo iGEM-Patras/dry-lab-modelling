@@ -1,0 +1,22 @@
+{
+ "cycle": 17,
+ "written": "2026-10-10, after feasibility was established and before any simulation was run",
+ "question": "Does the engineered payload YGGFEVVG engage the delta-opioid receptor in the same DOMAIN ORDER as deltorphin, whose address it carries? Lewandowski-style analysis after the 2026 preprint doi:10.64898/2026.02.06.704327, which reports for beta-endorphin at the mu receptor that address-first engagement is 3.8-fold more productive than message-first (18.8% vs 5.0%, p<0.001).",
+ "why_this_escapes_our_two_standing_failure_modes": [
+  "It computes NO ddG, so it cannot accumulate correlated per-window bias along a thermodynamic path.",
+  "It is not anchored to published affinities, so it does not inherit the between-source disagreement that exceeds the effect size."
+ ],
+ "native_reference": "PDB 8F7S, delta-opioid receptor with deltorphin (chains R/D receptor, P/Q peptide, sequence TYR1 DAL2 PHE3 GLU4 VAL5 VAL6 GLY7 NH2). Verified from the deposited coordinates, not from memory. Our payload YGGFEVVG shares the C-terminal FEVVG with it, so the address has an EXPERIMENTAL bound reference. This is the first time in this project that a computational question about the payload has had one.",
+ "declared_deviations_from_the_published_protocol": {
+  "1_no_membrane_term": "The preprint used CABS-dock WITH a membrane extension (their ref 9, Pulawski 2016). That extension is NOT in the public CABS 0.9.14 release: zero membrane mentions in the source and no --membrane option among the 54 exposed. Consequence: blind global docking will also sample the lipid-facing transmembrane surface, lowering efficiency. Our ABSOLUTE success rates are therefore NOT comparable to the preprint's. The within-study comparison between peptides on the same receptor remains valid because the inefficiency is common to both.",
+  "2_chirality_not_represented": "CABS is coarse-grained on L-amino-acid statistics. It cannot represent deltorphin's D-Ala2 or its C-terminal amide. Our deltorphin control is therefore effectively L-Ala, free-acid deltorphin, stripped of exactly the two features the Cycle 16 literature attributes rigidity to. This WEAKENS the control and must be stated with any result.",
+  "3_sampling_budget": "The preprint ran 1,000 simulations x 10 replicas. Ours will be set by the pilot's measured cost and stated as a number, not described as 'fewer'."
+ },
+ "gates": {
+  "G1_native_recovery": "Re-docking the native peptide into its own receptor must recover native-like poses, defined as the preprint does: mean total RMSD < 5 A over 100 frames within a replica. Threshold: strictly more than 0 native-like replicas out of the pilot. CAN FAIL. If blind docking without a membrane term cannot re-find the crystal pose of the peptide that was crystallised there, the method is unusable in our hands and nothing downstream is interpretable.",
+  "G2_pathway_asymmetry": "Deltorphin must reproduce the published direction: address-first success rate greater than message-first success rate. CAN FAIL. A failure means our adaptation does not reproduce the phenomenon the preprint reports, and G3 is then meaningless.",
+  "G3_the_question": "SCORED ONLY IF G1 AND G2 PASS. Does YGGFEVVG show the same address-first advantage as deltorphin on the same receptor with the same protocol? Reported as the two success rates with their Fisher exact p, not as a selectivity claim."
+ },
+ "decision_rule": "If G1 fails, report the method as unusable here and stop; do not run the payload. If G1 passes and G2 fails, report that the adaptation does not reproduce the published asymmetry and stop. Only if both pass is the payload run and G3 scored.",
+ "what_this_can_never_deliver": "A delta/mu selectivity value for YGGFEVVG. It tests engagement ORDER on ONE receptor. The cAMP assay remains the only instrument that measures the quantity the project needs."
+}
