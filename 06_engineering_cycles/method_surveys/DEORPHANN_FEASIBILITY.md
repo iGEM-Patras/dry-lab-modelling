@@ -59,6 +59,18 @@ untested.
 **With the calibration-panel control this project requires, that is 28 AlphaFold-Multimer
 runs** (13 reference compounds + our payload, x 2 receptors) through an unverified pipeline.
 
+### A third friction, read directly from the two sources
+
+The authors' 195 shipped pair representations are **`.h5` files**
+(`pair_representations/AEX-2-1_gpcr_T.h5`), but `deorphann_batch.py` globs for
+`*gpcr_T.npy`, `*pep_T.npy`, `*interaction.npy` and `*.contacts`. **The authors' own example
+data does not drop straight into the authors' own batch script**; a format conversion sits
+between them, and the `.contacts` files are not in the dataset at all.
+
+That is not a criticism of the work, it is a measurement of setup cost. It means the first
+milestone for anyone resuming is not "score our peptide" but **"reproduce one published
+score from the authors' own inputs"**, and even that requires writing a loader.
+
 ## Why the ceiling is lower than it looks
 
 DeorphaNN discriminates **agonist from non-agonist**. Our question is delta-over-mu
