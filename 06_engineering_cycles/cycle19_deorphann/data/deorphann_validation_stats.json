@@ -1,0 +1,11 @@
+{
+ "auc_heldout": 0.8931903748567687,
+ "auc_ens": 0.9443444098870519,
+ "n_binders": 41,
+ "n_pairs": 339,
+ "null_rate": 0.7609427609427609,
+ "obs_rate": 0.9512195121951219,
+ "p_offset": 0.0026903409187121812,
+ "n_discriminating": 41,
+ "n_neither": 297
+}
