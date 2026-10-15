@@ -1,0 +1,53 @@
+  GPU: NVIDIA GeForce RTX 2080 Ti, 11264 MiB
+### Are the dibasic processing sites accessible in the ENGINEERED precursor?
+### Control: native preproenkephalin, whose sites ARE cleaved in vivo.
+=== natPENK 17:27:56 ===
+/data/users/kzanaj/envs/boltz2/lib/python3.11/site-packages/pytorch_lightning/utilities/migration/utils.py:56: The loaded checkpoint was produced with Lightning v2.5.0.post0, which is newer than your current Lightning version: v2.5.0
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Predicting: |          | 0/? [00:00<?, ?it/s]Predicting:   0%|          | 0/1 [00:00<?, ?it/s]Predicting DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s]Predicting DataLoader 0: 100%|██████████| 1/1 [02:33<00:00,  0.01it/s]Number of failed examples: 0
+Predicting DataLoader 0: 100%|██████████| 1/1 [02:33<00:00,  0.01it/s]
+  models: 5
+=== engPENK 18:04:59 ===
+/data/users/kzanaj/envs/boltz2/lib/python3.11/site-packages/pytorch_lightning/utilities/migration/utils.py:56: The loaded checkpoint was produced with Lightning v2.5.0.post0, which is newer than your current Lightning version: v2.5.0
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Predicting: |          | 0/? [00:00<?, ?it/s]Predicting:   0%|          | 0/1 [00:00<?, ?it/s]Predicting DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s]Predicting DataLoader 0: 100%|██████████| 1/1 [00:55<00:00,  0.02it/s]Number of failed examples: 0
+Predicting DataLoader 0: 100%|██████████| 1/1 [00:55<00:00,  0.02it/s]
+  models: 5
+
+=== RSA at the dibasic sites ===
+
+  natPENK: 5 models | mean pLDDT 43.2
+     KR98     RSA 0.480 +- 0.077
+     KR105    RSA 0.392 +- 0.175
+     KK112    RSA 0.327 +- 0.170
+     KR134    RSA 0.280 +- 0.177
+     KK141    RSA 0.384 +- 0.176
+     KR184    RSA 0.417 +- 0.093
+     KR194    RSA 0.510 +- 0.099
+     KR208    RSA 0.317 +- 0.148
+     RR215    RSA 0.300 +- 0.162
+     KR228    RSA 0.450 +- 0.131
+     KR235    RSA 0.505 +- 0.082
+     KR259    RSA 0.576 +- 0.098
+
+  engPENK: 5 models | mean pLDDT 37.1
+     KR106    RSA 0.393 +- 0.187
+     KR116    RSA 0.281 +- 0.110
+     KK126    RSA 0.185 +- 0.165
+     KR148    RSA 0.386 +- 0.217
+     KK158    RSA 0.281 +- 0.075
+     KR201    RSA 0.409 +- 0.226
+     KR214    RSA 0.417 +- 0.091
+     KR228    RSA 0.513 +- 0.109
+     RR238    RSA 0.171 +- 0.114
+     KR251    RSA 0.589 +- 0.138
+     KR261    RSA 0.138 +- 0.101
+     KR285    RSA 0.354 +- 0.151
+
+==================================================================
+G1 control validity: native median RSA 0.404 (>0.40) -> PASS
+G2 reproducibility : 14 of 24 sites SD<0.15 -> PASS
+G3: native 10th pct RSA = 0.280
+   engineered sites below it: KK126(0.185), RR238(0.171), KR261(0.138)
+   VERDICT: flagged sites above -> wet-lab actionable
+done=Thu Oct 15 18:07:19 CEST 2026
