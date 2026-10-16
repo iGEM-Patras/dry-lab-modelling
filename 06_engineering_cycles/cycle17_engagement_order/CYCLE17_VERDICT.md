@@ -9,7 +9,7 @@
 | gate | question | outcome |
 |---|---|---|
 | **G1** | can blind docking recover the deltorphin crystal pose without the membrane term? | **PASS**, 3.41 A, 4 of 32 models under 5 A, under-sampled control recovered nothing |
-| **G2** | does the control reproduce the published address-first productivity asymmetry? | **FAIL**, OR 1.09, p = 0.58 at n = 140 |
+| **G2** | does the control reproduce the published address-first productivity asymmetry? | **FAIL**, OR 1.20, p = 0.51 at the full n = 150 |
 | **G3** | does the engineered payload engage in the same order? | **NOT SCORED**, as the pre-registration requires |
 
 ## G2 in detail: the effect decayed as evidence accumulated
@@ -19,15 +19,20 @@
 | 80 | 2.00 | 0.46 | 11.1 % | 5.9 % |
 | 100 | 0.83 | 0.75 | 11.5 % | 13.6 % |
 | 120 | 1.07 | 0.61 | 11.8 % | 11.1 % |
-| **140** | **1.09** | **0.58** | **13.1 %** | **12.1 %** |
+| 140 | 1.09 | 0.58 | 13.1 % | 12.1 % |
+| **150** | **1.20** | **0.51** | **13.8 %** | **11.8 %** |
+
+The campaign ran to its full pre-registered size, 15 seeds and 150 trajectories, so no
+appeal to truncation or sample size is available. The last four increments bounced between
+0.83 and 1.20 with no trend: noise around unity.
 
 Published reference for beta-endorphin at the mu receptor: **18.8 % versus 5.0 %, p < 0.001**,
 corresponding to an odds ratio near **4.4**.
 
-Our control converges on **1.09**. Address-first and message-first trajectories reach a
+Our control converges on **1.20**. Address-first and message-first trajectories reach a
 native-like pose at indistinguishable rates.
 
-**Power is 0.72** for the published effect, so this is not simply an underpowered null. A
+**Power is 0.74** for the published effect, so this is not simply an underpowered null. A
 real effect of the published magnitude would have been detected roughly three times in four,
 and the point estimate is sitting on 1.0 rather than somewhere between.
 
@@ -37,6 +42,9 @@ At n = 130 I reported the estimate as "stable over the last 90 trajectories" and
 the remaining seeds would not change the verdict. **Ten more trajectories moved the odds
 ratio from 1.41 to 1.09.** The direction of my conclusion held, but the stability claim was
 wrong when I made it, and I should have said the estimate was still moving.
+
+The final seed moved it again, 1.09 to 1.20. Checking rather than assuming was therefore the
+right call both times; it simply did not change the verdict on the second occasion.
 
 ## G3 is not scored, and the engineered arm looks better
 
