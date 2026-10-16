@@ -1,0 +1,43 @@
+# Conda environment for the analysis scripts in this repository.
+#
+#   conda env create -f environment.yml && conda activate epione-drylab
+#
+# Scope: the Python analyses, plotting and sequence work. It does NOT install the
+# simulation engines or the external services, which are listed in
+# `methods_references.md` with how each was obtained:
+#
+#   GROMACS 2024.5        separate conda-forge build with CUDA, run on a cluster
+#   Boltz 2.2.1           separate environment, GPU required
+#   CABS-dock 0.9.14      not on PyPI; ported to Python 3 in cycle17, Fortran engine
+#                         compiled at run time with gfortran and -mcmodel=medium
+#   pmx                   installed from the deGrootLab GitHub repository
+#   ADFR / AutoDock CrankPep   vendor binary distribution
+#   DSIR, siDirect, DeepSig, DeepTMHMM   web services, not installable packages
+#
+# Versions are pinned only where the version actually used was recorded. Where a
+# package is unpinned the version used was not captured at the time, and this file
+# says so rather than inventing one.
+
+name: epione-drylab
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - statsmodels          # Fisher exact, power calculations in cycle17
+  - scikit-learn         # ROC / AUC in the DeorphaNN validation
+  - biopython            # SeqIO, Seq, Shrake-Rupley SASA in cycle18
+  - h5py                 # DeorphaNN pair representations
+  - pyarrow              # DeorphaNN Arpeggio contact tables
+  - mdanalysis
+  - parmed
+  - requests
+  - pip
+  - pip:
+      - torch==2.14.1            # DeorphaNN scorer, CPU is sufficient
+      - torch-geometric==2.8.1
+      - numpy-indexed

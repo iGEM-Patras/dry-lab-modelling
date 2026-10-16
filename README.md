@@ -60,7 +60,7 @@ The full narrative (rationale, results, and honest limitations) is in **[`docs/p
 
 ## Status
 
-*Last reviewed 2026-10-09. Individual cycle documents are the authority on their own status.
+*Last reviewed 2026-10-16. Individual cycle documents are the authority on their own status.
 check `git log -1 --format=%ad -- <file>` before trusting any date here.*
 
 Workstreams `01`–`05` and `08`–`11` are **complete**. Cycle 3b terminated on 2026-08-31 per its
@@ -83,15 +83,23 @@ for the terminal verdict.
 | **14** (indexed as **8b**), re-spaced free-energy ladder | ❌ **closed, gates failed.** The diagnosis was right: the overlap gate **passed decisively** (0 of 56 intervals above threshold, against 20 to 21 of 25 on the old ladder). Reproducibility still failed: replicates at **+0.72 ± 3.13** and **+14.47 ± 3.28 kcal/mol**, a 13.75 spread against a combined error of 4.53. Doubling the windows to fix overlap doubled the number of accumulating terms |
 | **15**, residue-mutation free energy | ❌ **blocked, then ruled out.** The hybrid residue was built and charge-verified, but the system's standalone topology is incompatible with the mutation toolchain in both directions. The literature check that should have come first settles it anyway: the purpose-built method reports RMSE 1.61 kcal/mol against an effect of 0.81 |
 | **16**, conformational constraint | ❌ **control gate failed.** A constrained peptide was indistinguishable from a flexible one, and the most selective peptide was the least turn-like. Diagnosis: five replicates of one system span the whole metric, so 20 ns does not re-equilibrate a bound peptide backbone. Our own payload was **not scored and not run** |
+| **17**, engagement order | ⚠️ **G1 passed, G2 failed, G3 not scored.** Blind docking recovered the deltorphin crystal pose (PDB 8F7S) at **3.41 Å** while a deliberately under-sampled control recovered nothing, so the docking protocol validates. Over the full pre-registered campaign (150 trajectories, 15 seeds) the control did **not** reproduce the published engagement asymmetry: OR **1.20**, p 0.51 at 0.74 power, against a published OR near 4.4. The payload was therefore never scored, though its partial data looked favourable |
+| **18**, precursor processing sites | ⚠️ **gates passed, conclusion withdrawn.** Solvent accessibility at all 12 dibasic sites in both precursors. Three engineered sites initially appeared less accessible at p < 0.05; the finding was **withdrawn** because prediction confidence (pLDDT 43 and 37) is below the band where per-residue burial is interpretable, and because site-to-site variation in the native control is smaller than the scatter between repeated predictions of the same sequence. The gate was mis-designed and is recorded as inadequate rather than quietly amended. Reportable: across all 12 corresponding sites, 0.411 native vs 0.343 engineered, p = 0.160, a **weak negative** |
 
 **Four published selectivity methods were assessed and rejected**, each for a documented and
 different reason, in [`06_engineering_cycles/cycle11_selectivity_qsar/BINDPRED_REJECTED.md`](06_engineering_cycles/cycle11_selectivity_qsar/BINDPRED_REJECTED.md).
 The common cause is not the algorithms: published affinities for these receptors disagree with
 each other by more than the effect being measured.
 
-**Prediction ledger: 20 scored, 10 confirmed, 10 falsified.** Every prediction was committed to
+**Prediction ledger: 22 scored, 11 confirmed, 11 falsified.** Every prediction was committed to
 this repository before the test that judged it, so the record is checkable against `git log`
 rather than taken on trust.
+
+The two added since the previous count are both from cycle 17: G1, that blind docking could
+recover a crystal pose without a membrane term, **confirmed**; and G2, that the control would
+reproduce the published engagement asymmetry, **falsified**. Cycle 18's three gates passed but
+its conclusion was withdrawn on a diagnostic that the gates themselves could not see, so it is
+**not counted here** in either column; that case is argued in its verdict rather than scored.
 
 The open questions are now **wet-lab questions**. The computational selectivity question is
 closed: every available method's reported error exceeds the 0.81 kcal/mol effect, so the
@@ -118,6 +126,12 @@ that predictions are committed before the tests that could falsify them, are in
 [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Reproducibility
+
+The Python analyses, plotting and sequence work run from
+[`environment.yml`](environment.yml): `conda env create -f environment.yml`. Simulation
+engines and web services are not installable from it and are listed individually in
+[`methods_references.md`](methods_references.md), each with how it was obtained and whether
+its version was recorded.
 
 Coarse-grained MD used **GROMACS 2024.5** with the **MARTINI 2** force field. All-atom membrane MD and MM-GBSA rescoring (cycle 3b) used **GROMACS 2024.5** + **AmberTools**. Sequence work used **Biopython**; siRNA off-target screening used **NCBI BLAST+ (blastn-short)** against human `refseq_rna`. See `methods_references.md` for the complete list with citations. MD input files (`.mdp`, topology) and analysis scripts are under `04_lipoplex_md/` and `06_engineering_cycles/`.
 

@@ -1,413 +1,289 @@
-# Engineering Success
+# Engineering
 
-*Epione: a DNA-encoded enkephalin factory for chronic cancer pain. iGEM Patras 2026.*
+> Four cycles. Each one changed a design, and three of them changed it because something
+> did not work.
 
-Our project is wet-lab led. The dry lab's job is to decide **what to build** and to
-refuse to let an untested assumption reach the bench. This page documents three
-Design–Build–Test–Learn cycles on the thing we are actually building, in the order we ran
-them. Every prediction below was committed to public version control **before** the test
-that judged it, so each claim here is checkable against `git log` rather than taken on
-trust.
+## Overview
 
-A fourth cycle follows, on the *method* rather than the product. We separate it deliberately:
-it never changed the construct, so it is not an engineering success on the thing we are
-building. It is one on the instrument we use to judge it, and it went round the loop twice. The other covers the
-delivery vehicle. The full granular record, including every cycle we do not narrate here,
-is in [`06_engineering_cycles/`](https://github.com/kei-zan/dry-lab-modelling/tree/main/06_engineering_cycles).
+Epione hands the cell a proenkephalin precursor and lets the cell's own enzymes release the
+analgesic peptides. Building that required solving four problems in sequence, and the
+engineering record below is the account of getting each one wrong first.
+
+| cycle | the problem | what the Learn step changed |
+|---|---|---|
+| **1** | one plasmid must yield two proteins | two coding sequences back to back translate as **one** fused polypeptide, burying the terminal opioid core. An IRES or P2A element goes between them, and both gene orders are built for each |
+| **2** | the precursor must be purified | at roughly 30 kDa it is an unremarkable size among host proteins, so size exclusion cannot isolate it. **The purification problem became a construct problem**: a His6 tag was added and capture moved to IMAC |
+| **3** | the precursor must be cut | PC1/3 plus PC2 covers one enzymatic activity twice and the other not at all. CPE was added, and then its required cobalt turned out to **inhibit PC2**, splitting one reaction into two |
+| **4** | the product must work | a plate-bound binding assay would report weakly for reasons unrelated to binding, so the readout moved to a **cellular functional** assay |
+
+Every cycle follows Design, Build, Test, Learn, and is counted only where the Learn step
+altered the next Design. **Two of the four were corrected before any reagent was consumed**,
+which is the cheapest place to be wrong.
+
+The dry lab appears inside these cycles as support rather than as cycles of its own; the
+modelling record in full is on the Model page.
 
 ---
 
-## Cycle 1: Designing a payload that DNA can encode
+## Cycle 1 · Getting two proteins from one plasmid
 
-![Native human proenkephalin against our engineered precursor: seven cassettes in both, the same
-dibasic processing sites, with the native YGGFM/YGGFL cores replaced by YGGFEVVG](../07_invitro_penk/figures/fig_junction_map.png)
-
-*The engineered precursor keeps the native architecture: seven cassettes at the native spacing,
-flanked by the same dibasic sites the cell's convertases already recognise, and changes only the
-message-plus-address sequence inside them. The cassette count is not an optimisation: it is what
-human PENK carries, so the spacing is already known to work in secretory granules.*
-
-**The problem.** Enkephalins are the body's own analgesic peptides, but they act at both the
-μ- and δ-opioid receptor. μ-receptor activation is what brings the respiratory depression,
-constipation and dependence that make opioid therapy self-limiting. A payload biased toward
-δ is therefore the design goal.
+One plasmid has to deliver proenkephalin, which is the product, and mEGFP, which reports
+that the cell received the construct.
 
 ### Design
 
-The most δ-selective natural opioid peptides are the deltorphins, from *Phyllomedusa*
-frogs. Deltorphin II is **Tyr-D-Ala-Phe-Glu-Val-Val-Gly-NH₂**, and opioid peptide
-pharmacology splits that into two parts: a **message** (the N-terminal residues that
-activate the receptor) and an **address** (the C-terminal residues that select *which*
-receptor).
-
-We could not use deltorphin II itself. It contains **D-alanine** and a **C-terminal amide**,
-and a gene can encode neither: the ribosome builds L-amino acids and leaves a free acid.
-
-So we built a chimera: deltorphin's δ-**address** on the enkephalin **message**.
-
-```
-deltorphin II   Tyr–D-Ala–Phe | Glu-Val-Val-Gly –NH₂     not encodable
-Met-enkephalin  Tyr–Gly–Gly–Phe | Met –OH               encodable
-our payload     Tyr–Gly–Gly–Phe | Glu-Val-Val-Gly –OH   YGGFEVVG
-```
+The economical version: a single CMV promoter, a Kozak sequence, and the two coding
+sequences placed one after the other. One promoter, one transcript, two proteins, or so the
+map suggests.
 
 ### Build
 
-`YGGFEVVG` as a synthetic cassette, repeated seven times in a proenkephalin-like precursor.
-Seven is not an arbitrary choice: the native human precursor (UniProt **P01210**) carries
-seven opioid cores, so the spacing between our cassettes is already known to work inside
-human secretory granules.
+The construct was assembled **in silico** first, as a complete annotated map. Doing that
+before ordering DNA is what made the next step cost nothing.
 
 ### Test
 
-Co-folding of the peptide into both receptors, then a selectivity estimate from the
-predicted complexes.
+The construct was translated in silico from the Kozak sequence onward, and the predicted
+product examined rather than assumed.
 
 ### Learn
 
-**The direction was right; our first quantitative claim was wrong.** An early version of this
-cycle reported the payload as 1.96× more δ-preferring than native enkephalin. **That figure
-is withdrawn**: it came from an estimator we had not calibrated against any experimental
-value, and when we later calibrated one properly (see *Method validation*), the number did
-not survive.
+**It does not make two proteins.** With nothing between the genes, the ribosome reads
+through from the first start codon to the last stop codon and produces one continuous
+PENK-mEGFP polypeptide.
 
-What carried forward was the sequence. `YGGFEVVG` is what every construct in the project now
-expresses, and what the wet lab will measure.
+That defeats both purposes at once. Proenkephalin's last opioid core **is** its own carboxy
+terminus, so a fluorescent protein hanging off that end buries the core where the processing
+enzymes cannot reach it. The conclusion is structural rather than a matter of optimisation:
+something has to sit between the genes, and what sits there defines the next iteration.
 
-**The honest status of δ-preference is a design goal, not a demonstrated result.** We say so
-on our poster and we say so here.
+### Re-Design
 
----
+Two elements give two proteins from one transcript by different mechanisms. An **IRES**
+allows a second independent initiation on the same mRNA, so each protein keeps its native
+ends. **P2A** gives near-stoichiometric ratios through ribosomal skipping, at the cost of a
+residual peptide scar.
 
-## Cycle 2: Can the cassette actually be manufactured?
+First principles did not settle which gene should come first, so rather than guess,
+**both orders were built for each element**.
 
-![Where the GC-rich windows sit along the construct and the targeted recoding that fixes them](../09_codon_gc_design/figures/fig_gc_where_and_fix.png)
+### Re-Build
 
-*Synthesis difficulty is not spread evenly. Locating the specific windows that drive the vendor's
-complexity score is what allowed a targeted recoding instead of a blanket redesign.*
+Four plasmids on the same pcDNA3.1(+) backbone and the same CMV promoter, differing only in
+the separating element and the gene order.
 
-This is our strongest cycle, and the only one whose Test step is **not** a simulation. The
-test was an external commercial DNA synthesis vendor, whose feasibility engine either
-accepts a sequence or refuses to make it. We ran three rounds against it.
+### Re-Test
 
-### Round 1 · Design → Build → Test
+Each construct translated in silico as before, and the predicted products inspected: how
+many polypeptides come out, and what each carries at its ends.
 
-Four bicistronic constructs, codon- and GC-optimised, submitted for synthesis.
+### Re-Learn
 
-**Result: denied.** One construct scored **23.8** on the vendor's complexity scale, where
-anything at or above 10 is refused.
-
-### Round 1 · Learn, and the finding that justifies the whole cycle
-
-Our assumption had been that if anything was unmanufacturable it would be the engineered
-part: seven near-identical repeats of a synthetic cassette is exactly the kind of sequence
-a synthesiser struggles with.
-
-**That assumption was wrong.** The itemised rejection report put most of the score on two
-*terminal flanking sequences*, not our cassettes at all. Those two flanks are exact reverse
-complements of one another, forming a **10 bp terminal inverted repeat**.
-
-Those flanks came from the wet lab's own existing plasmid files. They were inherited, not
-designed by us, and they had never been tested as a pair.
-
-The lesson we took, and now apply to every sequence that enters a design:
-**inherited sequence is still untested sequence.** A terminal inverted repeat is also a
-genuine biological liability beyond synthesis: it can form a hairpin and destabilise the
-construct, so this was worth catching before the bench, not after.
-
-### Round 2 · Design → Test
-
-A minimal repair of the flanks rather than a redesign, screened against a restriction-enzyme
-panel so the wet lab's existing cloning scheme still worked.
-
-**Result: 3 of 4 accepted.** The fourth still flagged.
-
-### Round 2 · Learn
-
-The vendor's report named **two** scoring rules and we had only modelled one. The residual
-flag came from long-range repeats *between* tandem cassettes, a consequence of repeating
-one cassette seven times, and invisible to the local scoring window we had been using.
-
-### Round 3 · Design → Test → Learn
-
-We rebuilt the codon optimisation against a **global** repeat objective rather than a local
-one, so synonymous codon choices were made to minimise repeats across the whole insert
-instead of within a sliding window.
-
-**Result: v6 accepted. All four constructs ordered.**
-
-Before querying the vendor we committed a prediction for each construct's complexity score,
-derived from a two-rule model we had reverse-engineered from the earlier reports. Those
-predictions are in the repository with timestamps preceding the vendor's reply. Most were
-exact; one revealed a third rule we had not encoded, which we recorded as a falsified
-prediction rather than quietly updating the model.
-
-**Why this cycle matters for engineering.** A design that cannot be manufactured is not a
-design. The loop closed across the dry–wet boundary with a real external oracle, it took
-three rounds, and it caught a defect in material the project had been treating as settled.
+**All four solve the problem of iteration 1.** Every one yields two separate proteins, so
+the question changes rather than closes. What the four do not share is what they cost: the
+IRES constructs leave both proteins with native ends but put one gene in a weaker
+cap-independent position, while P2A balances expression and leaves a scar. The decision now
+rests on predicted yield and on where each scar falls, which is what the four constructs
+were built to measure.
 
 ---
 
-## Cycle 3, What should the first transfection produce? *(in progress)*
-
-![Predicted western-blot bands and mass-spectrometry targets for each of the four constructs,
-committed before the first transfection](../06_engineering_cycles/cycle5_expression_processing/cycle5_predictions.png)
-
-*Every band position here was computed from the construct sequences and committed to version
-control before the wet lab ran anything, including one species predicted to be **absent**. A
-prediction that only names what should appear cannot be falsified by a blank lane.*
-
-The constructs are ordered. This cycle is **pre-registered and awaiting bench data**, which
-is what an open cycle should look like.
+## Cycle 2 · Purifying the precursor
 
 ### Design
 
-Rather than transfect and then interpret whatever appears, we committed falsifiable
-predictions first: band sizes, which species should be present, which should be **absent**,
-and target masses for mass spectrometry, so the first experiment can contradict us.
+**Size exclusion chromatography.** Filter away the media proteins by size and recover ours.
 
 ### Build
 
-Four constructs as a two-by-two comparison: two bicistronic strategies against two reporter
-orientations, so the comparison is controlled rather than anecdotal.
+SEC was to be run at the **Hellenic Pasteur Institute** under the supervision of
+Dr. M. Zouridakis, using a small analytical column.
 
-### Test *(wet lab, pending)*
+### Test
 
-Transfection, western blot, and a biomimetic *in vitro* digest using the convertase pair
-that generates enkephalins natively.
+Evaluation in group meetings revealed the limitation. The precursor is approximately
+**30 kDa**, a size shared by a great many host cellular proteins, so SEC alone cannot reach
+useful specificity.
 
-### Learn, already, before the bench
+### Rebuild
 
-Two findings came out of the prediction work itself:
+The purification approach had to change, and changing it **changed the construct**: a
+His6 tag was incorporated next to proenkephalin.
 
-**An asymmetry between orientations.** In one bicistronic arrangement, an uncleaved
-read-through product buries the signal peptide *internally*, where it cannot be cleaved and
-the product cannot be secreted. The two orientations are therefore not equivalent, and the
-western blot should show it.
+### Retest
 
-**One cassette cannot release free peptide.** Computing the C-terminal context of every
-cassette showed that the terminal cassette has no downstream cleavage site, so it releases an
-extended species rather than a free octapeptide, in **all four** constructs equally. That
-told us the yield is identical across the constructs we had already ordered, so no re-order
-was warranted. We added the extended species to the mass-spectrometry target list as a
-labelled internal negative control.
+The His-tagged protein enables high-precision capture by **IMAC**, performed again at the
+Hellenic Pasteur Institute on a Ni-NTA FPLC.
 
-This mirrors the native precursor, which also releases extended products from some of its
-cores, so it is expected behaviour rather than a defect.
+### Learn
 
----
+The precursor cannot be isolated efficiently on size alone, because that size is
+unremarkable among cellular proteins. Affinity capture succeeds where a physical property
+shared with the background fails.
 
-## Cycle 4, Engineering the instrument, not the product
+> **The revision this forced, recorded rather than smoothed over.** Our first-generation
+> constructs carried **no affinity tag at all**, because purification had been treated as a
+> step that came after expression. Taking the question to domain experts gave an answer that
+> was obvious in hindsight: IMAC is affinity capture on immobilised nickel, and without a
+> polyhistidine tag there is nothing for the column to hold.
+>
+> That turned a purification decision into a construct decision, and the two could no longer
+> be made separately. For native PENK the constructs were re-ordered from Twist with the tag
+> included, and those second-generation plasmids are what everything downstream used. For the
+> **engineered** PENK sequence there was no time left to order complete plasmids, since full
+> plasmid synthesis turns round more slowly than a linear gene fragment and the season would
+> have closed first. The first-generation plasmids therefore served only as backbones for the
+> engineered constructs and entered **no** expression, purification or maturation experiment.
+>
+> **The correction is to the order of work, not to the design.** The purification route
+> should be specified alongside the expression cassette, because the former constrains the
+> latter.
 
-A large part of our computational effort went into one question: **is `YGGFEVVG` really
-δ-preferring?** None of it changed the construct. What it did change, twice, was the method
-we use to answer the question, and that is a Design–Build–Test–Learn loop in its own right,
-with the Learn step of each round visibly driving the Design of the next.
+### Where the tag had to go
 
-### Round 1 · a method that failed its own control
-
-**Design.** Rank candidate peptides by δ/μ selectivity using a co-folding confidence score.
-**Test.** Score published reference opioids whose selectivity is already measured, and
-require the predictions to correlate with them before any number for our own peptide is
-quoted. **Result at n = 4: every gate failed**, including a wrong sign on the most strongly
-selective reference in the set.
-
-**Learn.** The failure was *statistical power*, not the method. We computed the correlation
-threshold that n = 4 can clear and found the test could not have passed even had the method
-been perfect. The honest consequence was to withhold the target number entirely, and it is
-worth saying what that cost: had we skipped the controls, the withheld value would have
-agreed with our own earlier null and been mistaken for confirmation.
-
-### Round 2 · the same test, properly powered
-
-**Design.** Expand the reference panel rather than accept the negative. **Build.** Thirteen
-published opioids, all affinities taken from a single source so that between-study scatter
-could not enter the calibration axis.
-
-![Calibration against thirteen published reference opioids, and the resulting selectivity estimate](../06_engineering_cycles/cycle7_calibration/cycle7_calibration.png)
-
-**Test.** `r = 0.805`, `p = 0.001`, signs correct on **12 of 13**. The gate passed, and the
-project got its first calibrated selectivity estimate.
-
-**Learn.** Three limits came with it, all reported: the regression slope compresses
-magnitudes, so direction and ranking are calibrated while absolute values are not; the panel
-contains no control in the strongly δ-selective regime, because the two most selective
-peptides failed the inclusion criterion, and those are exactly the two the method had called
-with the wrong sign at n = 4; and binding is not efficacy.
-
-### Round 3 · a harder method, and what its control did to it
-
-**Design.** Replace the ranking score with alchemical free energy, which does not interpolate
-from published values at all. **Test.** Run native Met-enkephalin, whose selectivity is
-published, through the identical protocol as a control.
-
-![Per-interval overlap along the thermodynamic path: the ladder validated on a 5-residue control peptide is too coarse for the 8-residue payload](../06_engineering_cycles/cycle12_pose_independence/ladder_convergence.png)
-
-**Result.** The control's two replicates came back at **−3.12 and +5.41 kcal/mol**, opposite
-signs, from nothing but a different random seed.
-
-**Learn.** Rather than stop at "the method is noisy", we measured why. Along the
-thermodynamic path, **20–21 of 25 intervals** had poorly overlapping work distributions for
-our payload against 9–15 of 25 for the control. The cause is not sampling time but spacing:
-at fixed spacing the perturbation per step grows with the size of the molecule being
-decoupled, so a ladder validated on a 5-residue peptide is too coarse for an 8-residue one.
-More computer time would have tightened the error bar around a biased number, which is worse
-than a visibly noisy one.
-
-**Design, again.** A 57-window ladder spaced for uniform overlap: placing windows where the
-measurement said they were needed rather than doubling them everywhere, with replicates
-generated from independent equilibrations rather than from a shared one. Four gates were
-committed to version control before a single window ran.
-
-### Round 4 · the fix worked, and it was not enough
-
-684 ns across 228 windows. Scored against the gates as written:
-
-| gate | criterion | result |
-|---|---|---|
-| overlap | median s < 1.5 kT, ≤3 of 56 intervals > 2 kT, every leg | **pass**: median 0.30–0.43 kT, **0 of 56** above threshold |
-| sign | δ-preferring | **pass**: both replicates positive |
-| accuracy | two-replicate mean within 1.5 kcal/mol of published | **fail**: mean +7.59 against +0.81 |
-| reproducibility | replicates agree within 2.0 kcal/mol | **fail**: **13.75** apart |
-
-**The diagnosis was right.** Zero intervals exceed the overlap threshold, against 20–21 of 25
-on the old ladder. The spacing problem identified in round 3 is solved.
-
-**The measurement still fails.** The two replicates give **+0.72** and **+14.47** kcal/mol.
-The first sits 0.09 from the published value and, reported alone, would have read as a
-complete success, which is precisely what the reproducibility gate existed to prevent us
-from claiming.
-
-**Learn, again, and this is the part that generalises.** We decomposed the disagreement per
-window rather than calling the method noisy. No single window is responsible: the largest
-replicate difference in any interval is 3.5 kJ/mol and none exceeds 5. But **40 of 55 and 40
-of 56 intervals share the sign of their leg's total**, where random noise would give half. The
-small biases are correlated, so they accumulate along the path instead of cancelling:
-reaching ≈30 kJ/mol per leg, about **7 kcal/mol of replicate variation in each absolute free
-energy**, when the quantity we want is a *difference* of two of them and the effect is 0.81.
-
-Doubling the windows to fix overlap also doubled the number of terms whose biases accumulate.
-The fix was necessary, correct, and self-defeating.
-
-**Consequence, as pre-registered:** the engineered-peptide stage does not run, and no
-selectivity value is quoted from this method. A wet-lab cAMP assay measures the quantity
-directly and is not subject to any of this.
-
-### Round 5 · two more instruments, and the limit we hit
-
-**Design.** Round 4 left us with two general reasons a method fails here, and we used them as
-a filter rather than trying things at random. Anything anchored to *published affinities*
-inherits a between-source disagreement larger than the effect. Anything computing selectivity
-as a *difference of two large absolute quantities* accumulates correlated bias. We went
-looking only for methods that escape both.
-
-**Build (a).** One route escapes both by construction: mutate the **receptor** rather than
-decoupling the ligand twice, so the large absolute quantity is never formed. We costed it
-from our own measured throughput, counted the divergent orthosteric pocket residues by
-aligning the two receptors, and built the hybrid residue, verifying atom by atom that it
-carried both side chains and that the net charge changed by exactly +1, as the mutation
-requires.
-
-**Test (a).** It was blocked, and not by the science. Our membrane system was built with
-Amber tooling and converted into a *standalone* topology with every parameter written out
-and no includes. The mutation toolchain emits the other kind. Reconciling them failed in both
-directions: the force field's bonded tables reference type names the standalone file does
-not declare, and the library that produced that file classifies the alchemical dummy atoms as
-virtual sites and refuses to bond them to each other, which is exactly what a dual topology
-requires.
-
-**Learn (a), and a correction to our own recommendation.** Before accepting the block we
-checked whether anything resolves it. Nothing installed here does. But the search turned up
-something that mattered more: the purpose-built state of the art for this calculation reports
-**RMSE 1.61 kcal/mol**, whose optimistic bound still exceeds the **0.81 kcal/mol** effect we
-are trying to measure, and it names charge-changing mutations (our exact case) as its
-hardest class. We had recommended this route as escaping both failure modes **without
-checking its resolution against the effect**, which is the first test we apply to everything
-else. The tooling block saved us days that would have ended at an unresolvable number.
-
-**Build (b).** The second route came from the literature rather than from us. A 2026 review
-argues that δ/μ selectivity arises from **conformational constraint** beyond the
-message–address framework a payload like ours is built on: a rigid, turn-forming tetrapeptide
-is >1500-fold selective, while a more flexible endogenous peptide binds both receptors
-equally. Our payload is all-L and gene-encoded, so it **cannot** carry either of the features
-that rigidify the selective comparators: a D-amino acid or a C-terminal amide. If constraint
-is what selectivity needs, that is a structural explanation for several cycles of null
-results.
-
-**Test (b).** We pre-registered the gates before opening a trajectory, and built the test
-around controls: a constrained peptide and a highly selective one against a flexible one,
-five replicates each on both receptors, 20 ns matched.
-
-**Learn (b).** **The control gate failed.** The constrained peptide was indistinguishable
-from the flexible one, and the most selective peptide in the set was the *least* turn-like:
-the opposite of the prediction. The diagnosis is in the replicates: five runs of the same
-system, differing only by seed, span the entire range of the metric. Twenty nanoseconds from
-a modelled pose does not re-equilibrate a bound peptide's backbone, so the analysis cannot
-separate real conformational preferences from the starting pose. Following the decision rule,
-**we did not score our own peptide and did not spend the compute to do so.**
+Once a tag was required, its position was not free. A carboxy-terminal tag would be carried
+into the terminal Met-enkephalin-Arg-Phe peptide and **destroy one of the seven products**.
+It therefore sits at the amino terminus of the mature protein, immediately downstream of the
+native signal peptide so that the signal peptide remains amino-terminal and secretion is
+unaffected. Verified in the ordered sequences: residues 1 to 24 are the native signal
+peptide, His6 begins at residue 25.
 
 ---
 
-### Where that leaves the question
+## Cycle 3 · The enzyme set, corrected on paper
 
-**We assessed five independent computational approaches. Each one failed, for a specific and
-documented reason.**
+Proenkephalin carries its opioid cores buried inside one long chain, each flanked by paired
+basic residues. **HEK293T cells carry the constitutive convertases and not the neuroendocrine
+ones, and have no regulated secretory pathway at all**, so expression and maturation are
+treated as two separable engineering problems rather than assuming the cell solves both.
 
-| approach | why it cannot answer the question |
-|---|---|
-| Co-folding confidence difference | failed its correlation gate against published reference compounds |
-| MM-GBSA rescoring | failed its own pre-registered gate |
-| Fingerprint QSAR (ours) | aggregate correlation looks good, but the prediction is a nearest-neighbour lookup and flips sign when neighbours are removed |
-| Published sequence- and transfer-learning predictors | their reported error, converted to a selectivity difference, is several times larger than the effect we need to resolve |
-| Alchemical free energy | its own control's replicates disagree by **17× the effect** (and after re-spacing fixed the overlap problem, by more) |
+### Design
 
-That last one is the most informative. We ran native Met-enkephalin, whose selectivity is
-published, through the identical protocol as a control. Its two replicates came back at
-**−3.12 and +5.41 kcal/mol**: opposite signs, from nothing but a different random seed. We
-then measured *why*: along the thermodynamic path, **20–21 of 25 intervals** had poorly
-overlapping work distributions for our payload (9–15 of 25 for the control), which makes the
-estimator noisy rather than wrong-headed. More computer time cannot fix that; only a finer
-path can, which is what we are now running.
+The literature names PC1/3 and PC2 as the endoproteases acting on neuropeptide precursors,
+often found together in the same secretory granules. Supply both and let them cut
+proenkephalin between them.
 
-**The common cause is the reference data, not any single method.** Four of the five calibrate
-against published binding affinities, and our own records disagree by **1.83 kcal/mol** on a
-single compound measured in two different studies, which is *larger than the effect we are
-trying to measure*.
+### Build PC1/3 + PC2
 
-So the honest position, and the one on our poster: **δ-preference is a design goal, and the
-cAMP assay is the experiment that decides it**, not a confirmation of a computational
-result, but the only measurement that can settle it.
+The precursor expressed with a His tag and isolated by IMAC. **IMAC matters more than it
+first appears**: it does not only remove contaminating protein, it yields a substrate that
+can be **quantified**, so every enzyme amount downstream is defined per microgram of
+substrate.
 
-**Four of the five approaches in that table are our own, and we report all four as failed.**
-At the level of individual predictions the repository's ledger stands at **20 scored, 10
-confirmed, 10 falsified**, each with the commit that registered it before its test.
+### Test PC1/3 + PC2
 
-We think that is a stronger position than one unchallenged number, and it is the reason we
-trust the three cycles above.
+Each enzyme checked against what the literature reports it does, and the two checked against
+each other.
+
+### Learn PC1/3 + PC2
+
+**The set is chemically incomplete.** Releasing the cores takes two different activities in a
+fixed order: an endoprotease cuts at the paired sites, then an **exopeptidase** removes the
+basic residues left at each new carboxy terminus. Two endoproteases cover the first activity
+twice and the second not at all.
+
+### Re-Design PC2 → CPE + Co²⁺
+
+PC1/3 is dropped; **carboxypeptidase E** is added, supplying the one activity no endoprotease
+performs. And CPE is never a specification on its own: it is a metallopeptidase whose
+activity depends on a divalent metal, with reported conditions carrying **cobalt at 2 mM**.
+The metal belongs to the enzyme, not to a later optimisation.
+
+### Re-Build PC2 → CPE + Co²⁺
+
+**Two sequential reactions rather than one, and the metal is what forces the sequence.**
+
+The working assumption had been a single granule-like buffer with CPE added into the same
+tube. That does not hold: **the same ion CPE requires inhibits PC2.** PC2 runs first in
+acidic calcium conditions, and only once it has finished is CPE added with its cobalt. What
+looked like one reaction with two enzymes is two reactions in sequence.
+
+### Re-Test PC2 → CPE + Co²⁺
+
+The second set checked the same way as the first: each enzyme against the literature, and
+the two against each other. Does the set cover both activities? Are the conditions
+compatible? What is left at the ends?
+
+### Re-Learn PC2 → CPE + Co²⁺
+
+The design closes: a chemically complete enzyme set, in the order and conditions its enzymes
+require. **The incompatibility was found on paper, where it costs nothing, rather than in a
+reaction that would simply have underperformed.** Two enzymes that each work do not make a
+working set until their conditions are compared.
+
+**What this cycle cannot claim.** The conclusion concerns the enzyme set, not yield. Which
+cores are released in what proportion is not something a literature check settles.
+
+**And the digestion is a model, not the therapy.** CNS neurons carry PC2, CPE and a regulated
+secretory pathway of their own, so what is reconstructed here on the bench happens
+endogenously in the patient.
+
+*Dry lab support for this cycle:* predicted structures of both precursors, with solvent
+accessibility measured at all twelve dibasic sites PC2 must cut. Across the twelve
+corresponding sites, 0.411 native versus 0.343 engineered, p = 0.160. No evidence that
+recoding buries the processing sites. Reported as a **weak negative only**, because
+prediction confidence was below the band where per-residue burial is interpretable. Details
+and the withdrawn finding are on the Model page.
 
 ---
 
-## Delivery vehicle
+## Cycle 4 · Testing that the product works
 
-The construct has to reach nasal epithelium. We modelled a non-viral lipoplex, coarse-grained
-molecular dynamics of a lipid formulation with the DNA cargo, and produced a formulation
-specification for the wet lab.
+To test the matured peptide we have to examine its binding to the mu and delta opioid
+receptors, both of which sit on the external cell surface.
 
-Non-viral delivery is a deliberate choice rather than a fallback: no genomic integration, no
-anti-vector immunity, re-administrable, and a better-established regulatory route than viral
-vectors. It is also why a nasal spray is plausible at all, where the gene-therapy
-alternatives for chronic pain require intrathecal delivery or hospitalisation.
+### Design
+
+The matured enkephalin must bind its receptors with high affinity, which requires that in
+vitro maturation produced a product correctly cut and correctly folded.
+
+### Build
+
+Two 96-well ELISA plates coated separately with the two receptors, followed by reciprocal
+dilutions of the matured peptide and detection of the receptor-peptide complex.
+
+### Test
+
+Evaluation made clear the ELISA signal might not meet expectations, **and that such weakness
+is often unrelated to actual binding ability**. Replicating brain-like conditions in a
+coated well is the difficulty, not the protein.
+
+### Rebuild
+
+Two additional plasmids were constructed, one for the mu receptor and one for the delta
+receptor, and used to transfect cells as the original construct was. The readout moves from
+a plate-bound binding assay to a **cellular functional** one.
+
+### Retest
+
+The **cAMP-Glo assay** with forskolin, following the protocol supplied with the commercial
+kit.
+
+### Learn
+
+Two methodological conclusions. First, **a weak initial ELISA signal does not imply incorrect
+protein structure**, since signal strength depends heavily on assay conditions. Second, a
+functional readout in cells answers the question the plate assay was being asked to answer,
+and answers it under conditions closer to the target tissue.
+
+*Dry lab support for this cycle:* a delta/mu selectivity model calibrated against thirteen
+published reference opioids, r = 0.805, p = 0.0009, correct sign on 12 of 13. Applied to the
+engineered payload it gives +1.23 +/- 1.76 kcal/mol delta over mu. **That interval includes
+zero**, so delta preference is stated throughout as a design goal rather than a demonstrated
+result. The cAMP assay in this cycle is the instrument that settles it.
 
 ---
 
-## What we would tell another team
+## Scope, stated plainly
 
-**Test the assumption you did not make.** Our vendor rejection was in inherited sequence, not
-in the part we designed. We had tested what we built and trusted what we were given.
+This chain runs four steps: **construct design, expression, affinity capture, in vitro
+maturation.** The season closed with that chain complete and no further.
 
-**Calibrate a method before you quote it.** Every selectivity number we withdrew came from a
-method we had not first checked against a value someone had measured.
+Within it, the constructs are expressed **transiently** rather than from stable selected
+lines, which suits a workflow whose purpose is to generate precursor for purification inside
+a short window. The digestion is reconstituted enzymatically in a tube rather than carried
+out by the cell, which gives control over it but does not demonstrate that a cell expressing
+the construct performs the same chemistry.
 
-**A control that destroys your result is the control working.** Our free-energy control cost
-us our only quantitative selectivity claim. Running it was still right, and we would rather
-find that here than in front of a reviewer.
+**These are proof-of-principle results.** They establish that the construct expresses, that
+the precursor can be captured, and that it is a substrate for the maturation reaction.

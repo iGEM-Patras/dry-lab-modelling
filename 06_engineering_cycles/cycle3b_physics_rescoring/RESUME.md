@@ -334,7 +334,7 @@ Budget unchanged: 71.5 ns/day measured → Stage 1 = 6.7 GPU-days (~3.4 d on 2 G
 
 All 6 systems built with `RESUME_EXIT=0`, `tleap Errors=0`, and every log carries
 `amide verified in final topology: 1 NHE residue(s)`. The `--resume` path worked:
-builds took 45 s – 2:48 instead of ~30 min. The nullglob fix for the silent EXIT=2
+builds took 45 s, 2:48 instead of ~30 min. The nullglob fix for the silent EXIT=2
 is confirmed correct against real builds.
 
 ## BLOCKER 1: build → production skipped a stage

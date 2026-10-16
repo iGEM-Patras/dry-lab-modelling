@@ -27,8 +27,8 @@ models with confidence scores. Nothing in the output announces the mistake.
 | Cys content | 207 residues, 23.4 % | chemically absurd |
 | MSA depth | **1** | no homolog exists, because the molecule doesn't |
 | Mean pLDDT | 32.1 (97 % below 50) | "very low" across essentially the whole chain |
-| pTM | 0.16 – 0.18, all 5 models | no reliable global fold |
-| `fraction_disordered` | 0.13 – 0.56 | AlphaFold's own disorder call, on nonsense |
+| pTM | 0.16, 0.18, all 5 models | no reliable global fold |
+| `fraction_disordered` | 0.13, 0.56 | AlphaFold's own disorder call, on nonsense |
 
 MSA depth 1 is the single most diagnostic number. PENK is a well-conserved
 vertebrate gene with abundant homologs; a real PENK submission returns a deep

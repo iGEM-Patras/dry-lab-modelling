@@ -64,9 +64,9 @@ atoms as predicted, 59 once OXT is added.
 
 | contact | distance | |
 |---|---|---|
-| `ASP128:OD2 – TYR373:N` (δ) | 2.65 Å | D3.32 anchoring the peptide's N-terminal amine |
-| `ASP149:OD2 – TYR401:N` (μ) | 2.68 Å | the equivalent residue in OPRM1 |
-| `ARG192:NH1 – GLY380:OXT` (δ) | 2.65 Å | the free-acid C-terminus in a salt bridge |
+| `ASP128:OD2, TYR373:N` (δ) | 2.65 Å | D3.32 anchoring the peptide's N-terminal amine |
+| `ASP149:OD2, TYR401:N` (μ) | 2.68 Å | the equivalent residue in OPRM1 |
+| `ARG192:NH1, GLY380:OXT` (δ) | 2.65 Å | the free-acid C-terminus in a salt bridge |
 
 Asp3.32 is the conserved opioid-receptor residue that salt-bridges the protonated amine of every
 opioid ligand. Its spontaneous formation in both systems is independent evidence the pose is sane.

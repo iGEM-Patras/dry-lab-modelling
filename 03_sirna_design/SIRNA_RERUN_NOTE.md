@@ -214,9 +214,9 @@ It is the only guide strong on **all three** selection axes at once:
 
 | | `2700-2722` | range across the 17 |
 |---|---|---|
-| seed-duplex Tm (guide) | **13.6 °C** | 6.3 – 21.5 |
-| near-matches in the human transcriptome (3 mm) | **2** | 2 – 38 |
-| target accessibility (mean unpaired prob.) | **0.66** | 0.32 – 0.66 (highest) |
+| seed-duplex Tm (guide) | **13.6 °C** | 6.3, 21.5 |
+| near-matches in the human transcriptome (3 mm) | **2** | 2, 38 |
+| target accessibility (mean unpaired prob.) | **0.66** | 0.32, 0.66 (highest) |
 
 Seed Tm is the most informative single column siDirect prints: a weak seed duplex
 suppresses microRNA-like off-target silencing, which is the dominant off-target

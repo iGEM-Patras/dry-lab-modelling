@@ -4,12 +4,62 @@ This file records every tool, force field, database, parameter, and published
 rule used in the computational work, so the methods section is fully traceable.
 
 ## Software & versions
-- **GROMACS 2024.5** (conda-forge build, CUDA 11.8), MD engine.
+
+A runnable specification for the Python analyses is in [`environment.yml`](environment.yml).
+Simulation engines and web services are not installable from it and are listed separately
+below. **Versions appear only where the version actually used was recorded**; entries marked
+*version not recorded* are honest gaps rather than omissions to be filled in later from
+memory.
+
+### Simulation and structure prediction
+
+- **GROMACS 2024.5** (conda-forge build, CUDA 11.8), molecular dynamics engine.
   Abraham MJ et al. (2015) *SoftwareX* 1–2:19–25. doi:10.1016/j.softx.2015.06.001
-- **Biopython** (SeqIO / Seq) for sequence parsing & translation.
-  Cock PJA et al. (2009) *Bioinformatics* 25(11):1422–3. doi:10.1093/bioinformatics/btp163
-- **NCBI BLAST+ / URLAPI** (blastn-short) for siRNA off-target screening.
+- **MARTINI** coarse-grained force field, lipoplex simulations. *Version not recorded.*
+- **Boltz 2.2.1**, co-folding and structure prediction. GPU required.
+- **CABS-dock 0.9.14**, blind peptide-protein docking by replica-exchange Monte Carlo.
+  Not distributed on PyPI. The release is Python 2 only; a Python 3 port was made for
+  cycle 17 and is recorded with its thirteen fixes in
+  [`06_engineering_cycles/cycle17_engagement_order/`](06_engineering_cycles/cycle17_engagement_order/).
+  Its Fortran engine ships inside a data file and is compiled at run time, requiring
+  `gfortran` and `-mcmodel=medium`.
+- **ADFR suite / AutoDock CrankPep**, receptor preparation and target-box construction.
+  *Version not recorded.*
+- **pmx**, alchemical residue mutation. Installed from the deGrootLab GitHub repository;
+  no release version. Used in cycle 15, which was **abandoned**, see that directory.
+- **ParmEd**, topology handling.
+- **AmberTools / MM-GBSA**, endpoint rescoring in cycle 3b.
+- **AlphaFold** and **ColabFold** are referenced as the upstream of third-party inputs;
+  neither was run in this project.
+
+### Sequence, structure and statistics
+
+- **Biopython** (SeqIO, Seq, and `Bio.PDB.SASA.ShrakeRupley` for solvent accessibility in
+  cycle 18). Cock PJA et al. (2009) *Bioinformatics* 25(11):1422–3.
+  doi:10.1093/bioinformatics/btp163
+- **NCBI BLAST+ / URLAPI** (blastn-short), siRNA off-target screening.
   Camacho C et al. (2009) *BMC Bioinformatics* 10:421. doi:10.1186/1471-2105-10-421
+- **NumPy**, **SciPy**, **pandas**, **Matplotlib** throughout.
+- **statsmodels**, power calculations and proportion confidence intervals in cycle 17.
+- **scikit-learn**, ROC and AUC in the DeorphaNN validation.
+- **ViennaRNA / RNAfold**, local target-site accessibility for the siRNA arm.
+- **h5py** and **pyarrow**, reading the DeorphaNN pair representations and contact tables.
+- **PyTorch 2.14.1** with **torch-geometric 2.8.1**, running the published DeorphaNN
+  scorer. CPU only; no model was trained in this project.
+
+### Web services, not installable
+
+Each was driven over HTTP and its output is stored in the repository beside the analysis
+that used it.
+
+- **DSIR**, siRNA efficacy scoring. Vert JP et al. (2006) *BMC Bioinformatics* 7:520.
+- **siDirect**, siRNA design with seed-duplex stability.
+- **DeepSig**, signal peptide prediction and cleavage site.
+- **DeepTMHMM**, referenced in the DeorphaNN preprocessing chain; not run here.
+- **Arpeggio**, interatomic contacts in the DeorphaNN pipeline. Not run here: reading the
+  source established that only the contact **topology** is consumed and the chemistry
+  labels are discarded, so the step is reproducible without it. See
+  [`06_engineering_cycles/method_surveys/DEORPHANN_REVISED.md`](06_engineering_cycles/method_surveys/DEORPHANN_REVISED.md).
 
 ## Databases
 - **NCBI RefSeq** (human MME mRNA variants NM_000902.5, NM_007287, NM_007288,
