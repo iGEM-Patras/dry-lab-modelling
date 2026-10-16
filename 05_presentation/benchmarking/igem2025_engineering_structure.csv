@@ -1,0 +1,13 @@
+team,words,n_cycles,cycles_with_titles,dbtl_subheadings,h1_is_eng_success,phrase_count
+Marburg,5785,10,5,14,False,0
+ETH-Zurich,2657,8,8,25,False,0
+XMU-China,4796,8,8,26,True,3
+Patras,267,2,2,0,False,0
+KCL-UK,10529,0,0,5,False,0
+Heidelberg,30004,0,0,360,False,3
+Cambridge,13184,0,0,0,False,0
+Munich,5723,0,0,0,False,0
+Oxford,253,0,0,4,False,0
+Toronto,2753,0,0,32,False,0
+Tsinghua,6633,0,0,84,False,0
+Vilnius-Lithuania,5515,0,0,47,False,0

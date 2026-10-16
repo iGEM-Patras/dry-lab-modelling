@@ -3,9 +3,25 @@
 > Four cycles. Each one changed a design, and three of them changed it because something
 > did not work.
 
-Every cycle below follows Design, Build, Test, Learn, and is counted only where the Learn
-step altered the next Design. Two of the four were corrected **before** any reagent was
-consumed, which is the cheapest place to be wrong.
+## Overview
+
+Epione hands the cell a proenkephalin precursor and lets the cell's own enzymes release the
+analgesic peptides. Building that required solving four problems in sequence, and the
+engineering record below is the account of getting each one wrong first.
+
+| cycle | the problem | what the Learn step changed |
+|---|---|---|
+| **1** | one plasmid must yield two proteins | two coding sequences back to back translate as **one** fused polypeptide, burying the terminal opioid core. An IRES or P2A element goes between them, and both gene orders are built for each |
+| **2** | the precursor must be purified | at roughly 30 kDa it is an unremarkable size among host proteins, so size exclusion cannot isolate it. **The purification problem became a construct problem**: a His6 tag was added and capture moved to IMAC |
+| **3** | the precursor must be cut | PC1/3 plus PC2 covers one enzymatic activity twice and the other not at all. CPE was added, and then its required cobalt turned out to **inhibit PC2**, splitting one reaction into two |
+| **4** | the product must work | a plate-bound binding assay would report weakly for reasons unrelated to binding, so the readout moved to a **cellular functional** assay |
+
+Every cycle follows Design, Build, Test, Learn, and is counted only where the Learn step
+altered the next Design. **Two of the four were corrected before any reagent was consumed**,
+which is the cheapest place to be wrong.
+
+The dry lab appears inside these cycles as support rather than as cycles of its own; the
+modelling record in full is on the Model page.
 
 ---
 
