@@ -1,5 +1,39 @@
 # What each wiki page should say
 
+> **Revised 16 Oct 2026, after reading the team's own wiki texts.** An earlier version of
+> this document said the Description page was unwritten and treated several pages as gaps.
+> That was wrong: the team has `DESCRIPTION` at 2,519 words, `EXPERIMENTS` at 5,873,
+> `SAFETY` at 1,918 and `ENGINEERING` at 2,451, plus Contribution, Integrated Human
+> Practices, Inclusivity and Entrepreneurship. The wiki is largely written. What follows is
+> corrected to say where the dry lab adds something and where it should stay out of the way.
+
+## Where the dry lab actually adds something
+
+| page | who owns it | dry-lab contribution |
+|---|---|---|
+| Description | team, written | none needed |
+| Engineering | wet lab, written | `WIKI_ENGINEERING.md` is a presentation layer over their four cycles, same cycles in the same order, with descriptive titles added because 4 of 4 benchmarked teams that number cycles also title them |
+| Experiments | wet lab, written | none needed |
+| Safety | wet lab, written | `WIKI_SAFETY.md` is an insert, not a replacement. Their section covers the lab and the delivery device and contains no mention of seizure liability, anti-PEG or MHC immunogenicity |
+| **Model** | **dry lab** | `WIKI_MODEL.md`. No Model section exists in the team's documents, and this is the Best Model submission |
+| Results / Tests | open | the team's `RESULTS` section is empty and their build notes rename it **Tests**. `WIKI_RESULTS.md` carries the computational record; the bench rows are still pending |
+
+## House style, measured from the team's own documents
+
+Rather than guess, these were measured from `WET.docx` and the Contribution page.
+
+| | team | target |
+|---|---|---|
+| mean sentence | 20.4 to 21.0 words | match it |
+| words in bold | 2.0 % to 6.9 % | stay inside |
+| bold span length | median 2 words, 79 % at 4 or fewer, 90th pct 6 | emphasise terms, numbers and verdicts, never clauses |
+| tables | yes, 8 in `WET.docx`, 3 to 5 rows each | small and frequent beats large and rare |
+| voice | first person plural throughout | "we found", never "the team found" |
+
+The Human Practices register is different again: flowing narrative, longer paragraphs, the
+reasoning explained conversationally. Technical pages are tighter. Both are first person.
+
+
 Derived on 16 Oct 2026 from the measured structure of 2025 team wikis, not from
 recollection. Twelve Engineering pages and twenty-one Model, Description and Results pages
 were read directly from `2025.igem.wiki`.
@@ -72,9 +106,10 @@ prediction, every number carries the interval that bounds it, and where a method
 own control the page says so instead of quoting what it produced. The free-energy campaign
 and cycle 17 are both reported as failures.
 
-## Results
+## Results, to be renamed Tests
 
-**Status: draft exists** (`WIKI_RESULTS.md`), **needs the wet lab's data.**
+**Status: draft exists** (`WIKI_RESULTS.md`), **needs the wet lab's data.** The team's build
+notes rename this page **Tests**, and their own `RESULTS` section is currently empty.
 
 The convention is Problem to evidence to limits. What this page can carry now is the
 computational record; what it cannot carry is the bench. It should state plainly which rows
@@ -83,7 +118,8 @@ putting it in a table that looks like data.
 
 ## Description
 
-**Status: not written. This is team copy, not dry lab.**
+**Status: written by the team, 2,519 words.** No dry-lab action. The structure below is
+retained only as a record of the convention it already follows.
 
 The convention is tight and worth following exactly. Across KCL-UK, Tsinghua and XMU-China
 the order is the same:
