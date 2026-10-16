@@ -1,0 +1,12 @@
+parameter,low,high,units,source_class,note
+spray_volume_uL,100.0,200.0,"uL per actuation, both nostrils",device,Standard metered nasal spray pumps deliver 50 to 100 uL per nostril.
+f_olf,0.005,0.05,fraction of dose reaching the olfactory region,literature range,The olfactory region is a small fraction of the nasal surface and is poorly reached by conventional sprays. Device work aims to raise this.
+eta_tf,0.001,0.05,fraction of exposed cells productively transfected,assumption,In vivo non-viral transfection of nasal epithelium. Wide because it depends on formulation and on mucociliary clearance competing with uptake.
+cells_exposed,1000000.0,10000000.0,cells in the exposed olfactory epithelium,physiological,Human olfactory epithelium is roughly 2 to 10 cm2 with ~1e6 cells/cm2.
+f_cns,0.05,0.5,fraction of secreted peptide entering the CNS compartment,assumption,Peptide secreted at the epithelium partitions between systemic uptake and direct nose-to-brain routes. Highly uncertain.
+cns_volume_mL,140.0,170.0,mL,physiological,Adult human CSF volume.
+csf_turnover_per_h,0.15,0.25,fraction of CSF replaced per hour,physiological,CSF is replaced roughly 3 to 4 times daily.
+t_half_min_native,1.0,5.0,min,literature range,"Enkephalins are degraded within minutes, principally by neprilysin and aminopeptidase N."
+knockdown_fold,1.5,4.0,fold increase in peptide half-life,assumption,"Effect of the neprilysin siRNA arm. Neprilysin is one of two main enzymes, so even complete knockdown cannot give an unbounded increase."
+ec50_nM,1.0,50.0,nM at the delta receptor,literature range,Enkephalin potency at DOR. Spans the range reported across assay formats.
+expression_days,3.0,14.0,days of useful expression from one dose,assumption,"Transient, non-integrating plasmid in a tissue that turns over."

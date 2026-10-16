@@ -1,0 +1,38 @@
+{
+ "free_variable": "peptide molecules secreted per transfected cell per day",
+ "required_yield_bulk_csf_155mL": 273000000000000.0,
+ "plausible_cellular_output": [
+  10000.0,
+  1000000.0
+ ],
+ "shortfall_fold": 273000000.0,
+ "k_enzymatic_per_h": 5.041070404072329,
+ "k_bulk_per_h": 0.2,
+ "enzymatic_dominance_fold": 25.205352020361644,
+ "silencing_benefit_midpoint_fold": 2.68321974844527,
+ "silencing_ceiling_fold": 70.30984454894305,
+ "top_drivers": [
+  {
+   "parameter": "eta_tf",
+   "rho": 0.5293677327574192,
+   "source": "assumption"
+  },
+  {
+   "parameter": "cells_exposed",
+   "rho": 0.3988753927361884,
+   "source": "physiological"
+  },
+  {
+   "parameter": "f_olf",
+   "rho": 0.3952244777110611,
+   "source": "literature range"
+  },
+  {
+   "parameter": "f_cns",
+   "rho": 0.38815435753638583,
+   "source": "assumption"
+  }
+ ],
+ "assumptions_in_top_four": 2,
+ "status": "parametric, awaiting the transfection yield"
+}

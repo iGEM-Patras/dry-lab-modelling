@@ -1,0 +1,11 @@
+parameter,spearman_rho,p_value,source_class
+eta_tf,0.5293677327574192,0.0,assumption
+cells_exposed,0.3988753927361884,0.0,physiological
+f_olf,0.3952244777110611,0.0,literature range
+f_cns,0.38815435753638583,0.0,assumption
+t_half_min_native,0.2909298088108244,0.0,literature range
+knockdown_fold,0.18355578294288943,4.512607014531211e-151,assumption
+spray_volume_uL,0.07057618423294044,1.638567273217055e-23,device
+cns_volume_mL,-0.0332236422410591,2.607530633670959e-06,physiological
+expression_days,0.005746393467865983,0.4164367220250461,assumption
+csf_turnover_per_h,0.0030334147215835363,0.6679495704323168,physiological
