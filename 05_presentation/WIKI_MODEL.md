@@ -22,7 +22,20 @@ ruled out eight routes.
 
 ---
 
-## 2 · Calibration before prediction
+## 2 · Our assumptions, and which of them broke
+
+Every model here rests on assumptions we can name. Three of the five below were falsified by
+our own work, which is why they are listed before the results rather than after.
+
+| assumption | status |
+|---|---|
+| A **binding** difference predicts the **functional** difference the therapy needs | **unresolved, and it matters.** Every number on this page is a binding quantity; the cAMP assay measures potency. A disagreement between them would be ligand bias, and nothing computational here can tell the two apart |
+| Published reference affinities are comparable across sources | **falsified.** Between-source disagreement for these two receptors exceeds the 0.81 kcal/mol effect we are trying to resolve. This is why calibration against a panel, not a single literature value, became mandatory |
+| Per-residue features of a predicted structure are interpretable | **falsified for disordered regions.** Cycle 18's precursor predictions came back at pLDDT 43 and 37, below the band where per-residue burial means anything. The finding built on it was withdrawn |
+| A selectivity difference can be computed as the difference of two large absolute free energies | **falsified.** Correlated per-window bias accumulates along the path, and with the two legs drifting in opposite directions the errors add rather than cancel |
+| Coarse-grained sampling preserves the approach-path information an engagement-order analysis needs | **untested.** Named as a candidate explanation for cycle 17's control failure, not demonstrated |
+
+## 3 · Calibration before prediction
 
 A selectivity model was calibrated against **thirteen published reference opioids** spanning
 mu-selective, delta-selective and mixed pharmacology, before being applied to our own
@@ -48,7 +61,7 @@ demonstrated result**. No later work changed that, and two later methods pushed 
 
 ---
 
-## 3 · The free-energy calculation, and why we do not quote its number
+## 4 · The free-energy calculation, and why we do not quote its number
 
 An alchemical free-energy calculation was built to test the same question from first
 principles. It is the most expensive thing the dry lab attempted, and it **failed its own
@@ -82,7 +95,7 @@ is what prevented that.
 
 ---
 
-## 4 · A learned method, validated rather than cited
+## 5 · A learned method, validated rather than cited
 
 A graph neural network over peptide-GPCR complexes was suggested independently by a
 bioinformatician colleague. Before spending compute on our receptors, we reproduced the
@@ -114,7 +127,7 @@ delta/mu preference, it cannot rank ours.
 
 ---
 
-## 5 · The rest of the modelling, each with its limit stated
+## 6 · The rest of the modelling, each with its limit stated
 
 **Lipoplex formulation.** Coarse-grained molecular dynamics, **200 ns across three
 independent replicates**, confirmed the mechanism expected of an ionisable lipid:
@@ -173,7 +186,58 @@ cannot target the transcript it exists to protect.
 
 ---
 
-## 6 · What the modelling is for, and what it is not
+## 7 · What the modelling actually changed at the bench
+
+A model that changes nothing is an essay. These are the decisions that went differently
+because of the dry lab, each traceable to a cycle.
+
+| the model found | the bench changed |
+|---|---|
+| Two coding sequences placed back to back translate **in silico** as one continuous fusion protein, burying the carboxy-terminal opioid core | An IRES or P2A element was placed between them, and **both gene orders were built for each**, giving the four constructs that were ordered |
+| A carboxy-terminal purification tag would be carried into the terminal Met-enkephalin-Arg-Phe peptide and **destroy one of the seven products** | The His6 tag sits at the amino terminus of the mature protein, immediately downstream of the native signal peptide so secretion is unaffected |
+| The vendor rejected the first ordering-ready set. Diagnosis: the two terminal flanks were exact reverse complements of each other, a defect inherited from existing files rather than introduced | Flanks repaired, all four v6 constructs accepted and ordered |
+| HEK293T carries the constitutive convertases but **not** the neuroendocrine ones, and has no regulated secretory pathway | Maturation is reconstituted **in vitro** as a separate step rather than assumed to happen in the cell |
+| Of 206 siRNA candidates, a top-ranking one carries a high-frequency population variant in its target site; and the lipoplex co-packages both cargoes, so a guide could silence the therapeutic transcript it is meant to protect | Two guides selected on efficacy, seed thermodynamics, transcriptome-wide specificity, all four transcript variants, population variants, **and against our own expression cassette**, a check no design tool performs |
+| Every registry anti-enkephalin antibody is raised against native `YGGFM`; the construct recodes every core | A custom polyclonal is on the critical path, and the readout for the maturation assay is LC-MS/MS rather than ELISA |
+| Recoding does not systematically bury the dibasic sites the convertase must cut (0.411 native vs 0.343 engineered, p = 0.160) | Weak reassurance only, and explicitly not a number to rely on. LC-MS/MS on the supernatant settles it directly |
+| No computational route separates the payload from its comparator at the required resolution | The arbiter is a **functional cellular assay**, cAMP-Glo with forskolin, rather than more modelling |
+
+## 8 · Parameters and thresholds
+
+Every threshold used on this page, in one place, so a reader can check that none was chosen
+after seeing the result. All were fixed in the relevant pre-registration before the data existed.
+
+| quantity | value | where it comes from |
+|---|---|---|
+| effect size to be resolved | **0.81 kcal/mol** | the published δ/μ selectivity of native Met-enkephalin, the thing any method must beat |
+| calibration gate | **r > 0.7** across 13 reference opioids | set before the panel was scored |
+| native-like pose | **RMSD < 5.0 Å** | the standard criterion, and the same value used in every cycle that reports it |
+| heavy-atom contact | **4.5 Å** | interface definition, cycle 17 |
+| free-energy overlap gate | relative entropy **< 1.0 kT** per λ-interval | cycle 14 pre-registration |
+| replicate agreement gate | spread **< 2×** the combined error | cycle 14 pre-registration |
+| MHC-I strong binder | **%rank ≤ 0.5** | tool default, not tuned |
+| MD analysis window | **100 to 200 ns** | chosen after contacts were shown to plateau by ~100 ns, not before |
+
+## 9 · Code and reproducibility
+
+Every analysis on this page runs from the public repository. The Python environment is
+specified in `environment.yml`; the simulation engines and web services are listed
+individually in `methods_references.md`, each with how it was obtained and whether its
+version was recorded.
+
+Two things we would want another team to be able to reuse directly:
+
+- **The engagement-order classifier** (`engagement_order.py`) takes any peptide-receptor
+  trajectory and returns which domain contacted first and the best pose reached. It carries
+  its own synthetic controls with known answers, and it is strict where it used to guess:
+  an earlier version silently returned seven receptor residues as the peptide, and the fix
+  is documented in the source rather than quietly applied.
+- **The calibration-first pattern.** Before any method was used on our payload it was scored
+  against a panel of compounds with published selectivity, and a gate was committed in
+  advance. That is the single practice that stopped this project quoting numbers it could
+  not defend, and it costs one day per method.
+
+## 10 · What the modelling is for, and what it is not
 
 **Eight routes to a computational selectivity number have been closed**, each on the same
 criterion. Two failure modes rule out whole classes rather than individual tools: anything
