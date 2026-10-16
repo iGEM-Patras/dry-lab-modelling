@@ -97,6 +97,8 @@ reproduce the published engagement asymmetry: an odds ratio of **1.20** at p = 0
 and we note that its partial data looked favourable. A measurement from a method that could
 not detect the effect on a positive control is not weak evidence; it is not evidence.
 
+**The campaign then ran that arm to full size anyway, and the favourable number collapsed**: an odds ratio of 6.75 at 30 trajectories, 2.78 at 50, and **1.07 at the full 150**, indistinguishable from the control and from no effect. Reporting the interim would have required a retraction.
+
 **One learned method did validate**, and it is the only one in the project with a
 demonstrated capability rather than an assumed one. Scoring a published peptide-GPCR
 classifier against a receptor clade excluded from its training gave **AUC 0.893**, and its

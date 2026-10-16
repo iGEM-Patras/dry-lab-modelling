@@ -46,17 +46,31 @@ wrong when I made it, and I should have said the estimate was still moving.
 The final seed moved it again, 1.09 to 1.20. Checking rather than assuming was therefore the
 right call both times; it simply did not change the verdict on the second occasion.
 
-## G3 is not scored, and the engineered arm looks better
+## G3 was not scored, and the campaign then showed why that mattered
 
-This is the part worth being explicit about. The engineered arm reached 50 trajectories and
-its numbers are **18.2 % versus 7.4 %, OR 2.78** , larger than the control and in the
-published direction.
+At 50 trajectories the engineered arm read **18.2 % versus 7.4 %, OR 2.78**: larger than the
+control, in the published direction, and favourable to our own construct. It was not
+reported, because the instrument had failed its calibration. A measurement from a method
+that could not detect the effect on a positive control is not weaker evidence, it is not
+evidence.
 
-It is not reported as a result, because the instrument failed its calibration. A measurement
-from a method that could not detect the effect on a positive control is not weaker evidence,
-it is not evidence. That is precisely the circumstance the gate ordering was registered to
-handle, and the fact that the unscored number happens to favour our own construct is the
-reason the ordering was written down in advance rather than decided now.
+**The campaign then ran that arm to full size, and the number collapsed.**
+
+| trajectories | engPENK odds ratio |
+|---|---|
+| 30 | **6.75** |
+| 50 | 2.78 |
+| 90 | 2.10 |
+| 120 | 2.27 |
+| **150** | **1.07** |
+
+At its full pre-registered size the engineered arm sits at **20.3 % versus 19.2 %, OR 1.07,
+p = 0.52**: indistinguishable from the control's 1.20 and indistinguishable from no effect.
+
+Had the favourable interim been reported, it would have had to be retracted. The gate
+ordering was written down before any simulation ran precisely so that the decision not to
+report it would not be ours to make after seeing it, and the full campaign is the evidence
+that the ordering earned its cost rather than merely imposing one.
 
 ## What can be claimed
 
@@ -106,6 +120,8 @@ comparison stands, because the same peptide is on both sides.
 
 ## Cost
 
-26 simulations at roughly 3.2 h on 4 cores each, about 333 core-hours, plus the 4 that
-survived the earlier run-clock error. Spent on a question that returned a null, which is
+**30 simulations, 300 trajectories, both arms at 15 of 15 seeds.** Roughly 3.2 h on 4 cores
+each, about 384 core-hours. Spent on a question that returned a null in both arms, which is
 what the budget was authorised for.
+
+![Both arms decay to no effect as trajectories accumulate](c17_both_arms_decay.png)
