@@ -127,6 +127,25 @@ that crystal pose to **3.41 A**, 4 of 32 models within 5 A. A deliberately under
 control recovered **nothing** (39.05 A), which is what rules out an artefact of our own pose
 selection. This validates the docking protocol; it is not a selectivity result.
 
+**And the analysis we built on it failed its own control.** Having a working docking
+protocol, we asked a further question from a 2026 preprint: do opioid peptides engage
+message-domain first or address-domain first, and is one order more productive? The control
+requirement was that deltorphin reproduce the published asymmetry, **18.8 % versus 5.0 %**,
+before our payload was scored at all.
+
+Over the full pre-registered campaign, **150 trajectories, 15 independent seeds**, it did
+not. Address-first trajectories reached a native-like pose **13.8 %** of the time against
+message-first at **11.8 %**: an odds ratio of **1.20** where the published effect corresponds
+to roughly **4.4**, at p = 0.51 with **0.74 power** to detect the published effect. The
+campaign ran to its designed size, so sample size is not an explanation available to us.
+
+**Our payload was therefore never scored on this measure**, and we note that its partial
+data looked *favourable*: an odds ratio of 2.78 in the published direction. We are not
+reporting it. A measurement from a method that could not detect the effect on a positive
+control is not weak evidence, it is not evidence, and the ordering that forbids reporting it
+was registered before any simulation ran precisely so that this decision would not be ours
+to make after seeing the number.
+
 **Processing-site accessibility.** Predicted structures of the engineered and native
 precursors, with solvent accessibility measured at all twelve dibasic sites. Across all
 twelve corresponding sites: **0.411 native versus 0.343 engineered, p = 0.160.** No evidence
