@@ -66,7 +66,7 @@ reference opioids (r = 0.805, signs correct on 12 of 13). Everything we did afte
 to narrow that interval, and the interval is set by the accuracy floor of the available
 methods, not by effort.
 
-**Seven computational routes were attempted. Five of our own methods are recorded as
+**Eight computational routes were attempted. Five of our own methods are recorded as
 falsified against the public record**, each with its pre-registration and its verdict
 committed to version control before the test ran:
 
@@ -79,11 +79,31 @@ committed to version control before the test ran:
 | alchemical free energy, re-spaced ladder | overlap **fixed**; reproducibility failed |
 | residue-mutation free energy | blocked on tooling, and its published RMSE (1.61 kcal/mol) exceeds the effect (0.81) |
 | conformational-constraint descriptor | control gate failed; trajectories not converged |
+| graph neural network on interface graphs | reported MAE 2.31 kcal/mol, 2.9 times the effect, and trained on protein-protein rather than peptide-GPCR binding |
 
 Two general lessons rule out classes rather than instances: anything anchored to published
 affinities inherits a between-source disagreement larger than the effect, and anything
 computing selectivity as a difference of two large absolute quantities accumulates
 correlated bias.
+
+**A ninth route asked a different question, and also failed its control.** Rather than
+predict an energy, it asked whether the payload engages the receptor in the same **domain
+order** as deltorphin, whose address sequence it carries. Blind docking first had to prove
+itself, and did: it recovered the deltorphin crystal pose (PDB **8F7S**) to **3.41 Å** while
+a deliberately under-sampled run of the same pipeline recovered nothing. But over the full
+pre-registered campaign of **150 trajectories across 15 seeds**, the control did not
+reproduce the published engagement asymmetry: an odds ratio of **1.20** at p = 0.51, with
+0.74 power, against a published value near 4.4. Our payload was therefore **never scored**,
+and we note that its partial data looked favourable. A measurement from a method that could
+not detect the effect on a positive control is not weak evidence; it is not evidence.
+
+**One learned method did validate**, and it is the only one in the project with a
+demonstrated capability rather than an assumed one. Scoring a published peptide-GPCR
+classifier against a receptor clade excluded from its training gave **AUC 0.893**, and its
+ability to tell which of two receptors a peptide prefers survived an offset control
+(95.1 % correct against a 76.1 % baseline, p = 0.003). It never produces a kcal/mol value,
+and running it on our own receptors needs a structure-prediction step we did not build, so
+it is recorded as a validated route for next season rather than a result for this one.
 
 **δ-preference remains a design goal, not a demonstrated result.** The functional cAMP assay
 measures it directly and is subject to none of these constraints.
