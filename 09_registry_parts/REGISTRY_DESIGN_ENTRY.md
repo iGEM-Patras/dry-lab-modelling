@@ -1,8 +1,9 @@
-# Registry entry — Type: **Design**
+# Registry entry, Type: **Design**
 
 **Paste everything below the line into the editor box. Markdown only, no HTML.**
 **Title:** `Engineered proenkephalin precursor: recoding seven payload cassettes while preserving native processing`
 **Affiliation:** Patras UPAT (2026)
+**Part:** `BBa_26J864WV`
 
 ---
 
@@ -146,11 +147,19 @@ part's own transcript to confirm it does not target the therapeutic cassette.
 The part is designed, sequence-verified and compliant with both assembly standards. The
 design preserves everything required for native processing and changes only the payload.
 
-**It has not been characterised at the bench.** One point we want stated rather than
-discovered: the DNA currently in our freezer is the His-tagged, differently codon-optimised
-version of this sequence. This part is that construct's coding sequence minus the
-purification tag, so forthcoming characterisation will support it by **close correspondence
-rather than identity**.
+**It has not been characterised at the bench, and we can say exactly why.** Our
+purification route was specified after the expression cassette rather than alongside it, so
+our first-generation constructs carried no affinity tag. Correcting that meant re-ordering.
+For native proenkephalin the tagged constructs arrived and carried everything downstream.
+For this engineered sequence **there was no time left to order complete plasmids**, since
+full plasmid synthesis turns round more slowly than a linear gene fragment and the season
+would have closed first. The first-generation plasmids therefore served only as backbones,
+and **this sequence entered no expression, purification or maturation experiment.**
+
+One further point we would rather state than have found: the DNA in our freezer is the
+His-tagged, differently codon-optimised version. This part is that construct's coding
+sequence minus the purification tag, so any future characterisation supports it by
+**close correspondence rather than identity**.
 
 The claims this entry supports are: the architecture is preserved, the sequence is clean,
 the payload is no more immunogenic than the one it replaces, and there is no evidence the
