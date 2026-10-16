@@ -4,7 +4,6 @@
 the wet lab: (1) can the DOR interaction be shown *in silico*, and has it been done;
 (2) what is the fallback if the wet-lab demonstration fails.
 ![DOR evidence status: what the co-folding shows, what selectivity does not, and the calibrated Plan B route](figures/dor_evidence_status.png)
-![DOR evidence status](/home/kay/.claude-science/orgs/6cf41134-f542-4332-8c2d-8b7df40cdb61/artifacts/proj_b5d9b81f671a/51962b67-a319-4b70-a4e5-f7c2bd8791f9/v777debf9_dor_evidence_status.png)
 
 ---
 

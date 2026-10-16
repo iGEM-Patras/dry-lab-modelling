@@ -3,6 +3,10 @@
 # libpng12 / libSM / libICE, none of which are in the sandbox base image. Without
 # these on LD_LIBRARY_PATH *every* openbabel format plugin fails to load -- including
 # pdbformat and pdbqtformat -- and agfr exits 1. The conda python env carries all three.
-export ADFR="/home/kay/.claude-science/orgs/6cf41134-f542-4332-8c2d-8b7df40cdb61/workspaces/26811836-f929-4728-a6f6-a5c8fb1dc9c2/adcp/ADFR"
-export LD_LIBRARY_PATH="/home/kay/.claude-science/conda/envs/python/lib:$LD_LIBRARY_PATH"
+# ADFR location, relative to this script so the path does not depend on one machine.
+export ADFR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/adcp/ADFR"
+# Resolve the active interpreter's lib directory rather than hardcoding one machine's
+# path, so this script is portable. Falls back to leaving LD_LIBRARY_PATH untouched.
+_PYLIB="$(python3 -c 'import sys,os;print(os.path.join(sys.prefix,"lib"))' 2>/dev/null)"
+[ -d "$_PYLIB" ] && export LD_LIBRARY_PATH="$_PYLIB:$LD_LIBRARY_PATH"
 export PATH="$ADFR/bin:$PATH"
