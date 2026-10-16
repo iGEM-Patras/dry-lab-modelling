@@ -153,7 +153,8 @@ ours is intranasal.
 
 ## Parts
 
-**Status: entry written** (`09_registry_parts/REGISTRY_DESIGN_ENTRY.md`).
+**Status: both entries written.** `09_registry_parts/REGISTRY_DESIGN_ENTRY.md` for the basic
+part and `09_registry_parts/REGISTRY_COMPOSITE_ENTRY.md` for the composite.
 
 One entry, Type **Design**, because the submission form takes one Type per entry. No
 Characterisation entry should be filed while everything available is predicted rather than
