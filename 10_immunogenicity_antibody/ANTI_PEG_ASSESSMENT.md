@@ -19,7 +19,11 @@ DMG-PEG2000 too.
 | **bench spec + wet-lab protocol** | **DMG-PEG2000** | **C14 diacylglycerol** | **1.5** |
 
 **The immunogenicity assessment is written about a formulation we are not making.** That
-needs fixing before anyone cites it. Everything below is about DMG-PEG2000 at 1.5 mol%,
+**RESOLVED 16 Oct 2026 in favour of the wet lab.** The formulation is theirs to choose and
+their protocol and bench spec agree, so `antibody_assessment.md` was corrected to
+DMG-PEG2000 at 1.5 mol% rather than the question being handed back to them again.
+
+Everything below was already written about DMG-PEG2000 at 1.5 mol%,
 which is what the bench will actually use.
 
 ---
@@ -96,7 +100,7 @@ not an exemption.
 
 | | priority |
 |---|---|
-| **Fix the formulation inconsistency** in `antibody_assessment.md`: it assesses CerC8, the bench uses DMG-PEG2000 | do first, costs nothing |
+| ~~Fix the formulation inconsistency in `antibody_assessment.md`~~ | **DONE 16 Oct 2026**, corrected to DMG-PEG2000 at 1.5 mol% |
 | **Price hydroxyl-terminated PEG2000-DMG.** If available and affordable, it is a one-reagent change with published benefit against pre-existing IgM and complement activation | cheap, specific |
 | **State the route gap** on the Safety page rather than claiming intranasal avoids ABC | honesty, and judges reward it |
 | Sandwich ELISA with RM105 + B141M/B139M for surface PEG density | only if the formulation is being characterised anyway |

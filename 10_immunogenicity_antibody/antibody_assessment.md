@@ -81,8 +81,21 @@ handle than an antibody against a 6.7%-exposed target.
 | B141M / B139M | AB_936779 / AB_936777 | PEG backbone |
 
 Terminus + backbone pair supports a sandwich ELISA for surface PEG density, and screens
-anti-PEG immunogenicity [14]: a real failure mode for the repeat-dosed PEG(2000)-CerC8
-formulation the document specifies.
+anti-PEG immunogenicity [14]: a real failure mode for the repeat-dosed **DMG-PEG2000 at
+1.5 mol%** formulation the wet lab is making.
+
+> **Corrected 16 Oct 2026.** This paragraph previously read "the repeat-dosed
+> PEG(2000)-CerC8 formulation the document specifies", at 5 mol%. That was wrong. The
+> formulation is the wet lab's call and two of their sources agree on it:
+> `11_wetlab_protocols/lipoplex/LIPOPLEX_FORMULATION_WETLAB.md` and
+> `targeting/lipoplex_formulation_spec.csv` both specify **DMG-PEG2000 at 1.5 mol%**, a C14
+> diacylglycerol anchor rather than a C8 ceramide. The original wording is left visible here
+> rather than deleted.
+>
+> **The anti-PEG conclusions are unaffected**, because the detection reagents target the PEG
+> moiety and its terminus rather than the anchor: DMG-PEG2000 is methoxy-terminated, so
+> RM105 and the backbone clones apply unchanged. See `ANTI_PEG_ASSESSMENT.md`, which was
+> written about DMG-PEG2000 throughout.
 
 ## siRNA arm: re-designed for human exclusivity
 

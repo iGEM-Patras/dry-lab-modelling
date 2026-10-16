@@ -3,6 +3,11 @@
 **Date:** 2026-09-25 · Prompted by a wet-lab formulation note arguing for
 `PEG(2000)-CerC8` at 5 mol%, which conflicts with this repo's own bench spec.
 
+> **Resolved 16 Oct 2026.** The conflict is closed in favour of the wet lab, whose protocol
+> and bench spec both specify **DMG-PEG2000 at 1.5 mol%**. `antibody_assessment.md` has been
+> corrected. The CerC8 figures below are retained because they document what was modelled at
+> the time, not what is being made.
+
 ## The gap
 
 **No simulated system contains a PEG-lipid.** Read from the `[molecules]` blocks of every
