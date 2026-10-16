@@ -1,5 +1,13 @@
 # iGEM Model / Best Model: how the dry-lab package aligns
 
+> **Status note, 16 Oct 2026.** This document was scaffolding written to plan the Best Model
+> submission, and parts of it describe an earlier state of the work. The **siRNA counts were
+> stale and are corrected above** (206 candidates and 2 guides, not 2,084 sites and 4
+> duplexes; see [`03_sirna_design/ORDER.md`](../03_sirna_design/ORDER.md), which is the single
+> source of truth). The authoritative Model content is now
+> [`WIKI_MODEL.md`](WIKI_MODEL.md); where the two disagree, that page wins.
+
+
 **iGEM Patras · dry-lab modelling** · a self-audit mapping our computational work to the iGEM judging framework, so the wiki and judging-form entries are targeted rather than generic.
 
 ---
@@ -32,7 +40,7 @@ iGEM's public description of strong modelling asks teams to:
 | Our work | How it guides the wet lab |
 |---|---|
 | **Lipoplex CG-MD** (3 formulations × 3 seeds) | Resolves the pH-dependent DNA-binding switch → tells the team to choose an **ionizable** lipid (MC3-type) over permanent-cation DOTAP. A design decision made *by the model*. |
-| **siRNA design + accessibility** | Ranks 2,084 candidate sites → 4 orderable duplexes with a defensible priority (CDS1224 first). The model chooses the reagents. |
+| **siRNA design + accessibility** | Ranks **206** candidate duplexes → **2** orderable guides with a defensible priority. The model chooses the reagents. |
 | **Plasmid audit** | Model-level sequence audit **found a real defect** (plasmid 1 truncated PENK) → removes a construct from the wet-lab plan before money is spent. |
 | **Restriction-QC design** | Virtual digest predicts the exact gel the wet lab should see → converts modelling into a bench acceptance test. |
 
@@ -106,8 +114,8 @@ To convert this into a scoring wiki page and judging-form entry:
 > Our dry-lab did not describe the system. It decided it. A sequence-level
 > audit of four PENK cassettes found a real defect (a truncated enkephalin
 > core) and selected the construct to build. A ViennaRNA-scored siRNA pipeline
-> screened 2,084 sites to four orderable anti-neprilysin duplexes with a ranked
-> priority. Coarse-grained MARTINI MD across three lipid formulations
+> screened **206** candidate duplexes to **two** orderable anti-neprilysin guides
+> with a ranked priority. Coarse-grained MARTINI MD across three lipid formulations
 > (triplicate seeds, mean ± SEM) resolved the pH-dependent DNA-binding switch
 > that motivates our ionizable-lipid choice over a permanent cation. Every model
 > output is written as a testable prediction with a named wet-lab assay, closing
