@@ -17,7 +17,7 @@ engineering record below is the account of getting each one wrong first.
 | **4** | the product must work | a plate-bound binding assay would report weakly for reasons unrelated to binding, so the readout moved to a **cellular functional** assay |
 
 Every cycle follows Design, Build, Test, Learn, and is counted only where the Learn step
-altered the next Design. **Two of the four were corrected before any reagent was consumed**,
+altered the next Design. Two of the four were corrected before any reagent was consumed,
 which is the cheapest place to be wrong.
 
 The dry lab appears inside these cycles as support rather than as cycles of its own; the
@@ -48,7 +48,7 @@ product examined rather than assumed.
 
 ### Learn
 
-**It does not make two proteins.** With nothing between the genes, the ribosome reads
+It does not make two proteins. With nothing between the genes, the ribosome reads
 through from the first start codon to the last stop codon and produces one continuous
 PENK-mEGFP polypeptide.
 
@@ -65,7 +65,7 @@ ends. **P2A** gives near-stoichiometric ratios through ribosomal skipping, at th
 residual peptide scar.
 
 First principles did not settle which gene should come first, so rather than guess,
-**both orders were built for each element**.
+both orders were built for each element.
 
 ### Re-Build
 
@@ -79,7 +79,7 @@ many polypeptides come out, and what each carries at its ends.
 
 ### Re-Learn
 
-**All four solve the problem of iteration 1.** Every one yields two separate proteins, so
+All four solve the problem of iteration 1. Every one yields two separate proteins, so
 the question changes rather than closes. What the four do not share is what they cost: the
 IRES constructs leave both proteins with native ends but put one gene in a weaker
 cap-independent position, while P2A balances expression and leaves a scar. The decision now
@@ -121,8 +121,8 @@ The precursor cannot be isolated efficiently on size alone, because that size is
 unremarkable among cellular proteins. Affinity capture succeeds where a physical property
 shared with the background fails.
 
-> **The revision this forced, recorded rather than smoothed over.** Our first-generation
-> constructs carried **no affinity tag at all**, because purification had been treated as a
+> The revision this forced, recorded rather than smoothed over. Our first-generation
+> constructs carried no affinity tag at all, because purification had been treated as a
 > step that came after expression. Taking the question to domain experts gave an answer that
 > was obvious in hindsight: IMAC is affinity capture on immobilised nickel, and without a
 > polyhistidine tag there is nothing for the column to hold.
@@ -135,14 +135,14 @@ shared with the background fails.
 > have closed first. The first-generation plasmids therefore served only as backbones for the
 > engineered constructs and entered **no** expression, purification or maturation experiment.
 >
-> **The correction is to the order of work, not to the design.** The purification route
+> The correction is to the order of work, not to the design. The purification route
 > should be specified alongside the expression cassette, because the former constrains the
 > latter.
 
 ### Where the tag had to go
 
 Once a tag was required, its position was not free. A carboxy-terminal tag would be carried
-into the terminal Met-enkephalin-Arg-Phe peptide and **destroy one of the seven products**.
+into the terminal Met-enkephalin-Arg-Phe peptide and destroy one of the seven products.
 It therefore sits at the amino terminus of the mature protein, immediately downstream of the
 native signal peptide so that the signal peptide remains amino-terminal and secretion is
 unaffected. Verified in the ordered sequences: residues 1 to 24 are the native signal
@@ -177,7 +177,7 @@ each other.
 
 ### Learn PC1/3 + PC2
 
-**The set is chemically incomplete.** Releasing the cores takes two different activities in a
+The set is chemically incomplete. Releasing the cores takes two different activities in a
 fixed order: an endoprotease cuts at the paired sites, then an **exopeptidase** removes the
 basic residues left at each new carboxy terminus. Two endoproteases cover the first activity
 twice and the second not at all.
@@ -191,10 +191,10 @@ The metal belongs to the enzyme, not to a later optimisation.
 
 ### Re-Build PC2 → CPE + Co²⁺
 
-**Two sequential reactions rather than one, and the metal is what forces the sequence.**
+Two sequential reactions rather than one, and the metal is what forces the sequence.
 
 The working assumption had been a single granule-like buffer with CPE added into the same
-tube. That does not hold: **the same ion CPE requires inhibits PC2.** PC2 runs first in
+tube. That does not hold: the same ion CPE requires inhibits PC2. PC2 runs first in
 acidic calcium conditions, and only once it has finished is CPE added with its cobalt. What
 looked like one reaction with two enzymes is two reactions in sequence.
 
@@ -211,10 +211,10 @@ require. **The incompatibility was found on paper, where it costs nothing, rathe
 reaction that would simply have underperformed.** Two enzymes that each work do not make a
 working set until their conditions are compared.
 
-**What this cycle cannot claim.** The conclusion concerns the enzyme set, not yield. Which
+What this cycle cannot claim. The conclusion concerns the enzyme set, not yield. Which
 cores are released in what proportion is not something a literature check settles.
 
-**And the digestion is a model, not the therapy.** CNS neurons carry PC2, CPE and a regulated
+And the digestion is a model, not the therapy. CNS neurons carry PC2, CPE and a regulated
 secretory pathway of their own, so what is reconstructed here on the bench happens
 endogenously in the patient.
 

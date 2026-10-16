@@ -35,7 +35,7 @@ overturned an earlier prediction we had scored as confirmed.
 | basic: engineered PENK cassette | **867 bp** | clean for RFC10, RFC1000 and every Type IIS site after **8 silent changes**, protein byte-identical |
 | composite: Kozak + basic part + IRES + mEGFP | **2,164 bp** | clean on both standards **without modification** |
 
-The composite **contains the basic part verbatim**, so the relationship is verifiable with a
+The composite contains the basic part verbatim, so the relationship is verifiable with a
 single search and the two read as one coherent submission. Both are designed sequences: the
 DNA in our freezer is the His-tagged, differently codon-optimised construct, so bench
 characterisation supports them by close correspondence rather than identity. We state this
@@ -86,7 +86,7 @@ affinities inherits a between-source disagreement larger than the effect, and an
 computing selectivity as a difference of two large absolute quantities accumulates
 correlated bias.
 
-**A ninth route asked a different question, and also failed its control.** Rather than
+A ninth route asked a different question, and also failed its control. Rather than
 predict an energy, it asked whether the payload engages the receptor in the same **domain
 order** as deltorphin, whose address sequence it carries. Blind docking first had to prove
 itself, and did: it recovered the deltorphin crystal pose (PDB **8F7S**) to **3.41 Å** while
@@ -97,9 +97,9 @@ reproduce the published engagement asymmetry: an odds ratio of **1.20** at p = 0
 and we note that its partial data looked favourable. A measurement from a method that could
 not detect the effect on a positive control is not weak evidence; it is not evidence.
 
-**The campaign then ran that arm to full size anyway, and the favourable number collapsed**: an odds ratio of 6.75 at 30 trajectories, 2.78 at 50, and **1.07 at the full 150**, indistinguishable from the control and from no effect. Reporting the interim would have required a retraction.
+The campaign then ran that arm to full size anyway, and the favourable number collapsed: an odds ratio of 6.75 at 30 trajectories, 2.78 at 50, and **1.07 at the full 150**, indistinguishable from the control and from no effect. Reporting the interim would have required a retraction.
 
-**One learned method did validate**, and it is the only one in the project with a
+One learned method did validate, and it is the only one in the project with a
 demonstrated capability rather than an assumed one. Scoring a published peptide-GPCR
 classifier against a receptor clade excluded from its training gave **AUC 0.893**, and its
 ability to tell which of two receptors a peptide prefers survived an offset control
@@ -107,13 +107,13 @@ ability to tell which of two receptors a peptide prefers survived an offset cont
 and running it on our own receptors needs a structure-prediction step we did not build, so
 it is recorded as a validated route for next season rather than a result for this one.
 
-**δ-preference remains a design goal, not a demonstrated result.** The functional cAMP assay
+δ-preference remains a design goal, not a demonstrated result. The functional cAMP assay
 measures it directly and is subject to none of these constraints.
 
 ## 5 · Safety evidence
 
 A δ-agonist seizure liability was raised and assessed against the primary literature across
-twelve references. The concern **does not survive as a class claim**, and the strongest
+twelve references. The concern does not survive as a class claim, and the strongest
 counter-evidence is a gene-therapy vector expressing native preproenkephalin that completed
 Phase 1 in our exact indication. Four gaps remain and are stated on the part pages: that
 vector expressed the *native* precursor where ours is engineered, and was delivered

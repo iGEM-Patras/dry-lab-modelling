@@ -1,127 +1,90 @@
-# Safety
+# Safety: the pharmacology of the payload
 
-> Three safety questions were put to this project, and we answered all three with evidence
-> rather than reassurance. One of the answers is uncomfortable for us and is on this page
-> anyway.
+**Written to slot into the existing Safety page, after *Patient Safety*.**
 
----
+Our Safety page already covers the laboratory: the two chassis and why each is handled as it
+is, the reagents, cobalt(II) chloride, environmental containment, and a bow-tie analysis of
+losing containment of HEK293T material. It also covers patient safety as a question of the
+delivery interface, where a dosing error is the realistic hazard.
 
-## 1 · Organisms, vectors and containment
-
-| | |
-|---|---|
-| **Cloning host** | *E. coli* NEB 10-beta, a K-12 derivative. **Risk Group 1** |
-| **Expression host** | HEK293T, a human embryonic kidney line. **Risk Group 1**, handled as human-derived material |
-| **Backbone** | pcDNA3.1(+), a standard non-integrating mammalian expression vector |
-| **Delivery** | **non-viral**. A cationic / ionisable lipoplex co-packaging plasmid DNA and siRNA |
-
-Nothing in this project uses a viral vector, a pathogen, a toxin gene, or any sequence on a
-select-agent or export-control list. The payload is a human peptide hormone precursor with
-its opioid cassettes recoded; the silencing arm targets a human housekeeping protease.
-
-**The delivery choice is itself a safety decision.** A non-viral lipoplex does not integrate,
-can be re-administered, and follows a better-established regulatory route than a viral
-vector. It is also the reason the construct must be re-dosed, which is what makes the
-anti-PEG question in §3 worth asking at all.
-
-> *To be completed by the wet lab:* institutional biosafety level of the laboratory used,
-> the local biosafety committee approval reference, and waste-handling procedure. These are
-> facility facts the dry lab cannot supply.
+What it does not yet cover is the safety of the molecule itself. Three questions were put to
+us about the payload and the carrier, and we answered all three with evidence. One of the
+answers is uncomfortable for us, and it is here anyway.
 
 ---
 
-## 2 · The payload: does δ-opioid agonism cause seizures?
+## Does δ-opioid agonism cause seizures?
 
-This was raised against us directly, and it is the right question to ask of an opioid
-payload engineered **towards** the δ receptor.
+This was raised against us directly, and it is the right question to ask of a payload
+engineered towards the δ receptor. We went to the primary literature rather than to review
+summaries, and we deliberately looked in three directions: the convulsant reports and which
+receptor they implicate, whether the liability separates from analgesia, and what is known
+about the endogenous peptide specifically. We committed to reporting what the third strand
+showed before we knew what it would show.
 
-We assessed it across **twelve primary references**, deliberately in three directions: the
-convulsant reports and the receptor implicated, whether the liability separates from
-analgesia, and what is known about the **endogenous peptide** specifically. We committed in
-advance to reporting whichever way the third strand pointed.
+The liability is real for certain synthetic δ agonists, and it is genuinely δ-receptor
+mediated. We are not minimising that. What the literature does not support is treating it as
+a property of δ agonism as such: it is ligand-specific, and compounds exist in which the
+convulsant activity and the analgesia come apart. For the peptide enkephalins the evidence
+points the other way again, and inhibiting enkephalin degradation, which is precisely what
+our silencing arm does, has been associated with reduced rather than increased seizure
+activity.
 
-**The liability is real and δ-mediated for certain synthetic small molecules.** It is not in
-dispute and we do not minimise it.
+The evidence that settles it for us is clinical rather than preclinical. A gene therapy
+expressing preproenkephalin has completed Phase 1 in chronic cancer pain, which is our exact
+indication, with safety data published (NCT00804076 and NCT01291901). A payload of this class
+has been given to patients in this disease, and the trial read out.
 
-**It does not hold as a class property of δ agonism.** It is ligand-specific, and compounds
-exist that separate analgesia from convulsant activity.
+We would rather state the gaps in that argument ourselves than have them found. That vector
+expressed the native precursor, where ours is engineered with every opioid cassette recoded.
+It was delivered peripherally, where ours is intranasal. A Phase 1 establishes tolerability
+at the doses tested and cannot exclude a rare event. And our own computational estimate of
+δ-preference has a confidence interval that includes zero, so the δ bias on which the safety
+argument for δ over μ depends is a design goal rather than a demonstrated result. The cAMP
+assay is what will settle that, and it has not run yet.
 
-**For peptide enkephalins the evidence points the other way.** Inhibiting enkephalin
-degradation, which is precisely what our silencing arm does, has literature associating it
-with **reduced** seizure activity rather than increased.
+## Will antibodies against the carrier clear a repeat dose?
 
-**The decisive precedent is clinical.** A gene-therapy vector expressing preproenkephalin
-completed **Phase 1 in chronic cancer pain**, our exact indication, with safety data
-published: [`NCT00804076`](https://clinicaltrials.gov/study/NCT00804076) and
-[`NCT01291901`](https://clinicaltrials.gov/study/NCT01291901).
+Our formulation is PEGylated and the therapy is intended for repeat dosing, which raises
+accelerated blood clearance: antibodies raised against PEG by the first dose clear the
+second one faster.
 
-### Four gaps we will not omit
+One finding here is directly actionable. Pre-existing anti-PEG IgM binding depends on how the
+PEG chain terminates, and the hydroxyl-terminated form is bound less than the methoxy form
+our current lipid carries. Substituting hydroxyl-terminated PEG2000-DMG would be a change of
+one reagent: the same lipid, the same anchor, the same molar fraction, the same protocol.
 
-1. That vector expressed the **native** precursor. Ours is engineered, with every opioid
-   cassette recoded.
-2. It was delivered **peripherally**. Ours is intranasal, nose-to-brain.
-3. Phase 1 establishes tolerability at the doses tested, not absence of a rare event.
-4. Our own selectivity estimate's interval **includes zero**, so we cannot claim the δ bias
-   that the safety argument for δ over μ depends on. δ-preference is a design goal.
+There is also something we expected to find and did not. Accelerated clearance is
+characterised with repeated intravenous dosing, where the particles reach the spleen and
+prime a B-cell response, and our route is intranasal. We looked for evidence that the
+intranasal route escapes the phenomenon and found none in either direction. It is plausible
+that limited systemic exposure reduces priming; it is equally plausible that
+nasal-associated lymphoid tissue provides its own. We are recording this as an open question
+and not as a reassurance, because writing "intranasal avoids this" would be a claim we cannot
+support. Nor is the faster shedding of our C14 anchor an exemption, since accelerated
+clearance has been reported without the expected rise in antibody titre.
 
-Full assessment with all twelve references:
-[`DELTA_SEIZURE_SAFETY.md`](../DELTA_SEIZURE_SAFETY.md).
+## Is the engineered peptide more immunogenic than the one it replaces?
 
----
+Our construct replaces a human epitope with an engineered one, so we screened MHC class I
+presentation across 6,120 allele-peptide pairs. The engineered payload gives 1.86 % strong
+binders against 1.77 % for the native epitope it replaces, which is not a meaningful
+increase. The highest of the three groups we tested was the P2A remnant junction at 2.07 %,
+which is a concrete argument in favour of the IRES constructs if immunogenicity of a
+persistently expressed product turns out to matter.
 
-## 3 · The carrier: anti-PEG immunogenicity
+This is a screen and not a clearance, and the distinction is worth stating plainly. Class I
+prediction speaks to CD8 recognition of a product presented from inside the cell. It says
+nothing about an antibody response to a peptide that has been secreted, which is a different
+mechanism and would need a different experiment.
 
-A PEGylated carrier intended for **repeat dosing** raises accelerated blood clearance, where
-anti-PEG antibodies clear the second dose faster than the first.
+## What we have not resolved
 
-**One actionable finding.** Pre-existing anti-PEG IgM binding is modulated by the PEG
-**terminus**, and the hydroxyl-terminated form evades it better than the methoxy form our
-lipid carries. Substituting hydroxyl-terminated PEG2000-DMG is a **single-reagent change**:
-same lipid, same anchor, same 1.5 mol%, same protocol.
+A safety section that lists only the questions it managed to answer is not doing its job.
 
-**One thing we expected to find and did not.** We looked for evidence that the intranasal
-route escapes accelerated clearance, since that phenomenon is characterised with repeated
-**intravenous** dosing. Pairing the concept with intranasal, nose-to-brain and mucosal
-delivery returned no evidence either way. It is recorded as an **open question, not a
-reassurance.** Putting "intranasal avoids this" on a safety page would not survive a
-follow-up question.
-
-**And shedding is a mitigation, not an exemption.** The C14 anchor sheds faster than longer
-alternatives, but accelerated clearance has been reported without the expected antibody
-elevation.
-
-Full assessment: [`ANTI_PEG_ASSESSMENT.md`](../10_immunogenicity_antibody/ANTI_PEG_ASSESSMENT.md).
-
----
-
-## 4 · The product: is the engineered peptide more immunogenic?
-
-The construct replaces a human epitope with an engineered one, so we screened MHC class I
-presentation across **6,120 allele-peptide pairs**.
-
-| epitope group | strong binders |
-|---|---|
-| native | 1.77 % |
-| **engineered payload** | **1.86 %** |
-| P2A remnant junction | **2.07 %** |
-
-**The engineered epitope is not meaningfully more immunogenic than the one it replaces.**
-The P2A junction ranks highest of the three, which is a concrete argument for the IRES
-cassettes if immunogenicity of a persistently expressed product matters.
-
-**This is a screen, not a clearance.** Class I prediction speaks to CD8 recognition of an
-intracellular product and says nothing about antibody responses to a secreted peptide.
-
----
-
-## 5 · What remains unresolved
-
-Stated plainly, because a safety page that lists only solved problems is not a safety page.
-
-- **The δ bias is not demonstrated.** The safety case for δ over μ rests on a preference our
-  own interval does not establish. The cAMP assay settles it.
-- **Whether the intranasal route changes the anti-PEG picture** is unknown, not favourable.
-- **No bench data exists yet.** Everything here is literature assessment and prediction. The
-  constructs have been ordered; nothing has been expressed, purified or dosed.
-- **No antibody detects the engineered product**, so a custom polyclonal is on the critical
-  path and the maturation readout is LC-MS/MS rather than ELISA.
+The δ bias is not demonstrated, and the safety case for preferring δ over μ rests on it.
+Whether the intranasal route changes the anti-PEG picture is unknown rather than favourable.
+No commercial antibody detects our engineered product, so a custom polyclonal sits on the
+critical path and the maturation readout is LC-MS/MS rather than ELISA. And none of this has
+been to the bench yet: the constructs have been designed and ordered, and nothing has been
+expressed, purified or dosed.
