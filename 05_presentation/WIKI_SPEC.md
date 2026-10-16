@@ -102,7 +102,12 @@ assessment, and cargo-agnostic delivery.
 
 ## Safety
 
-**Status: content exists, page not written.**
+**Status: written.** `WIKI_SAFETY.md`.
+
+Five sections: organisms and containment, the seizure question, the carrier, the product,
+and what remains unresolved. One block is marked **to be completed by the wet lab**, the
+institutional biosafety level, committee approval reference and waste handling, because
+those are facility facts the dry lab cannot supply.
 
 `DELTA_SEIZURE_SAFETY.md` already carries 12 references assessed in both directions, four
 caveats, and a gene-therapy precedent in the same indication. The anti-PEG assessment adds
