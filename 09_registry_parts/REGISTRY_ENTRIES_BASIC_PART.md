@@ -1,3 +1,16 @@
+> # SUPERSEDED, 16 Oct 2026. Do not use.
+>
+> This file instructs you to create **two** Registry entries, Design and Discussion. That is
+> wrong: the submission form's Type selector takes **one** value per entry, as the team
+> confirmed from the live form.
+>
+> **Use [`REGISTRY_DESIGN_ENTRY.md`](REGISTRY_DESIGN_ENTRY.md) instead**, a single Design
+> entry. The Design writing guide explicitly accommodates dry-lab results and discussion and
+> carries a dedicated computational-analysis section, so nothing from the Discussion draft
+> below is lost; it was folded in.
+>
+> Kept rather than deleted so the reasoning is auditable.
+
 # Registry documentation entries, basic part
 
 **Three separate entries, matching the form's Type selector. Paste each into its own
@@ -9,7 +22,7 @@ Do **not** create Characterisation yet. Reasons in the last section.
 ---
 ---
 
-# ENTRY 1 of 2 — Type: **Design**
+# ENTRY 1 of 2, Type: **Design** (superseded)
 
 **Title:** `Engineered proenkephalin: recoding seven payload cassettes while keeping native processing`
 
@@ -91,7 +104,7 @@ pair.
 ---
 ---
 
-# ENTRY 2 of 2 — Type: **Discussion**
+# ENTRY 2 of 2, Type: **Discussion** (superseded)
 
 **Title:** `What we can and cannot claim for the engineered proenkephalin payload`
 
