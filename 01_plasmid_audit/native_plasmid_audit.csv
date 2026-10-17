@@ -1,0 +1,5 @@
+file,architecture,orf_aa,YGGFM,YGGFL,YGGFMRF_present,opioid_cores
+1.τελικο  μεγφπ ιρεσ πενκ.dna,mEGFP-IRES-PENK,263,5,1,False,6
+2. τελικο μεγφπ π2α πενκ.dna,mEGFP-P2A-PENK,523,6,1,True,7
+3. τελικο πενκ ιρεσ μεγφπ.dna,PENK-IRES-mEGFP,267,6,1,True,7
+4. τελικο πενκ π2α μεγφπ.dna,PENK-P2A-mEGFP,523,6,1,True,7

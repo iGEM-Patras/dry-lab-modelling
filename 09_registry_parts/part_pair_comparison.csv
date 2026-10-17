@@ -1,0 +1,5 @@
+part,bp,cistron1_aa,met_cores,leu_cores,payload_cores,payload,silent_changes,rfc10,rfc1000
+engPENK basic,867,288,0,0,7,YGGFEVVG,8,0,0
+natPENK basic,804,267,6,1,7,YGGFM x6 + YGGFL x1,2,0,0
+engPENK composite,2164,288,0,0,7,YGGFEVVG,0,0,0
+natPENK composite,2101,267,6,1,7,YGGFM x6 + YGGFL x1,0,0,0

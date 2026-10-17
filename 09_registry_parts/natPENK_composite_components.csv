@@ -1,0 +1,5 @@
+component,start,end,bp,source
+Kozak,1,6,6,consensus GCCACC
+native PENK CDS,7,810,804,"wet lab as-received plasmid, protein = UniProt P01210"
+EMCV IRES,811,1384,574,"encephalomyocarditis virus, identical to the engineered composite"
+mEGFP,1385,2101,717,"monomeric EGFP A206K, identical to the engineered composite"
