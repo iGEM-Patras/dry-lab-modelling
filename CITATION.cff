@@ -4,7 +4,7 @@ message: "If you use this repository, please cite it as below."
 type: software
 authors:
   - name: "iGEM Patras 2026"
-    website: "https://github.com/kei-zan/dry-lab-modelling"
+    website: "https://github.com/iGEM-Patras/dry-lab-modelling"
   # TODO before publication: replace with individual contributors, e.g.
   # - family-names: <surname>
   #   given-names: <given name>
@@ -16,7 +16,7 @@ authors:
   - family-names: "Patrinos"
     given-names: "Georgios"
     affiliation: "Department of Pharmacy, University of Patras, Greece; Hellenic Pasteur Institute"
-repository-code: "https://github.com/kei-zan/dry-lab-modelling"
+repository-code: "https://github.com/iGEM-Patras/dry-lab-modelling"
 abstract: >-
   Computational design, audit and validation supporting an enkephalin-based analgesic
   strategy: a synthetic proenkephalin carrying seven tandem engineered opioid-peptide
@@ -34,4 +34,4 @@ keywords:
   - molecular dynamics
   - pre-registration
 license: CC-BY-4.0
-license-url: "https://github.com/kei-zan/dry-lab-modelling/blob/main/LICENSE"
+license-url: "https://github.com/iGEM-Patras/dry-lab-modelling/blob/main/LICENSE"

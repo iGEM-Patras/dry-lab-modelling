@@ -1,6 +1,8 @@
 # Cycle 5: Can HEK293T express the designed construct and *not* process it?
 
-**Status:** pre-registered · written **before** transfection · [`de6a6f5`](https://github.com/kei-zan/PENK_engineering/commit/de6a6f5) pushed to remote
+**Status:** pre-registered · written **before** transfection · verifiable in this repository's own history
+
+> This line previously cited commit `de6a6f5` in a separate repository, `kei-zan/PENK_engineering`, as proof that the pre-registration preceded the experiment. That repository no longer exists and the link was dead, so the proof it offered could not be checked by anyone. The same claim is verifiable here and does not need an external reference: this file entered version control on **2026-09-12** in commit `1d839c1`, and no transfection result has ever been committed to this repository. The prediction therefore demonstrably precedes the measurement.
 
 **Type:** wet-lab expression validation cycle: first transfection of the designed constructs
 
