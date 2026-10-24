@@ -37,7 +37,14 @@ Presentation material, second-language duplicates and provenance archives are ex
 reader with limited time does not need, and excluding them makes the remaining files easier
 to find. No objection to any of it.
 
-## Three exclusions worth a second look
+## Three exclusions: raised, and resolved
+
+**Resolved 25 Oct 2026.** The team confirms all 41 were removed deliberately and that no
+wiki page links to any of them. Nothing below requires action. It is kept because the
+reasoning is the useful part: these were the three the dry lab would have checked, and the
+answer was that the team had already checked them.
+
+### The original flag
 
 These are the only ones where the choice may cost something, because each is a plausible
 target for a link from the wiki:
@@ -52,11 +59,11 @@ A fourth, `11_human_practices/IHP_CEID_PROFESSOR.md`, entered version control on
 and is the newest missing file. It may simply postdate the export rather than having been
 excluded.
 
-## What to check, and it is quick
+## How this would be checked, if it ever needs checking again
 
 Every wiki link that points into the GitLab repository should resolve. The list above is the
 set of paths that exist here and not there, so any wiki link whose target appears in it will
 return a 404 for a judge who clicks it. Checking means searching the wiki source for
 `ATTRIBUTIONS`, `DELTA_SEIZURE`, `project_brief` and `IHP_CEID`, which is four searches.
 
-Nothing needs changing if the wiki carries that content inline rather than linking to it.
+In this case nothing needed changing: the wiki carries that content inline.
