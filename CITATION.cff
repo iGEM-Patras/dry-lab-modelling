@@ -10,12 +10,19 @@ authors:
   #   given-names: <given name>
   #   affiliation: "Department of Pharmacy, University of Patras, Greece"
   #   orcid: "https://orcid.org/0000-0000-0000-0000"
+ - family-names: "Zanaj"
+    given-names: "Keisi"
+    affiliation: "Department of Biology, National and Kapodistrian University of Athens, Greece"
+  - family-names: "Kirkinis"
+    given-names: "Manousos"
+    affiliation: "Computer Engineering and Informatics Department, University of Patras, Greece"
   - family-names: "Lagoumintzis"
     given-names: "Georgios"
     affiliation: "Department of Pharmacy, University of Patras, Greece"
   - family-names: "Patrinos"
     given-names: "Georgios"
     affiliation: "Department of Pharmacy, University of Patras, Greece; Hellenic Pasteur Institute"
+
 repository-code: "https://github.com/iGEM-Patras/dry-lab-modelling"
 abstract: >-
   Computational design, audit and validation supporting an enkephalin-based analgesic
