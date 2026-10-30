@@ -10,7 +10,7 @@ authors:
   #   given-names: <given name>
   #   affiliation: "Department of Pharmacy, University of Patras, Greece"
   #   orcid: "https://orcid.org/0000-0000-0000-0000"
- - family-names: "Zanaj"
+  - family-names: "Zanaj"
     given-names: "Keisi"
     affiliation: "Department of Biology, National and Kapodistrian University of Athens, Greece"
   - family-names: "Kirkinis"
