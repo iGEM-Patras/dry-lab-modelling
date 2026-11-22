@@ -87,7 +87,7 @@ protein: **synonymous recoding**. We use this to hit a target **GC content** (40
 synthesis fails outside a workable range.
 
 The cost is **CAI** (codon adaptation index, 0–1): how well codon choice matches what human
-cells prefer. Optimising GC pushes CAI down. Ours land at 0.65–0.74. That is a real trade, and
+cells prefer. Optimising GC pushes CAI down. Ours land at 0.754–0.775 on the four ordered v6 constructs, against the Kazusa *Homo sapiens* table (Sharp and Li 1987 geometric mean; Met, Trp and stops excluded). *Corrected 2026-11: this sentence previously read 0.65–0.74, a range the README had already retracted as unreproducible because no reference set was named. See [`09_codon_gc_design/cai_verification.csv`](09_codon_gc_design/cai_verification.csv).* That is a real trade, and
 [`09_codon_gc_design/`](09_codon_gc_design/) states it rather than hiding it.
 
 **Cycle 4 is the interesting part, methodologically.** The vendor rejects a sequence with a

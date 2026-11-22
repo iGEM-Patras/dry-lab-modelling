@@ -218,8 +218,8 @@ under-performs in the digest, the cause is kinetic or compositional, not steric,
 per-site sequence context in `cleavage_predictions.csv` is where to look.
 
 **Corollary for the His tag.** The tag sits at the mature N-terminus, i.e. at the start of
-the *folded* anchor, and the nearest dibasic site is 66 residues downstream with the whole
-anchor in between. Processing interference is therefore implausible. But note the pLDDT run
+the *folded* anchor, and the nearest dibasic site is 73 residues downstream with the whole
+anchor in between. Processing interference is therefore implausible. The fragment released at that first dibasic is **synenkephalin**, the ~73-residue non-opioid N-terminal peptide of proenkephalin, so the tag is carried on synenkephalin and is separated from all seven enkephalin cores at the first PC2 cleavage. But note the pLDDT run
 was done **without** the tag, so it says nothing about whether appending His6-GS perturbs
 the anchor's own fold: that is a solubility/folding question, not a processing one, and it
 is still open.

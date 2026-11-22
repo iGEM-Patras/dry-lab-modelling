@@ -1,5 +1,7 @@
 # 09, Codon composition & GC recoding
 
+> **Which constructs this directory describes.** The **ordered v6 engineered fragments**: `MARFLTLCTWLLLLGPGLLATVRA`-`HHHHHHGS`-`ECSQD…`, i.e. His6 at the **mature** N-terminus, downstream of the signal peptidase site. They are **not** the generation-2 native plasmids audited in `01_plasmid_audit/`, which carry His6 upstream of the signal peptide.
+
 Wet-lab request: bring the ordered constructs down to a synthesis-friendlier GC content
 without touching the protein.
 

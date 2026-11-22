@@ -140,7 +140,19 @@ not wanting to renegotiate. If the decision is to comply:
 
 ---
 
-## 6. Separate and more urgent: the His tag placement
+## 6. The His tag placement — RESOLVED in v6
+
+> **Correction, 2026-11.** Everything in this section was true of the **generation-2 native
+> constructs** it was written about, and is **no longer true of the ordered v6 fragments**. The
+> remedy it prescribes — "placing it immediately after the signal peptide cleavage site" — was
+> applied. Translating the four ordered v6 FASTAs gives
+> `MARFLTLCTWLLLLGPGLLATVRA` · `HHHHHHGS` · `ECSQDCATC…`, i.e. His6 at the **mature** N-terminus,
+> downstream of the signal peptidase site. The −3/−1 determinants (V-R-**A**) are unchanged; only
+> the +1 residue goes E → H, and DeepSig returns SP = 0.9998 for all four v6 constructs, matching
+> native P01210. The section is kept below rather than deleted, because it is the diagnosis that
+> produced the fix.
+
+## 6. Separate and more urgent: the His tag placement (generation-2 constructs)
 
 Independent of GC, the audit found a design issue in all four fragments that outranks the GC question:
 **the 6×His tag sits N-terminal to the signal peptide.** Residues upstream of the signal peptide start:

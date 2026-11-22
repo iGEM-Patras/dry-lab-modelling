@@ -29,7 +29,7 @@ guide     (antisense, 5'->3')   AAUGAUUGACUUGAUAGACCU
 passenger (sense,     5'->3')   GUCUAUCAAGUCAAUCAUUUC
 ```
 Best specificity of the shortlist (mean rank **3.62** of 17) and **highest target
-accessibility** (0.658). Only **2** off-targets at 3 mismatches, **423** 8mer seed
+accessibility** (0.658). Only **8** off-targets at 3 mismatches (bowtie1 `-v 3 -a`; the BLAST-derived figure was 2), **423** 8mer seed
 sites, seed-duplex Tm **13.7 °C**.
 
 Predicted efficacy is mid-pack: DSIR **85.4** (rank 839 of 5,841, below the >90
@@ -45,7 +45,7 @@ passenger (sense,     5'->3')   GCAAGAAUUCAUACAUGAAUC
 (rank 16 of 5,841), s-Biopredsi 0.881, iScore 81.9, Dharmacon 81.5;
 consensus efficacy rank **2.2**.
 
-Its cost is specificity: 18 off-targets at 3 mismatches, 859 8mer seed sites,
+Its cost is specificity: **34** off-targets at 3 mismatches (BLAST-derived figure was 18), 859 8mer seed sites,
 seed Tm 21.6 °C, accessibility 0.513.
 
 **Include a scrambled control.** Nothing here measures knockdown; qPCR at 48 h does.
@@ -71,6 +71,26 @@ That is a project-strategy call, not a data call.
 
 ---
 
+## Cross-species status, re-screened 2026-11
+
+The mouse cross-reactivity screen that withdrew the earlier four-duplex panel was never re-run
+after the redesign onto MME-213 coordinates. It has now been run, exhaustively, with
+**bowtie1 `-v 3 -a --norc`** against UCSC `hg38` (70,866 RefSeq mRNAs) and `mm10` (42,995).
+
+| guide | region | human *MME* hits | off-targets @3 mm | perfect mouse *Mme* hits |
+|---|---|---|---|---|
+| `2700-2722` | **3′UTR** | 6/6 transcripts | 8 | **0** — human-selective |
+| `2459-2481` | CDS | 6/6 transcripts | 34 | **4** — `NM_008604`, `NM_001289462`, `NM_001289463`, `NM_001357335` |
+| `1023-1045` | CDS | 6/6 transcripts | 10 | 0 |
+
+**Consequence, stated per guide rather than for the pair.** `2700-2722` cannot be validated in a
+mouse model and needs a rodent surrogate. `2459-2481` *can* be validated in mouse — and will knock
+down endogenous *Mme* in any mouse experiment whether or not that is wanted. The two guides do not
+share an in-vivo plan.
+
+Both guides hit all six human *MME* RefSeq transcripts, which is broader than the four variants
+named elsewhere in this directory: `NM_001354642` and `NM_001354643` also carry both sites.
+
 ## Do NOT order
 
 | position | reason |
@@ -81,6 +101,8 @@ That is a project-strategy call, not a data call.
 ---
 
 ## Correction log
+
+**2026-11: the off-target counts were low.** They came from BLAST+ `blastn-short`, a heuristic seeded aligner that does not guarantee finding every end-to-end hit for a 19-nt query. Re-screening exhaustively with bowtie1 `-v 3 -a` raises the 3-mismatch counts from 2 / 18 / 3 to **8 / 34 / 10** for `2700-2722` / `2459-2481` / `1023-1045` — an undercount of 1.9× to 4.0×. The ranking between guides is unchanged, so the selection stands; the absolute burden was understated.
 
 **2026-10-03: the first DSIR figures in this directory were wrong.** Guides were matched
 to the DSIR server output on the *sense 19-mer*, but DSIR's window is offset 2 nt from

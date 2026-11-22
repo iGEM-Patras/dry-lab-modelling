@@ -124,7 +124,7 @@ The mature PENK region is the largest contributor **and the only one that is fre
 recodable**: mEGFP and the IRES are functional elements we do not want to touch, and the
 IRES in particular is a structured RNA whose activity depends on its exact sequence.
 
-## Round 3 (v6): designed, pre-registered, NOT YET TESTED
+## Round 3 (v6): designed, pre-registered, and **scored** — see the rescoring below
 
 ### Design
 

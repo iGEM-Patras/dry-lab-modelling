@@ -1,5 +1,7 @@
 # 01 · Plasmid audit
 
+> **Which constructs this directory describes.** The **generation-2 native plasmids**: `M`-`HHHHHH`-`GS`-`LQ`-`[M]`-`ARFLTLCTWLLLLGPGLLATVRA` | `ECSQD…`, i.e. His6 **upstream of** the signal peptide (11–12 residues in front of it; 268 in `mEGFP-P2A-His-PENK`). These are the plasmids that were transfected and dot-blotted. They are **not** the ordered v6 fragments, which carry His6 *downstream* of the signal peptide — see `06_engineering_cycles/cycle4_synthesizability/data/`.
+
 Feature-level audit of four PENK expression cassettes (pcDNA3.1(+)-type backbones), differing in **gene order** and **linker** (EMCV IRES vs self-cleaving P2A). All carry the **native** human PENK sequence, they are the expression-system test-bed, not the engineered anionic-address payload.
 
 | # | Plasmid | Size (bp) | PENK identity | Verdict |

@@ -40,7 +40,7 @@ Expected bands (bp):
 
 - Shared 3,342 + 735 bp bands = common backbone/cassette landmarks.
 - The **diagnostic band** is the second-largest: 1,648+1,446 doublet (P1) / 2,416 (P2) / 2,749 (P3) / 2,226 (P4): resolves gene order.
-- **The plasmid-1 truncation** (PENK missing its C-terminal core) will NOT change these gel bands (it's a point-level premature stop): flag: gel QC passing does NOT clear plasmid 1; it must be confirmed by **Sanger sequencing** of the PENK 3' end.
+- **The plasmid-1 truncation** (PENK missing its C-terminal core) will NOT change these gel bands (it is a 12 bp in-frame deletion, which shifts the 1,648 bp band to 1,636 bp — unresolvable on a 1 % gel): flag: gel QC passing does NOT clear plasmid 1; it must be confirmed by **Sanger sequencing** of the PENK 3' end.
 
 ---
 ## Bench recipe (per lane, adjust to your kit)
