@@ -165,3 +165,67 @@ capacity fails**, and daily dosing is exactly what the dose model predicts will 
 | 32664676 | cytotoxicity and uptake of cationic carriers in a nasal delivery context |
 
 Full citations with links: [`REFERENCES.md`](REFERENCES.md).
+
+
+---
+
+## 8 · Added 22 Nov: charge density computed, and a correction to section 6
+
+Section 5 said charge density should be reported instead of zeta potential, and that it was
+computable from `lipoplex_formulation_spec.csv`. It is, and the result corrects something
+section 6 of this document got wrong.
+
+Cationic charge per gram of total lipid, from the formal charges and the ionizable lipid's
+pKa of 6.44 already recorded in the spec file. Data: `charge_density_vs_pH.csv`. Figure:
+`charge_density_pH.png`.
+
+| pH at the particle surface | DOTAP lipoplex | MC3 LNP + PEG | MC3 LNP (clinical) |
+|---|---|---|---|
+| 7.4 (plasma) | 756 | **74** | 84 |
+| 7.0 | 756 | 161 | 184 |
+| 6.44 (the lipid's pKa) | 756 | 372 | 426 |
+| 6.0 | 756 | 546 | 625 |
+| 5.5 | 756 | **668** | 765 |
+
+*µmol of cationic charge per g of lipid. DOTAP is a permanent quaternary ammonium, so its
+value does not move with pH; MC3 follows Henderson–Hasselbalch at pKa 6.44.*
+
+**Section 6 of this document predicted that the ionizable lipid "should be gentler at the
+neutral surface". That prediction holds only at pH 7.4, and the nasal surface is not pH 7.4.**
+MC3's ten-fold charge advantage over DOTAP at plasma pH falls to **1.1-fold at pH 5.5** — the
+two formulations become equivalent in cationic charge density.
+
+This matters specifically for us because of *where* the formulation is meant to land. In 62
+healthy adults, pH measured **within the olfactory cleft was significantly lower than over
+the respiratory mucosa**, and olfactory-cleft pH correlated with odour identification score,
+explaining 18 % of its variance (PMID 40346891). **The one region of the nose this therapy
+is designed to reach is the more acidic one**, which is the condition under which the
+ionizable lipid behaves most like a permanently cationic one.
+
+Two consequences worth acting on.
+
+**The MD rationale needs re-examining.** The lipoplex simulations are built around a protonated
+and a neutral MC3 state, with the neutral state representing the extracellular surface and the
+protonated state the endosome. If the delivery surface is appreciably below pH 6.44, the
+neutral state is not the right model of the surface, and the pH switch the simulations were
+designed to demonstrate is partly operating before the particle is taken up at all. This does
+not invalidate the simulations; it changes which of the two states is the relevant surface
+model, and that should be checked before any of the MD work is cited as evidence of surface
+behaviour.
+
+**The pKa should be measured, not assumed.** The 6.44 figure is the lipid's, not the
+formulated particle's. Apparent pKa of an LNP shifts with the nucleic-acid cargo — 0.1 to 0.5
+pH units with RNA size, and 0.15 units between same-length siRNA and miRNA, with the direction
+depending on the ionizable lipid (PMID 42615507). Our cargo is a ~6 kb plasmid, far outside
+the range tested. The standard measurement is a **TNS fluorescence titration**, which needs a
+plate reader and a dye, and is among the cheapest experiments on any list in this repository.
+
+**And the real surface pH should be measured too.** Nasal pH is measurable with a probe
+(the study above used an oesophageal/airway pH catheter) and varies between the olfactory
+cleft and the respiratory mucosa. Taking a literature value for the nose as a whole would
+repeat the error this section is correcting.
+
+| PMID | used for |
+|---|---|
+| 40346891 | olfactory-cleft pH is significantly lower than respiratory-mucosa pH, and correlates with odour identification |
+| 42615507 | apparent pKa of an LNP shifts with nucleic-acid cargo, so the lipid's pKa is not the particle's |

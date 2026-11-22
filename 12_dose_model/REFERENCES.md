@@ -134,3 +134,11 @@ Every entry below was retrieved from NCBI E-utilities and its DOI validated agai
 
 **Software** — PhysiCell / BioFVM, agent-based cells with a 3D diffusion-decay substrate solver (no advection); CompuCell3D, Cellular Potts tissue modelling. Both open source.
 [physicell.org](https://physicell.org/) · [compucell3d.org](https://compucell3d.org/)
+
+## Formulation charge and surface pH
+
+**PMID 40346891** — *Intranasal pH and Olfactory Function Among Healthy Adults.* The Laryngoscope 2025.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/40346891/) · [doi:10.1002/lary.32247](https://doi.org/10.1002/lary.32247)
+
+**PMID 42615507** — *RNA Size and Structure Modulate the Apparent pKa of Ionizable Lipid Nanoparticles.* Bioconjugate Chemistry 2026.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/42615507/) · [doi:10.1021/acs.bioconjchem.6c00177](https://doi.org/10.1021/acs.bioconjchem.6c00177)
