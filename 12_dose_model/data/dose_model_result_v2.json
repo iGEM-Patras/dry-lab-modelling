@@ -1,0 +1,36 @@
+{
+ "free_variable": "peptide molecules secreted per transfected cell per day",
+ "required_yield_bulk_csf_155mL_single_dose": 282283672397377.75,
+ "required_yield_bulk_csf_155mL_repeat_dosing": 249073828585921.56,
+ "max_tolerated_yield_bulk_csf": 1618979885808490.2,
+ "therapeutic_window_fold": 6.5,
+ "accumulation_factor_at_midpoint_interval": 1.1333333333333333,
+ "accumulation_factor_daily_dosing": 8.5,
+ "wetlab_ceiling_molecules_cell_day_per_mL_lysate": 69427333.11659415,
+ "wetlab_ceiling_vs_required_fold": 2.787419838959283e-07,
+ "wetlab_ceiling_vs_plausible_output_fold": 69.42733311659416,
+ "plausible_cellular_output": [
+  10000.0,
+  1000000.0
+ ],
+ "dotblot_linearity": {
+  "volume_response_observed": 0.8763888888888889,
+  "volume_response_if_linear": 2.0,
+  "calibrator_mass_range_fold": 10.0,
+  "calibrator_signal_fold": 1.1219512195121952,
+  "quantitative": false
+ },
+ "secretion_bound": {
+  "supernatant_range": [
+   -6,
+   6
+  ],
+  "negative_control_range": [
+   -6,
+   5
+  ],
+  "distinguishable": false,
+  "bounds_secretion": false
+ },
+ "status": "bounded above by our own dot blot; still parametric below that"
+}

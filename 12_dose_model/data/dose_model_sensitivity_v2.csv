@@ -1,0 +1,12 @@
+parameter,spearman_rho,p_value,source
+eta_tf,0.4905,0,assumption
+f_olf,0.3823,0,literature range
+cells_exposed,0.3727,0,physiological
+f_cns,0.3674,0,assumption
+dose_interval_days,-0.2786,0,assumption
+t_half_min_native,0.2726,0,literature range
+knockdown_fold,0.1723,4.32e-133,assumption
+expression_days,0.1310,2.71e-77,assumption
+spray_volume_uL,0.0756,8.95e-27,device
+cns_volume_mL,-0.0326,4.01e-06,physiological
+csf_turnover_per_h,-0.0054,0.441,physiological

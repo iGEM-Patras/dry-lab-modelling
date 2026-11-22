@@ -135,8 +135,12 @@ agent-related serious adverse events.
 4. **No seizure study has been done on our peptide.** Nothing here substitutes for that.
 
 **One point that cuts in our favour, from our own data.** Our calibrated selectivity estimate
-puts `YGGFEVVG` at **+1.23 ± 1.76 kcal/mol**, nominally δ-preferring but statistically
-indistinguishable from no preference, and indistinguishable from native Met-enkephalin. The
+puts `YGGFEVVG` at **+1.23 kcal/mol, 95 % inverse-prediction interval −3.02 to +5.48**,
+nominally δ-preferring but statistically indistinguishable from no preference, and
+indistinguishable from native Met-enkephalin. *Corrected 22 Nov 2026: previously written as
+± 1.76, which is the calibration residual divided by the slope (0.5432 / 0.3093) rather than
+an interval on a prediction. The wider, correct interval strengthens the argument made here
+rather than weakening it.* The
 convulsant literature concerns *high-efficacy, strongly δ-selective* agonists. Our failure to
 demonstrate strong δ-selectivity, which we report honestly as a negative result elsewhere,
 **reduces exposure to this specific liability**. We should not pretend that was the plan, but
