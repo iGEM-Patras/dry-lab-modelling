@@ -123,3 +123,14 @@ Every entry below was retrieved from NCBI E-utilities and its DOI validated agai
 
 **Software** — Multiple-Path Particle Dosimetry model (MPPD), Applied Research Associates, v3.04; and EPA MPPD v2.0 (2025). Free download.
 [ARA](https://www.ara.com/mppd/) · [EPA](https://www.epa.gov/risk/epa-multiple-path-particle-dosimetry-model)
+
+## Spatial scale of neuropeptide signalling
+
+**PMID 35723610** — Jiang Y et al. *Probing Neuropeptide Volume Transmission In Vivo by Simultaneous Near-Infrared Light-Triggered Release and Optical Sensing.* Angewandte Chemie 2022.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/35723610/) · [doi:10.1002/anie.202206122](https://doi.org/10.1002/anie.202206122)
+
+**PMID 38789677** — *Mechanisms of neuromodulatory volume transmission.* Molecular Psychiatry 2024.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/38789677/) · [doi:10.1038/s41380-024-02608-3](https://doi.org/10.1038/s41380-024-02608-3)
+
+**Software** — PhysiCell / BioFVM, agent-based cells with a 3D diffusion-decay substrate solver (no advection); CompuCell3D, Cellular Potts tissue modelling. Both open source.
+[physicell.org](https://physicell.org/) · [compucell3d.org](https://compucell3d.org/)
