@@ -106,3 +106,20 @@ Every entry below was retrieved from NCBI E-utilities and its DOI validated agai
 
 **PMID 32664676** — Rassu G et al. *Investigation of Cytotoxicity and Cell Uptake of Cationic Beta-Cyclodextrins as Valid Tools in Nasal Delivery.* Pharmaceutics 2020;12.
 [PubMed](https://pubmed.ncbi.nlm.nih.gov/32664676/) · [doi:10.3390/pharmaceutics12070658](https://doi.org/10.3390/pharmaceutics12070658) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7407921/)
+
+## Aerosol deposition modelling and low-cost nasal models
+
+**PMID 41751226** — Ličen A et al. *Development, Fabrication and Application of a Sectioned 3D-Printed Human Nasal Cavity Model for In Vitro Nasal Spray Deposition Studies.* Biomedicines 2026;14.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/41751226/) · [doi:10.3390/biomedicines14020329](https://doi.org/10.3390/biomedicines14020329) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12938445/)
+
+**PMID 38931844** — Jin Z et al. *Comparative Analysis of Micrometer-Sized Particle Deposition in the Olfactory Regions of Adult and Pediatric Nasal Cavities: A Computational Study.* Pharmaceutics 2024;16.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/38931844/) · [doi:10.3390/pharmaceutics16060722](https://doi.org/10.3390/pharmaceutics16060722) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11206772/)
+
+**PMID 42346986** — Sartelet K et al. *Quantifying Olfactory and Alveolar Deposition of Ultrafine Particles Using Multiscale Modeling: Implications for Brain Exposure.* Environmental science & technology 2026;60:19465-19475.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/42346986/) · [doi:10.1021/acs.est.6c05750](https://doi.org/10.1021/acs.est.6c05750) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13374090/)
+
+**Preprint (not peer reviewed)** — *Actuation-dependent plume geometry in nasal spray delivery of lipid nanoparticles influences nasal deposition site and particle integrity.* Research Square 2026.
+[doi:10.21203/rs.3.rs-11037329/v1](https://doi.org/10.21203/rs.3.rs-11037329/v1)
+
+**Software** — Multiple-Path Particle Dosimetry model (MPPD), Applied Research Associates, v3.04; and EPA MPPD v2.0 (2025). Free download.
+[ARA](https://www.ara.com/mppd/) · [EPA](https://www.epa.gov/risk/epa-multiple-path-particle-dosimetry-model)
