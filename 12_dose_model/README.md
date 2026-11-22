@@ -15,6 +15,9 @@ as a free variable so the model is complete except for one substitution.
 | `data/dose_model_result_v2.json` | the upper-bound, repeat-dosing and wet-lab-ceiling numbers added 22 Nov |
 | `data/dose_model_sensitivity_v2.csv` | Spearman ranking recomputed against the repeat-dosing concentration |
 | `dose_references.csv` | the literature anchors, with what each one is used for |
+| `ABUSE_DETERRENCE.md` | four dose-limiting architectures, ranked, with the one plate that decides between them |
+| `data/abuse_resistance.py` | transfer functions of the limiters, on top of `dose_model.py` |
+| `abuse_resistance.png` | exposure against sprays per day for each architecture |
 
 ## How to finish it
 
