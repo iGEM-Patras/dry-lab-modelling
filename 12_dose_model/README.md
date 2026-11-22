@@ -20,6 +20,8 @@ as a free variable so the model is complete except for one substitution.
 | `olfactory_local_exposure.csv` | deposited cationic lipid per cm2 and in the mucus film, across the parameter ranges |
 | `MPPD_DEPOSITION_PLAN.md` | free-tool plan: what MPPD answers, what it cannot, and the 3D-printed cast that fills the gap |
 | `SPATIAL_MODELLING.md` | the diffusion length scale in closed form, and where PhysiCell/CompuCell3D fit |
+| `data/coverage_model.py` | tissue coverage from sparse transfected cells, closed form plus direct superposition |
+| `coverage_map.png` | the peptide field at midpoint density, native vs knockdown, and coverage vs transfection efficiency |
 | `data/abuse_resistance.py` | transfer functions of the limiters, on top of `dose_model.py` |
 | `abuse_resistance.png` | exposure against sprays per day for each architecture |
 

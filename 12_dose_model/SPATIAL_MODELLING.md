@@ -146,3 +146,64 @@ Simulation should follow the measurements here, not substitute for them.
 | CompuCell3D (compucell3d.org) | Cellular Potts tissue model for injury and regeneration |
 
 Full citations with links: [`REFERENCES.md`](REFERENCES.md).
+
+---
+
+## 7 · Added 22 Nov: the PhysiCell question, answered without PhysiCell
+
+Section 5 assigned the coverage-versus-hot-spots question to a simulation. With one
+diffusion length and randomly placed sources it has a closed form:
+
+```
+coverage = 1 − exp(−ρ · π · λ²)
+```
+
+the probability that a point lies within one diffusion length of at least one transfected
+cell. Code: `data/coverage_model.py`. Figure: `coverage_map.png`.
+
+At the dose model's midpoint parameters there are **3,857 transfected cells over 6 cm²** —
+a density of 6.4 × 10⁻⁶ per µm², which is a **mean spacing of 394 µm against a λ of 161 µm**.
+The sources are more than two diffusion lengths apart.
+
+| | tissue within one λ of a source |
+|---|---|
+| native | **40.8 %** |
+| with MME knockdown | **76.4 %** |
+
+**The knockdown arm nearly doubles coverage, 1.87-fold, at the same transfection
+efficiency.** That is a different and stronger claim than the 2.7-fold concentration gain
+the dose model reports, and it is the argument the second arm has been missing.
+
+### Superposition helps more than the closed form admits
+
+A direct sum of the fields (107 sources over 4 × 4 mm) puts **66.9 %** of the area above the
+one-λ level natively and **98.6 %** with knockdown, against the 40.8 % and 76.4 % above. The
+difference is real: a point can clear a threshold on the sum of several distant sources
+while lying within one diffusion length of none of them. **Treat the closed form as a lower
+bound and the superposition as the realistic figure.**
+
+### The result the coverage number hides
+
+The native field is **extremely uneven: peak-to-median 66, CV 1.70.** With knockdown it
+falls to **32 and 1.14.** Panels (a) and (b) show why — natively the tissue is a scatter of
+bright spots in a dark field; with the longer λ the spots merge.
+
+This matters for safety, not only efficacy. Hot spots are where local concentration is
+highest, so they are where receptor over-activation would first occur, and the exposure
+ceiling in `dose_model.py` is computed on a **mean**. A field with a peak-to-median of 66
+can hold its mean below the ceiling while its hot spots sit far above it. **Halving the
+peak-to-median ratio widens the real safety margin at the same average exposure** — so the
+silencing arm improves safety as well as coverage, which nothing in the project currently
+claims.
+
+### What this does and does not settle
+
+It settles the geometry for a flat epithelium with randomly placed sources, which is the
+case section 5 described, and it does so in seconds rather than weeks. It does **not** cover
+clustered transfection (lipoplex deposition is patchy, and clustering lowers coverage at the
+same density), uptake by receptor-bearing cells acting as sinks, or any tissue mechanics.
+Those remain genuine PhysiCell and CompuCell3D questions.
+
+But the headline is now available without either: **at our own midpoint assumptions, under
+half the target tissue is within reach of the payload natively, and the silencing arm is
+what brings it above three-quarters.**
