@@ -58,7 +58,9 @@ def product_feedback(m, hill=2.0, K=CEILING_X_EC50):
 
     delta and mu receptors are Gi-coupled, so agonist occupancy lowers cAMP,
     lowers CREB phosphorylation and lowers transcription from a CRE promoter.
-    Proenkephalin transcription is natively CREB-dependent (PMID 7724644) and
+    The enkephalin gene carries the founding cAMP-inducible DNA element
+    (PMID 3020428), CREB binds its enhancer in striatum in vivo (PMID 8346209),
+    activation requires CREB phosphorylation at Ser-133 (PMID 10386963), and
     enkephalin biosynthesis is transcriptionally coupled to secretory activity
     (PMID 1364196), so the loop is native regulation restored rather than a
     circuit invented for the purpose. The CMV promoter in pcDNA3.1 is what

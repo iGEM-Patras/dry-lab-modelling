@@ -73,9 +73,11 @@ or with a synthetic 4×CRE–minimal promoter.
 
 **Why it closes:** δ and μ receptors are Gi-coupled, so agonist occupancy lowers adenylyl
 cyclase activity, lowers cAMP, lowers CREB phosphorylation and lowers transcription from a
-CRE. Proenkephalin transcription is natively CREB-dependent (PMID 7724644), and enkephalin
-biosynthesis is transcriptionally coupled to secretory activity through transcription of the
-*PENK* gene itself (PMID 1364196). **This is native regulation restored, not a circuit
+CRE. The enkephalin gene carries the founding example of a cAMP-inducible DNA element
+(PMID 3020428); CREB binds the proenkephalin enhancer in rat striatum *in vivo*
+(PMID 8346209); cAMP-dependent activation of the gene requires CREB phosphorylation at
+Ser-133 (PMID 10386963); and enkephalin biosynthesis is transcriptionally coupled to
+secretory activity through transcription of the *PENK* gene itself (PMID 1364196). **This is native regulation restored, not a circuit
 invented for the purpose.** The CMV promoter is what throws it away: we replaced a
 feedback-regulated promoter with a constitutive viral one and inherited an open loop.
 
@@ -200,10 +202,14 @@ which have not yet been transfected. Nothing here requires abandoning what was b
 
 | PMID | used for |
 |---|---|
-| 7724644 | proenkephalin transcription is CREB-dependent — the basis of Layer 1 |
+| 3020428 | the enkephalin gene's cAMP-inducible DNA element — the founding CRE |
+| 8346209 | CREB binds the proenkephalin enhancer in striatum in vivo — the basis of Layer 1 |
+| 10386963 | cAMP activation of the gene requires CREB phosphorylation at Ser-133 |
 | 1364196 | enkephalin biosynthesis is transcriptionally coupled to secretory activity |
 | 40300600 | ComMAND: single-transcript miRNA IFFL holding transgene output in a narrow window |
 | 42646356 | dosage-controlled transgene expression as a gene-therapy safety requirement |
 | 42262317 | destabilizing-domain systems for small-molecule control of protein level |
 | 17112570 | the 3–10× margin that sets the ceiling these designs are measured against |
 | 37004753 | δ-agonist seizure liability is efficacy- and ligand-dependent — the basis of Layer 4 |
+
+Full citations with PubMed, DOI and free-full-text links: [`REFERENCES.md`](REFERENCES.md).
