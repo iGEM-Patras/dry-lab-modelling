@@ -80,3 +80,29 @@ Every entry below was retrieved from NCBI E-utilities and its DOI validated agai
 
 **PMID 19242524** — Wolfe D et al. *A human trial of HSV-mediated gene transfer for the treatment of chronic pain.* Gene therapy 2009;16:455-60.
 [PubMed](https://pubmed.ncbi.nlm.nih.gov/19242524/) · [doi:10.1038/gt.2009.17](https://doi.org/10.1038/gt.2009.17) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2683467/)
+
+## Olfactory epithelium: tolerance and deposition
+
+**PMID 33407567** — Weiss M et al. *Density of surface charge is a more predictive factor of the toxicity of cationic carbon nanoparticles than zeta potential.* Journal of nanobiotechnology 2021;19:5.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/33407567/) · [doi:10.1186/s12951-020-00747-7](https://doi.org/10.1186/s12951-020-00747-7) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7789233/)
+
+**PMID 34834166** — Tratnjek L et al. *In Vitro Ciliotoxicity and Cytotoxicity Testing of Repeated Chronic Exposure to Topical Nasal Formulations for Safety Studies.* Pharmaceutics 2021;13.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/34834166/) · [doi:10.3390/pharmaceutics13111750](https://doi.org/10.3390/pharmaceutics13111750) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8618987/)
+
+**PMID 41093085** — Kim MH & Frank-Ito DO *Nasal cycling effects in intranasal drug delivery efficiency to the olfactory cleft.* Respiratory physiology & neurobiology 2026;339:104506.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/41093085/) · [doi:10.1016/j.resp.2025.104506](https://doi.org/10.1016/j.resp.2025.104506)
+
+**PMID 27977306** — Xi J et al. *Nasal and Olfactory Deposition with Normal and Bidirectional Intranasal Delivery Techniques: In Vitro Tests and Numerical Simulations.* Journal of aerosol medicine and pulmonary drug delivery 2017;30:118-131.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/27977306/) · [doi:10.1089/jamp.2016.1295](https://doi.org/10.1089/jamp.2016.1295)
+
+**PMID 42249898** — Wu S et al. *Determinants of olfactory cleft targeting in intranasal aerosol delivery: a combined computational and experimental study.* European archives of oto-rhino-laryngology : official journal of the European Federation of Oto-Rhino-Laryngological Societies (EUFOS) : affiliated with the German Society for Oto-Rhino-Laryngology - Head and Neck Surgery 2026;283:5777-5789.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/42249898/) · [doi:10.1007/s00405-026-10361-2](https://doi.org/10.1007/s00405-026-10361-2)
+
+**PMID 41149823** — Vishnumurthy P et al. *A Geometric Morphometrics Approach for Predicting Olfactory Region Accessibility: Toward Personalized Nose-to-Brain Drug Delivery.* Journal of personalized medicine 2025;15.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/41149823/) · [doi:10.3390/jpm15100461](https://doi.org/10.3390/jpm15100461) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12565324/)
+
+**PMID 30912321** — Jiao J & Zhang L *Influence of Intranasal Drugs on Human Nasal Mucociliary Clearance and Ciliary Beat Frequency.* Allergy, asthma & immunology research 2019;11:306-319.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/30912321/) · [doi:10.4168/aair.2019.11.3.306](https://doi.org/10.4168/aair.2019.11.3.306) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6439188/)
+
+**PMID 32664676** — Rassu G et al. *Investigation of Cytotoxicity and Cell Uptake of Cationic Beta-Cyclodextrins as Valid Tools in Nasal Delivery.* Pharmaceutics 2020;12.
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/32664676/) · [doi:10.3390/pharmaceutics12070658](https://doi.org/10.3390/pharmaceutics12070658) · [free full text](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7407921/)
