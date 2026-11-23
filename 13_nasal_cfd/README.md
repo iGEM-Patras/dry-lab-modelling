@@ -39,6 +39,39 @@ openfoam`). Verified working: `blockMesh`, `snappyHexMesh`, `simpleFoam` and
 `maxGlobalCells` in `snappyHexMeshDict` is set to 2 M as a conservative default — **raise it
 on a cluster.**
 
+### Can the RAM just be increased?
+
+Not from inside a sandboxed session, and it is worth knowing why. The host reports 13.9 GB
+total with ~1.9 GB available and **swap fully consumed (511/511 MB)** — the ~12 GB in use is
+held by processes outside the sandbox's PID namespace, so it can be neither seen nor freed
+from here. There is no cgroup memory limit to raise. The options are a machine with more
+memory (a university cluster, or a compute target attached under Customize → Compute) or a
+smaller problem.
+
+**The smaller problem is legitimate here, not a compromise.** The question is olfactory
+deposition, and the `Olf` patch spans z 3.4038–3.4184 m — entirely within the nasal cavity,
+above the pharynx. Measured from the STL, the nasal cavity proper (inlets, Vest, Resp1,
+Resp2, Olf) occupies 36.35 × 110.57 × 59.30 mm, which is **15 % of the full domain's bounding
+volume**. The pharynx, larynx and trachea take up most of the box and score no deposition
+that this question needs.
+
+So `system/blockMeshDict.lowmem` drops the base cell from 1.5 mm to 3 mm — **72,080
+background cells instead of 571,200, verified with `blockMesh`** — and
+`snappyHexMeshDict` carries a commented `olfBox` refinement region covering just the nasal
+cavity. Enable both together:
+
+```sh
+cp system/blockMeshDict.lowmem system/blockMeshDict
+# then uncomment the olfBox line in castellatedMeshControls/refinementRegions
+```
+
+Level 4 refinement on `Olf` from a 3 mm base still resolves that patch to **0.19 mm**, finer
+than the 1.5 mm full-resolution background achieves at level 0. The resolution is spent
+where it is measured and withdrawn from where it is not. **Report which mode produced any
+number**, because the two are not interchangeable: the low-memory mesh under-resolves the
+pharynx and trachea, so its total-deposition and lung-spillover figures are not
+trustworthy — only its olfactory figure is.
+
 Under-resolving is not a neutral economy. The olfactory cleft is a narrow slit, deposition
 there is a near-wall process, and a coarse mesh gives a confidently wrong `f_olf`. The case
 therefore sets `Olf` to refinement level 4 and adds three boundary layers. If you must cut

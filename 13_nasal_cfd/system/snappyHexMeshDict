@@ -10,6 +10,16 @@ addLayers       true;   // boundary layers matter: deposition is a near-wall pro
 
 geometry
 {
+    // Bounding box of the nasal cavity proper (inlets, Vest, Resp1, Resp2, Olf),
+    // measured from the STL: 36.35 x 110.57 x 59.30 mm, 15 % of the full domain's
+    // bounding volume. Used by refinementRegions in low-memory mode.
+    olfBox
+    {
+        type searchableBox;
+        min (3.6860 4.8390 3.4030);
+        max (3.7230 4.9500 3.4640);
+    }
+
     nasal.stl
     {
         type triSurfaceMesh;
@@ -53,7 +63,19 @@ castellatedMeshControls
             }
         }
     }
-    refinementRegions {}
+    refinementRegions
+    {
+        // LOW-MEMORY MODE: refine a box around the olfactory region only and
+        // leave the pharynx, larynx and trachea coarse. They still carry the
+        // flow out of the domain, but no deposition is scored there, so cells
+        // spent on them are wasted for this question. The Olf patch spans
+        // z 3.4038-3.4184; this box covers the whole nasal cavity above the
+        // pharynx (Resp1 ends at z 3.4631).
+        //
+        // Uncomment together with blockMeshDict.lowmem.
+        //
+        // olfBox { mode inside; levels ((1e15 3)); }
+    }
     // a point inside the airway lumen. VERIFY with: surfaceFind nasal.stl
     locationInMesh (3.7085 4.8700 3.5500);
 }
