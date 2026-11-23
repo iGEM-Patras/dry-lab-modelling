@@ -18,6 +18,7 @@ as a free variable so the model is complete except for one substitution.
 | `ABUSE_DETERRENCE.md` | four dose-limiting architectures, ranked, with the one plate that decides between them |
 | `OLFACTORY_SAFETY.md` | local exposure at the olfactory epithelium, and why better targeting raises it |
 | `olfactory_local_exposure.csv` | deposited cationic lipid per cm2 and in the mucus film, across the parameter ranges |
+| `olfactory_exposure_measured_area.csv` | the same, recomputed on the 21.6 cm2 olfactory area measured from the iLADDER human02.2021 geometry |
 | `MPPD_DEPOSITION_PLAN.md` | free-tool plan: what MPPD answers, what it cannot, and the 3D-printed cast that fills the gap |
 | `SPATIAL_MODELLING.md` | the diffusion length scale in closed form, and where PhysiCell/CompuCell3D fit |
 | `data/coverage_model.py` | tissue coverage from sparse transfected cells, closed form plus direct superposition |

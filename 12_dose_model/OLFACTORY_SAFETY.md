@@ -229,3 +229,103 @@ repeat the error this section is correcting.
 |---|---|
 | 40346891 | olfactory-cleft pH is significantly lower than respiratory-mucosa pH, and correlates with odour identification |
 | 42615507 | apparent pKa of an LNP shifts with nucleic-acid cargo, so the lipid's pKa is not the particle's |
+
+
+---
+
+## 9 · Added 23 Nov: the olfactory area measured on a real human airway, and what it changes
+
+Section 8 said the olfactory epithelial area was the parameter most worth pinning down, because
+local concentration scales inversely with it, and that it should be measured rather than argued
+about. **It has now been measured, from a published subject-specific geometry rather than from a
+literature range.**
+
+The iLADDER repository (UCSD Darquenne Lab, `github.com/UCSD-Darquenne-Lab/iLADDER`, NIH
+U01-ES028669 / EPA 68HE0B22P0365) publishes CT-segmented respiratory airway geometries. The
+`human02.2021` nasal model — male, 35 years, 68 kg, 1.70 m, from Corley et al. 2021 — is a
+300,490-facet ASCII STL in metres, and critically it is **segmented into named surface patches**,
+one of which is `Olf`.
+
+Computing triangle areas patch by patch:
+
+| patch | area (cm²) | share |
+|---|---|---|
+| Vest (vestibule) | 30.83 | 8.6 % |
+| Resp1 | 162.61 | 45.4 % |
+| Resp2 | 20.22 | 5.6 % |
+| **Olf (olfactory)** | **21.60** | 6.0 % |
+| Pharynx | 29.23 | 8.2 % |
+| Larynx | 33.24 | 9.3 % |
+| Trachea | 55.46 | 15.5 % |
+| inlets + outlet | 4.74 | 1.3 % |
+| **total** | **357.92** | |
+
+**The olfactory area is 21.60 cm², against the 2–10 cm² this project assumed** — 2.2-fold above
+the top of the assumed range and 3.6-fold above the midpoint used in section 1.
+
+The number validates itself independently: `Olf` is **9.2 % of the nasal cavity area**
+(Vest + Resp1 + Resp2 + Olf), and CFD studies on segmented CT geometry put the olfactory region
+at **7–10 % of total nasal cavity area** (PMID 38931844). A value derived here by summing
+triangles lands inside a range derived elsewhere by a different method on different subjects.
+
+### The local-exposure estimate falls roughly ten-fold
+
+Recomputing section 1 with the measured area, and with the deposition range measured rather than
+assumed (1.8–5.3 %, PMID 41093085):
+
+| | section 1 (2–10 cm² assumed) | with 21.60 cm² measured |
+|---|---|---|
+| DOTAP lipoplex | 159 – 15,876 µg/mL | **265 – 1,558 µg/mL** |
+| MC3 LNP | 292 – 29,186 µg/mL | **486 – 2,865 µg/mL** |
+
+*Data: `olfactory_exposure_measured_area.csv`. The lower bounds rise because the deposited
+fraction floor moves from the assumed 0.5 % to the measured 1.8 %; the upper bounds fall because
+the same material spreads over 2.2× more epithelium.*
+
+**The concern does not go away, and the honest statement is that it is about ten-fold less severe
+than section 1 claimed.** Against the 3–200 µg/mL cytotoxic band for cationic nanoparticles in
+airway epithelium (PMID 33407567), the worst case is now **14.3-fold over** rather than
+146-fold, and the best case **1.3-fold over** rather than 0.8-fold under. Every case still sits
+above the band. Section 1 overstated the magnitude; its conclusion stands.
+
+### Limits of this number
+
+It is **one subject**, n = 1, a healthy 35-year-old male. It is the area of the segmented airway
+wall assigned to the olfactory patch by that study's segmentation, which is an anatomical
+assignment rather than a histological one — the sensory epithelium's true extent is patchy and
+individually variable, and a segmentation boundary is not a biopsy. Geometric accessibility also
+varies between people (PMID 41149823). The second human nasal geometry in the repository
+(`human01`, female, 84 years) would give an independent second value and is the obvious next
+check, as would the `human03` and rat/monkey/rabbit models for cross-species work.
+
+### What else iLADDER makes possible, and what it does not
+
+**It is a geometry library, not a solver.** The repository ships surface meshes (volume meshes are
+linked externally) and no simulation code; the README asks only that the associated references be
+cited. There is **no licence file**, so the terms are the README sentence — permission to download
+and use with citation — which is adequate for internal work but should be checked with the authors
+before a figure derived from these geometries goes into a journal submission.
+
+Two things it unlocks that MPPD cannot, both noted in `MPPD_DEPOSITION_PLAN.md` as gaps:
+
+1. **A real olfactory compartment.** MPPD handles the head with empirical filtration efficiency
+   functions and has no olfactory region at all. These geometries have one, labelled. Running CFD
+   on them in OpenFOAM — free, and the `human01` meshes were built in OpenFOAM — would give
+   `f_olf` for our own device and particle size directly, which is the third-strongest driver in
+   the dose model and still an assumption.
+2. **The coupling we would need anyway.** Kuprat et al. 2021 (*J Aerosol Sci* 151:105647) is
+   precisely the bi-directional coupling of 3D CFD to the 1D MPPD lung model, and Kuprat et al.
+   2023 (174:106233) validates that coupling against subject-specific deposition data. That is
+   the published method for exactly the two-tool problem we have.
+
+Honest cost: a CFD run on a 2.85-million-element mesh is not a laptop afternoon. It needs
+OpenFOAM, mesh preparation, and real compute, and it is weeks of work rather than the hours the
+geometry download takes. **But the area measurement above took minutes and required no solver at
+all**, which is the cheapest useful thing in this document.
+
+| source | used for |
+|---|---|
+| iLADDER, `github.com/UCSD-Darquenne-Lab/iLADDER` | CT-segmented human nasal geometry with a labelled olfactory patch |
+| Corley et al. 2021, doi:10.1093/toxsci/kfab062 | the `human02.2021` model measured here |
+| Kuprat et al. 2021, doi:10.1016/j.jaerosci.2020.105647 | bi-directional 3D CFD ↔ 1D MPPD coupling |
+| Kuprat et al. 2023, doi:10.1016/j.jaerosci.2023.106233 | validation of that coupling against subject-specific deposition |

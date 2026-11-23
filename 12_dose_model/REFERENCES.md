@@ -142,3 +142,17 @@ Every entry below was retrieved from NCBI E-utilities and its DOI validated agai
 
 **PMID 42615507** — *RNA Size and Structure Modulate the Apparent pKa of Ionizable Lipid Nanoparticles.* Bioconjugate Chemistry 2026.
 [PubMed](https://pubmed.ncbi.nlm.nih.gov/42615507/) · [doi:10.1021/acs.bioconjchem.6c00177](https://doi.org/10.1021/acs.bioconjchem.6c00177)
+
+## Subject-specific airway geometry
+
+**Software/data** — iLADDER: In-silico Lung Aerosol Dosimetry for Drug and Environmental Research, UCSD Darquenne Lab. CT-segmented airway geometries with named surface patches including an olfactory region. No licence file; README grants use with citation.
+[GitHub](https://github.com/UCSD-Darquenne-Lab/iLADDER) · [SimTK](https://simtk.org/projects/insilico_ladder)
+
+**Corley et al. 2021** — *New Approach Methodology for Assessing Inhalation Risks of a Contact Respiratory Cytotoxicant.* Toxicol Sci 2021;182:243-259. The human02.2021 geometry.
+[doi:10.1093/toxsci/kfab062](https://doi.org/10.1093/toxsci/kfab062)
+
+**Kuprat et al. 2021** — *Efficient bi-directional coupling of 3D computational fluid-particle dynamics and 1D Multiple Path Particle Dosimetry lung models.* J Aerosol Sci 2021;151:105647.
+[doi:10.1016/j.jaerosci.2020.105647](https://doi.org/10.1016/j.jaerosci.2020.105647)
+
+**Kuprat et al. 2023** — *Automated bidirectional coupling of multiscale models of aerosol dosimetry: Validation with subject-specific deposition data.* J Aerosol Sci 2023;174:106233.
+[doi:10.1016/j.jaerosci.2023.106233](https://doi.org/10.1016/j.jaerosci.2023.106233)
