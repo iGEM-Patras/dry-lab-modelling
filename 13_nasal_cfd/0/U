@@ -1,0 +1,22 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| Epione nasal deposition case — OpenFOAM v2412                               |
+\*---------------------------------------------------------------------------*/
+FoamFile { version 2.0; format ascii; class volVectorField; object U; }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+internalField   uniform (0 0 0);
+boundaryField
+{
+    inlets
+    {
+        // 15 L/min = 2.5e-4 m3/s, the standard steady inhalation flow for
+        // nasal deposition studies. flowRateInletVelocity divides by patch area
+        // so it stays correct if the geometry is swapped.
+        type            flowRateInletVelocity;
+        volumetricFlowRate constant 2.5e-04;
+        value           uniform (0 0 0);
+    }
+    outlet          { type zeroGradient; }
+    "(Vest|Resp1|Resp2|Olf|Pharynx|Larynx|Trachea)" { type noSlip; }
+}

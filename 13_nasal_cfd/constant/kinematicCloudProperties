@@ -1,0 +1,78 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| Epione nasal deposition case — OpenFOAM v2412                               |
+\*---------------------------------------------------------------------------*/
+FoamFile { version 2.0; format ascii; class dictionary; object kinematicCloudProperties; }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solution
+{
+    active          true;
+    coupled         false;        // one-way: dilute aerosol does not drive the air
+    transient       yes;
+    cellValueSourceCorrection off;
+    maxCo           0.3;
+    interpolationSchemes { rho cell; U cellPoint; mu cell; }
+    integrationSchemes  { U Euler; }
+    sourceTerms     { schemes { U explicit 1; } }
+}
+
+constantProperties
+{
+    rho0            1000;         // droplet density, kg/m3. CHANGE for the
+                                  // actual formulation: a lipoplex suspension
+                                  // is close to water, a dry powder is not.
+}
+
+subModels
+{
+    particleForces  { sphereDrag; gravity; }
+    injectionModels
+    {
+        nebuliser
+        {
+            type            patchInjection;
+            patch           inlets;
+            SOI             0;
+            massTotal       0;              // unused when parcelBasisType fixed
+            parcelBasisType fixed;
+            nParticle       1;
+            parcelsPerSecond 175000;        // matches the published nasal study
+            duration        1.0;
+            U0              ( 0 0 0 );      // carried by the flow field
+            flowRateProfile constant 1;
+            sizeDistribution
+            {
+                // Sweep MMAD from 1 to 10 um across runs. This is the SINGLE
+                // most important parameter for olfactory deposition.
+                type            normal;
+                normalDistribution
+                {
+                    expectation 4.0e-06;    // MMAD 4 um, a vibrating-mesh nebuliser
+                    variance    1.5e-06;
+                    minValue    5.0e-07;
+                    maxValue    2.0e-05;
+                }
+            }
+        }
+    }
+    dispersionModel none;             // use stochasticDispersionRAS if turbulent
+    patchInteractionModel localInteraction;
+    localInteractionCoeffs
+    {
+        patches
+        (
+            // every airway wall captures: a droplet touching mucus is deposited
+            "(Olf|Vest|Resp1|Resp2|Pharynx|Larynx|Trachea)" { type stick; }
+            outlet { type escape; }
+            inlets { type escape; }
+        );
+    }
+    heatTransferModel none;
+    surfaceFilmModel  none;
+    packingModel      none;
+    dampingModel      none;
+    isotropyModel     none;
+    stochasticCollisionModel none;
+    collisionModel    none;
+}
+cloudFunctions {}

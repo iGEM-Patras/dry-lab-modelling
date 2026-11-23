@@ -1,0 +1,10 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| Epione nasal deposition case — OpenFOAM v2412                               |
+\*---------------------------------------------------------------------------*/
+FoamFile { version 2.0; format ascii; class dictionary; object momentumTransport; }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// 15 L/min through the nasal valve gives Re of order 2000: transitional.
+// kOmegaSST is the usual choice; swap to laminar to test sensitivity.
+simulationType  RAS;
+RAS { model kOmegaSST; turbulence on; printCoeffs on; }

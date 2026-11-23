@@ -1,0 +1,8 @@
+constant/polyMesh/
+constant/triSurface/
+constant/extendedFeatureEdgeMesh/
+processor*/
+postProcessing/
+log.*
+0.*/
+[1-9]*/

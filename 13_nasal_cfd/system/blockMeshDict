@@ -1,0 +1,19 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| Epione nasal deposition case — OpenFOAM v2412                               |
+\*---------------------------------------------------------------------------*/
+FoamFile { version 2.0; format ascii; class dictionary; object blockMeshDict; }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale   1;
+// Background block enclosing the geometry's actual extent:
+//   x 3.6869..3.7299 (43.0 mm), y 4.8397..4.9904 (150.7 mm), z 3.4038..3.6527 (248.9 mm)
+// padded slightly, with roughly cubic base cells of ~1.5 mm.
+vertices
+(
+    (3.684 4.836 3.400) (3.733 4.836 3.400) (3.733 4.994 3.400) (3.684 4.994 3.400)
+    (3.684 4.836 3.656) (3.733 4.836 3.656) (3.733 4.994 3.656) (3.684 4.994 3.656)
+);
+blocks ( hex (0 1 2 3 4 5 6 7) (32 105 170) simpleGrading (1 1 1) );
+edges ();
+boundary ( background { type patch; faces ( (0 3 2 1) (4 5 6 7) (0 1 5 4) (2 3 7 6) (0 4 7 3) (1 2 6 5) ); } );
+mergePatchPairs ();

@@ -1,0 +1,48 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| Epione nasal deposition case — OpenFOAM v2412                               |
+\*---------------------------------------------------------------------------*/
+FoamFile { version 2.0; format ascii; class dictionary; object controlDict; }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     icoUncoupledKinematicParcelFoam;
+startFrom       latestTime;
+startTime       0;
+stopAt          endTime;
+// 1.0 s of inhalation at steady flow. One breath at 20/min is 1.5 s in,
+// but deposition statistics converge well before that.
+endTime         1.0;
+deltaT          1e-4;
+writeControl    adjustableRunTime;
+writeInterval   0.1;
+purgeWrite      0;
+writeFormat     binary;
+writePrecision  8;
+timeFormat      general;
+runTimeModifiable true;
+adjustTimeStep  yes;
+maxCo           0.5;
+maxDeltaT       1e-3;
+
+functions
+{
+    // Deposition per patch. THIS is the output that matters: the fraction of
+    // injected parcels that stick to Olf versus every other wall.
+    cloudInfo
+    {
+        type            cloudInfo;
+        libs            ("liblagrangianFunctionObjects.so");
+        writeControl    writeTime;
+        clouds          ( kinematicCloud );
+    }
+    patchDeposition
+    {
+        type            patchParticleHistogram;
+        libs            ("liblagrangianFunctionObjects.so");
+        writeControl    writeTime;
+        cloud           kinematicCloud;
+        patches         ( Olf Vest Resp1 Resp2 Pharynx Larynx Trachea );
+        nBins           20;
+        min             0;
+        max             50e-6;
+    }
+}

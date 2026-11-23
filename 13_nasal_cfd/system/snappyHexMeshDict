@@ -1,0 +1,110 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| Epione nasal deposition case — OpenFOAM v2412                               |
+\*---------------------------------------------------------------------------*/
+FoamFile { version 2.0; format ascii; class dictionary; object snappyHexMeshDict; }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+castellatedMesh true;
+snap            true;
+addLayers       true;   // boundary layers matter: deposition is a near-wall process
+
+geometry
+{
+    nasal.stl
+    {
+        type triSurfaceMesh;
+        name nasal;
+        // the STL's own named solids become patches of these names
+        regions
+        {
+            inlets  { name inlets;  }
+            Vest    { name Vest;    }
+            Resp1   { name Resp1;   }
+            Resp2   { name Resp2;   }
+            Olf     { name Olf;     }
+            Pharynx { name Pharynx; }
+            Larynx  { name Larynx;  }
+            Trachea { name Trachea; }
+            outlet  { name outlet;  }
+        }
+    }
+}
+
+castellatedMeshControls
+{
+    maxLocalCells   1000000;
+    maxGlobalCells  2000000;   // RAISE on a cluster. 2M fits ~2.5 GB of RAM.
+    minRefinementCells 10;
+    nCellsBetweenLevels 3;
+    resolveFeatureAngle 30;
+    allowFreeStandingZoneFaces true;
+    features ( { file "nasal.eMesh"; level 2; } );
+    refinementSurfaces
+    {
+        nasal
+        {
+            level (2 3);
+            regions
+            {
+                // the olfactory cleft is narrow; under-resolving it is the
+                // single most likely way to get a wrong f_olf
+                Olf   { level (4 4); }
+                Vest  { level (3 4); }
+            }
+        }
+    }
+    refinementRegions {}
+    // a point inside the airway lumen. VERIFY with: surfaceFind nasal.stl
+    locationInMesh (3.7085 4.8700 3.5500);
+}
+
+snapControls
+{
+    nSmoothPatch    3;
+    tolerance       2.0;
+    nSolveIter      50;
+    nRelaxIter      5;
+    nFeatureSnapIter 10;
+    implicitFeatureSnap false;
+    explicitFeatureSnap true;
+    multiRegionFeatureSnap false;
+}
+
+addLayersControls
+{
+    relativeSizes   true;
+    layers { "(Olf|Vest|Resp1|Resp2|Pharynx|Larynx|Trachea)" { nSurfaceLayers 3; } }
+    expansionRatio  1.2;
+    finalLayerThickness 0.4;
+    minThickness    0.05;
+    nGrow           0;
+    featureAngle    130;
+    nRelaxIter      5;
+    nSmoothSurfaceNormals 1;
+    nSmoothNormals  3;
+    nSmoothThickness 10;
+    maxFaceThicknessRatio 0.5;
+    maxThicknessToMedialRatio 0.3;
+    minMedialAxisAngle 90;
+    nBufferCellsNoExtrude 0;
+    nLayerIter      50;
+}
+
+meshQualityControls
+{
+    maxNonOrtho     65;
+    maxBoundarySkewness 20;
+    maxInternalSkewness 4;
+    maxConcave      80;
+    minVol          1e-13;
+    minTetQuality   1e-30;
+    minArea         -1;
+    minTwist        0.02;
+    minDeterminant  0.001;
+    minFaceWeight   0.02;
+    minVolRatio     0.01;
+    minTriangleTwist -1;
+    nSmoothScale    4;
+    errorReduction  0.75;
+}
+mergeTolerance 1e-6;

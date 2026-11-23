@@ -1,0 +1,31 @@
+#!/bin/sh
+# Epione nasal deposition — run script.
+# Usage: ./Allrun [nProcs]      (default 8)
+cd "${0%/*}" || exit 1
+NP=${1:-8}
+
+if [ ! -f constant/triSurface/nasal.stl ]; then
+  echo "Fetching the iLADDER human02.2021 nasal geometry (14.8 MB)..."
+  mkdir -p constant/triSurface
+  curl -sL -o /tmp/nasal.stl.gz \
+    https://raw.githubusercontent.com/UCSD-Darquenne-Lab/iLADDER/main/human02.2021/PD01_nasal_meters.stl.gz
+  gunzip -c /tmp/nasal.stl.gz > constant/triSurface/nasal.stl
+fi
+
+# The STL sits far from the origin (~3.7, 4.9, 3.5 m); blockMesh is written
+# around it, so no translation is needed. Verify the extent before meshing.
+surfaceCheck constant/triSurface/nasal.stl > log.surfaceCheck 2>&1
+
+blockMesh                      > log.blockMesh      2>&1 || exit 1
+surfaceFeatureExtract          > log.featureExtract 2>&1
+decomposePar                   > log.decomposePar   2>&1
+mpirun -np $NP snappyHexMesh -overwrite -parallel > log.snappy 2>&1 || exit 1
+mpirun -np $NP checkMesh -parallel               > log.checkMesh 2>&1
+
+# 1. steady airflow
+mpirun -np $NP simpleFoam -parallel              > log.simpleFoam 2>&1 || exit 1
+# 2. particle tracking on the converged field
+mpirun -np $NP icoUncoupledKinematicParcelFoam -parallel > log.parcel 2>&1
+
+reconstructPar -latestTime     > log.reconstruct   2>&1
+echo "Done. Deposition per patch is in log.parcel and postProcessing/."

@@ -1,0 +1,13 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| Epione nasal deposition case — OpenFOAM v2412                               |
+\*---------------------------------------------------------------------------*/
+FoamFile { version 2.0; format ascii; class dictionary; object surfaceFeatureExtractDict; }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+nasal.stl
+{
+    extractionMethod    extractFromSurface;
+    includedAngle       150;
+    subsetFeatures      { nonManifoldEdges no; openEdges yes; }
+    writeObj            no;
+}
